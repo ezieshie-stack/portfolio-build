@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
   className?: string;
   as?: "div" | "section" | "article";
   id?: string;
+  style?: CSSProperties;
 };
 
-export function Reveal({ children, className = "", as = "div", id }: Props) {
+export function Reveal({ children, className = "", as = "div", id, style }: Props) {
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export function Reveal({ children, className = "", as = "div", id }: Props) {
     <Tag
       ref={ref as never}
       id={id}
+      style={style}
       className={`reveal ${className}`}
     >
       {children}
