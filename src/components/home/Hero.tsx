@@ -46,7 +46,7 @@ export function Hero() {
           }}
         >
           <Image
-            src="/portrait.jpg"
+            src="/portrait.png"
             alt={`${home.tag} portrait`}
             fill
             sizes="(min-width: 1024px) 480px, 100vw"
