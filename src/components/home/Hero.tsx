@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+import { OperationsDiagram } from "./OperationsDiagram";
 import { home } from "@/lib/content";
 
 export function Hero() {
@@ -35,22 +36,25 @@ export function Hero() {
         </ul>
       </div>
 
-      <div
-        className="relative aspect-[4/5] max-w-[480px] mx-auto w-full rounded-3xl overflow-hidden border"
-        style={{
-          borderColor: "var(--glass-border)",
-          background:
-            "linear-gradient(160deg, rgba(139,92,246,0.18), rgba(10,10,15,0.95))",
-        }}
-      >
-        <Image
-          src="/portrait.png"
-          alt={`${home.tag} portrait`}
-          fill
-          sizes="(min-width: 1024px) 480px, 100vw"
-          priority
-          className="object-cover"
-        />
+      <div className="flex flex-col gap-6">
+        <div
+          className="relative aspect-[4/5] max-w-[480px] mx-auto w-full rounded-3xl overflow-hidden border"
+          style={{
+            borderColor: "var(--glass-border)",
+            background:
+              "linear-gradient(160deg, rgba(139,92,246,0.18), rgba(10,10,15,0.95))",
+          }}
+        >
+          <Image
+            src="/portrait.png"
+            alt={`${home.tag} portrait`}
+            fill
+            sizes="(min-width: 1024px) 480px, 100vw"
+            priority
+            className="object-cover"
+          />
+        </div>
+        <OperationsDiagram />
       </div>
     </Reveal>
   );
