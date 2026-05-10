@@ -1,12 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
-import { OperationsDiagram } from "./OperationsDiagram";
 import { home } from "@/lib/content";
 
 export function Hero() {
   return (
-    <Reveal as="section" className="grid lg:grid-cols-2 gap-12 items-start pb-12">
+    <Reveal as="section" className="relative grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center pb-12">
+      <div
+        aria-hidden
+        className="absolute pointer-events-none -z-10"
+        style={{
+          right: "-15%",
+          top: "0",
+          width: "70%",
+          height: "120%",
+          background:
+            "radial-gradient(ellipse at 60% 45%, rgba(139,92,246,0.22), rgba(139,92,246,0.06) 45%, transparent 70%)",
+          filter: "blur(40px)",
+        }}
+      />
+
       <div>
         <span className="eyebrow mb-6">{home.tag}</span>
         <h1 className="font-extrabold leading-[1.05] tracking-[-0.03em] text-[clamp(40px,6vw,68px)] mb-6">
@@ -36,35 +49,23 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-10">
-        <div
-          className="relative aspect-[4/5] max-w-[480px] mx-auto w-full overflow-hidden"
-          style={{
-            maskImage:
-              "radial-gradient(ellipse 90% 95% at 50% 45%, #000 55%, rgba(0,0,0,0.7) 80%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 90% 95% at 50% 45%, #000 55%, rgba(0,0,0,0.7) 80%, transparent 100%)",
-          }}
-        >
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-10"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 40%, rgba(139,92,246,0.35), transparent 65%)",
-              filter: "blur(40px)",
-            }}
-          />
-          <Image
-            src="/portrait.png"
-            alt={`${home.tag} portrait`}
-            fill
-            sizes="(min-width: 1024px) 480px, 100vw"
-            priority
-            className="object-cover"
-          />
-        </div>
-        <OperationsDiagram />
+      <div
+        className="relative aspect-[3/2] w-full max-w-[640px] mx-auto overflow-hidden"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 88% 95% at 50% 50%, #000 60%, rgba(0,0,0,0.7) 82%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 88% 95% at 50% 50%, #000 60%, rgba(0,0,0,0.7) 82%, transparent 100%)",
+        }}
+      >
+        <Image
+          src="/portrait.png"
+          alt={`${home.tag} portrait`}
+          fill
+          sizes="(min-width: 1024px) 640px, 100vw"
+          priority
+          className="object-cover"
+        />
       </div>
     </Reveal>
   );
