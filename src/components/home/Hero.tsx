@@ -49,15 +49,7 @@ export function Hero() {
         </ul>
       </div>
 
-      <div
-        className="relative aspect-[3/2] w-full max-w-[640px] mx-auto overflow-hidden"
-        style={{
-          maskImage:
-            "radial-gradient(ellipse 88% 95% at 50% 50%, #000 60%, rgba(0,0,0,0.7) 82%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 88% 95% at 50% 50%, #000 60%, rgba(0,0,0,0.7) 82%, transparent 100%)",
-        }}
-      >
+      <div className="relative aspect-[3/2] w-full max-w-[640px] mx-auto">
         <Image
           src="/portrait.png"
           alt={`${home.tag} portrait`}
