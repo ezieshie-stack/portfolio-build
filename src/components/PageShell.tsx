@@ -8,7 +8,7 @@ type Props = {
 export function PageShell({ children, className = "" }: Props) {
   return (
     <div
-      className={`max-w-[var(--container)] mx-auto px-6 md:px-10 pt-32 pb-16 ${className}`}
+      className={`max-w-[1440px] mx-auto px-6 lg:px-12 pt-12 pb-16 ${className}`}
     >
       {children}
     </div>

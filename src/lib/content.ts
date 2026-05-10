@@ -24,46 +24,67 @@ export const site = {
 
 export const home = {
   tag: "OPERATIONS & BUSINESS SYSTEMS ANALYST",
-  titleStart: "[Headline placeholder line one]",
-  titleHighlight: "[Highlighted phrase]",
+  titleStart: "Designing Systems That Drive",
+  titleHighlight: "Operational Excellence.",
   subtitle:
-    "[Subtitle placeholder. One to two sentences describing the value you bring to operations and systems work.]",
+    "I analyze, design, and optimize operational workflows and systems that improve efficiency, align teams, and drive measurable business outcomes.",
   primaryCta: { label: "View My Work", href: "/work" },
   secondaryCta: { label: "Let's Connect", href: "/contact" },
-  pills: [
-    "Process Optimization",
-    "Data-Informed Decisions",
-    "Cross-functional Alignment",
-    "Continuous Improvement",
+  competencies: [
+    { label: "Process Optimization", icon: "Workflow" as const },
+    { label: "Data-Informed Decisions", icon: "BarChart3" as const },
+    { label: "Cross-Functional Alignment", icon: "Users" as const },
+    { label: "Continuous Improvement", icon: "RefreshCw" as const },
   ],
   diagram: {
     centerLabel: "Process & Workflow Design",
+    centerIcon: "GitBranch" as const,
     nodes: [
-      { label: "Stakeholder Alignment", position: "top-left" as const },
-      { label: "Data & System Inputs", position: "top-right" as const },
-      { label: "Implementation & Coordination", position: "bottom-left" as const },
       {
-        label: "Operational Outcomes & Continuous Improvement",
+        label: "Stakeholder Alignment",
+        position: "top-left" as const,
+        icon: "Users" as const,
+      },
+      {
+        label: "Data & System Inputs",
+        position: "top-right" as const,
+        icon: "Database" as const,
+      },
+      {
+        label: "Implementation & Coordination",
+        position: "bottom-left" as const,
+        icon: "Settings" as const,
+      },
+      {
+        label: "Operational Outcomes",
         position: "bottom-right" as const,
+        icon: "CheckCircle2" as const,
       },
     ],
   },
   metricCard: {
     label: "PROCESS EFFICIENCY",
-    value: "[00%]",
-    sublabel: "[Metric description]",
+    value: "28%",
+    sublabel: "Improvement vs. Previous Quarter",
   },
   featured: {
     tag: "FEATURED PROJECT",
-    title: "[Featured project title placeholder]",
+    pill: "Process Redesign",
+    title: "Fiitco — Fitness Platform Process Redesign",
     description:
-      "[Short featured project summary. One or two sentences describing the project and the outcome.]",
+      "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency by 28%.",
+    workflow: {
+      title: "End-to-End Workflow",
+      steps: [
+        ["User Registration", "Workout Selection", "Payment Processing", "Plan Activation"],
+        ["Progress Tracking", "Performance Analytics", "Reporting & Insights", "Continuous Improvement"],
+      ] as const,
+    },
     metrics: [
-      { value: "[00%]", label: "[Metric A]" },
-      { value: "[00%]", label: "[Metric B]" },
-      { value: "[00%]", label: "[Metric C]" },
-      { value: "[00%]", label: "[Metric D]" },
-      { value: "[00+]", label: "[Metric E]" },
+      { value: "28%", label: "Improvement in Operational Efficiency" },
+      { value: "32%", label: "Reduction in Response Time" },
+      { value: "25%", label: "Increase in Data Accuracy" },
+      { value: "20+", label: "Hours Saved Monthly" },
     ],
     cta: { label: "View Case Study", href: "/work/featured" },
   },
