@@ -36,15 +36,25 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-10">
         <div
-          className="relative aspect-[4/5] max-w-[480px] mx-auto w-full rounded-3xl overflow-hidden border"
+          className="relative aspect-[4/5] max-w-[480px] mx-auto w-full overflow-hidden"
           style={{
-            borderColor: "var(--glass-border)",
-            background:
-              "linear-gradient(160deg, rgba(139,92,246,0.18), rgba(10,10,15,0.95))",
+            maskImage:
+              "radial-gradient(ellipse 90% 95% at 50% 45%, #000 55%, rgba(0,0,0,0.7) 80%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 90% 95% at 50% 45%, #000 55%, rgba(0,0,0,0.7) 80%, transparent 100%)",
           }}
         >
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 40%, rgba(139,92,246,0.35), transparent 65%)",
+              filter: "blur(40px)",
+            }}
+          />
           <Image
             src="/portrait.png"
             alt={`${home.tag} portrait`}
