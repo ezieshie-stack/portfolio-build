@@ -5,21 +5,7 @@ import { home } from "@/lib/content";
 
 export function Hero() {
   return (
-    <Reveal as="section" className="relative grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center pb-12">
-      <div
-        aria-hidden
-        className="absolute pointer-events-none -z-10"
-        style={{
-          right: "-15%",
-          top: "0",
-          width: "70%",
-          height: "120%",
-          background:
-            "radial-gradient(ellipse at 60% 45%, rgba(139,92,246,0.22), rgba(139,92,246,0.06) 45%, transparent 70%)",
-          filter: "blur(40px)",
-        }}
-      />
-
+    <Reveal as="section" className="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center pb-12">
       <div>
         <span className="eyebrow mb-6">{home.tag}</span>
         <h1 className="font-extrabold leading-[1.05] tracking-[-0.03em] text-[clamp(40px,6vw,68px)] mb-6">
