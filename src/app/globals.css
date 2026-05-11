@@ -2033,3 +2033,29 @@ button:focus-visible {
     max-width: 320px;
   }
 }
+
+/* ============================================================
+   Oversized editorial portrait on tablet + mobile
+   ============================================================ */
+@media (max-width: 1024px) {
+  .hero-portrait-column {
+    overflow: hidden;
+  }
+
+  .hero-portrait {
+    width: 120vw;
+    max-width: none;
+    height: auto;
+    object-fit: contain;
+    transform: scale(1.15);
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-portrait {
+    width: 135vw;
+    transform: scale(1.25);
+    margin-top: -20px;
+  }
+}
