@@ -36,12 +36,12 @@ type CardPos = {
   left?: string;
 };
 
-const cardPositions: Record<string, CardPos> = {
-  "top-left": { top: "6%", right: "38%" },
-  "top-right": { top: "10%", right: "0%" },
-  center: { top: "42%", right: "16%" },
-  "bottom-left": { bottom: "30%", right: "36%" },
-  "bottom-right": { bottom: "22%", right: "-2%" },
+const cardLayout: Record<string, { pos: CardPos; anchor: { x: number; y: number } }> = {
+  "top-left": { pos: { top: "4%", left: "-2%" }, anchor: { x: 14, y: 9 } },
+  "top-right": { pos: { top: "6%", right: "-2%" }, anchor: { x: 86, y: 11 } },
+  center: { pos: { top: "40%", right: "-4%" }, anchor: { x: 88, y: 47 } },
+  "bottom-left": { pos: { bottom: "22%", left: "-2%" }, anchor: { x: 14, y: 75 } },
+  "bottom-right": { pos: { bottom: "18%", right: "-2%" }, anchor: { x: 86, y: 79 } },
 };
 
 function FloatingCard({
@@ -57,31 +57,31 @@ function FloatingCard({
 }) {
   return (
     <div
-      className="absolute z-30 rounded-2xl border px-3.5 py-3 max-w-[180px]"
+      className="absolute z-30 rounded-2xl border px-3.5 py-3 w-[200px]"
       style={{
         ...position,
         background: highlight
-          ? "linear-gradient(160deg, rgba(139,92,246,0.22), rgba(20,20,30,0.92))"
+          ? "linear-gradient(160deg, rgba(139,92,246,0.25), rgba(20,20,30,0.92))"
           : "rgba(13, 13, 13, 0.78)",
         borderColor: highlight
-          ? "rgba(139, 92, 246, 0.45)"
+          ? "rgba(139, 92, 246, 0.5)"
           : "var(--glass-border)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
+        backdropFilter: "blur(22px)",
+        WebkitBackdropFilter: "blur(22px)",
         boxShadow: highlight
-          ? "0 0 50px rgba(139, 92, 246, 0.25)"
-          : "0 10px 30px rgba(0, 0, 0, 0.45), 0 0 30px rgba(139, 92, 246, 0.08)",
+          ? "0 0 50px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.06)"
+          : "0 14px 36px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.08)",
       }}
     >
       <div className="flex items-center gap-2.5">
         <span
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border"
           style={{
-            borderColor: "rgba(139, 92, 246, 0.3)",
-            background: "rgba(139, 92, 246, 0.14)",
+            borderColor: "rgba(139, 92, 246, 0.35)",
+            background: "rgba(139, 92, 246, 0.16)",
           }}
         >
-          <Icon className="text-[color:var(--primary)]" size={15} />
+          <Icon className="text-[color:var(--primary)]" size={16} />
         </span>
         <span className="text-[11px] font-medium text-white leading-tight">
           {label}
@@ -94,13 +94,28 @@ function FloatingCard({
 export function Hero() {
   const { centerLabel, centerIcon, nodes } = home.diagram;
   const CenterIcon = cardIcons[centerIcon];
+  const centerAnchor = cardLayout.center.anchor;
 
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[1fr_1.45fr] gap-10 lg:gap-6 items-center min-h-[88vh] pb-12 border-b"
+      className="relative grid grid-cols-1 lg:grid-cols-[0.72fr_1fr] gap-10 lg:gap-2 items-center min-h-[92vh] pb-12 border-b overflow-visible"
       style={{ borderColor: "var(--glass-border)" }}
     >
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-20 pointer-events-none opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+        }}
+      />
+
       <div className="self-center max-w-[560px] z-10">
         <div
           className="inline-flex rounded-full border px-4 py-2 text-[11px] tracking-[0.2em] uppercase mb-7"
@@ -170,35 +185,97 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="relative h-[640px] lg:h-[760px] w-full">
+      <div className="relative h-[680px] lg:h-[820px] w-full">
         <div
           aria-hidden
-          className="absolute inset-0 -z-10"
+          className="absolute pointer-events-none -z-10"
           style={{
+            inset: "-10%",
             background:
-              "radial-gradient(ellipse 70% 60% at 38% 58%, rgba(139, 92, 246, 0.42), transparent 65%)",
+              "radial-gradient(ellipse 60% 55% at 45% 55%, rgba(124, 58, 237, 0.28), transparent 70%)",
+            filter: "blur(140px)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute pointer-events-none -z-10"
+          style={{
+            inset: "10%",
+            background:
+              "radial-gradient(ellipse 55% 50% at 45% 50%, rgba(168, 85, 247, 0.32), transparent 65%)",
             filter: "blur(70px)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute pointer-events-none -z-10"
+          style={{
+            inset: "0",
+            background:
+              "radial-gradient(ellipse 65% 60% at 65% 60%, rgba(59, 130, 246, 0.12), transparent 65%)",
+            filter: "blur(120px)",
           }}
         />
 
         <div
-          className="absolute bottom-0 left-[-6%] lg:left-[-4%] w-[68%] lg:w-[62%] max-w-[640px] aspect-[3/4] z-10"
+          className="absolute z-10"
           style={{
-            filter: "drop-shadow(0 30px 60px rgba(139, 92, 246, 0.35))",
+            top: "-2%",
+            left: "16%",
+            width: "62%",
+            height: "100%",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
+            filter:
+              "drop-shadow(0 0 60px rgba(124, 58, 237, 0.28)) drop-shadow(0 30px 80px rgba(0, 0, 0, 0.6))",
           }}
         >
           <Image
             src="/portrait.png"
             alt={`${site.brand.name} portrait`}
             fill
-            sizes="(min-width: 1024px) 600px, 80vw"
+            sizes="(min-width: 1024px) 600px, 90vw"
             priority
-            className="object-contain object-bottom"
+            className="object-cover object-top"
           />
         </div>
 
+        <svg
+          aria-hidden
+          className="absolute inset-0 w-full h-full pointer-events-none z-20"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
+          {nodes.map((node) => {
+            const start = cardLayout[node.position].anchor;
+            return (
+              <line
+                key={`connector-${node.position}`}
+                x1={start.x}
+                y1={start.y}
+                x2={centerAnchor.x}
+                y2={centerAnchor.y}
+                stroke="rgba(139, 92, 246, 0.45)"
+                strokeWidth="0.35"
+                strokeDasharray="0.8 1.4"
+                vectorEffect="non-scaling-stroke"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  from="0"
+                  to="-4.4"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              </line>
+            );
+          })}
+        </svg>
+
         <FloatingCard
-          position={cardPositions.center}
+          position={cardLayout.center.pos}
           icon={CenterIcon}
           label={centerLabel}
           highlight
@@ -206,7 +283,7 @@ export function Hero() {
         {nodes.map((node) => (
           <FloatingCard
             key={node.label}
-            position={cardPositions[node.position]}
+            position={cardLayout[node.position].pos}
             icon={cardIcons[node.icon]}
             label={node.label}
           />
@@ -219,7 +296,7 @@ export function Hero() {
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
             borderColor: "var(--glass-border)",
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.45)",
+            boxShadow: "0 14px 36px rgba(0, 0, 0, 0.5)",
           }}
         >
           <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
