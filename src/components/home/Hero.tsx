@@ -142,6 +142,17 @@ export function Hero() {
       </div>
 
       <div className="hero-system relative z-[15] flex flex-col justify-center">
+        <p
+          className="hero-system-label text-center mb-5"
+          style={{
+            fontSize: "11px",
+            letterSpacing: "0.45em",
+            textTransform: "uppercase",
+            color: "rgb(167, 139, 250)",
+          }}
+        >
+          Operational Framework
+        </p>
         <SystemCluster />
       </div>
     </Reveal>
