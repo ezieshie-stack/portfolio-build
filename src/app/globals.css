@@ -1326,13 +1326,13 @@ body {
 .portfolioFooter {
   max-width: 1520px;
   width: calc(100% - 96px);
-  margin: 120px auto 0;
-  padding: 0 0 48px;
+  margin: 80px auto 0;
+  padding: 0 0 32px;
 }
 
 .footerCTA {
-  min-height: 560px;
-  padding: 96px 92px;
+  min-height: 420px;
+  padding: 64px 72px;
   border-radius: 36px 36px 0 0;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 0;
@@ -1341,7 +1341,7 @@ body {
     linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
   display: grid;
   grid-template-columns: 1fr 0.9fr;
-  gap: 72px;
+  gap: 48px;
   align-items: center;
 }
 
@@ -1356,17 +1356,17 @@ body {
 .footerCTA h2 {
   margin: 0;
   color: white;
-  font-size: clamp(86px, 8vw, 150px);
-  line-height: 0.9;
+  font-size: clamp(72px, 7vw, 118px);
+  line-height: 0.88;
   letter-spacing: -0.07em;
 }
 
 .footerCTARight p {
   color: #a1a1aa;
-  font-size: 21px;
-  line-height: 1.75;
+  font-size: 18px;
+  line-height: 1.6;
   max-width: 620px;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
 }
 
 .footerCTAButtons {
@@ -1397,13 +1397,14 @@ body {
 }
 
 .footerMain {
-  padding: 72px 92px 80px;
+  padding: 48px 72px 40px;
+  margin-top: 0;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0 0 36px 36px;
   background: rgba(255, 255, 255, 0.025);
   display: grid;
   grid-template-columns: 1.6fr 0.9fr 0.9fr 1.3fr;
-  gap: 84px;
+  gap: 56px;
 }
 
 .footerLogo {
@@ -1434,7 +1435,7 @@ body {
   display: block;
   max-width: 340px;
   color: #a1a1aa;
-  line-height: 1.75;
+  line-height: 1.55;
 }
 
 .footerColumn h4 {
@@ -1457,7 +1458,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 8px;
   transition: 0.25s ease;
 }
 
@@ -1472,7 +1473,8 @@ body {
 }
 
 .footerBottom {
-  padding: 24px 0 0;
+  padding: 18px 0 0;
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
   color: #71717a;
