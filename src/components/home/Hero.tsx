@@ -100,7 +100,7 @@ export function Hero() {
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[1fr_0.9fr_1fr] lg:items-center gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-0 border-b overflow-hidden"
+      className="hero relative pb-0 border-b overflow-hidden"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div
@@ -117,7 +117,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-[20] lg:self-center max-w-[560px]">
+      <div className="hero-text relative z-[20]">
         <div
           className="inline-flex rounded-full border px-4 py-2 text-[11px] tracking-[0.2em] uppercase mb-7"
           style={{
@@ -129,25 +129,18 @@ export function Hero() {
           {home.tag}
         </div>
 
-        <h1
-          className="font-extrabold mb-7"
-          style={{
-            fontSize: "clamp(3.25rem, 7vw, 6.25rem)",
-            lineHeight: 0.92,
-            letterSpacing: "-0.05em",
-          }}
-        >
+        <h1 className="hero-title font-extrabold mb-7">
           {home.titleStart}{" "}
           <span className="text-[color:var(--primary)]">
             {home.titleHighlight}
           </span>
         </h1>
 
-        <p className="text-base lg:text-lg text-[color:var(--text-dim)] leading-relaxed mb-9 max-w-[480px]">
+        <p className="hero-subtitle text-base lg:text-lg text-[color:var(--text-dim)] leading-relaxed mb-9 max-w-[480px]">
           {home.subtitle}
         </p>
 
-        <div className="flex flex-wrap gap-3 mb-10">
+        <div className="hero-cta-row flex flex-wrap gap-3 mb-10">
           <Link
             href={home.primaryCta.href}
             className="rounded-2xl px-7 py-3.5 font-medium text-white transition hover:brightness-110"
@@ -167,7 +160,7 @@ export function Hero() {
           </Link>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-[420px]">
+        <ul className="hero-competencies grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-[420px]">
           {home.competencies.map((c) => {
             const Icon = competencyIcons[c.icon];
             return (
@@ -194,18 +187,13 @@ export function Hero() {
       </div>
 
       <div
-        className="hidden lg:flex relative items-end justify-center pointer-events-none"
-        style={{ height: "100%", zIndex: 10 }}
+        className="hero-portrait-column relative flex items-end justify-center pointer-events-none"
+        style={{ zIndex: 10 }}
       >
         <div
           aria-hidden
-          className="absolute pointer-events-none"
+          className="hero-portrait-glow absolute pointer-events-none"
           style={{
-            width: "620px",
-            height: "620px",
-            bottom: "40px",
-            left: "50%",
-            transform: "translateX(-50%)",
             background:
               "radial-gradient(circle, rgba(124,58,237,0.28), transparent 68%)",
             filter: "blur(70px)",
@@ -218,16 +206,9 @@ export function Hero() {
           width={1040}
           height={1300}
           priority
-          sizes="(min-width: 1024px) 720px, 90vw"
-          className="object-contain"
+          sizes="(min-width: 1440px) 560px, (min-width: 1024px) 480px, (min-width: 768px) 380px, 90vw"
+          className="hero-portrait object-contain"
           style={{
-            position: "relative",
-            left: "24px",
-            height: "min(78vh, 860px)",
-            width: "auto",
-            maxWidth: "none",
-            marginLeft: 0,
-            transform: "translateX(0)",
             objectPosition: "center bottom",
             filter: "drop-shadow(0 30px 90px rgba(124,58,237,0.25))",
             maskImage:
@@ -238,24 +219,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="lg:hidden relative w-full flex justify-center my-6">
-        <Image
-          src="/portrait.png"
-          alt={`${site.brand.name} portrait`}
-          width={1040}
-          height={1300}
-          priority
-          sizes="90vw"
-          className="w-full max-w-[420px] h-auto object-contain"
-          style={{
-            objectPosition: "center bottom",
-            filter:
-              "drop-shadow(0 20px 60px rgba(124,58,237,0.28)) drop-shadow(0 20px 40px rgba(0,0,0,0.55))",
-          }}
-        />
-      </div>
-
-      <div className="relative z-[15] lg:self-center min-h-[620px] flex flex-col justify-center gap-2">
+      <div className="hero-system relative z-[15] flex flex-col justify-center gap-2">
         <div className="grid grid-cols-2 gap-3">
           {stakeholders ? (
             <SystemCard
