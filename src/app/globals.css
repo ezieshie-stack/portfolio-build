@@ -371,13 +371,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    margin-top: 0;
+    margin-top: 12px;
     min-height: 0;
   }
   .hero-portrait {
-    width: 115%;
-    max-width: none;
+    width: 92%;
+    max-width: 420px;
     height: auto;
     object-fit: cover;
     object-position: center top;
