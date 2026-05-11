@@ -274,7 +274,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 28px;
-    padding: 40px 0 0;
+    padding: 18px 0 0;
   }
   .hero-text {
     max-width: none;
@@ -554,19 +554,26 @@ body {
   align-items: center;
 }
 
-.featuredProjectHeader p {
-  color: #a78bfa;
-  text-transform: uppercase;
-  letter-spacing: 0.42em;
-  font-size: 12px;
+.featuredTitle {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
 }
 
-.featuredProjectHeader a {
+.featuredHeaderLink {
   color: #a78bfa;
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
+  font-size: 13px;
+}
+
+.viewAllButton {
+  display: none;
 }
 
 .featuredProjectCard {
@@ -788,6 +795,31 @@ body {
   .featuredProjectHeader {
     padding: 0 24px;
     margin-bottom: 24px;
+    display: block;
+  }
+
+  .featuredTitle {
+    font-size: 28px;
+  }
+
+  .featuredHeaderLink {
+    display: none;
+  }
+
+  .viewAllButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: calc(100% - 32px);
+    margin: 24px 16px 0;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    background: rgba(139, 92, 246, 0.1);
+    color: #c4b5fd;
+    font-weight: 500;
+    text-decoration: none;
   }
 
   .featuredProjectCard {
@@ -1065,8 +1097,12 @@ body {
 
 @media (max-width: 767px) {
   .tools-section {
-    padding-top: 56px;
-    padding-bottom: 56px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .tools-eyebrow {
+    display: none;
   }
 
   .tool-card {

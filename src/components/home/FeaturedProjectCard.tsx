@@ -32,8 +32,8 @@ export default function FeaturedProjectCard() {
   return (
     <section className="featuredProjectSection">
       <div className="featuredProjectHeader">
-        <p>Featured Project</p>
-        <a href="/work">
+        <h2 className="featuredTitle">Featured Project</h2>
+        <a href="/work" className="featuredHeaderLink">
           View All Projects <ArrowUpRight size={16} />
         </a>
       </div>
@@ -127,6 +127,10 @@ export default function FeaturedProjectCard() {
           </div>
         </div>
       </article>
+
+      <a href="/work" className="viewAllButton">
+        View All Projects <ArrowUpRight size={16} />
+      </a>
     </section>
   );
 }
