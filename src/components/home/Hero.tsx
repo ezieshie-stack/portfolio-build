@@ -100,7 +100,7 @@ export function Hero() {
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr_0.9fr] items-center gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-12 border-b overflow-visible"
+      className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr_0.9fr] items-center gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-12 border-b overflow-hidden"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div
@@ -224,17 +224,18 @@ export function Hero() {
       />
 
       <div
-        className="hidden lg:block absolute z-[2] pointer-events-none"
+        className="hidden lg:flex absolute pointer-events-none items-end justify-center"
         style={{
-          left: "52%",
-          bottom: "-80px",
-          width: "min(50vw, 860px)",
-          minWidth: "620px",
+          left: "48%",
+          bottom: 0,
           transform: "translateX(-50%)",
+          height: "clamp(620px, 72vh, 860px)",
+          width: "clamp(420px, 36vw, 680px)",
+          zIndex: 12,
           maskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%)",
           filter: "drop-shadow(0 30px 80px rgba(0,0,0,0.55))",
         }}
       >
@@ -244,9 +245,14 @@ export function Hero() {
           width={1040}
           height={1300}
           priority
-          sizes="(min-width: 1024px) 720px, 90vw"
-          className="w-full h-auto object-contain"
-          style={{ objectPosition: "center bottom" }}
+          sizes="(min-width: 1024px) 680px, 90vw"
+          className="object-contain"
+          style={{
+            height: "100%",
+            width: "auto",
+            maxWidth: "none",
+            objectPosition: "center bottom",
+          }}
         />
       </div>
 
@@ -267,7 +273,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-[4] min-h-[640px] flex flex-col justify-center gap-2">
+      <div className="relative z-[20] min-h-[640px] flex flex-col justify-center gap-2">
         <div className="grid grid-cols-2 gap-3">
           {stakeholders ? (
             <SystemCard
