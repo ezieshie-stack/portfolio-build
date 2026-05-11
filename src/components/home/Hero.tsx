@@ -100,7 +100,7 @@ export function Hero() {
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[minmax(420px,0.95fr)_minmax(360px,0.75fr)_minmax(420px,0.9fr)] lg:items-end gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-0 border-b overflow-hidden"
+      className="relative grid grid-cols-1 lg:grid-cols-[1fr_0.9fr_1fr] lg:items-center gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-0 border-b overflow-hidden"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div
@@ -194,12 +194,8 @@ export function Hero() {
       </div>
 
       <div
-        className="hidden lg:flex relative self-end items-end justify-center pointer-events-none"
-        style={{
-          height: "calc(100vh - 160px)",
-          minHeight: "620px",
-          zIndex: 12,
-        }}
+        className="hidden lg:flex relative items-end justify-center pointer-events-none"
+        style={{ height: "100%", zIndex: 10 }}
       >
         <div
           aria-hidden
@@ -225,9 +221,13 @@ export function Hero() {
           sizes="(min-width: 1024px) 720px, 90vw"
           className="object-contain"
           style={{
-            height: "min(82vh, 820px)",
+            position: "relative",
+            left: "24px",
+            height: "min(78vh, 860px)",
             width: "auto",
             maxWidth: "none",
+            marginLeft: 0,
+            transform: "translateX(0)",
             objectPosition: "center bottom",
             filter: "drop-shadow(0 30px 90px rgba(124,58,237,0.25))",
             maskImage:
