@@ -250,6 +250,88 @@ body {
   }
 }
 
+/* --- Mobile drawer (hamburger menu) --- */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobile-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mobile-drawer__panel {
+  position: relative;
+  width: min(86vw, 320px);
+  height: 100%;
+  background: rgba(10, 10, 12, 0.96);
+  border-left: 1px solid var(--glass-border);
+  padding: 22px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: drawerSlideIn 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes drawerSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobile-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-drawer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-drawer__link {
+  display: block;
+  padding: 14px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.mobile-drawer__link:hover,
+.mobile-drawer__link:active {
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.mobile-drawer__cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+}
+
 /* --- Hero layout — strict, non-overlapping ranges --- */
 /* Hero is text + portrait at every breakpoint. The Operational Framework
    is its own section below the hero (see .operational-framework). */
@@ -273,8 +355,8 @@ body {
   .hero {
     display: flex;
     flex-direction: column;
-    gap: 28px;
-    padding: 40px 0 0;
+    gap: 32px;
+    padding: 24px 0 0;
   }
   .hero-text {
     max-width: none;
@@ -286,10 +368,20 @@ body {
   }
   .hero-portrait-column {
     width: 100%;
-    min-height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    min-height: 0;
   }
   .hero-portrait {
-    height: 460px;
+    width: 92%;
+    max-width: 420px;
+    height: auto;
+    object-fit: cover;
+    object-position: center top;
+    transform: translateX(0);
+    margin: 0 auto;
   }
   .hero-portrait-glow {
     width: 380px;
