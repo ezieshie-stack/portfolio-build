@@ -52,12 +52,12 @@ export const home = {
       },
       {
         label: "Implementation & Coordination",
-        position: "bottom-left" as const,
+        position: "mid-bottom" as const,
         icon: "Settings" as const,
       },
       {
         label: "Operational Outcomes",
-        position: "bottom-right" as const,
+        position: "mid-right" as const,
         icon: "CheckCircle2" as const,
       },
     ],

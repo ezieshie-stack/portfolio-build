@@ -36,13 +36,21 @@ type CardPos = {
   left?: string;
 };
 
-const cardLayout: Record<string, { pos: CardPos; anchor: { x: number; y: number } }> = {
-  "top-left": { pos: { top: "4%", left: "-2%" }, anchor: { x: 14, y: 9 } },
-  "top-right": { pos: { top: "6%", right: "-2%" }, anchor: { x: 86, y: 11 } },
-  center: { pos: { top: "40%", right: "-4%" }, anchor: { x: 88, y: 47 } },
-  "bottom-left": { pos: { bottom: "22%", left: "-2%" }, anchor: { x: 14, y: 75 } },
-  "bottom-right": { pos: { bottom: "18%", right: "-2%" }, anchor: { x: 86, y: 79 } },
+const cardLayout: Record<
+  string,
+  { pos: CardPos; anchor: { x: number; y: number } }
+> = {
+  "top-left": { pos: { top: "2%", left: "0%" }, anchor: { x: 13, y: 7 } },
+  "top-right": { pos: { top: "2%", right: "0%" }, anchor: { x: 87, y: 7 } },
+  center: { pos: { top: "44%", left: "0%" }, anchor: { x: 16, y: 50 } },
+  "mid-right": { pos: { top: "44%", right: "0%" }, anchor: { x: 87, y: 50 } },
+  "mid-bottom": {
+    pos: { bottom: "23%", left: "20%" },
+    anchor: { x: 34, y: 73 },
+  },
 };
+
+const analyticsAnchor = { x: 87, y: 93 };
 
 function FloatingCard({
   position,
@@ -61,15 +69,15 @@ function FloatingCard({
       style={{
         ...position,
         background: highlight
-          ? "linear-gradient(160deg, rgba(139,92,246,0.25), rgba(20,20,30,0.92))"
+          ? "linear-gradient(160deg, rgba(139,92,246,0.28), rgba(20,20,30,0.92))"
           : "rgba(13, 13, 13, 0.78)",
         borderColor: highlight
-          ? "rgba(139, 92, 246, 0.5)"
+          ? "rgba(139, 92, 246, 0.55)"
           : "var(--glass-border)",
         backdropFilter: "blur(22px)",
         WebkitBackdropFilter: "blur(22px)",
         boxShadow: highlight
-          ? "0 0 50px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.06)"
+          ? "0 0 60px rgba(139, 92, 246, 0.35), inset 0 1px 0 rgba(255,255,255,0.08)"
           : "0 14px 36px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.08)",
       }}
     >
@@ -95,6 +103,12 @@ export function Hero() {
   const { centerLabel, centerIcon, nodes } = home.diagram;
   const CenterIcon = cardIcons[centerIcon];
   const centerAnchor = cardLayout.center.anchor;
+
+  const inboundNodes = nodes.filter(
+    (n) => n.position === "top-left" || n.position === "top-right",
+  );
+  const outboundRight = nodes.find((n) => n.position === "mid-right");
+  const outboundBottom = nodes.find((n) => n.position === "mid-bottom");
 
   return (
     <Reveal
@@ -190,20 +204,10 @@ export function Hero() {
           aria-hidden
           className="absolute pointer-events-none -z-10"
           style={{
-            inset: "-10%",
+            inset: "0",
             background:
-              "radial-gradient(ellipse 60% 55% at 45% 55%, rgba(124, 58, 237, 0.28), transparent 70%)",
-            filter: "blur(140px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute pointer-events-none -z-10"
-          style={{
-            inset: "10%",
-            background:
-              "radial-gradient(ellipse 55% 50% at 45% 50%, rgba(168, 85, 247, 0.32), transparent 65%)",
-            filter: "blur(70px)",
+              "radial-gradient(ellipse 55% 45% at 58% 68%, rgba(124, 58, 237, 0.34), transparent 70%)",
+            filter: "blur(130px)",
           }}
         />
         <div
@@ -212,52 +216,46 @@ export function Hero() {
           style={{
             inset: "0",
             background:
-              "radial-gradient(ellipse 65% 60% at 65% 60%, rgba(59, 130, 246, 0.12), transparent 65%)",
+              "radial-gradient(ellipse 28% 22% at 55% 26%, rgba(168, 85, 247, 0.42), transparent 65%)",
+            filter: "blur(55px)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute pointer-events-none -z-10"
+          style={{
+            inset: "0",
+            background:
+              "radial-gradient(ellipse 65% 50% at 88% 42%, rgba(59, 130, 246, 0.16), transparent 75%)",
             filter: "blur(120px)",
           }}
         />
-
         <div
-          className="absolute z-10"
+          aria-hidden
+          className="absolute pointer-events-none -z-10"
           style={{
-            top: "-2%",
-            left: "16%",
-            width: "62%",
-            height: "100%",
-            maskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
-            filter:
-              "drop-shadow(0 0 60px rgba(124, 58, 237, 0.28)) drop-shadow(0 30px 80px rgba(0, 0, 0, 0.6))",
+            inset: "0",
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, transparent 22%, transparent 78%, rgba(0,0,0,0.55) 100%)",
           }}
-        >
-          <Image
-            src="/portrait.png"
-            alt={`${site.brand.name} portrait`}
-            fill
-            sizes="(min-width: 1024px) 600px, 90vw"
-            priority
-            className="object-cover object-top"
-          />
-        </div>
+        />
 
         <svg
           aria-hidden
-          className="absolute inset-0 w-full h-full pointer-events-none z-20"
+          className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
         >
-          {nodes.map((node) => {
+          {inboundNodes.map((node) => {
             const start = cardLayout[node.position].anchor;
             return (
               <line
-                key={`connector-${node.position}`}
+                key={`connector-in-${node.position}`}
                 x1={start.x}
                 y1={start.y}
                 x2={centerAnchor.x}
                 y2={centerAnchor.y}
-                stroke="rgba(139, 92, 246, 0.45)"
+                stroke="rgba(139, 92, 246, 0.5)"
                 strokeWidth="0.35"
                 strokeDasharray="0.8 1.4"
                 vectorEffect="non-scaling-stroke"
@@ -272,7 +270,93 @@ export function Hero() {
               </line>
             );
           })}
+          {outboundRight ? (
+            <line
+              x1={centerAnchor.x}
+              y1={centerAnchor.y}
+              x2={cardLayout[outboundRight.position].anchor.x}
+              y2={cardLayout[outboundRight.position].anchor.y}
+              stroke="rgba(139, 92, 246, 0.5)"
+              strokeWidth="0.35"
+              strokeDasharray="0.8 1.4"
+              vectorEffect="non-scaling-stroke"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-4.4"
+                dur="3s"
+                repeatCount="indefinite"
+              />
+            </line>
+          ) : null}
+          {outboundBottom ? (
+            <line
+              x1={centerAnchor.x}
+              y1={centerAnchor.y}
+              x2={cardLayout[outboundBottom.position].anchor.x}
+              y2={cardLayout[outboundBottom.position].anchor.y}
+              stroke="rgba(139, 92, 246, 0.5)"
+              strokeWidth="0.35"
+              strokeDasharray="0.8 1.4"
+              vectorEffect="non-scaling-stroke"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-4.4"
+                dur="3s"
+                repeatCount="indefinite"
+              />
+            </line>
+          ) : null}
+          {outboundBottom ? (
+            <line
+              x1={cardLayout[outboundBottom.position].anchor.x}
+              y1={cardLayout[outboundBottom.position].anchor.y}
+              x2={analyticsAnchor.x}
+              y2={analyticsAnchor.y}
+              stroke="rgba(139, 92, 246, 0.4)"
+              strokeWidth="0.3"
+              strokeDasharray="0.6 1.6"
+              vectorEffect="non-scaling-stroke"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-4.4"
+                dur="3.4s"
+                repeatCount="indefinite"
+              />
+            </line>
+          ) : null}
         </svg>
+
+        <div
+          className="absolute z-10"
+          style={{
+            top: "5%",
+            left: "30%",
+            width: "54%",
+            height: "92%",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,1) 76%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,1) 76%, rgba(0,0,0,0) 100%)",
+            filter:
+              "drop-shadow(0 0 60px rgba(124, 58, 237, 0.28)) drop-shadow(0 30px 80px rgba(0, 0, 0, 0.6))",
+          }}
+        >
+          <Image
+            src="/portrait.png"
+            alt={`${site.brand.name} portrait`}
+            fill
+            sizes="(min-width: 1024px) 540px, 90vw"
+            priority
+            className="object-cover"
+            style={{ objectPosition: "center 18%" }}
+          />
+        </div>
 
         <FloatingCard
           position={cardLayout.center.pos}
