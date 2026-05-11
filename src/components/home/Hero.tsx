@@ -2,13 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   BarChart3,
+  CheckCircle2,
+  Database,
+  GitBranch,
   RefreshCw,
+  Settings,
   Users,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { WorkflowCanvas } from "./WorkflowCanvas";
 import { home, site } from "@/lib/content";
 
 const competencyIcons: Record<string, LucideIcon> = {
@@ -18,14 +21,87 @@ const competencyIcons: Record<string, LucideIcon> = {
   RefreshCw,
 };
 
+const cardIcons: Record<string, LucideIcon> = {
+  Users,
+  Database,
+  Settings,
+  CheckCircle2,
+  GitBranch,
+};
+
+type CardPos = {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+};
+
+const cardPositions: Record<string, CardPos> = {
+  "top-left": { top: "6%", right: "38%" },
+  "top-right": { top: "10%", right: "0%" },
+  center: { top: "42%", right: "16%" },
+  "bottom-left": { bottom: "30%", right: "36%" },
+  "bottom-right": { bottom: "22%", right: "-2%" },
+};
+
+function FloatingCard({
+  position,
+  icon: Icon,
+  label,
+  highlight,
+}: {
+  position: CardPos;
+  icon: LucideIcon;
+  label: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className="absolute z-30 rounded-2xl border px-3.5 py-3 max-w-[180px]"
+      style={{
+        ...position,
+        background: highlight
+          ? "linear-gradient(160deg, rgba(139,92,246,0.22), rgba(20,20,30,0.92))"
+          : "rgba(13, 13, 13, 0.78)",
+        borderColor: highlight
+          ? "rgba(139, 92, 246, 0.45)"
+          : "var(--glass-border)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        boxShadow: highlight
+          ? "0 0 50px rgba(139, 92, 246, 0.25)"
+          : "0 10px 30px rgba(0, 0, 0, 0.45), 0 0 30px rgba(139, 92, 246, 0.08)",
+      }}
+    >
+      <div className="flex items-center gap-2.5">
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border"
+          style={{
+            borderColor: "rgba(139, 92, 246, 0.3)",
+            background: "rgba(139, 92, 246, 0.14)",
+          }}
+        >
+          <Icon className="text-[color:var(--primary)]" size={15} />
+        </span>
+        <span className="text-[11px] font-medium text-white leading-tight">
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
+  const { centerLabel, centerIcon, nodes } = home.diagram;
+  const CenterIcon = cardIcons[centerIcon];
+
   return (
     <Reveal
       as="section"
-      className="grid gap-10 lg:gap-8 lg:grid-cols-[1.1fr_0.9fr_1fr] items-end min-h-[80vh] py-10 border-b"
+      className="relative grid grid-cols-1 lg:grid-cols-[1fr_1.45fr] gap-10 lg:gap-6 items-center min-h-[88vh] pb-12 border-b"
       style={{ borderColor: "var(--glass-border)" }}
     >
-      <div className="self-center max-w-[560px]">
+      <div className="self-center max-w-[560px] z-10">
         <div
           className="inline-flex rounded-full border px-4 py-2 text-[11px] tracking-[0.2em] uppercase mb-7"
           style={{
@@ -37,21 +113,21 @@ export function Hero() {
           {home.tag}
         </div>
 
-        <h1 className="font-extrabold leading-[1.05] tracking-[-0.03em] text-[clamp(36px,5vw,64px)] mb-7">
+        <h1 className="font-extrabold leading-[1.05] tracking-[-0.03em] text-[clamp(40px,5.5vw,68px)] mb-7">
           {home.titleStart}{" "}
           <span className="text-[color:var(--primary)]">
             {home.titleHighlight}
           </span>
         </h1>
 
-        <p className="text-base lg:text-lg text-[color:var(--text-dim)] leading-relaxed mb-9">
+        <p className="text-base lg:text-lg text-[color:var(--text-dim)] leading-relaxed mb-9 max-w-[480px]">
           {home.subtitle}
         </p>
 
         <div className="flex flex-wrap gap-3 mb-10">
           <Link
             href={home.primaryCta.href}
-            className="rounded-2xl px-7 py-3.5 font-medium text-white transition"
+            className="rounded-2xl px-7 py-3.5 font-medium text-white transition hover:brightness-110"
             style={{ background: "rgb(124, 58, 237)" }}
           >
             {home.primaryCta.label}
@@ -68,7 +144,7 @@ export function Hero() {
           </Link>
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <ul className="grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-[420px]">
           {home.competencies.map((c) => {
             const Icon = competencyIcons[c.icon];
             return (
@@ -83,10 +159,7 @@ export function Hero() {
                     background: "rgba(139, 92, 246, 0.1)",
                   }}
                 >
-                  <Icon
-                    className="text-[color:var(--primary)]"
-                    size={18}
-                  />
+                  <Icon className="text-[color:var(--primary)]" size={18} />
                 </span>
                 <span className="text-[11px] leading-tight text-[color:var(--text-dim)]">
                   {c.label}
@@ -97,42 +170,56 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="relative">
+      <div className="relative h-[640px] lg:h-[760px] w-full">
         <div
           aria-hidden
-          className="absolute left-1/2 -translate-x-1/2 bottom-0 -z-10"
+          className="absolute inset-0 -z-10"
           style={{
-            width: "85%",
-            height: "70%",
             background:
-              "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.28), transparent 65%)",
-            filter: "blur(60px)",
+              "radial-gradient(ellipse 70% 60% at 38% 58%, rgba(139, 92, 246, 0.42), transparent 65%)",
+            filter: "blur(70px)",
           }}
         />
-        <div className="relative w-full max-w-[500px] mx-auto aspect-[3/4]">
+
+        <div
+          className="absolute bottom-0 left-[-6%] lg:left-[-4%] w-[68%] lg:w-[62%] max-w-[640px] aspect-[3/4] z-10"
+          style={{
+            filter: "drop-shadow(0 30px 60px rgba(139, 92, 246, 0.35))",
+          }}
+        >
           <Image
             src="/portrait.png"
             alt={`${site.brand.name} portrait`}
             fill
-            sizes="(min-width: 1024px) 500px, 100vw"
+            sizes="(min-width: 1024px) 600px, 80vw"
             priority
             className="object-contain object-bottom"
-            style={{
-              filter: "drop-shadow(0 30px 60px rgba(139, 92, 246, 0.25))",
-            }}
           />
         </div>
-      </div>
 
-      <div className="self-center flex flex-col gap-5">
-        <WorkflowCanvas />
+        <FloatingCard
+          position={cardPositions.center}
+          icon={CenterIcon}
+          label={centerLabel}
+          highlight
+        />
+        {nodes.map((node) => (
+          <FloatingCard
+            key={node.label}
+            position={cardPositions[node.position]}
+            icon={cardIcons[node.icon]}
+            label={node.label}
+          />
+        ))}
+
         <article
-          className="rounded-2xl border px-5 py-4"
+          className="absolute bottom-0 right-0 z-30 rounded-2xl border px-5 py-4 w-[260px]"
           style={{
             background: "rgba(13, 13, 13, 0.82)",
-            backdropFilter: "blur(18px)",
-            WebkitBackdropFilter: "blur(18px)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
             borderColor: "var(--glass-border)",
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.45)",
           }}
         >
           <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
