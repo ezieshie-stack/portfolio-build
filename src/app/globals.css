@@ -9,6 +9,14 @@
   --text-main: #ffffff;
   --text-dim: #94a3b8;
   --container: 1280px;
+
+  /* Global spacing tokens */
+  --section-y-desktop: 72px;
+  --section-y-tablet: 56px;
+  --section-y-mobile: 40px;
+  --card-pad-desktop: 48px;
+  --card-pad-tablet: 36px;
+  --card-pad-mobile: 24px;
 }
 
 @theme inline {
@@ -1609,3 +1617,99 @@ body {
   }
 }
 
+
+/* ============================================================
+   Global spacing pass — tokenized vertical rhythm + card padding
+   Appended last so it overrides earlier per-section values.
+   ============================================================ */
+
+.coreCapabilities,
+.aboutPreview,
+.toolsSection,
+.currentlyExploring,
+.operational-framework,
+.section-spacing,
+.featuredProjectSection {
+  padding-top: var(--section-y-desktop);
+  padding-bottom: var(--section-y-desktop);
+  margin-top: 0;
+}
+
+.aboutPreviewCard,
+.featuredProjectCard,
+.footerCTA,
+.footerMain {
+  padding: var(--card-pad-desktop);
+}
+
+.sectionEyebrow {
+  margin-bottom: 18px;
+}
+
+.hero {
+  padding-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .coreCapabilities,
+  .aboutPreview,
+  .toolsSection,
+  .currentlyExploring,
+  .operational-framework,
+  .section-spacing,
+  .featuredProjectSection {
+    padding-top: var(--section-y-tablet);
+    padding-bottom: var(--section-y-tablet);
+  }
+
+  .aboutPreviewCard,
+  .featuredProjectCard,
+  .footerCTA,
+  .footerMain {
+    padding: var(--card-pad-tablet);
+  }
+}
+
+@media (max-width: 767px) {
+  .coreCapabilities,
+  .aboutPreview,
+  .toolsSection,
+  .currentlyExploring,
+  .operational-framework,
+  .section-spacing,
+  .featuredProjectSection {
+    padding-top: var(--section-y-mobile);
+    padding-bottom: var(--section-y-mobile);
+  }
+
+  .aboutPreviewCard,
+  .featuredProjectCard,
+  .footerCTA,
+  .footerMain {
+    padding: var(--card-pad-mobile);
+  }
+
+  .hero {
+    padding-top: 20px;
+    padding-bottom: 36px;
+  }
+
+  .toolsSection {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .featuredProjectSection {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .currentlyExploring {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .portfolioFooter {
+    margin-top: 48px;
+  }
+}
