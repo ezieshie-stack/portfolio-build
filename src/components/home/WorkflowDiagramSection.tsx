@@ -3,13 +3,13 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  CreditCard,
+  Cog,
   FileText,
-  ListChecks,
+  Gauge,
+  Inbox,
   RefreshCw,
-  Rocket,
-  TrendingUp,
-  UserPlus,
+  ShieldCheck,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
 
@@ -22,12 +22,12 @@ type Step = {
 };
 
 const steps: Step[] = [
-  { label: "User Registration", icon: UserPlus, next: "right" },
-  { label: "Workout Selection", icon: ListChecks, next: "right" },
-  { label: "Payment Processing", icon: CreditCard, next: "right" },
-  { label: "Plan Activation", icon: Rocket, next: "down" },
-  { label: "Progress Tracking", icon: TrendingUp, next: "left" },
-  { label: "Performance Analytics", icon: BarChart3, next: "left" },
+  { label: "Request Intake", icon: Inbox, next: "right" },
+  { label: "Workflow Assignment", icon: Workflow, next: "right" },
+  { label: "Data Validation", icon: ShieldCheck, next: "right" },
+  { label: "Process Execution", icon: Cog, next: "down" },
+  { label: "Performance Tracking", icon: Gauge, next: "left" },
+  { label: "Operational Analytics", icon: BarChart3, next: "left" },
   { label: "Reporting & Insights", icon: FileText, next: "left" },
   { label: "Continuous Improvement", icon: RefreshCw, next: null },
 ];
