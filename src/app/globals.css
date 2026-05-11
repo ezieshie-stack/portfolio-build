@@ -250,106 +250,31 @@ body {
   }
 }
 
-/* --- Hero layout: Laptop (1024-1439) default --- */
+/* --- Hero layout — strict, non-overlapping ranges --- */
+/* Hero is text + portrait at every breakpoint. The Operational Framework
+   is its own section below the hero (see .operational-framework). */
 .hero {
   position: relative;
-  display: grid;
-  grid-template-columns: 0.9fr 0.75fr 0.85fr;
-  align-items: center;
-  gap: 40px;
-  min-height: calc(100vh - 96px);
-}
-
-.hero-text {
-  max-width: 560px;
-}
-
-.hero-title {
-  font-size: clamp(64px, 6vw, 92px);
-  line-height: 0.92;
-  letter-spacing: -0.05em;
-}
-
-.hero-portrait-column {
-  height: 100%;
-  min-height: 600px;
 }
 
 .hero-portrait {
   position: relative;
-  height: min(74vh, 760px);
   width: auto;
   max-width: none;
 }
 
 .hero-portrait-glow {
-  width: 620px;
-  height: 620px;
-  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.hero-system {
-  min-height: 620px;
-}
-
-/* Desktop (1440+) — give every column a touch more room */
-@media (min-width: 1440px) {
-  .hero {
-    grid-template-columns: 0.95fr 0.8fr 0.9fr;
-    gap: 48px;
-  }
-  .hero-title {
-    font-size: clamp(72px, 6.5vw, 100px);
-  }
-  .hero-portrait {
-    height: min(78vh, 860px);
-  }
-}
-
-/* Tablet (768-1023) — 2-col text+portrait, system spans full width below */
-@media (max-width: 1023px) {
-  .hero {
-    grid-template-columns: 1fr 0.85fr;
-    gap: 32px;
-    min-height: auto;
-    padding-block: 56px 32px;
-  }
-  .hero-text {
-    max-width: none;
-  }
-  .hero-title {
-    font-size: clamp(48px, 6.4vw, 72px);
-  }
-  .hero-portrait-column {
-    min-height: 480px;
-  }
-  .hero-portrait {
-    height: min(62vh, 600px);
-  }
-  .hero-portrait-glow {
-    width: 480px;
-    height: 480px;
-  }
-  .hero-system {
-    grid-column: 1 / -1;
-    min-height: auto;
-    max-width: 760px;
-    margin-inline: auto;
-    width: 100%;
-    padding-top: 8px;
-  }
-}
-
-/* Mobile (<768) — single column, text > portrait (no system cluster) */
+/* Mobile: 0–767 */
 @media (max-width: 767px) {
   .hero {
     display: flex;
     flex-direction: column;
     gap: 28px;
     padding: 40px 0 0;
-    min-height: auto;
   }
   .hero-text {
     max-width: none;
@@ -357,6 +282,7 @@ body {
   .hero-title {
     font-size: clamp(44px, 12vw, 64px);
     line-height: 0.95;
+    letter-spacing: -0.04em;
   }
   .hero-portrait-column {
     width: 100%;
@@ -370,8 +296,151 @@ body {
     height: 380px;
     bottom: 20px;
   }
-  .hero-system {
-    display: none;
+}
+
+/* Tablet: 768–1023 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 0.85fr;
+    gap: 32px;
+    align-items: center;
+    padding-block: 56px 32px;
+  }
+  .hero-text {
+    max-width: none;
+  }
+  .hero-title {
+    font-size: clamp(48px, 6.4vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+  .hero-portrait-column {
+    min-height: 480px;
+  }
+  .hero-portrait {
+    height: min(62vh, 600px);
+  }
+  .hero-portrait-glow {
+    width: 480px;
+    height: 480px;
+    bottom: 30px;
+  }
+}
+
+/* Laptop: 1024–1439 */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    min-height: calc(100vh - 96px);
+  }
+  .hero-text {
+    max-width: 620px;
+  }
+  .hero-title {
+    font-size: clamp(64px, 6vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+  .hero-portrait-column {
+    height: 100%;
+    min-height: 600px;
+  }
+  .hero-portrait {
+    height: min(74vh, 760px);
+  }
+  .hero-portrait-glow {
+    width: 600px;
+    height: 600px;
+    bottom: 40px;
+  }
+}
+
+/* Desktop: 1440+ */
+@media (min-width: 1440px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+    min-height: calc(100vh - 96px);
+  }
+  .hero-text {
+    max-width: 680px;
+  }
+  .hero-title {
+    font-size: clamp(72px, 6.5vw, 100px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+  }
+  .hero-portrait-column {
+    height: 100%;
+    min-height: 680px;
+  }
+  .hero-portrait {
+    height: min(78vh, 860px);
+  }
+  .hero-portrait-glow {
+    width: 680px;
+    height: 680px;
+    bottom: 40px;
+  }
+}
+
+/* --- Operational Framework section (always visible) --- */
+.operational-framework {
+  display: block;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.operational-framework__eyebrow {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgb(167, 139, 250);
+  margin: 0 0 24px;
+}
+
+.operational-framework__cluster {
+  width: 100%;
+  margin-inline: auto;
+}
+
+@media (max-width: 767px) {
+  .operational-framework {
+    padding: 40px 0 8px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .operational-framework {
+    padding: 48px 0 16px;
+  }
+  .operational-framework__cluster {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .operational-framework {
+    padding: 56px 0 24px;
+  }
+  .operational-framework__cluster {
+    max-width: 1040px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .operational-framework {
+    padding: 64px 0 32px;
+  }
+  .operational-framework__cluster {
+    max-width: 1120px;
   }
 }
 

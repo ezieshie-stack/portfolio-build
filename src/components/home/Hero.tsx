@@ -8,7 +8,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { SystemCluster } from "@/components/home/SystemCluster";
 import { home, site } from "@/lib/content";
 
 const competencyIcons: Record<string, LucideIcon> = {
@@ -141,9 +140,6 @@ export function Hero() {
         />
       </div>
 
-      <div className="hero-system relative z-[15] flex flex-col justify-center">
-        <SystemCluster />
-      </div>
     </Reveal>
   );
 }

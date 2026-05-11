@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { BackgroundCanvas } from "@/components/BackgroundCanvas";
@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: "Portfolio — Operations & Business Systems Analyst",
   description:
     "Operations and business systems analyst portfolio. Workflow design, automation, and data-driven systems.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
