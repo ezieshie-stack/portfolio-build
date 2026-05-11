@@ -1322,59 +1322,155 @@ body {
   background: rgba(139, 92, 246, 0.08);
 }
 
-.siteFooter {
-  width: 100%;
-  margin-top: 72px;
-  padding: 56px 0 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: #030305;
+/* --- Portfolio footer (CTA panel + main + bottom bar) --- */
+.portfolioFooter {
+  max-width: 1280px;
+  margin: 96px auto 0;
+  padding: 0 64px 40px;
 }
 
-.footerInner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 64px;
+.footerCTA {
+  padding: 72px;
+  border-radius: 36px 36px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.22), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
   display: grid;
-  grid-template-columns: 1.5fr 0.8fr 0.8fr 1.1fr;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.footerEyebrow {
+  color: #a78bfa;
+  font-size: 12px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+}
+
+.footerCTA h2 {
+  margin: 0;
+  color: white;
+  font-size: clamp(64px, 8vw, 132px);
+  line-height: 0.9;
+  letter-spacing: -0.07em;
+}
+
+.footerCTARight p {
+  color: #a1a1aa;
+  font-size: 18px;
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 0 32px;
+}
+
+.footerCTAButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.footerPrimaryBtn,
+.footerSecondaryBtn {
+  height: 56px;
+  padding: 0 24px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  color: white;
+}
+
+.footerPrimaryBtn {
+  background: #7c3aed;
+}
+
+.footerSecondaryBtn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.footerMain {
+  padding: 56px 72px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 36px 36px;
+  background: rgba(255, 255, 255, 0.025);
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.9fr 1.2fr;
   gap: 56px;
 }
 
 .footerLogo {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  border: 1px solid rgba(139, 92, 246, 0.45);
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid rgba(139, 92, 246, 0.55);
+  background: rgba(139, 92, 246, 0.08);
+  color: white;
   display: grid;
   place-items: center;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.footerBrand h3 {
+  margin: 0 0 6px;
   color: white;
-  margin-bottom: 18px;
+  font-size: 22px;
 }
 
-.footerBrand h3,
-.footerColumn h4 {
-  color: white;
-  margin: 0 0 14px;
+.footerBrand p {
+  margin: 0 0 24px;
+  color: #c4b5fd;
 }
 
-.footerBrand p,
-.footerBrand span,
-.footerColumn p,
-.footerColumn a {
-  color: #a1a1aa;
-  line-height: 1.7;
-}
-
-.footerColumn a {
+.footerBrand span {
   display: block;
+  max-width: 340px;
+  color: #a1a1aa;
+  line-height: 1.75;
+}
+
+.footerColumn h4 {
+  margin: 0 0 20px;
+  color: white;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.footerColumn a,
+.footerColumn p {
+  color: #a1a1aa;
+  font-size: 15px;
+  line-height: 1.8;
   text-decoration: none;
-  margin-top: 10px;
+}
+
+.footerColumn a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  transition: 0.25s ease;
+}
+
+.footerColumn a:hover {
+  color: #c4b5fd;
+  transform: translateX(4px);
+}
+
+.footerInlineCTA {
+  color: #c4b5fd !important;
+  margin-top: 20px !important;
 }
 
 .footerBottom {
-  max-width: 1280px;
-  margin: 42px auto 0;
-  padding: 24px 64px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px 0 0;
   display: flex;
   justify-content: space-between;
   color: #71717a;
@@ -1384,7 +1480,8 @@ body {
 @media (max-width: 900px) {
   .capabilityGrid,
   .aboutPreviewCard,
-  .footerInner {
+  .footerCTA,
+  .footerMain {
     grid-template-columns: 1fr;
   }
 
@@ -1401,15 +1498,37 @@ body {
     padding: 36px 24px;
   }
 
-  .footerInner,
-  .footerBottom {
-    padding-left: 24px;
-    padding-right: 24px;
+  .portfolioFooter {
+    margin-top: 64px;
+    padding: 0 24px 32px;
+  }
+
+  .footerCTA {
+    padding: 40px 28px;
+    gap: 32px;
+  }
+
+  .footerCTA h2 {
+    font-size: 64px;
+  }
+
+  .footerCTAButtons {
+    flex-direction: column;
+  }
+
+  .footerPrimaryBtn,
+  .footerSecondaryBtn {
+    width: 100%;
+  }
+
+  .footerMain {
+    padding: 36px 28px;
+    gap: 36px;
   }
 
   .footerBottom {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .heroSocialLinks {

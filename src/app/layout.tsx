@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { BackgroundCanvas } from "@/components/BackgroundCanvas";
 import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { PortfolioFooter } from "@/components/PortfolioFooter";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,7 +43,7 @@ export default function RootLayout({
         <div className="orb" aria-hidden />
         <Nav />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <PortfolioFooter />
       </body>
     </html>
   );
