@@ -19,23 +19,29 @@ type Step = {
   label: string;
   icon: LucideIcon;
   next: Direction;
+  /** Column in the lg+ snake layout. 1-based. */
+  col: 1 | 2 | 3 | 4;
 };
 
 const steps: Step[] = [
-  { label: "Request Intake", icon: Inbox, next: "right" },
-  { label: "Workflow Assignment", icon: Workflow, next: "right" },
-  { label: "Data Validation", icon: ShieldCheck, next: "right" },
-  { label: "Process Execution", icon: Cog, next: "down" },
-  { label: "Performance Tracking", icon: Gauge, next: "left" },
-  { label: "Operational Analytics", icon: BarChart3, next: "left" },
-  { label: "Reporting & Insights", icon: FileText, next: "left" },
-  { label: "Continuous Improvement", icon: RefreshCw, next: null },
+  { label: "Request Intake", icon: Inbox, next: "right", col: 1 },
+  { label: "Workflow Assignment", icon: Workflow, next: "right", col: 2 },
+  { label: "Data Validation", icon: ShieldCheck, next: "right", col: 3 },
+  { label: "Process Execution", icon: Cog, next: "down", col: 4 },
+  { label: "Performance Tracking", icon: Gauge, next: "left", col: 4 },
+  { label: "Operational Analytics", icon: BarChart3, next: "left", col: 3 },
+  { label: "Reporting & Insights", icon: FileText, next: "left", col: 2 },
+  { label: "Continuous Improvement", icon: RefreshCw, next: null, col: 1 },
 ];
 
-// Visual order: row 1 = steps 1-4 left-to-right; row 2 = steps 8,7,6,5 left-to-right
-const visualOrder = [...steps.slice(0, 4), ...steps.slice(4).reverse()];
+const colStartClass: Record<Step["col"], string> = {
+  1: "lg:col-start-1",
+  2: "lg:col-start-2",
+  3: "lg:col-start-3",
+  4: "lg:col-start-4",
+};
 
-function Arrow({ direction }: { direction: Direction }) {
+function SnakeArrow({ direction }: { direction: Direction }) {
   if (!direction) return null;
 
   const common = {
@@ -106,16 +112,17 @@ export function WorkflowDiagramSection() {
         </p>
 
         <div
-          className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+          className="relative grid grid-cols-1 lg:grid-cols-4"
           style={{ gap: "28px 32px" }}
         >
-          {visualOrder.map((step) => {
+          {steps.map((step, idx) => {
             const Icon = step.icon;
-            const stepNumber = steps.indexOf(step) + 1;
+            const stepNumber = idx + 1;
+            const isLast = idx === steps.length - 1;
             return (
               <div
                 key={step.label}
-                className="relative rounded-[20px] border"
+                className={`relative rounded-[20px] border ${colStartClass[step.col]}`}
                 style={{
                   minHeight: "112px",
                   padding: "18px 20px",
@@ -157,9 +164,28 @@ export function WorkflowDiagramSection() {
                   {step.label}
                 </h3>
 
+                {/* Snake-path arrows: laptop+ only */}
                 <div className="hidden lg:block" aria-hidden>
-                  <Arrow direction={step.next} />
+                  <SnakeArrow direction={step.next} />
                 </div>
+
+                {/* Vertical-flow arrow: tablet & mobile, between consecutive cards */}
+                {!isLast ? (
+                  <ChevronDown
+                    aria-hidden
+                    size={18}
+                    className="lg:hidden"
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      bottom: "-22px",
+                      transform: "translateX(-50%)",
+                      color: "rgba(167,139,250,0.9)",
+                      pointerEvents: "none",
+                      filter: "drop-shadow(0 0 6px rgba(139,92,246,0.4))",
+                    }}
+                  />
+                ) : null}
               </div>
             );
           })}
