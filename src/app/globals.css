@@ -1915,3 +1915,121 @@ button:focus-visible {
     padding-right: 0;
   }
 }
+
+/* ============================================================
+   Tablet/mobile refinement — portrait scale + featured overflow
+   + 4-col footer on tablet
+   ============================================================ */
+@media (max-width: 1024px) {
+  .hero-portrait {
+    max-width: 520px;
+    width: 72vw;
+    height: auto;
+    margin-inline: auto;
+    object-fit: contain;
+    transform: none;
+  }
+
+  .featuredProjectSection,
+  .featuredProjectCard,
+  .slider-slide,
+  .projectIntro,
+  .projectOutcomes,
+  .projectFlow,
+  .flowGrid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .featuredProjectCard {
+    grid-template-columns: 1fr;
+    padding: 40px;
+  }
+
+  .projectIntro h2,
+  .projectIntro p {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .metricBox {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .projectFlow,
+  .flowGrid {
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footerMain {
+    display: grid;
+    grid-template-columns: 1.35fr 0.75fr 0.75fr 1fr;
+    gap: 28px;
+    padding: 40px;
+  }
+
+  .footerBrand span {
+    max-width: 260px;
+    line-height: 1.45;
+  }
+
+  .footerBrand p {
+    max-width: 260px;
+  }
+
+  .footerColumn p {
+    max-width: 260px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-portrait {
+    max-width: 420px;
+    width: 92vw;
+    height: auto;
+    transform: none;
+  }
+
+  .featuredProjectCard {
+    padding: 28px 20px;
+    border-radius: 28px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectActions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .projectActions a,
+  .projectActions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footerMain {
+    grid-template-columns: 1fr;
+  }
+
+  .footerBrand span {
+    max-width: 320px;
+  }
+}
