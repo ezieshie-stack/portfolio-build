@@ -21,17 +21,19 @@ type Step = {
   next: Direction;
   /** Column in the lg+ snake layout. 1-based. */
   col: 1 | 2 | 3 | 4;
+  /** Row in the lg+ snake layout. 1-based. */
+  row: 1 | 2;
 };
 
 const steps: Step[] = [
-  { label: "Request Intake", icon: Inbox, next: "right", col: 1 },
-  { label: "Workflow Assignment", icon: Workflow, next: "right", col: 2 },
-  { label: "Data Validation", icon: ShieldCheck, next: "right", col: 3 },
-  { label: "Process Execution", icon: Cog, next: "down", col: 4 },
-  { label: "Performance Tracking", icon: Gauge, next: "left", col: 4 },
-  { label: "Operational Analytics", icon: BarChart3, next: "left", col: 3 },
-  { label: "Reporting & Insights", icon: FileText, next: "left", col: 2 },
-  { label: "Continuous Improvement", icon: RefreshCw, next: null, col: 1 },
+  { label: "Request Intake", icon: Inbox, next: "right", col: 1, row: 1 },
+  { label: "Workflow Assignment", icon: Workflow, next: "right", col: 2, row: 1 },
+  { label: "Data Validation", icon: ShieldCheck, next: "right", col: 3, row: 1 },
+  { label: "Process Execution", icon: Cog, next: "down", col: 4, row: 1 },
+  { label: "Performance Tracking", icon: Gauge, next: "left", col: 4, row: 2 },
+  { label: "Operational Analytics", icon: BarChart3, next: "left", col: 3, row: 2 },
+  { label: "Reporting & Insights", icon: FileText, next: "left", col: 2, row: 2 },
+  { label: "Continuous Improvement", icon: RefreshCw, next: null, col: 1, row: 2 },
 ];
 
 const colStartClass: Record<Step["col"], string> = {
@@ -39,6 +41,11 @@ const colStartClass: Record<Step["col"], string> = {
   2: "lg:col-start-2",
   3: "lg:col-start-3",
   4: "lg:col-start-4",
+};
+
+const rowStartClass: Record<Step["row"], string> = {
+  1: "lg:row-start-1",
+  2: "lg:row-start-2",
 };
 
 function SnakeArrow({ direction }: { direction: Direction }) {
@@ -122,7 +129,7 @@ export function WorkflowDiagramSection() {
             return (
               <div
                 key={step.label}
-                className={`relative rounded-[20px] border ${colStartClass[step.col]}`}
+                className={`relative rounded-[20px] border ${colStartClass[step.col]} ${rowStartClass[step.row]}`}
                 style={{
                   minHeight: "112px",
                   padding: "18px 20px",
