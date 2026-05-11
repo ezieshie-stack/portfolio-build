@@ -1190,11 +1190,16 @@ body {
 
 .coreCapabilities,
 .aboutPreview,
-.toolsSection,
-.currentlyExploring {
+.toolsSection {
   max-width: 1280px;
   margin: 0 auto;
   padding: 56px 64px;
+}
+
+.currentlyExploring {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 72px 64px 56px;
 }
 
 .capabilityGrid {
@@ -1307,19 +1312,45 @@ body {
   }
 }
 
-.exploringPills {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 22px;
+.exploringGrid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
 }
 
-.exploringPills span {
-  padding: 14px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  color: #c4b5fd;
-  background: rgba(139, 92, 246, 0.08);
+.exploringCard {
+  min-height: 210px;
+  padding: 34px 30px;
+  border-radius: 28px;
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  background:
+    radial-gradient(circle at 20% 15%, rgba(139, 92, 246, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 34px;
+}
+
+.exploringCard svg {
+  width: 34px;
+  height: 34px;
+  color: #a78bfa;
+}
+
+.exploringCard span {
+  font-size: 28px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  max-width: 220px;
+}
+
+@media (max-width: 900px) {
+  .exploringGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* --- Portfolio footer (CTA panel + main + bottom bar) --- */
@@ -1497,9 +1528,26 @@ body {
 @media (max-width: 767px) {
   .coreCapabilities,
   .aboutPreview,
-  .toolsSection,
-  .currentlyExploring {
+  .toolsSection {
     padding: 36px 24px;
+  }
+
+  .currentlyExploring {
+    padding: 48px 24px 40px;
+  }
+
+  .exploringGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .exploringCard {
+    min-height: 150px;
+    padding: 26px 24px;
+  }
+
+  .exploringCard span {
+    font-size: 24px;
   }
 
   .portfolioFooter {
