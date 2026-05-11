@@ -1,30 +1,26 @@
 export function ToolsCarousel() {
   const tools = [
-    "Excel",
-    "SQL",
-    "Python",
-    "Power BI",
-    "Looker Studio",
-    "Jira",
-    "Notion",
-    "Figma",
-    "Google Sheets",
-    "Lucidchart",
+    { name: "Excel", icon: "X" },
+    { name: "SQL", icon: "DB" },
+    { name: "Python", icon: "Py" },
+    { name: "Power BI", icon: "BI" },
+    { name: "Looker Studio", icon: "LS" },
+    { name: "Jira", icon: "J" },
+    { name: "Notion", icon: "N" },
+    { name: "Figma", icon: "F" },
+    { name: "Google Sheets", icon: "G" },
+    { name: "Lucidchart", icon: "L" },
   ];
 
   return (
-    <section className="tools-section">
-      <p className="tools-eyebrow">Tools & Technologies</p>
-
-      <div className="tools-marquee">
-        <div className="tools-track">
-          {[...tools, ...tools].map((tool, index) => (
-            <div className="tool-card" key={`${tool}-${index}`}>
-              <span className="tool-icon">{tool[0]}</span>
-              <span>{tool}</span>
-            </div>
-          ))}
-        </div>
+    <section className="toolsSection">
+      <div className="toolsTrack">
+        {[...tools, ...tools].map((tool, index) => (
+          <div className="toolCard" key={`${tool.name}-${index}`}>
+            <span className="toolIcon">{tool.icon}</span>
+            <span>{tool.name}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
