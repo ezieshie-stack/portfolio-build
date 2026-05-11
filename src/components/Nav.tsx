@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { site } from "@/lib/content";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -47,15 +49,20 @@ export function Nav() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8 text-[13px]">
-            {site.navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[color:var(--text-dim)] hover:text-white transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {site.navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`navLink text-[color:var(--text-dim)] hover:text-white${
+                    isActive ? " active" : ""
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-3">
