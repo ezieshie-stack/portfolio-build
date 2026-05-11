@@ -880,11 +880,12 @@ body {
   .featuredProjectSection {
     padding-top: 56px;
     padding-bottom: 56px;
+    padding-inline: 16px;
     overflow-x: hidden;
   }
 
   .featuredProjectHeader {
-    padding: 0 24px;
+    padding: 0;
     margin-bottom: 24px;
   }
 
@@ -893,14 +894,16 @@ body {
   }
 
   .viewAllButton {
-    width: calc(100% - 32px);
-    margin: 24px 16px 0;
+    width: 100%;
+    margin: 24px 0 0;
     height: 52px;
   }
 
   .featuredProjectCard {
-    width: calc(100% - 32px);
-    margin: 0 16px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
     padding: 28px 20px;
     border-radius: 28px;
     grid-template-columns: 1fr;
@@ -909,23 +912,32 @@ body {
   }
 
   .projectIntro h2 {
-    font-size: clamp(34px, 10vw, 46px);
+    font-size: clamp(34px, 10vw, 48px);
     line-height: 1.08;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   .projectIntro p {
     font-size: 16px;
     line-height: 1.65;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   .projectActions {
-    flex-direction: column;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .primaryAction,
   .secondaryAction {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
   }
 
   .projectFlow,
@@ -933,6 +945,7 @@ body {
     border-left: 0;
     padding-left: 0;
     width: 100%;
+    max-width: 100%;
     overflow: hidden;
   }
 

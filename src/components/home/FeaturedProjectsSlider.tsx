@@ -1,31 +1,21 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   FeaturedProjectCard,
   projects,
 } from "@/components/home/FeaturedProjectCard";
 
-const AUTOPLAY_MS = 6000;
 const SWIPE_THRESHOLD = 50;
 
 export function FeaturedProjectsSlider() {
   const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   const total = projects.length;
   const goTo = (i: number) => setCurrent(((i % total) + total) % total);
   const next = () => goTo(current + 1);
   const prev = () => goTo(current - 1);
-
-  useEffect(() => {
-    if (paused) return;
-    const id = window.setInterval(() => {
-      setCurrent((c) => (c + 1) % total);
-    }, AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-  }, [paused, total]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.changedTouches[0].clientX;
@@ -40,13 +30,7 @@ export function FeaturedProjectsSlider() {
   };
 
   return (
-    <section
-      className="featuredProjectSection"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
-    >
+    <section className="featuredProjectSection">
       <div className="featuredProjectHeader">
         <h2 className="featuredTitle">Featured Project</h2>
       </div>
