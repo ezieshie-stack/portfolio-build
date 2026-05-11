@@ -391,11 +391,102 @@ body {
   }
 }
 
-/* --- Operational Framework section (always visible) --- */
+/* --- Mobile drawer (hamburger menu) --- */
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobile-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mobile-drawer__panel {
+  position: relative;
+  width: min(86vw, 320px);
+  height: 100%;
+  background: rgba(10, 10, 12, 0.96);
+  border-left: 1px solid var(--glass-border);
+  padding: 22px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: drawerSlideIn 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes drawerSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobile-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-drawer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-drawer__link {
+  display: block;
+  padding: 14px 12px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.mobile-drawer__link:hover,
+.mobile-drawer__link:active {
+  background: rgba(139, 92, 246, 0.12);
+}
+
+/* --- Section spacing utility (56 / 72 / 96 scale) --- */
+.section-spacing {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (max-width: 1023px) {
+  .section-spacing {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-spacing {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+/* --- Operational Framework section --- */
 .operational-framework {
   display: block;
   width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 96px;
+  padding-bottom: 96px;
 }
 
 .operational-framework__eyebrow {
@@ -412,15 +503,10 @@ body {
   margin-inline: auto;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .operational-framework {
-    padding: 40px 0 8px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .operational-framework {
-    padding: 48px 0 16px;
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
   .operational-framework__cluster {
     max-width: 720px;
@@ -428,26 +514,35 @@ body {
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
-  .operational-framework {
-    padding: 56px 0 24px;
-  }
   .operational-framework__cluster {
     max-width: 1040px;
   }
 }
 
 @media (min-width: 1440px) {
-  .operational-framework {
-    padding: 64px 0 32px;
-  }
   .operational-framework__cluster {
     max-width: 1120px;
   }
 }
 
+@media (max-width: 767px) {
+  .operational-framework {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
 /* --- Featured Project Card (full-bleed section) --- */
 .featuredProjectSection {
-  padding: 72px 0 96px;
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+@media (max-width: 1023px) {
+  .featuredProjectSection {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
 }
 
 .featuredProjectHeader {
@@ -685,7 +780,8 @@ body {
 
 @media (max-width: 767px) {
   .featuredProjectSection {
-    padding: 56px 0 72px;
+    padding-top: 56px;
+    padding-bottom: 56px;
     overflow-x: hidden;
   }
 
@@ -881,8 +977,16 @@ body {
 
 /* --- Tools & Technologies marquee --- */
 .tools-section {
-  padding: 56px 0;
+  padding-top: 96px;
+  padding-bottom: 96px;
   overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .tools-section {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
 }
 
 .tools-eyebrow {
@@ -961,7 +1065,8 @@ body {
 
 @media (max-width: 767px) {
   .tools-section {
-    padding: 44px 0;
+    padding-top: 56px;
+    padding-bottom: 56px;
   }
 
   .tool-card {

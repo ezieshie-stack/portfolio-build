@@ -9,11 +9,13 @@ export default function Home() {
     <>
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12 pt-12">
         <Hero />
+      </div>
+      <ToolsCarousel />
+      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12">
         <OperationalFramework />
         <WorkflowDiagramSection />
       </div>
       <FeaturedProjectCard />
-      <ToolsCarousel />
     </>
   );
 }

@@ -99,10 +99,9 @@ function SnakeArrow({ direction }: { direction: Direction }) {
 export function WorkflowDiagramSection() {
   return (
     <section
-      className="w-full"
+      className="w-full section-spacing"
       style={{
         borderTop: "1px solid rgba(255,255,255,0.08)",
-        padding: "48px 0 52px",
       }}
     >
       <div className="max-w-[1280px] mx-auto px-6 sm:px-10 lg:px-16">
