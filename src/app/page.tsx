@@ -3,6 +3,7 @@ import { OperationalFramework } from "@/components/home/OperationalFramework";
 import { WorkflowDiagramSection } from "@/components/home/WorkflowDiagramSection";
 import { FeaturedProjectsSlider } from "@/components/home/FeaturedProjectsSlider";
 import { ToolsCarousel } from "@/components/home/ToolsCarousel";
+import { AboutPreview } from "@/components/home/AboutPreview";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
       </div>
       <ToolsCarousel />
+      <AboutPreview />
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12">
         <OperationalFramework />
         <WorkflowDiagramSection />

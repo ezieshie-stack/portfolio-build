@@ -1138,6 +1138,86 @@ body {
   width: 100%;
 }
 
+/* --- About Preview section --- */
+.aboutPreview {
+  padding: 64px 0;
+}
+
+.aboutPreviewInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+.sectionEyebrow {
+  margin-bottom: 24px;
+  color: #a78bfa;
+  font-size: 12px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.aboutPreviewGrid {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 72px;
+  padding: 42px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.14), transparent 34%),
+    rgba(255, 255, 255, 0.025);
+}
+
+.aboutPreview h2 {
+  margin: 0;
+  color: white;
+  font-size: clamp(36px, 4vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.aboutPreviewCopy p {
+  margin: 0 0 28px;
+  color: #a1a1aa;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.aboutPreviewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #a78bfa;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .aboutPreview {
+    padding: 40px 0;
+  }
+
+  .aboutPreviewInner {
+    padding: 0 24px;
+  }
+
+  .aboutPreviewGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 28px 22px;
+    border-radius: 28px;
+  }
+
+  .aboutPreview h2 {
+    font-size: 38px;
+  }
+
+  .aboutPreviewCopy p {
+    font-size: 16px;
+  }
+}
+
 /* --- Tools & Technologies marquee --- */
 .tools-section {
   padding-top: 96px;
