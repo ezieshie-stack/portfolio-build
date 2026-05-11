@@ -170,19 +170,19 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="relative h-[640px] lg:h-[760px] w-full">
+      <div className="relative h-[680px] lg:h-[820px] w-full">
         <div
           aria-hidden
           className="absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(ellipse 70% 60% at 38% 58%, rgba(139, 92, 246, 0.42), transparent 65%)",
+              "radial-gradient(ellipse 75% 65% at 38% 58%, rgba(139, 92, 246, 0.42), transparent 65%)",
             filter: "blur(70px)",
           }}
         />
 
         <div
-          className="absolute bottom-0 left-[-6%] lg:left-[-4%] w-[68%] lg:w-[62%] max-w-[640px] aspect-[3/4] z-10"
+          className="absolute bottom-0 left-[-8%] lg:left-[-6%] w-[88%] lg:w-[78%] max-w-[760px] aspect-[4/5] z-10"
           style={{
             filter: "drop-shadow(0 30px 60px rgba(139, 92, 246, 0.35))",
           }}
@@ -191,9 +191,9 @@ export function Hero() {
             src="/portrait.png"
             alt={`${site.brand.name} portrait`}
             fill
-            sizes="(min-width: 1024px) 600px, 80vw"
+            sizes="(min-width: 1024px) 760px, 88vw"
             priority
-            className="object-contain object-bottom"
+            className="object-cover object-bottom"
           />
         </div>
 
