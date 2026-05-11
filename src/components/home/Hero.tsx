@@ -199,10 +199,10 @@ export function Hero() {
         aria-hidden
         className="hidden lg:block absolute pointer-events-none -z-10"
         style={{
-          top: "8%",
+          top: "4%",
           left: "52%",
-          width: "min(42vw, 720px)",
-          height: "82%",
+          width: "min(50vw, 860px)",
+          height: "92%",
           transform: "translateX(-50%)",
           background:
             "radial-gradient(circle at 50% 55%, rgba(139,92,246,0.35), transparent 70%)",
@@ -227,14 +227,14 @@ export function Hero() {
         className="hidden lg:block absolute z-[2] pointer-events-none"
         style={{
           left: "52%",
-          bottom: "-40px",
-          width: "min(42vw, 720px)",
-          minWidth: "520px",
+          bottom: "-80px",
+          width: "min(50vw, 860px)",
+          minWidth: "620px",
           transform: "translateX(-50%)",
           maskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%)",
           filter: "drop-shadow(0 30px 80px rgba(0,0,0,0.55))",
         }}
       >
