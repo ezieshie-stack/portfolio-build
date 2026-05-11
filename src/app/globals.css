@@ -877,11 +877,37 @@ body {
 }
 
 @media (max-width: 767px) {
-  .featuredProjectSection {
-    padding-top: 56px;
-    padding-bottom: 56px;
-    padding-inline: 16px;
+  html,
+  body {
     overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .featuredProjectSection,
+  .slider-viewport,
+  .slider-track,
+  .slider-slide,
+  .featuredProjectCard,
+  .projectIntro,
+  .projectFlow,
+  .projectOutcomes {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .featuredProjectSection,
+  .slider-viewport,
+  .featuredProjectCard,
+  .projectIntro,
+  .projectFlow,
+  .projectOutcomes {
+    overflow: hidden;
+  }
+
+  .featuredProjectSection {
+    padding: 56px 16px;
   }
 
   .featuredProjectHeader {
@@ -893,42 +919,45 @@ body {
     font-size: 28px;
   }
 
-  .viewAllButton {
-    width: 100%;
-    margin: 24px 0 0;
-    height: 52px;
+  .slider-viewport {
+    margin: 0;
+  }
+
+  .slider-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .featuredProjectCard {
-    width: 100%;
-    max-width: 100%;
     margin: 0;
-    box-sizing: border-box;
     padding: 28px 20px;
     border-radius: 28px;
     grid-template-columns: 1fr;
     gap: 36px;
-    overflow: hidden;
   }
 
   .projectIntro h2 {
-    font-size: clamp(34px, 10vw, 48px);
+    font-size: clamp(34px, 10vw, 44px);
     line-height: 1.08;
     max-width: 100%;
-    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .projectIntro p {
     font-size: 16px;
     line-height: 1.65;
     max-width: 100%;
-    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .projectActions {
-    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
+    width: 100%;
     gap: 14px;
   }
 
@@ -936,37 +965,35 @@ body {
   .secondaryAction {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
     justify-content: center;
-  }
-
-  .projectFlow,
-  .projectOutcomes {
-    border-left: 0;
-    padding-left: 0;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
+    white-space: normal;
   }
 
   .flowGrid {
-    display: grid;
     grid-template-columns: 1fr;
-    gap: 14px;
+    width: 100%;
+    max-width: 100%;
     overflow: visible;
+    gap: 14px;
   }
 
   .flowStep {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     min-height: 76px;
     flex-direction: row;
     justify-content: flex-start;
     padding: 16px;
     text-align: left;
+    box-sizing: border-box;
   }
 
   .flowStep span {
     font-size: 14px;
+    overflow-wrap: anywhere;
   }
 
   .flowArrow {
@@ -976,21 +1003,36 @@ body {
   .metricsGrid {
     grid-template-columns: 1fr;
     gap: 14px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .metricBox {
     min-height: auto;
+    min-width: 0;
     padding: 22px;
+    box-sizing: border-box;
   }
 
   .metricBox strong {
     font-size: 44px;
   }
 
+  .metricBox span {
+    overflow-wrap: anywhere;
+  }
+
   .outcomeNote {
     align-items: flex-start;
     font-size: 16px;
     line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .viewAllButton {
+    width: 100%;
+    margin: 24px 0 0;
+    height: 52px;
   }
 }
 
