@@ -444,6 +444,264 @@ body {
   }
 }
 
+/* --- Featured Project Card (full-bleed section) --- */
+.featuredProjectSection {
+  padding: 72px 0 96px;
+}
+
+.featuredProjectHeader {
+  max-width: 1280px;
+  margin: 0 auto 28px;
+  padding: 0 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.featuredProjectHeader p {
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-size: 12px;
+}
+
+.featuredProjectHeader a {
+  color: #a78bfa;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.featuredProjectCard {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 42px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.16), transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
+  display: grid;
+  grid-template-columns: 0.9fr 1.35fr 0.85fr;
+  gap: 38px;
+}
+
+.projectBadge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #c4b5fd;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.projectIntro h2 {
+  font-size: clamp(34px, 3vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #fff;
+  margin: 0;
+}
+
+.projectIntro p {
+  color: #a1a1aa;
+  line-height: 1.7;
+  margin: 24px 0;
+}
+
+.projectMeta {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.projectMeta span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a1a1aa;
+  font-size: 14px;
+}
+
+.projectActions {
+  display: flex;
+  gap: 14px;
+}
+
+.primaryAction,
+.secondaryAction {
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.primaryAction {
+  background: #7c3aed;
+}
+
+.secondaryAction {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.projectFlow,
+.projectOutcomes {
+  border-left: 1px dashed rgba(139, 92, 246, 0.22);
+  padding-left: 34px;
+}
+
+.panelTitle {
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 12px;
+  margin-bottom: 28px;
+}
+
+.flowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.flowStep {
+  min-height: 92px;
+  border-radius: 18px;
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  background: rgba(139, 92, 246, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+}
+
+.flowStep svg {
+  color: #a78bfa;
+}
+
+.flowArrow {
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a78bfa;
+}
+
+.keyHighlights {
+  margin-top: 32px;
+}
+
+.keyHighlights p {
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 12px;
+}
+
+.keyHighlights ul {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.keyHighlights li {
+  color: #a1a1aa;
+  font-size: 14px;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.metricBox {
+  min-height: 150px;
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.metricBox svg {
+  color: #a78bfa;
+  margin-bottom: 18px;
+}
+
+.metricBox strong {
+  display: block;
+  font-size: 40px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.metricBox span {
+  color: #a1a1aa;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.outcomeNote {
+  margin-top: 18px;
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.24);
+  color: #c4b5fd;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+@media (max-width: 1100px) {
+  .featuredProjectCard {
+    grid-template-columns: 1fr;
+  }
+
+  .projectFlow,
+  .projectOutcomes {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .featuredProjectHeader {
+    padding: 0 24px;
+  }
+
+  .featuredProjectCard {
+    margin: 0 24px;
+    padding: 28px;
+  }
+
+  .flowGrid {
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
+    overflow-x: auto;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .form-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.03);
