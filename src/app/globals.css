@@ -236,6 +236,20 @@ body {
   }
 }
 
+.hero-grid-pulse {
+  animation: heroGridPulse 8s ease-in-out infinite;
+}
+
+@keyframes heroGridPulse {
+  0%,
+  100% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.085;
+  }
+}
+
 .form-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.03);

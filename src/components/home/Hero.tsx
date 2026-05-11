@@ -33,16 +33,14 @@ function SystemCard({
   icon: Icon,
   label,
   highlight,
-  className,
 }: {
   icon: LucideIcon;
   label: string;
   highlight?: boolean;
-  className?: string;
 }) {
   return (
     <div
-      className={`rounded-2xl border px-3.5 py-3 ${className ?? ""}`}
+      className="rounded-2xl border px-3.5 py-3"
       style={{
         background: highlight
           ? "linear-gradient(160deg, rgba(139,92,246,0.28), rgba(20,20,30,0.92))"
@@ -102,12 +100,12 @@ export function Hero() {
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[minmax(420px,0.95fr)_minmax(320px,0.7fr)_minmax(360px,0.85fr)] items-center gap-10 lg:gap-12 min-h-[calc(100vh-96px)] pb-12 border-b overflow-visible"
+      className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr_0.9fr] items-center gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-12 border-b overflow-visible"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div
         aria-hidden
-        className="absolute inset-0 -z-20 pointer-events-none opacity-[0.05]"
+        className="absolute inset-0 -z-30 pointer-events-none opacity-[0.06] hero-grid-pulse"
         style={{
           backgroundImage:
             "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
@@ -131,7 +129,14 @@ export function Hero() {
           {home.tag}
         </div>
 
-        <h1 className="font-extrabold leading-[1.05] tracking-[-0.03em] text-[clamp(40px,5.5vw,68px)] mb-7">
+        <h1
+          className="font-extrabold mb-7"
+          style={{
+            fontSize: "clamp(3.25rem, 7vw, 6.25rem)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.05em",
+          }}
+        >
           {home.titleStart}{" "}
           <span className="text-[color:var(--primary)]">
             {home.titleHighlight}
@@ -188,54 +193,81 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="relative z-[2] flex items-end justify-center min-h-[640px]">
-        <div
-          aria-hidden
-          className="absolute pointer-events-none -z-10"
-          style={{
-            inset: "-10% -20%",
-            background:
-              "radial-gradient(ellipse 55% 50% at 50% 65%, rgba(124, 58, 237, 0.34), transparent 70%)",
-            filter: "blur(120px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute pointer-events-none -z-10"
-          style={{
-            inset: "0",
-            background:
-              "radial-gradient(ellipse 30% 25% at 50% 28%, rgba(168, 85, 247, 0.4), transparent 65%)",
-            filter: "blur(50px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute pointer-events-none -z-10"
-          style={{
-            inset: "0",
-            background:
-              "radial-gradient(ellipse 70% 55% at 85% 45%, rgba(59, 130, 246, 0.15), transparent 75%)",
-            filter: "blur(110px)",
-          }}
-        />
+      <div aria-hidden className="hidden lg:block min-h-[640px]" />
 
+      <div
+        aria-hidden
+        className="hidden lg:block absolute pointer-events-none -z-10"
+        style={{
+          top: "8%",
+          left: "52%",
+          width: "min(42vw, 720px)",
+          height: "82%",
+          transform: "translateX(-50%)",
+          background:
+            "radial-gradient(circle at 50% 55%, rgba(139,92,246,0.35), transparent 70%)",
+          filter: "blur(70px)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="hidden lg:block absolute pointer-events-none -z-10"
+        style={{
+          top: "12%",
+          left: "70%",
+          width: "30vw",
+          height: "50%",
+          background:
+            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(59,130,246,0.16), transparent 75%)",
+          filter: "blur(100px)",
+        }}
+      />
+
+      <div
+        className="hidden lg:block absolute z-[2] pointer-events-none"
+        style={{
+          left: "52%",
+          bottom: "-40px",
+          width: "min(42vw, 720px)",
+          minWidth: "520px",
+          transform: "translateX(-50%)",
+          maskImage:
+            "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%)",
+          filter: "drop-shadow(0 30px 80px rgba(0,0,0,0.55))",
+        }}
+      >
         <Image
           src="/portrait.png"
           alt={`${site.brand.name} portrait`}
           width={1040}
           height={1300}
           priority
-          sizes="(min-width: 1024px) 520px, 90vw"
-          className="relative w-full max-w-[520px] h-auto max-h-[680px] object-contain object-bottom"
+          sizes="(min-width: 1024px) 720px, 90vw"
+          className="w-full h-auto object-contain"
+          style={{ objectPosition: "center bottom" }}
+        />
+      </div>
+
+      <div className="lg:hidden relative w-full flex justify-center my-6">
+        <Image
+          src="/portrait.png"
+          alt={`${site.brand.name} portrait`}
+          width={1040}
+          height={1300}
+          priority
+          sizes="90vw"
+          className="w-full max-w-[420px] h-auto object-contain"
           style={{
+            objectPosition: "center bottom",
             filter:
-              "drop-shadow(0 30px 90px rgba(124, 58, 237, 0.28)) drop-shadow(0 20px 60px rgba(0, 0, 0, 0.55))",
+              "drop-shadow(0 20px 60px rgba(124,58,237,0.28)) drop-shadow(0 20px 40px rgba(0,0,0,0.55))",
           }}
         />
       </div>
 
-      <div className="relative z-[1] min-h-[640px] flex flex-col justify-center gap-2">
+      <div className="relative z-[4] min-h-[640px] flex flex-col justify-center gap-2">
         <div className="grid grid-cols-2 gap-3">
           {stakeholders ? (
             <SystemCard
