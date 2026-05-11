@@ -29,45 +29,21 @@ const cardIcons: Record<string, LucideIcon> = {
   GitBranch,
 };
 
-type CardPos = {
-  top?: string;
-  right?: string;
-  bottom?: string;
-  left?: string;
-};
-
-const cardLayout: Record<
-  string,
-  { pos: CardPos; anchor: { x: number; y: number } }
-> = {
-  "top-left": { pos: { top: "2%", left: "-2%" }, anchor: { x: 12, y: 7 } },
-  "top-right": { pos: { top: "2%", right: "-2%" }, anchor: { x: 88, y: 7 } },
-  center: { pos: { top: "42%", left: "-3%" }, anchor: { x: 11, y: 48 } },
-  "mid-right": { pos: { top: "42%", right: "-3%" }, anchor: { x: 89, y: 48 } },
-  "mid-bottom": {
-    pos: { bottom: "20%", left: "8%" },
-    anchor: { x: 22, y: 76 },
-  },
-};
-
-const analyticsAnchor = { x: 87, y: 93 };
-
-function FloatingCard({
-  position,
+function SystemCard({
   icon: Icon,
   label,
   highlight,
+  className,
 }: {
-  position: CardPos;
   icon: LucideIcon;
   label: string;
   highlight?: boolean;
+  className?: string;
 }) {
   return (
     <div
-      className="absolute z-30 rounded-2xl border px-3.5 py-3 w-[200px]"
+      className={`rounded-2xl border px-3.5 py-3 ${className ?? ""}`}
       style={{
-        ...position,
         background: highlight
           ? "linear-gradient(160deg, rgba(139,92,246,0.28), rgba(20,20,30,0.92))"
           : "rgba(13, 13, 13, 0.78)",
@@ -99,21 +75,34 @@ function FloatingCard({
   );
 }
 
+function Connector() {
+  return (
+    <div className="flex justify-center" aria-hidden>
+      <div
+        className="h-5 w-px"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(139,92,246,0.55) 50%, transparent 50%)",
+          backgroundSize: "1px 6px",
+        }}
+      />
+    </div>
+  );
+}
+
 export function Hero() {
   const { centerLabel, centerIcon, nodes } = home.diagram;
   const CenterIcon = cardIcons[centerIcon];
-  const centerAnchor = cardLayout.center.anchor;
 
-  const inboundNodes = nodes.filter(
-    (n) => n.position === "top-left" || n.position === "top-right",
-  );
-  const outboundRight = nodes.find((n) => n.position === "mid-right");
-  const outboundBottom = nodes.find((n) => n.position === "mid-bottom");
+  const stakeholders = nodes.find((n) => n.position === "top-left");
+  const dataInputs = nodes.find((n) => n.position === "top-right");
+  const outcomes = nodes.find((n) => n.position === "mid-right");
+  const implementation = nodes.find((n) => n.position === "mid-bottom");
 
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[0.72fr_1fr] gap-10 lg:gap-2 items-center min-h-[92vh] pb-12 border-b overflow-visible"
+      className="relative grid grid-cols-1 lg:grid-cols-[minmax(420px,0.95fr)_minmax(320px,0.7fr)_minmax(360px,0.85fr)] items-center gap-10 lg:gap-12 min-h-[calc(100vh-96px)] pb-12 border-b overflow-visible"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div
@@ -130,7 +119,7 @@ export function Hero() {
         }}
       />
 
-      <div className="self-center max-w-[560px] z-10">
+      <div className="relative z-[3] max-w-[560px]">
         <div
           className="inline-flex rounded-full border px-4 py-2 text-[11px] tracking-[0.2em] uppercase mb-7"
           style={{
@@ -199,34 +188,14 @@ export function Hero() {
         </ul>
       </div>
 
-      <div className="relative h-[680px] lg:h-[820px] w-full">
+      <div className="relative z-[2] flex items-end justify-center min-h-[640px]">
         <div
           aria-hidden
           className="absolute pointer-events-none -z-10"
           style={{
-            inset: "0",
+            inset: "-10% -20%",
             background:
-              "radial-gradient(ellipse 55% 45% at 58% 68%, rgba(124, 58, 237, 0.34), transparent 70%)",
-            filter: "blur(130px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute pointer-events-none -z-10"
-          style={{
-            inset: "0",
-            background:
-              "radial-gradient(ellipse 28% 22% at 55% 26%, rgba(168, 85, 247, 0.42), transparent 65%)",
-            filter: "blur(55px)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute pointer-events-none -z-10"
-          style={{
-            inset: "0",
-            background:
-              "radial-gradient(ellipse 65% 50% at 88% 42%, rgba(59, 130, 246, 0.16), transparent 75%)",
+              "radial-gradient(ellipse 55% 50% at 50% 65%, rgba(124, 58, 237, 0.34), transparent 70%)",
             filter: "blur(120px)",
           }}
         />
@@ -236,145 +205,77 @@ export function Hero() {
           style={{
             inset: "0",
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, transparent 22%, transparent 78%, rgba(0,0,0,0.55) 100%)",
+              "radial-gradient(ellipse 30% 25% at 50% 28%, rgba(168, 85, 247, 0.4), transparent 65%)",
+            filter: "blur(50px)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute pointer-events-none -z-10"
+          style={{
+            inset: "0",
+            background:
+              "radial-gradient(ellipse 70% 55% at 85% 45%, rgba(59, 130, 246, 0.15), transparent 75%)",
+            filter: "blur(110px)",
           }}
         />
 
-        <svg
-          aria-hidden
-          className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          {inboundNodes.map((node) => {
-            const start = cardLayout[node.position].anchor;
-            return (
-              <line
-                key={`connector-in-${node.position}`}
-                x1={start.x}
-                y1={start.y}
-                x2={centerAnchor.x}
-                y2={centerAnchor.y}
-                stroke="rgba(139, 92, 246, 0.5)"
-                strokeWidth="0.35"
-                strokeDasharray="0.8 1.4"
-                vectorEffect="non-scaling-stroke"
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  from="0"
-                  to="-4.4"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </line>
-            );
-          })}
-          {outboundRight ? (
-            <line
-              x1={centerAnchor.x}
-              y1={centerAnchor.y}
-              x2={cardLayout[outboundRight.position].anchor.x}
-              y2={cardLayout[outboundRight.position].anchor.y}
-              stroke="rgba(139, 92, 246, 0.5)"
-              strokeWidth="0.35"
-              strokeDasharray="0.8 1.4"
-              vectorEffect="non-scaling-stroke"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-4.4"
-                dur="3s"
-                repeatCount="indefinite"
-              />
-            </line>
-          ) : null}
-          {outboundBottom ? (
-            <line
-              x1={centerAnchor.x}
-              y1={centerAnchor.y}
-              x2={cardLayout[outboundBottom.position].anchor.x}
-              y2={cardLayout[outboundBottom.position].anchor.y}
-              stroke="rgba(139, 92, 246, 0.5)"
-              strokeWidth="0.35"
-              strokeDasharray="0.8 1.4"
-              vectorEffect="non-scaling-stroke"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-4.4"
-                dur="3s"
-                repeatCount="indefinite"
-              />
-            </line>
-          ) : null}
-          {outboundBottom ? (
-            <line
-              x1={cardLayout[outboundBottom.position].anchor.x}
-              y1={cardLayout[outboundBottom.position].anchor.y}
-              x2={analyticsAnchor.x}
-              y2={analyticsAnchor.y}
-              stroke="rgba(139, 92, 246, 0.4)"
-              strokeWidth="0.3"
-              strokeDasharray="0.6 1.6"
-              vectorEffect="non-scaling-stroke"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-4.4"
-                dur="3.4s"
-                repeatCount="indefinite"
-              />
-            </line>
-          ) : null}
-        </svg>
-
-        <div
-          className="absolute z-10"
+        <Image
+          src="/portrait.png"
+          alt={`${site.brand.name} portrait`}
+          width={1040}
+          height={1300}
+          priority
+          sizes="(min-width: 1024px) 520px, 90vw"
+          className="relative w-full max-w-[520px] h-auto max-h-[680px] object-contain object-bottom"
           style={{
-            top: "6%",
-            left: "34%",
-            width: "48%",
-            height: "90%",
-            maskImage:
-              "radial-gradient(ellipse 78% 88% at 50% 42%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 78% 88% at 50% 42%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
             filter:
-              "drop-shadow(0 0 60px rgba(124, 58, 237, 0.28)) drop-shadow(0 30px 80px rgba(0, 0, 0, 0.6))",
+              "drop-shadow(0 30px 90px rgba(124, 58, 237, 0.28)) drop-shadow(0 20px 60px rgba(0, 0, 0, 0.55))",
           }}
-        >
-          <Image
-            src="/portrait.png"
-            alt={`${site.brand.name} portrait`}
-            fill
-            sizes="(min-width: 1024px) 480px, 90vw"
-            priority
-            className="object-cover"
-            style={{ objectPosition: "center 18%" }}
-          />
+        />
+      </div>
+
+      <div className="relative z-[1] min-h-[640px] flex flex-col justify-center gap-2">
+        <div className="grid grid-cols-2 gap-3">
+          {stakeholders ? (
+            <SystemCard
+              icon={cardIcons[stakeholders.icon]}
+              label={stakeholders.label}
+            />
+          ) : null}
+          {dataInputs ? (
+            <SystemCard
+              icon={cardIcons[dataInputs.icon]}
+              label={dataInputs.label}
+            />
+          ) : null}
         </div>
 
-        <FloatingCard
-          position={cardLayout.center.pos}
-          icon={CenterIcon}
-          label={centerLabel}
-          highlight
-        />
-        {nodes.map((node) => (
-          <FloatingCard
-            key={node.label}
-            position={cardLayout[node.position].pos}
-            icon={cardIcons[node.icon]}
-            label={node.label}
-          />
-        ))}
+        <Connector />
+
+        <SystemCard icon={CenterIcon} label={centerLabel} highlight />
+
+        <Connector />
+
+        <div className="grid grid-cols-2 gap-3">
+          {outcomes ? (
+            <SystemCard
+              icon={cardIcons[outcomes.icon]}
+              label={outcomes.label}
+            />
+          ) : null}
+          {implementation ? (
+            <SystemCard
+              icon={cardIcons[implementation.icon]}
+              label={implementation.label}
+            />
+          ) : null}
+        </div>
+
+        <Connector />
 
         <article
-          className="absolute bottom-0 right-0 z-30 rounded-2xl border px-5 py-4 w-[260px]"
+          className="rounded-2xl border px-5 py-4"
           style={{
             background: "rgba(13, 13, 13, 0.82)",
             backdropFilter: "blur(20px)",
