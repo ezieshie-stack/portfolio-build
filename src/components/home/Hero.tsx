@@ -100,7 +100,7 @@ export function Hero() {
   return (
     <Reveal
       as="section"
-      className="relative grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr_0.9fr] items-center gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-12 border-b overflow-hidden"
+      className="relative grid grid-cols-1 lg:grid-cols-[minmax(420px,0.95fr)_minmax(360px,0.75fr)_minmax(420px,0.9fr)] lg:items-end gap-10 lg:gap-10 min-h-[calc(100vh-96px)] pb-0 border-b overflow-hidden"
       style={{ borderColor: "var(--glass-border)" }}
     >
       <div
@@ -117,7 +117,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-[3] max-w-[560px]">
+      <div className="relative z-[20] lg:self-center max-w-[560px]">
         <div
           className="inline-flex rounded-full border px-4 py-2 text-[11px] tracking-[0.2em] uppercase mb-7"
           style={{
@@ -193,65 +193,47 @@ export function Hero() {
         </ul>
       </div>
 
-      <div aria-hidden className="hidden lg:block min-h-[640px]" />
-
       <div
-        aria-hidden
-        className="hidden lg:block absolute pointer-events-none -z-10"
+        className="hidden lg:flex relative self-end items-end justify-center pointer-events-none"
         style={{
-          top: "4%",
-          left: "52%",
-          width: "min(50vw, 860px)",
-          height: "92%",
-          transform: "translateX(-50%)",
-          background:
-            "radial-gradient(circle at 50% 55%, rgba(139,92,246,0.35), transparent 70%)",
-          filter: "blur(70px)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="hidden lg:block absolute pointer-events-none -z-10"
-        style={{
-          top: "12%",
-          left: "70%",
-          width: "30vw",
-          height: "50%",
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(59,130,246,0.16), transparent 75%)",
-          filter: "blur(100px)",
-        }}
-      />
-
-      <div
-        className="hidden lg:flex absolute pointer-events-none items-end justify-center"
-        style={{
-          left: "48%",
-          bottom: 0,
-          transform: "translateX(-50%)",
-          height: "clamp(620px, 72vh, 860px)",
-          width: "clamp(420px, 36vw, 680px)",
+          height: "calc(100vh - 160px)",
+          minHeight: "620px",
           zIndex: 12,
-          maskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,1) 88%, rgba(0,0,0,0) 100%)",
-          filter: "drop-shadow(0 30px 80px rgba(0,0,0,0.55))",
         }}
       >
+        <div
+          aria-hidden
+          className="absolute pointer-events-none"
+          style={{
+            width: "620px",
+            height: "620px",
+            bottom: "40px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background:
+              "radial-gradient(circle, rgba(124,58,237,0.28), transparent 68%)",
+            filter: "blur(70px)",
+            zIndex: -1,
+          }}
+        />
         <Image
           src="/portrait.png"
           alt={`${site.brand.name} portrait`}
           width={1040}
           height={1300}
           priority
-          sizes="(min-width: 1024px) 680px, 90vw"
+          sizes="(min-width: 1024px) 720px, 90vw"
           className="object-contain"
           style={{
-            height: "100%",
+            height: "min(82vh, 820px)",
             width: "auto",
             maxWidth: "none",
             objectPosition: "center bottom",
+            filter: "drop-shadow(0 30px 90px rgba(124,58,237,0.25))",
+            maskImage:
+              "linear-gradient(to bottom, black 78%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 78%, transparent 100%)",
           }}
         />
       </div>
@@ -273,7 +255,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-[20] min-h-[640px] flex flex-col justify-center gap-2">
+      <div className="relative z-[15] lg:self-center min-h-[620px] flex flex-col justify-center gap-2">
         <div className="grid grid-cols-2 gap-3">
           {stakeholders ? (
             <SystemCard
