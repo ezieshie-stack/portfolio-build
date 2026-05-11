@@ -879,3 +879,98 @@ body {
   width: 100%;
 }
 
+/* --- Tools & Technologies marquee --- */
+.tools-section {
+  padding: 56px 0;
+  overflow: hidden;
+}
+
+.tools-eyebrow {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 12px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #a78bfa;
+}
+
+.tools-marquee {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+.tools-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: tools-scroll 28s linear infinite;
+}
+
+.tools-marquee:hover .tools-track {
+  animation-play-state: paused;
+}
+
+.tool-card {
+  min-width: 170px;
+  height: 72px;
+  padding: 0 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: white;
+  white-space: nowrap;
+}
+
+.tool-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.16);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #a78bfa;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+@keyframes tools-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .tools-section {
+    padding: 44px 0;
+  }
+
+  .tool-card {
+    min-width: 145px;
+    height: 64px;
+  }
+
+  .tools-track {
+    animation-duration: 22s;
+  }
+}
+
