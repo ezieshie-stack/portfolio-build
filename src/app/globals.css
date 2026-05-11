@@ -677,8 +677,13 @@ body {
     radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.16), transparent 35%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
   display: grid;
-  grid-template-columns: 0.9fr 1.35fr 0.85fr;
-  gap: 38px;
+  grid-template-columns: 0.9fr 1.35fr;
+  gap: 48px;
+}
+
+.projectSide {
+  display: grid;
+  gap: 28px;
 }
 
 .projectBadge {
@@ -749,10 +754,12 @@ body {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.projectFlow,
 .projectOutcomes {
-  border-left: 1px dashed rgba(139, 92, 246, 0.22);
-  padding-left: 34px;
+  order: 1;
+}
+
+.projectFlow {
+  order: 2;
 }
 
 .panelTitle {
@@ -798,7 +805,20 @@ body {
 }
 
 .keyHighlights {
-  margin-top: 32px;
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 900px) {
+  .featuredProjectCard {
+    grid-template-columns: 1fr;
+  }
+
+  .keyHighlights {
+    grid-column: auto;
+  }
 }
 
 .keyHighlights p {
@@ -1167,8 +1187,7 @@ body {
 .aboutPreview,
 .toolsSection,
 .currentlyExploring,
-.finalCTA,
-.siteFooter {
+.finalCTA {
   max-width: 1280px;
   margin: 0 auto;
   padding: 56px 64px;
@@ -1184,8 +1203,7 @@ body {
 .capabilityCard,
 .toolCard,
 .aboutPreviewCard,
-.finalCTA,
-.siteFooter {
+.finalCTA {
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.035);
   border-radius: 24px;
@@ -1335,15 +1353,26 @@ body {
 }
 
 .siteFooter {
+  width: 100%;
+  margin-top: 80px;
+  padding: 56px 0 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.siteFooterInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 32px;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px;
 }
 
 .siteFooter h4,
 .siteFooter p {
   color: white;
+  margin: 0 0 14px;
 }
 
 .siteFooter a {
@@ -1351,6 +1380,17 @@ body {
   color: #a1a1aa;
   text-decoration: none;
   margin-top: 10px;
+}
+
+.footerBottom {
+  max-width: 1280px;
+  margin: 42px auto 0;
+  padding: 24px 64px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: space-between;
+  color: #71717a;
+  font-size: 13px;
 }
 
 .footerLogo {
@@ -1368,7 +1408,7 @@ body {
   .capabilityGrid,
   .aboutPreviewCard,
   .finalCTA,
-  .siteFooter {
+  .siteFooterInner {
     grid-template-columns: 1fr;
   }
 
@@ -1382,9 +1422,25 @@ body {
   .aboutPreview,
   .toolsSection,
   .currentlyExploring,
-  .finalCTA,
-  .siteFooter {
+  .finalCTA {
     padding: 36px 24px;
+  }
+
+  .siteFooter {
+    margin-top: 56px;
+    padding-top: 40px;
+  }
+
+  .siteFooterInner {
+    padding: 0 24px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footerBottom {
+    padding: 24px 24px 0;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .heroSocialLinks {

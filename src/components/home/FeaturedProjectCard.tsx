@@ -100,61 +100,63 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className="projectFlow">
-        <p className="panelTitle">Project Impact Flow</p>
+      <div className="projectSide">
+        <div className="projectOutcomes">
+          <p className="panelTitle">Project Outcomes</p>
 
-        <div className="flowGrid">
-          {impactFlow.map((step, index) => {
-            const Icon = step.icon;
+          <div className="metricsGrid">
+            {metrics.map((metric) => {
+              const Icon = metric.icon;
 
-            return (
-              <div className="flowStep" key={step.label}>
-                <Icon size={22} />
-                <span>{step.label}</span>
+              return (
+                <div className="metricBox" key={metric.label}>
+                  <Icon size={24} />
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </div>
+              );
+            })}
+          </div>
 
-                {index !== impactFlow.length - 1 && (
-                  <span className="flowArrow">→</span>
-                )}
-              </div>
-            );
-          })}
+          <div className="outcomeNote">
+            <CheckCircle2 size={22} />
+            <span>
+              Delivered measurable improvement across processes, people, and
+              performance.
+            </span>
+          </div>
         </div>
 
-        <div className="keyHighlights">
-          <p>Key Highlights</p>
+        <div className="projectFlow">
+          <p className="panelTitle">Project Impact Flow</p>
 
-          <ul>
-            {highlights.map((h) => (
-              <li key={h}>{h}</li>
-            ))}
-          </ul>
+          <div className="flowGrid">
+            {impactFlow.map((step, index) => {
+              const Icon = step.icon;
+
+              return (
+                <div className="flowStep" key={step.label}>
+                  <Icon size={22} />
+                  <span>{step.label}</span>
+
+                  {index !== impactFlow.length - 1 && (
+                    <span className="flowArrow">→</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <div className="projectOutcomes">
-        <p className="panelTitle">Project Outcomes</p>
+      <div className="keyHighlights">
+        <p>Key Highlights</p>
 
-        <div className="metricsGrid">
-          {metrics.map((metric) => {
-            const Icon = metric.icon;
-
-            return (
-              <div className="metricBox" key={metric.label}>
-                <Icon size={24} />
-                <strong>{metric.value}</strong>
-                <span>{metric.label}</span>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="outcomeNote">
-          <CheckCircle2 size={22} />
-          <span>
-            Delivered measurable improvement across processes, people, and
-            performance.
-          </span>
-        </div>
+        <ul>
+          {highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
       </div>
     </article>
   );

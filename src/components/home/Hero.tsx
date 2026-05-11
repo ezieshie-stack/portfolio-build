@@ -1,21 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  BarChart3,
-  RefreshCw,
-  Users,
-  Workflow,
-  type LucideIcon,
-} from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { home, site } from "@/lib/content";
-
-const competencyIcons: Record<string, LucideIcon> = {
-  Workflow,
-  BarChart3,
-  Users,
-  RefreshCw,
-};
 
 export function Hero() {
   return (
@@ -81,30 +67,6 @@ export function Hero() {
           </Link>
         </div>
 
-        <ul className="hero-competencies grid grid-cols-2 sm:grid-cols-4 gap-5 max-w-[420px]">
-          {home.competencies.map((c) => {
-            const Icon = competencyIcons[c.icon];
-            return (
-              <li
-                key={c.label}
-                className="flex flex-col items-center text-center gap-2"
-              >
-                <span
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border"
-                  style={{
-                    borderColor: "rgba(139, 92, 246, 0.3)",
-                    background: "rgba(139, 92, 246, 0.1)",
-                  }}
-                >
-                  <Icon className="text-[color:var(--primary)]" size={18} />
-                </span>
-                <span className="text-[11px] leading-tight text-[color:var(--text-dim)]">
-                  {c.label}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
       </div>
 
       <div
