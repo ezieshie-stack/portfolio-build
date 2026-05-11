@@ -1296,14 +1296,14 @@ body {
 }
 
 .toolIcon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   background: rgba(139, 92, 246, 0.18);
   color: #a78bfa;
   display: grid;
   place-items: center;
-  font-weight: 700;
+  flex-shrink: 0;
 }
 
 @keyframes toolsScroll {
