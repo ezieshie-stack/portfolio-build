@@ -1,7 +1,7 @@
 import { Hero } from "@/components/home/Hero";
 import { OperationalFramework } from "@/components/home/OperationalFramework";
 import { WorkflowDiagramSection } from "@/components/home/WorkflowDiagramSection";
-import FeaturedProjectCard from "@/components/home/FeaturedProjectCard";
+import { FeaturedProjectsSlider } from "@/components/home/FeaturedProjectsSlider";
 import { ToolsCarousel } from "@/components/home/ToolsCarousel";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
         <OperationalFramework />
         <WorkflowDiagramSection />
       </div>
-      <FeaturedProjectCard />
+      <FeaturedProjectsSlider />
     </>
   );
 }

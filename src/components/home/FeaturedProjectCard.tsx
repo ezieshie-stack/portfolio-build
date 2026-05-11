@@ -21,116 +21,141 @@ const impactFlow = [
   { label: "Continuous Improvement", icon: CheckCircle2 },
 ];
 
-const metrics = [
-  { value: "28%", label: "Increase in Operational Efficiency", icon: LineChart },
-  { value: "32%", label: "Reduction in Response Time", icon: Clock },
-  { value: "25%", label: "Improvement in Data Accuracy", icon: Database },
-  { value: "20+", label: "Hours Saved Monthly", icon: Users },
+const metricMeta = [
+  { label: "Increase in Operational Efficiency", icon: LineChart },
+  { label: "Reduction in Response Time", icon: Clock },
+  { label: "Improvement in Data Accuracy", icon: Database },
+  { label: "Hours Saved Monthly", icon: Users },
 ];
 
-export default function FeaturedProjectCard() {
+const highlights = [
+  "Streamlined 12+ operational workflows",
+  "Introduced role-based access and data governance",
+  "Built real-time dashboards for operational visibility",
+  "Reduced manual reporting time by 32%",
+];
+
+export type Project = {
+  title: string;
+  category: string;
+  description: string;
+  metricValues: [string, string, string, string];
+};
+
+export const projects: Project[] = [
+  {
+    title: "Fiitco — Fitness Platform Process Redesign",
+    category: "Process Redesign",
+    description:
+      "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency and team accountability.",
+    metricValues: ["28%", "32%", "25%", "20+"],
+  },
+  {
+    title: "SLA & Escalation Optimization",
+    category: "Workflow Analysis",
+    description:
+      "Analyzed escalation patterns, support bottlenecks, and SLA gaps to improve response workflows and operational visibility.",
+    metricValues: ["-28%", "-19%", "94%", "100%"],
+  },
+  {
+    title: "Fraud Detection Analysis",
+    category: "Data Analysis",
+    description:
+      "Used SQL-driven analysis to identify suspicious patterns, high-risk transaction behavior, and reporting opportunities.",
+    metricValues: ["SQL", "Risk", "Patterns", "Insights"],
+  },
+];
+
+export function FeaturedProjectCard({ project }: { project: Project }) {
+  const metrics = metricMeta.map((meta, i) => ({
+    ...meta,
+    value: project.metricValues[i],
+  }));
+
   return (
-    <section className="featuredProjectSection">
-      <div className="featuredProjectHeader">
-        <h2 className="featuredTitle">Featured Project</h2>
-        <a href="/work" className="featuredHeaderLink">
-          View All Projects <ArrowUpRight size={16} />
-        </a>
+    <article className="featuredProjectCard">
+      <div className="projectIntro">
+        <span className="projectBadge">{project.category}</span>
+
+        <h2>{project.title}</h2>
+
+        <p>{project.description}</p>
+
+        <div className="projectMeta">
+          <span>
+            <Calendar size={16} /> Mar 2024 – May 2024
+          </span>
+          <span>
+            <Users size={16} /> Cross-functional Project
+          </span>
+        </div>
+
+        <div className="projectActions">
+          <a href="/work/fiitco" className="primaryAction">
+            View Case Study <ArrowUpRight size={16} />
+          </a>
+          <a href="/work/fiitco" className="secondaryAction">
+            Project Details
+          </a>
+        </div>
       </div>
 
-      <article className="featuredProjectCard">
-        <div className="projectIntro">
-          <span className="projectBadge">Process Redesign</span>
+      <div className="projectFlow">
+        <p className="panelTitle">Project Impact Flow</p>
 
-          <h2>Fiitco — Fitness Platform Process Redesign</h2>
+        <div className="flowGrid">
+          {impactFlow.map((step, index) => {
+            const Icon = step.icon;
 
-          <p>
-            Redesigned end-to-end workflows, implemented role-based systems,
-            and built operational reporting that improved efficiency and team
-            accountability.
-          </p>
+            return (
+              <div className="flowStep" key={step.label}>
+                <Icon size={22} />
+                <span>{step.label}</span>
 
-          <div className="projectMeta">
-            <span>
-              <Calendar size={16} /> Mar 2024 – May 2024
-            </span>
-            <span>
-              <Users size={16} /> Cross-functional Project
-            </span>
-          </div>
-
-          <div className="projectActions">
-            <a href="/work/fiitco" className="primaryAction">
-              View Case Study <ArrowUpRight size={16} />
-            </a>
-            <a href="/work/fiitco" className="secondaryAction">
-              Project Details
-            </a>
-          </div>
+                {index !== impactFlow.length - 1 && (
+                  <span className="flowArrow">→</span>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        <div className="projectFlow">
-          <p className="panelTitle">Project Impact Flow</p>
+        <div className="keyHighlights">
+          <p>Key Highlights</p>
 
-          <div className="flowGrid">
-            {impactFlow.map((step, index) => {
-              const Icon = step.icon;
+          <ul>
+            {highlights.map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
-              return (
-                <div className="flowStep" key={step.label}>
-                  <Icon size={22} />
-                  <span>{step.label}</span>
+      <div className="projectOutcomes">
+        <p className="panelTitle">Project Outcomes</p>
 
-                  {index !== impactFlow.length - 1 && (
-                    <span className="flowArrow">→</span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+        <div className="metricsGrid">
+          {metrics.map((metric) => {
+            const Icon = metric.icon;
 
-          <div className="keyHighlights">
-            <p>Key Highlights</p>
-
-            <ul>
-              <li>Streamlined 12+ operational workflows</li>
-              <li>Introduced role-based access and data governance</li>
-              <li>Built real-time dashboards for operational visibility</li>
-              <li>Reduced manual reporting time by 32%</li>
-            </ul>
-          </div>
+            return (
+              <div className="metricBox" key={metric.label}>
+                <Icon size={24} />
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="projectOutcomes">
-          <p className="panelTitle">Project Outcomes</p>
-
-          <div className="metricsGrid">
-            {metrics.map((metric) => {
-              const Icon = metric.icon;
-
-              return (
-                <div className="metricBox" key={metric.label}>
-                  <Icon size={24} />
-                  <strong>{metric.value}</strong>
-                  <span>{metric.label}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="outcomeNote">
-            <CheckCircle2 size={22} />
-            <span>
-              Delivered measurable improvement across processes, people, and
-              performance.
-            </span>
-          </div>
+        <div className="outcomeNote">
+          <CheckCircle2 size={22} />
+          <span>
+            Delivered measurable improvement across processes, people, and
+            performance.
+          </span>
         </div>
-      </article>
-
-      <a href="/work" className="viewAllButton">
-        View All Projects <ArrowUpRight size={16} />
-      </a>
-    </section>
+      </div>
+    </article>
   );
 }
