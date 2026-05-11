@@ -1,4 +1,4 @@
-import { ArrowUpRight, BarChart3, Brain, Layers3, Target } from "lucide-react";
+import { ArrowUpRight, Brain, Layers3, Target } from "lucide-react";
 
 export function AboutPreview() {
   const points = [
@@ -49,10 +49,6 @@ export function AboutPreview() {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="aboutVisual">
-          <BarChart3 size={72} />
         </div>
       </div>
     </section>

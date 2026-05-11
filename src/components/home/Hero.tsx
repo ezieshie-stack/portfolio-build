@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+import { HeroSocialLinks } from "@/components/home/HeroSocialLinks";
 import { home, site } from "@/lib/content";
 
 export function Hero() {
@@ -67,6 +68,7 @@ export function Hero() {
           </Link>
         </div>
 
+        <HeroSocialLinks />
       </div>
 
       <div

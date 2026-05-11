@@ -98,6 +98,16 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
             Project Details
           </a>
         </div>
+
+        <div className="keyHighlights">
+          <p>Key Highlights</p>
+
+          <ul>
+            {highlights.map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="projectSide">
@@ -149,15 +159,6 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      <div className="keyHighlights">
-        <p>Key Highlights</p>
-
-        <ul>
-          {highlights.map((h) => (
-            <li key={h}>{h}</li>
-          ))}
-        </ul>
-      </div>
     </article>
   );
 }

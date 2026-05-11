@@ -1,14 +1,18 @@
 export function Footer() {
   return (
     <footer className="siteFooter">
-      <div className="siteFooterInner">
-        <div>
+      <div className="footerInner">
+        <div className="footerBrand">
           <div className="footerLogo">DE</div>
-          <p>David Ezieshi</p>
-          <span>Operations & Business Systems Analyst</span>
+          <h3>David Ezieshi</h3>
+          <p>Operations & Business Systems Analyst</p>
+          <span>
+            Building systems that improve operational clarity, workflow design,
+            and business execution.
+          </span>
         </div>
 
-        <div>
+        <div className="footerColumn">
           <h4>Navigation</h4>
           <a href="/">Home</a>
           <a href="/about">About</a>
@@ -16,7 +20,7 @@ export function Footer() {
           <a href="/contact">Contact</a>
         </div>
 
-        <div>
+        <div className="footerColumn">
           <h4>Resources</h4>
           <a href="/resume.pdf">Resume</a>
           <a href="https://linkedin.com/in/YOUR-LINKEDIN">LinkedIn</a>
@@ -24,18 +28,20 @@ export function Footer() {
           <a href="https://github.com/YOUR-GITHUB">GitHub</a>
         </div>
 
-        <div>
+        <div className="footerColumn">
           <h4>Connect</h4>
-          <span>
-            Open to opportunities in operations, systems analysis, and process
-            improvement.
-          </span>
+          <p>
+            Open to opportunities in operations, systems analysis, process
+            improvement, and business analysis.
+          </p>
           <a href="/contact">Get in Touch</a>
         </div>
       </div>
 
       <div className="footerBottom">
-        <span>© {new Date().getFullYear()} David Ezieshi. All rights reserved.</span>
+        <span>
+          © {new Date().getFullYear()} David Ezieshi. All rights reserved.
+        </span>
         <span>Built with care.</span>
       </div>
     </footer>
