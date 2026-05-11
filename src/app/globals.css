@@ -30,6 +30,12 @@
 
 * {
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+img,
+svg {
+  max-width: 100%;
 }
 
 html,
@@ -1825,5 +1831,87 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Tablet (768–1024) overrides — prevent horizontal overflow
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  section,
+  .hero,
+  .coreCapabilities,
+  .aboutPreview,
+  .toolsSection,
+  .operational-framework,
+  .section-spacing,
+  .featuredProjectSection,
+  .currentlyExploring,
+  .portfolioFooter {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .portfolioFooter {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  /* Hero collapses to a single column at tablet */
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-portrait {
+    max-width: 620px;
+    margin-inline: auto;
+  }
+
+  /* Featured project card sits as one column on tablet */
+  .featuredProjectCard {
+    grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+
+  /* Outcomes metrics stay 2-up on tablet (more compact than the
+     desktop 2-col grid the cards already use, but explicit so any
+     wider override can't bleed in) */
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Project Impact Flow + flow grid clamped to card width */
+  .projectFlow,
+  .flowGrid {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Footer CTA single column with compact padding */
+  .footerCTA {
+    grid-template-columns: 1fr;
+    padding: 56px 48px;
+  }
+
+  .footerCTA h2 {
+    font-size: clamp(64px, 9vw, 96px);
+  }
+
+  /* Footer main is 2-up on tablet (not 4-up) */
+  .footerMain {
+    grid-template-columns: 1fr 1fr;
+    padding: 48px;
+    gap: 40px;
+  }
+
+  .footerBottom {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
