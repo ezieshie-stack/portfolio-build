@@ -2059,3 +2059,247 @@ button:focus-visible {
     margin-top: -20px;
   }
 }
+
+/* ============================================================
+   About page
+   ============================================================ */
+.aboutPage {
+  background: #030305;
+  color: white;
+  overflow-x: hidden;
+}
+
+.aboutHero,
+.aboutSplit,
+.educationSection,
+.approachSection {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 96px 64px;
+}
+
+.aboutHero {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 72px;
+  align-items: center;
+  background:
+    radial-gradient(circle at 75% 35%, rgba(139, 92, 246, 0.2), transparent 34%);
+}
+
+.aboutHero h1,
+.aboutSplit h2,
+.educationSection h2,
+.approachSection h2 {
+  font-size: clamp(52px, 7vw, 104px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.aboutHero h1 span {
+  color: #8b5cf6;
+}
+
+.aboutHero p,
+.aboutSplit p,
+.timelineItem p,
+.driveCard p,
+.educationItem p,
+.approachSection p {
+  color: #a1a1aa;
+  line-height: 1.7;
+}
+
+.aboutHeroImage img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.statsGrid,
+.drivesMe,
+.strengthsSection {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px 96px;
+}
+
+.statsGrid,
+.strengthsGrid,
+.drivesGrid {
+  display: grid;
+  gap: 18px;
+}
+
+.statsGrid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.statCard,
+.strengthCard,
+.driveCard,
+.approachSection,
+.educationSection {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 28px;
+}
+
+.statCard {
+  padding: 32px;
+}
+
+.statCard svg,
+.strengthCard svg,
+.driveCard svg {
+  color: #a78bfa;
+}
+
+.statCard h3 {
+  font-size: 42px;
+  margin: 24px 0 8px;
+}
+
+.aboutSplit {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 72px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.timeline {
+  display: grid;
+  gap: 32px;
+}
+
+.timelineItem {
+  border-left: 1px solid rgba(139, 92, 246, 0.45);
+  padding-left: 28px;
+}
+
+.timelineItem span,
+.educationItem span {
+  color: #a78bfa;
+  font-size: 14px;
+}
+
+.timelineItem h3,
+.driveCard h3,
+.educationItem h3 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.drivesGrid {
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 28px;
+}
+
+.driveCard {
+  padding: 28px;
+}
+
+.strengthsGrid {
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 28px;
+}
+
+.strengthCard {
+  padding: 28px;
+  display: grid;
+  gap: 24px;
+}
+
+.educationSection {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 72px;
+}
+
+.educationTimeline {
+  display: grid;
+  gap: 28px;
+  position: relative;
+}
+
+.educationItem {
+  position: relative;
+  padding-left: 32px;
+}
+
+.educationDot {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #8b5cf6;
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.8);
+}
+
+.approachSection {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 72px;
+  background:
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.18), transparent 34%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.approachSection a {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #c4b5fd;
+  text-decoration: none;
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .aboutHero,
+  .aboutSplit,
+  .educationSection,
+  .approachSection {
+    grid-template-columns: 1fr;
+  }
+
+  .statsGrid,
+  .drivesGrid,
+  .strengthsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .aboutHero,
+  .aboutSplit,
+  .educationSection,
+  .approachSection,
+  .statsGrid,
+  .drivesMe,
+  .strengthsSection {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .aboutHero,
+  .aboutSplit,
+  .educationSection,
+  .approachSection {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .statsGrid,
+  .drivesGrid,
+  .strengthsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutHero h1,
+  .aboutSplit h2,
+  .educationSection h2,
+  .approachSection h2 {
+    font-size: 56px;
+  }
+}
