@@ -40,13 +40,13 @@ const cardLayout: Record<
   string,
   { pos: CardPos; anchor: { x: number; y: number } }
 > = {
-  "top-left": { pos: { top: "2%", left: "0%" }, anchor: { x: 13, y: 7 } },
-  "top-right": { pos: { top: "2%", right: "0%" }, anchor: { x: 87, y: 7 } },
-  center: { pos: { top: "44%", left: "0%" }, anchor: { x: 16, y: 50 } },
-  "mid-right": { pos: { top: "44%", right: "0%" }, anchor: { x: 87, y: 50 } },
+  "top-left": { pos: { top: "2%", left: "-2%" }, anchor: { x: 12, y: 7 } },
+  "top-right": { pos: { top: "2%", right: "-2%" }, anchor: { x: 88, y: 7 } },
+  center: { pos: { top: "42%", left: "-3%" }, anchor: { x: 11, y: 48 } },
+  "mid-right": { pos: { top: "42%", right: "-3%" }, anchor: { x: 89, y: 48 } },
   "mid-bottom": {
-    pos: { bottom: "23%", left: "20%" },
-    anchor: { x: 34, y: 73 },
+    pos: { bottom: "20%", left: "8%" },
+    anchor: { x: 22, y: 76 },
   },
 };
 
@@ -335,14 +335,14 @@ export function Hero() {
         <div
           className="absolute z-10"
           style={{
-            top: "5%",
-            left: "30%",
-            width: "54%",
-            height: "92%",
+            top: "6%",
+            left: "34%",
+            width: "48%",
+            height: "90%",
             maskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,1) 76%, rgba(0,0,0,0) 100%)",
+              "radial-gradient(ellipse 78% 88% at 50% 42%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
             WebkitMaskImage:
-              "linear-gradient(to bottom, rgba(0,0,0,1) 76%, rgba(0,0,0,0) 100%)",
+              "radial-gradient(ellipse 78% 88% at 50% 42%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
             filter:
               "drop-shadow(0 0 60px rgba(124, 58, 237, 0.28)) drop-shadow(0 30px 80px rgba(0, 0, 0, 0.6))",
           }}
@@ -351,7 +351,7 @@ export function Hero() {
             src="/portrait.png"
             alt={`${site.brand.name} portrait`}
             fill
-            sizes="(min-width: 1024px) 540px, 90vw"
+            sizes="(min-width: 1024px) 480px, 90vw"
             priority
             className="object-cover"
             style={{ objectPosition: "center 18%" }}
