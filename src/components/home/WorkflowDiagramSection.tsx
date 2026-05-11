@@ -1,13 +1,87 @@
-const workflowSteps = [
-  "User Registration",
-  "Workout Selection",
-  "Payment Processing",
-  "Plan Activation",
-  "Progress Tracking",
-  "Performance Analytics",
-  "Reporting & Insights",
-  "Continuous Improvement",
+import {
+  BarChart3,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  CreditCard,
+  FileText,
+  ListChecks,
+  RefreshCw,
+  Rocket,
+  TrendingUp,
+  UserPlus,
+  type LucideIcon,
+} from "lucide-react";
+
+type Direction = "right" | "down" | "left" | null;
+
+type Step = {
+  label: string;
+  icon: LucideIcon;
+  next: Direction;
+};
+
+const steps: Step[] = [
+  { label: "User Registration", icon: UserPlus, next: "right" },
+  { label: "Workout Selection", icon: ListChecks, next: "right" },
+  { label: "Payment Processing", icon: CreditCard, next: "right" },
+  { label: "Plan Activation", icon: Rocket, next: "down" },
+  { label: "Progress Tracking", icon: TrendingUp, next: "left" },
+  { label: "Performance Analytics", icon: BarChart3, next: "left" },
+  { label: "Reporting & Insights", icon: FileText, next: "left" },
+  { label: "Continuous Improvement", icon: RefreshCw, next: null },
 ];
+
+// Visual order: row 1 = steps 1-4 left-to-right; row 2 = steps 8,7,6,5 left-to-right
+const visualOrder = [...steps.slice(0, 4), ...steps.slice(4).reverse()];
+
+function Arrow({ direction }: { direction: Direction }) {
+  if (!direction) return null;
+
+  const common = {
+    position: "absolute" as const,
+    color: "rgba(167,139,250,0.9)",
+    pointerEvents: "none" as const,
+    filter: "drop-shadow(0 0 6px rgba(139,92,246,0.4))",
+  };
+
+  if (direction === "right") {
+    return (
+      <ChevronRight
+        size={20}
+        style={{
+          ...common,
+          right: "-22px",
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      />
+    );
+  }
+  if (direction === "down") {
+    return (
+      <ChevronDown
+        size={20}
+        style={{
+          ...common,
+          right: "20px",
+          bottom: "-22px",
+        }}
+      />
+    );
+  }
+  return (
+    <ChevronLeft
+      size={20}
+      style={{
+        ...common,
+        left: "-22px",
+        top: "50%",
+        transform: "translateY(-50%)",
+      }}
+    />
+  );
+}
 
 export function WorkflowDiagramSection() {
   return (
@@ -15,12 +89,12 @@ export function WorkflowDiagramSection() {
       className="w-full"
       style={{
         borderTop: "1px solid rgba(255,255,255,0.08)",
-        padding: "64px 0 80px",
+        padding: "48px 0 52px",
       }}
     >
       <div className="max-w-[1280px] mx-auto px-6 sm:px-10 lg:px-16">
         <p
-          className="text-center mb-9"
+          className="text-center mb-8"
           style={{
             fontSize: "12px",
             letterSpacing: "0.45em",
@@ -31,46 +105,64 @@ export function WorkflowDiagramSection() {
           End-to-End Workflow
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[22px]">
-          {workflowSteps.map((step, index) => (
-            <div
-              key={step}
-              className="rounded-[22px] border"
-              style={{
-                minHeight: "128px",
-                padding: "22px",
-                background:
-                  "linear-gradient(180deg, rgba(139,92,246,0.10), rgba(255,255,255,0.025))",
-                borderColor: "rgba(255,255,255,0.10)",
-                boxShadow: "0 0 40px rgba(139,92,246,0.08)",
-              }}
-            >
-              <span
-                className="inline-grid place-items-center"
+        <div
+          className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+          style={{ gap: "28px 32px" }}
+        >
+          {visualOrder.map((step) => {
+            const Icon = step.icon;
+            const stepNumber = steps.indexOf(step) + 1;
+            return (
+              <div
+                key={step.label}
+                className="relative rounded-[20px] border"
                 style={{
-                  width: "34px",
-                  height: "34px",
-                  marginBottom: "16px",
-                  borderRadius: "10px",
-                  background: "rgba(139,92,246,0.16)",
-                  border: "1px solid rgba(139,92,246,0.35)",
-                  color: "rgb(167, 139, 250)",
-                  fontSize: "12px",
+                  minHeight: "112px",
+                  padding: "18px 20px",
+                  background:
+                    "linear-gradient(180deg, rgba(139,92,246,0.10), rgba(255,255,255,0.025))",
+                  borderColor: "rgba(255,255,255,0.10)",
+                  boxShadow: "0 0 40px rgba(139,92,246,0.08)",
                 }}
               >
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3
-                style={{
-                  fontSize: "15px",
-                  lineHeight: 1.3,
-                  color: "white",
-                }}
-              >
-                {step}
-              </h3>
-            </div>
-          ))}
+                <div className="flex items-center gap-3 mb-3">
+                  <span
+                    className="inline-grid place-items-center shrink-0"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "9px",
+                      background: "rgba(139,92,246,0.16)",
+                      border: "1px solid rgba(139,92,246,0.35)",
+                      color: "rgb(167, 139, 250)",
+                      fontSize: "11px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {String(stepNumber).padStart(2, "0")}
+                  </span>
+                  <Icon
+                    size={16}
+                    style={{ color: "rgba(167,139,250,0.85)" }}
+                  />
+                </div>
+                <h3
+                  style={{
+                    fontSize: "14px",
+                    lineHeight: 1.35,
+                    color: "white",
+                    fontWeight: 500,
+                  }}
+                >
+                  {step.label}
+                </h3>
+
+                <div className="hidden lg:block" aria-hidden>
+                  <Arrow direction={step.next} />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

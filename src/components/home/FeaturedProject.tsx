@@ -7,7 +7,7 @@ export function FeaturedProject() {
   const f = home.featured;
 
   return (
-    <section className="py-24">
+    <section className="pt-12 pb-24">
       <div className="flex items-baseline justify-between mb-8">
         <span className="eyebrow">{f.tag}</span>
         <Link
