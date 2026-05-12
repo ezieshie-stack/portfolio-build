@@ -2384,3 +2384,52 @@ button:focus-visible {
     transform: translateX(8px);
   }
 }
+
+/* ABOUT PORTRAIT VIGNETTE FRAME */
+
+.aboutHeroImage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+}
+
+.aboutHeroImage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    linear-gradient(to right, #020204 0%, transparent 18%, transparent 78%, #020204 100%),
+    linear-gradient(to bottom, #020204 0%, transparent 16%, transparent 72%, #020204 100%);
+}
+
+.aboutHeroImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at center,
+    transparent 35%,
+    rgba(2, 2, 4, 0.45) 72%,
+    #020204 100%
+  );
+}
+
+.aboutHeroImage img {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: auto;
+  display: block;
+
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: normal;
+}
