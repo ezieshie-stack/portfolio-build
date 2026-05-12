@@ -2110,11 +2110,6 @@ button:focus-visible {
   line-height: 1.7;
 }
 
-.aboutHeroImage img {
-  width: 100%;
-  object-fit: contain;
-}
-
 .statsGrid,
 .drivesMe,
 .strengthsSection {
