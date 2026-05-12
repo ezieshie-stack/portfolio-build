@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import {
   ArrowUpRight,
   BarChart3,
@@ -13,6 +13,7 @@ import {
   Users,
   Workflow,
 } from "lucide-react";
+import { site } from "@/lib/content";
 
 export const metadata = { title: "About — Portfolio" };
 
@@ -104,8 +105,37 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="aboutHeroImage">
-          <img src="/portrait.png" alt="David Ezieshi" />
+        <div
+          className="hero-portrait-column relative flex items-end justify-center pointer-events-none"
+          style={{ zIndex: 10 }}
+        >
+          <div
+            aria-hidden
+            className="hero-portrait-glow absolute pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(124,58,237,0.28), transparent 68%)",
+              filter: "blur(70px)",
+              zIndex: -1,
+            }}
+          />
+          <Image
+            src="/portrait.png"
+            alt={`${site.brand.name} portrait`}
+            width={1040}
+            height={1300}
+            priority
+            sizes="(min-width: 1440px) 560px, (min-width: 1024px) 480px, (min-width: 768px) 380px, 90vw"
+            className="hero-portrait object-contain"
+            style={{
+              objectPosition: "center bottom",
+              filter: "drop-shadow(0 30px 90px rgba(124,58,237,0.25))",
+              maskImage:
+                "linear-gradient(to bottom, black 78%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 78%, transparent 100%)",
+            }}
+          />
         </div>
       </section>
 
