@@ -273,97 +273,74 @@ export const work = {
   },
 };
 
-export const process = {
-  tag: "MY APPROACH",
-  title: "[Process headline placeholder line 1]\n[Process headline placeholder line 2]",
-  intro: "[Process intro paragraph placeholder.]",
+export const processPage = {
+  hero: {
+    eyebrow: "// PROCESS FRAMEWORK",
+    title: "Systems designed for execution.",
+    highlight: "execution.",
+    description:
+      "My process focuses on transforming operational complexity into scalable systems that improve efficiency, visibility, and organizational alignment.",
+  },
+  executionTag: "// EXECUTION MODEL",
   steps: [
     {
       number: "01",
-      title: "Understand",
-      description: "[Step description placeholder.]",
+      subtitle: "Understanding the operational landscape",
+      title: "Discovery & Analysis",
+      description:
+        "I begin by auditing workflows, stakeholder pain points, business objectives, and existing systems to uncover inefficiencies and identify opportunities for optimization.",
+      tags: [
+        "Stakeholder Interviews",
+        "Workflow Mapping",
+        "Requirements Gathering",
+        "Gap Analysis",
+      ],
     },
     {
       number: "02",
-      title: "Analyze",
-      description: "[Step description placeholder.]",
+      subtitle: "Building scalable operational frameworks",
+      title: "Systems Design",
+      description:
+        "After identifying constraints and opportunities, I design operational systems that simplify execution, improve visibility, and align teams around measurable outcomes.",
+      tags: [
+        "Process Architecture",
+        "Automation Opportunities",
+        "Documentation Systems",
+        "KPI Framework Design",
+      ],
     },
     {
       number: "03",
-      title: "Design",
-      description: "[Step description placeholder.]",
+      subtitle: "Deploying structured solutions",
+      title: "Implementation",
+      description:
+        "I collaborate with stakeholders and cross-functional teams to implement systems efficiently while ensuring usability, adoption, and long-term sustainability.",
+      tags: [
+        "Cross-team Coordination",
+        "System Deployment",
+        "Process Documentation",
+        "Change Management",
+      ],
     },
     {
       number: "04",
-      title: "Implement",
-      description: "[Step description placeholder.]",
-    },
-    {
-      number: "05",
-      title: "Evaluate",
-      description: "[Step description placeholder.]",
-    },
-  ],
-  principlesTag: "CORE PRINCIPLES",
-  principles: [
-    {
-      title: "[Principle one]",
-      description: "[Short principle description placeholder.]",
-    },
-    {
-      title: "[Principle two]",
-      description: "[Short principle description placeholder.]",
-    },
-    {
-      title: "[Principle three]",
-      description: "[Short principle description placeholder.]",
-    },
-    {
-      title: "[Principle four]",
-      description: "[Short principle description placeholder.]",
+      subtitle: "Continuous improvement through data",
+      title: "Optimization",
+      description:
+        "Operational excellence is iterative. I monitor metrics, gather feedback, and continuously refine workflows to improve performance and scalability over time.",
+      tags: [
+        "Performance Monitoring",
+        "Operational Reporting",
+        "Workflow Refinement",
+        "Continuous Iteration",
+      ],
     },
   ],
-  thinkingTag: "HOW I THINK",
-  thinking: [
-    "Diagnose friction",
-    "Map dependencies",
-    "Simplify workflows",
-    "Measure outcomes",
-    "Iterate continuously",
-  ],
-  systemTag: "SYSTEM VIEW",
-  system: [
-    {
-      title: "Intake",
-      description: "Capture requests, inputs, and business needs.",
-    },
-    {
-      title: "Validation",
-      description: "Check data quality, requirements, and ownership.",
-    },
-    {
-      title: "Execution",
-      description: "Move work through structured processes.",
-    },
-    {
-      title: "Reporting",
-      description: "Track outcomes, bottlenecks, and performance.",
-    },
-  ],
-  signalsTag: "CASE STUDY SIGNALS",
-  signals: [
-    {
-      label: "Before",
-      text: "Manual handoffs, unclear ownership, limited process visibility.",
-    },
-    {
-      label: "After",
-      text: "Mapped workflows, defined ownership, dashboard-ready reporting.",
-    },
-    {
-      label: "Impact",
-      text: "Improved clarity, faster execution, and measurable operating rhythm.",
-    },
+  metricsTag: "// PERFORMANCE IMPACT",
+  metrics: [
+    { value: "4.2×", label: "Workflow Efficiency", icon: "chart" },
+    { value: "65%", label: "Process Reduction", icon: "clock" },
+    { value: "100%", label: "Visibility Coverage", icon: "eye" },
   ],
 };
 
