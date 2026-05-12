@@ -61,36 +61,36 @@ export default function ProcessPage() {
         </div>
 
         {/* Process visualization */}
-        <div className="process-visual-card">
-          <div className="process-grid" />
+        <div className="processSystemVisual">
+          <div className="processSystemGrid" />
 
-          <svg className="process-paths" viewBox="0 0 800 520" fill="none">
-            <path d="M180 105 C 360 105, 430 145, 545 215" className="process-path" />
-            <path d="M545 215 C 410 225, 350 250, 270 330" className="process-path" />
-            <path d="M270 330 C 425 350, 470 395, 595 430" className="process-path" />
+          <svg className="processSystemLines" viewBox="0 0 700 520" fill="none">
+            <path d="M150 130 C260 70 430 80 535 170" />
+            <path d="M535 170 C470 275 350 305 220 270" />
+            <path d="M220 270 C290 390 445 410 560 340" />
           </svg>
 
-          <div className="glow-point glow-one" />
-          <div className="glow-point glow-two" />
-          <div className="glow-point glow-three" />
-          <div className="glow-point glow-four" />
+          <div className="processCore">
+            <span>OPERATING MODEL</span>
+            <strong>Analyze → Design → Deploy → Improve</strong>
+          </div>
 
-          <div className="process-node node-analyze">
-            <span>⌕</span>
-            ANALYZE
-          </div>
-          <div className="process-node node-design">
-            <span>✎</span>
-            DESIGN
-          </div>
-          <div className="process-node node-implement">
-            <span>↗</span>
-            IMPLEMENT
-          </div>
-          <div className="process-node node-optimize">
-            <span>⌁</span>
-            OPTIMIZE
-          </div>
+          <button className="processNode processNode1" type="button">
+            <span>01</span>
+            Analyze
+          </button>
+          <button className="processNode processNode2" type="button">
+            <span>02</span>
+            Design
+          </button>
+          <button className="processNode processNode3" type="button">
+            <span>03</span>
+            Deploy
+          </button>
+          <button className="processNode processNode4" type="button">
+            <span>04</span>
+            Improve
+          </button>
         </div>
       </Reveal>
 

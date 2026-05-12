@@ -446,7 +446,6 @@ export const insights = {
     body: "Good systems do more than organize information. They reduce friction, clarify ownership, improve visibility, and help teams make better decisions faster.",
     ctaLabel: "Read Insight",
     ctaHref: "/insights/operational-systems",
-    nodes: ["Workflow", "Data", "People", "Execution"],
   },
   filters: ["All", "Process Design", "Business Analysis", "Analytics", "Systems"],
   articles: [

@@ -42,12 +42,37 @@ export default function InsightsPage() {
           </Link>
         </div>
 
-        <div className="insights-featured-visual">
-          {featured.nodes.map((label, i) => (
-            <div key={label} className={`insight-node insight-node-${i + 1}`}>
-              {label}
-            </div>
-          ))}
+        <div className="insightMapVisual">
+          <div className="insightMapGrid" />
+
+          <svg className="insightMapLines" viewBox="0 0 700 520" fill="none">
+            <path d="M350 260 C280 190 210 170 145 145" />
+            <path d="M350 260 C445 180 510 160 585 135" />
+            <path d="M350 260 C250 310 190 360 130 410" />
+            <path d="M350 260 C465 315 525 365 600 415" />
+          </svg>
+
+          <div className="insightCenter">
+            <span>INSIGHT</span>
+            <strong>Better decisions start with clearer systems.</strong>
+          </div>
+
+          <div className="insightBubble bubble1">
+            <span>01</span>
+            Workflow Friction
+          </div>
+          <div className="insightBubble bubble2">
+            <span>02</span>
+            Decision Gaps
+          </div>
+          <div className="insightBubble bubble3">
+            <span>03</span>
+            Reporting Signals
+          </div>
+          <div className="insightBubble bubble4">
+            <span>04</span>
+            Operational Clarity
+          </div>
         </div>
       </Reveal>
 

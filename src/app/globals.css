@@ -2831,3 +2831,266 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── PROCESS PAGE: EXECUTION-FLOW ORBIT DIAGRAM ───── */
+
+.processSystemVisual {
+  position: relative;
+  height: 520px;
+  border-radius: 32px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 70%, rgba(139, 92, 246, 0.35), transparent 36%),
+    radial-gradient(circle at 30% 22%, rgba(168, 85, 247, 0.22), transparent 30%),
+    linear-gradient(180deg, rgba(14, 14, 20, 0.96), rgba(3, 3, 6, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.processSystemGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 88%);
+}
+
+.processSystemLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.processSystemLines path {
+  stroke: rgba(168, 139, 250, 0.75);
+  stroke-width: 2;
+  stroke-dasharray: 8 10;
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.9));
+  animation: flowDash 7s linear infinite;
+  fill: none;
+}
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -140;
+  }
+}
+
+.processCore {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 260px;
+  min-height: 130px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(8, 8, 13, 0.72);
+  border: 1px solid rgba(168, 139, 250, 0.34);
+  box-shadow: 0 0 70px rgba(139, 92, 246, 0.22);
+  backdrop-filter: blur(16px);
+  z-index: 4;
+}
+
+.processCore span {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  color: #a78bfa;
+}
+
+.processCore strong {
+  font-size: 18px;
+  line-height: 1.3;
+  color: white;
+}
+
+.processNode {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-radius: 18px;
+  background: rgba(10, 10, 16, 0.82);
+  border: 1px solid rgba(168, 139, 250, 0.38);
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.22);
+  backdrop-filter: blur(16px);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.processNode span {
+  color: #a78bfa;
+}
+
+.processNode:hover {
+  transform: translateY(-6px);
+  border-color: rgba(196, 181, 253, 0.85);
+  box-shadow: 0 0 60px rgba(139, 92, 246, 0.38);
+}
+
+.processNode1 { top: 70px; left: 82px; }
+.processNode2 { top: 130px; right: 70px; }
+.processNode3 { bottom: 120px; left: 92px; }
+.processNode4 { bottom: 78px; right: 90px; }
+
+@media (max-width: 768px) {
+  .processSystemVisual {
+    height: 430px;
+  }
+  .processCore {
+    width: 210px;
+    min-height: 110px;
+  }
+  .processNode {
+    padding: 14px 16px;
+    font-size: 11px;
+  }
+  .processNode1 { top: 48px; left: 24px; }
+  .processNode2 { top: 130px; right: 22px; }
+  .processNode3 { bottom: 112px; left: 24px; }
+  .processNode4 { bottom: 42px; right: 24px; }
+}
+
+/* ── INSIGHTS PAGE: THINKING-MAP DIAGRAM ──────────── */
+
+.insightMapVisual {
+  position: relative;
+  height: 500px;
+  border-radius: 32px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.3), transparent 34%),
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(14, 14, 22, 0.95), rgba(3, 3, 7, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.insightMapGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(168, 139, 250, 0.18) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.45;
+  mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
+}
+
+.insightMapLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.insightMapLines path {
+  stroke: rgba(196, 181, 253, 0.55);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 8;
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.7));
+  animation: insightPulse 8s linear infinite;
+  fill: none;
+}
+
+@keyframes insightPulse {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.insightCenter {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 250px;
+  transform: translate(-50%, -50%);
+  padding: 28px;
+  border-radius: 999px;
+  background: rgba(9, 9, 14, 0.82);
+  border: 1px solid rgba(196, 181, 253, 0.38);
+  text-align: center;
+  box-shadow:
+    0 0 80px rgba(139, 92, 246, 0.32),
+    inset 0 0 28px rgba(139, 92, 246, 0.1);
+  backdrop-filter: blur(18px);
+  z-index: 4;
+}
+
+.insightCenter span {
+  display: block;
+  color: #a78bfa;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  margin-bottom: 10px;
+}
+
+.insightCenter strong {
+  color: white;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.insightBubble {
+  position: absolute;
+  max-width: 190px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(8, 8, 14, 0.78);
+  border: 1px solid rgba(168, 139, 250, 0.34);
+  color: white;
+  font-weight: 700;
+  line-height: 1.3;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 36px rgba(139, 92, 246, 0.18);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  z-index: 3;
+}
+
+.insightBubble span {
+  display: block;
+  color: #a78bfa;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  margin-bottom: 8px;
+}
+
+.insightBubble:hover {
+  transform: scale(1.04);
+  border-color: rgba(196, 181, 253, 0.8);
+}
+
+.bubble1 { top: 80px; left: 58px; }
+.bubble2 { top: 74px; right: 58px; }
+.bubble3 { bottom: 72px; left: 64px; }
+.bubble4 { bottom: 70px; right: 58px; }
+
+@media (max-width: 768px) {
+  .insightMapVisual {
+    height: 460px;
+  }
+  .insightCenter {
+    width: 210px;
+    padding: 22px;
+  }
+  .insightBubble {
+    max-width: 150px;
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+  .bubble1 { top: 46px; left: 22px; }
+  .bubble2 { top: 76px; right: 18px; }
+  .bubble3 { bottom: 88px; left: 22px; }
+  .bubble4 { bottom: 38px; right: 18px; }
+}
