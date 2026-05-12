@@ -2546,10 +2546,3 @@ button:focus-visible {
   .node-implement { left: 42px; bottom: 120px; }
   .node-optimize { right: 34px; bottom: 58px; }
 }
-
-/* HERO TITLE SCALE + WIDTH OVERRIDE */
-.hero-title {
-  font-size: clamp(52px, 6vw, 96px);
-  line-height: 0.92;
-  max-width: 8ch;
-}
