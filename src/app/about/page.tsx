@@ -105,7 +105,7 @@ export default function AboutPage() {
         </div>
 
         <div className="aboutHeroImage">
-          <img src="/portrait.png" alt="David Ezieshi" />
+          <img src="/portrait-2.png" alt="David Ezieshi" />
         </div>
       </section>
 
