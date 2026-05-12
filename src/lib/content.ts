@@ -398,11 +398,6 @@ export const insights = {
       readTime: "4 min read",
     },
   ] as Article[],
-  cta: {
-    tag: "// CONTINUE THE CONVERSATION",
-    title: "Operational thinking, practical execution.",
-    body: "Insights on systems analysis, workflow design, reporting infrastructure, and operational improvement.",
-  },
 };
 
 export const contact = {

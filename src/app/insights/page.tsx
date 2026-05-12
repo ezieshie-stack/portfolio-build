@@ -7,7 +7,7 @@ import { insights } from "@/lib/content";
 export const metadata = { title: "Insights — Portfolio" };
 
 export default function InsightsPage() {
-  const { featured, cta } = insights;
+  const { featured } = insights;
 
   return (
     <PageShell>
@@ -52,19 +52,8 @@ export default function InsightsPage() {
       </Reveal>
 
       {/* ── CATEGORIES + ARTICLE GRID ────────────────── */}
-      <Reveal as="section" className="mb-24">
+      <Reveal as="section">
         <InsightsGrid filters={[...insights.filters]} articles={insights.articles} />
-      </Reveal>
-
-      {/* ── TRANSITION (no button — footer handles conversion) ─ */}
-      <Reveal as="section" className="insights-cta-card px-7 py-12 md:px-12 md:py-14 max-w-[820px]">
-        <SectionTag>{cta.tag}</SectionTag>
-        <h2 className="text-[clamp(28px,4vw,44px)] font-extrabold leading-[1.05] tracking-[-0.04em] mt-5 mb-5">
-          {cta.title}
-        </h2>
-        <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[600px]">
-          {cta.body}
-        </p>
       </Reveal>
     </PageShell>
   );
