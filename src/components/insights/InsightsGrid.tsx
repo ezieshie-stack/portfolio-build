@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { Article } from "@/lib/content";
@@ -20,7 +19,7 @@ export function InsightsGrid({ filters, articles }: Props) {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap gap-3 mb-9">
         {filters.map((f) => (
           <button
             key={f}
@@ -34,43 +33,29 @@ export function InsightsGrid({ filters, articles }: Props) {
         ))}
       </div>
 
-      <div className="grid gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {visible.map((a) => (
-          <article
+          <Link
             key={a.slug}
-            className="glass-card p-6 grid md:grid-cols-[160px_1fr] gap-6 items-start"
+            href={`/insights/${a.slug}`}
+            className="insight-card glass-card p-7 md:p-8 flex flex-col justify-between min-h-[320px] group"
           >
-            <Link
-              href={`/insights/${a.slug}`}
-              className="relative aspect-[4/3] md:aspect-square w-full rounded-2xl overflow-hidden border"
-              style={{ borderColor: "var(--glass-border)" }}
-            >
-              <Image
-                src={a.image}
-                alt=""
-                fill
-                sizes="160px"
-                className="object-cover opacity-80 hover:opacity-100 transition-opacity"
-              />
-            </Link>
             <div>
-              <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-[color:var(--text-dim)] mb-3">
-                <span>{a.category}</span>
-                <span aria-hidden>·</span>
-                <span>{a.date}</span>
-                <span aria-hidden>·</span>
-                <span>{a.readTime}</span>
-              </div>
-              <Link href={`/insights/${a.slug}`}>
-                <h3 className="text-xl font-bold mb-2 hover:text-[color:var(--primary)] transition-colors">
-                  {a.title}
-                </h3>
-              </Link>
-              <p className="text-sm text-[color:var(--text-dim)] leading-relaxed">
+              <span className="text-[12px] tracking-[0.18em] uppercase text-[#a78bfa] font-semibold">
+                {a.category}
+              </span>
+              <h3 className="text-[26px] font-bold leading-[1.1] tracking-[-0.04em] my-5 group-hover:text-[color:var(--primary)] transition-colors">
+                {a.title}
+              </h3>
+              <p className="text-[color:var(--text-dim)] text-[15px] leading-relaxed">
                 {a.excerpt}
               </p>
             </div>
-          </article>
+            <div className="mt-8 flex justify-between text-[13px] text-white/40">
+              <span>{a.date}</span>
+              <span>{a.readTime}</span>
+            </div>
+          </Link>
         ))}
       </div>
     </>

@@ -351,47 +351,59 @@ export type Article = {
   category: string;
   date: string;
   readTime: string;
-  image: string;
+  image?: string;
 };
 
 export const insights = {
-  tag: "INSIGHTS",
-  title: "[Insights headline placeholder line 1]\n[Insights headline placeholder line 2]",
-  intro: "[Insights intro paragraph placeholder.]",
-  filters: ["All", "Process Improvement", "Data & Analytics", "Systems"],
+  tag: "// INSIGHTS",
+  title: "Thinking through systems, workflows, and operational clarity.",
+  intro:
+    "Notes on business analysis, process design, operational systems, reporting infrastructure, and the practical work of improving how teams execute.",
+  featured: {
+    pill: "Featured Insight",
+    title:
+      "Operational systems are only valuable when people can actually use them.",
+    body: "Good systems do more than organize information. They reduce friction, clarify ownership, improve visibility, and help teams make better decisions faster.",
+    ctaLabel: "Read Insight",
+    ctaHref: "/insights/operational-systems",
+    nodes: ["Workflow", "Data", "People", "Execution"],
+  },
+  filters: ["All", "Process Design", "Business Analysis", "Analytics", "Systems"],
   articles: [
     {
-      slug: "article-one",
-      title: "[Article one title placeholder]",
-      excerpt: "[Article one excerpt placeholder.]",
-      category: "Process Improvement",
-      date: "[Mon DD, YYYY]",
-      readTime: "[N] min read",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+      slug: "operational-clarity-workflows",
+      title: "Why operational clarity starts with better workflows",
+      excerpt:
+        "A breakdown of how process visibility, ownership, and documentation improve team execution.",
+      category: "Process Design",
+      date: "Mar 2026",
+      readTime: "5 min read",
     },
     {
-      slug: "article-two",
-      title: "[Article two title placeholder]",
-      excerpt: "[Article two excerpt placeholder.]",
-      category: "Process Improvement",
-      date: "[Mon DD, YYYY]",
-      readTime: "[N] min read",
-      image:
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+      slug: "requirements-to-systems",
+      title: "Turning requirements into systems teams can actually use",
+      excerpt:
+        "How strong requirements gathering connects business needs to practical execution.",
+      category: "Business Analysis",
+      date: "Mar 2026",
+      readTime: "6 min read",
     },
     {
-      slug: "article-three",
-      title: "[Article three title placeholder]",
-      excerpt: "[Article three excerpt placeholder.]",
-      category: "Systems",
-      date: "[Mon DD, YYYY]",
-      readTime: "[N] min read",
-      image:
-        "https://images.unsplash.com/photo-1518433278988-2b2bb19767ad?auto=format&fit=crop&q=80&w=800",
+      slug: "dashboards-and-decisions",
+      title: "Dashboards are only useful when they support decisions",
+      excerpt:
+        "Why reporting systems should focus on action, not just visualization.",
+      category: "Analytics",
+      date: "Feb 2026",
+      readTime: "4 min read",
     },
   ] as Article[],
-  viewAll: { label: "View All Articles", href: "/insights" },
+  cta: {
+    tag: "// CONTINUE THE CONVERSATION",
+    title: "Have a process, system, or workflow problem worth unpacking?",
+    ctaLabel: "Let's Connect",
+    ctaHref: "/contact",
+  },
 };
 
 export const contact = {

@@ -7,27 +7,65 @@ import { insights } from "@/lib/content";
 export const metadata = { title: "Insights — Portfolio" };
 
 export default function InsightsPage() {
+  const { featured, cta } = insights;
+
   return (
     <PageShell>
-      <Reveal as="section" className="pb-12">
+      {/* ── HERO ─────────────────────────────────────── */}
+      <Reveal as="section" className="pb-24 max-w-[900px]">
         <SectionTag>{insights.tag}</SectionTag>
-        <h1 className="text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6 whitespace-pre-line">
+        <h1 className="text-[clamp(52px,7vw,104px)] font-extrabold leading-[0.95] tracking-[-0.06em] my-6">
           {insights.title}
         </h1>
-        <p className="text-[color:var(--text-dim)] max-w-prose mb-10">
+        <p className="text-[color:var(--text-dim)] text-lg leading-relaxed max-w-[680px]">
           {insights.intro}
         </p>
+      </Reveal>
+
+      {/* ── FEATURED INSIGHT ─────────────────────────── */}
+      <Reveal
+        as="section"
+        className="insights-featured-card grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-10 p-8 md:p-12 mb-20"
+      >
+        <div>
+          <span className="filter-pill" data-active="true">
+            {featured.pill}
+          </span>
+          <h2 className="text-[clamp(34px,4vw,64px)] font-extrabold leading-none tracking-[-0.05em] mt-6 mb-6">
+            {featured.title}
+          </h2>
+          <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[560px] mb-8">
+            {featured.body}
+          </p>
+          <Link href={featured.ctaHref} className="btn-primary inline-flex">
+            {featured.ctaLabel} →
+          </Link>
+        </div>
+
+        <div className="insights-featured-visual">
+          {featured.nodes.map((label, i) => (
+            <div key={label} className={`insight-node insight-node-${i + 1}`}>
+              {label}
+            </div>
+          ))}
+        </div>
+      </Reveal>
+
+      {/* ── CATEGORIES + ARTICLE GRID ────────────────── */}
+      <Reveal as="section" className="mb-24">
         <InsightsGrid filters={[...insights.filters]} articles={insights.articles} />
       </Reveal>
 
-      <div className="mt-12">
-        <Link
-          href={insights.viewAll.href}
-          className="text-[13px] font-semibold text-[color:var(--primary)] hover:text-white transition-colors"
-        >
-          {insights.viewAll.label} <span aria-hidden>↗</span>
+      {/* ── CTA ──────────────────────────────────────── */}
+      <Reveal as="section" className="insights-cta-card p-10 md:p-14">
+        <SectionTag>{cta.tag}</SectionTag>
+        <h2 className="text-[clamp(36px,5vw,72px)] font-extrabold leading-none tracking-[-0.05em] mt-6 mb-8 max-w-[800px]">
+          {cta.title}
+        </h2>
+        <Link href={cta.ctaHref} className="btn-primary inline-flex">
+          {cta.ctaLabel} →
         </Link>
-      </div>
+      </Reveal>
     </PageShell>
   );
 }

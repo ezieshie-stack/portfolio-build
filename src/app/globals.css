@@ -2546,3 +2546,56 @@ button:focus-visible {
   .node-implement { left: 42px; bottom: 120px; }
   .node-optimize { right: 34px; bottom: 58px; }
 }
+
+/* INSIGHTS PAGE */
+
+.insights-featured-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.25), transparent 35%),
+    rgba(255, 255, 255, 0.035);
+}
+
+.insights-featured-visual {
+  position: relative;
+  min-height: 420px;
+  border-radius: 28px;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 42px 42px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.insight-node {
+  position: absolute;
+  padding: 14px 22px;
+  border-radius: 16px;
+  border: 1px solid rgba(168, 139, 250, 0.4);
+  background: rgba(12, 10, 18, 0.85);
+  color: #c4b5fd;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 28px rgba(139, 92, 246, 0.18);
+}
+
+.insight-node-1 { top: 18%; left: 12%; }
+.insight-node-2 { top: 34%; right: 14%; }
+.insight-node-3 { bottom: 28%; left: 18%; }
+.insight-node-4 { bottom: 14%; right: 18%; }
+
+.insights-cta-card {
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(255, 255, 255, 0.03));
+}
+
+@media (max-width: 900px) {
+  .insights-featured-visual {
+    min-height: 320px;
+  }
+}
