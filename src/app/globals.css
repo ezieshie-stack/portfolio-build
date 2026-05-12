@@ -2326,3 +2326,61 @@ button:focus-visible {
     transform: translateX(10px);
   }
 }
+
+/* ABOUT PAGE PORTRAIT RESPONSIVE OVERRIDES */
+
+.aboutHero {
+  align-items: center;
+}
+
+.aboutHeroImage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: visible;
+}
+
+.aboutHeroImage img {
+  width: 125%;
+  max-width: 820px;
+  height: auto;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .aboutHero {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .aboutHeroImage {
+    margin-top: -24px;
+  }
+
+  .aboutHeroImage img {
+    width: 125vw;
+    max-width: 760px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .aboutHero {
+    gap: 32px;
+  }
+
+  .aboutHeroImage {
+    margin-top: -40px;
+    overflow: visible;
+  }
+
+  .aboutHeroImage img {
+    width: 155vw;
+    max-width: none;
+    min-width: 620px;
+    transform: translateX(8px);
+  }
+}
