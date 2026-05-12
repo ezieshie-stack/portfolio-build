@@ -42,36 +42,43 @@ export default function InsightsPage() {
           </Link>
         </div>
 
-        <div className="insightMapVisual">
-          <div className="insightMapGrid" />
+        <div className="insightLibrary">
+          <header className="libHead">
+            <span className="libEyebrow">INSIGHT LIBRARY</span>
+            <span className="libCount">12 articles</span>
+          </header>
 
-          <svg className="insightMapLines" viewBox="0 0 700 520" fill="none">
-            <path d="M350 260 C280 190 210 170 145 145" />
-            <path d="M350 260 C445 180 510 160 585 135" />
-            <path d="M350 260 C250 310 190 360 130 410" />
-            <path d="M350 260 C465 315 525 365 600 415" />
-          </svg>
+          <nav className="libTabs">
+            <button className="libTab is-active" type="button">Process</button>
+            <button className="libTab" type="button">Systems</button>
+            <button className="libTab" type="button">Analytics</button>
+          </nav>
 
-          <div className="insightCenter">
-            <span>INSIGHT</span>
-            <strong>Better decisions start with clearer systems.</strong>
-          </div>
+          <article className="libFeatured">
+            <span className="libBadge">FEATURED INSIGHT</span>
+            <h4>
+              Operational systems are only valuable when people can actually use them.
+            </h4>
+            <p>
+              Good systems reduce friction, clarify ownership, and improve visibility — so teams make better decisions faster.
+            </p>
+            <div className="libMetaRow">
+              <span className="libPill">Process</span>
+              <span className="libPill">Systems</span>
+              <span className="libPill">Analytics</span>
+              <span className="libDate">5 min read</span>
+            </div>
+          </article>
 
-          <div className="insightBubble bubble1">
-            <span>01</span>
-            Workflow Friction
-          </div>
-          <div className="insightBubble bubble2">
-            <span>02</span>
-            Decision Gaps
-          </div>
-          <div className="insightBubble bubble3">
-            <span>03</span>
-            Reporting Signals
-          </div>
-          <div className="insightBubble bubble4">
-            <span>04</span>
-            Operational Clarity
+          <div className="libCards">
+            <article className="libCard">
+              <span className="libCardCat">PROCESS DESIGN</span>
+              <p>Why operational clarity starts with better workflows</p>
+            </article>
+            <article className="libCard">
+              <span className="libCardCat">ANALYTICS</span>
+              <p>Dashboards are only useful when they support decisions</p>
+            </article>
           </div>
         </div>
       </Reveal>

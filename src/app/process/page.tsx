@@ -60,37 +60,68 @@ export default function ProcessPage() {
           </p>
         </div>
 
-        {/* Process visualization */}
-        <div className="processSystemVisual">
-          <div className="processSystemGrid" />
+        {/* Operational control system visualization */}
+        <div className="opControlSystem">
+          <header className="opControlHead">
+            <span className="opEyebrow">OPERATIONAL CONTROL SYSTEM</span>
+            <span className="opStatus">
+              <span className="opStatusDot" aria-hidden /> Live
+            </span>
+          </header>
 
-          <svg className="processSystemLines" viewBox="0 0 700 520" fill="none">
-            <path d="M150 130 C260 70 430 80 535 170" />
-            <path d="M535 170 C470 275 350 305 220 270" />
-            <path d="M220 270 C290 390 445 410 560 340" />
-          </svg>
+          <div className="opControlBody">
+            <ol className="opStepRail">
+              <li className="opStep">
+                <span>01</span>
+                <strong>Analyze</strong>
+              </li>
+              <li className="opStep is-active">
+                <span>02</span>
+                <strong>Design</strong>
+              </li>
+              <li className="opStep">
+                <span>03</span>
+                <strong>Deploy</strong>
+              </li>
+              <li className="opStep">
+                <span>04</span>
+                <strong>Improve</strong>
+              </li>
+            </ol>
 
-          <div className="processCore">
-            <span>OPERATING MODEL</span>
-            <strong>Analyze → Design → Deploy → Improve</strong>
+            <div className="opWorkflow">
+              <span className="opWorkflowTrack" aria-hidden />
+              <span className="opWorkflowPulse" aria-hidden />
+
+              <div className="opEvent">
+                <p className="opEventLabel">Intake mapped</p>
+                <p className="opEventMeta">Requirements captured</p>
+              </div>
+              <div className="opEvent">
+                <p className="opEventLabel">Workflow built</p>
+                <p className="opEventMeta">Process architecture set</p>
+              </div>
+              <div className="opEvent">
+                <p className="opEventLabel">System launched</p>
+                <p className="opEventMeta">Feedback loop active</p>
+              </div>
+            </div>
+
+            <aside className="opMetricRail">
+              <div className="opMetric">
+                <span>Visibility</span>
+                <strong>92%</strong>
+              </div>
+              <div className="opMetric">
+                <span>Efficiency</span>
+                <strong>4.2×</strong>
+              </div>
+              <div className="opMetric">
+                <span>Adoption</span>
+                <strong>100%</strong>
+              </div>
+            </aside>
           </div>
-
-          <button className="processNode processNode1" type="button">
-            <span>01</span>
-            Analyze
-          </button>
-          <button className="processNode processNode2" type="button">
-            <span>02</span>
-            Design
-          </button>
-          <button className="processNode processNode3" type="button">
-            <span>03</span>
-            Deploy
-          </button>
-          <button className="processNode processNode4" type="button">
-            <span>04</span>
-            Improve
-          </button>
         </div>
       </Reveal>
 
