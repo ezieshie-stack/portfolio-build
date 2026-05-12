@@ -61,56 +61,35 @@ export default function ProcessPage() {
         </div>
 
         {/* Process visualization */}
-        <div className="glass-card relative h-[420px] md:h-[480px] overflow-hidden flex items-center justify-center">
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-              backgroundSize: "42px 42px",
-              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1), transparent)",
-              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1), transparent)",
-            }}
-          />
+        <div className="process-visual-card">
+          <div className="process-grid" />
 
-          <div className="relative w-full h-full">
-            {[
-              { className: "top-[14%] left-[12%]", label: "ANALYZE" },
-              { className: "top-[34%] right-[10%]", label: "DESIGN" },
-              { className: "bottom-[28%] left-[16%]", label: "IMPLEMENT" },
-              { className: "bottom-[10%] right-[14%]", label: "OPTIMIZE" },
-            ].map((node) => (
-              <div
-                key={node.label}
-                className={`absolute ${node.className} px-5 py-3 rounded-2xl border border-[color:var(--primary)]/25 backdrop-blur-md z-10`}
-                style={{
-                  background: "rgba(10,10,14,0.78)",
-                  boxShadow: "0 0 40px rgba(139,92,246,0.18)",
-                }}
-              >
-                <span className="text-[11px] tracking-[0.18em] font-bold text-[#c084fc]">
-                  {node.label}
-                </span>
-              </div>
-            ))}
+          <svg className="process-paths" viewBox="0 0 800 520" fill="none">
+            <path d="M180 105 C 360 105, 430 145, 545 215" className="process-path" />
+            <path d="M545 215 C 410 225, 350 250, 270 330" className="process-path" />
+            <path d="M270 330 C 425 350, 470 395, 595 430" className="process-path" />
+          </svg>
 
-            <svg
-              aria-hidden
-              viewBox="0 0 1000 1000"
-              preserveAspectRatio="none"
-              className="absolute inset-0 w-full h-full opacity-45"
-            >
-              <defs>
-                <linearGradient id="proc-flow" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#c084fc" />
-                  <stop offset="100%" stopColor="#8B5CF6" />
-                </linearGradient>
-              </defs>
-              <path d="M210 180 C 420 220, 520 260, 760 360" stroke="url(#proc-flow)" strokeWidth="2" fill="none" />
-              <path d="M760 360 C 620 520, 460 620, 280 720" stroke="url(#proc-flow)" strokeWidth="2" fill="none" />
-              <path d="M280 720 C 520 780, 620 760, 780 860" stroke="url(#proc-flow)" strokeWidth="2" fill="none" />
-            </svg>
+          <div className="glow-point glow-one" />
+          <div className="glow-point glow-two" />
+          <div className="glow-point glow-three" />
+          <div className="glow-point glow-four" />
+
+          <div className="process-node node-analyze">
+            <span>⌕</span>
+            ANALYZE
+          </div>
+          <div className="process-node node-design">
+            <span>✎</span>
+            DESIGN
+          </div>
+          <div className="process-node node-implement">
+            <span>↗</span>
+            IMPLEMENT
+          </div>
+          <div className="process-node node-optimize">
+            <span>⌁</span>
+            OPTIMIZE
           </div>
         </div>
       </Reveal>
