@@ -2551,5 +2551,5 @@ button:focus-visible {
 .hero-title {
   font-size: clamp(52px, 6vw, 96px);
   line-height: 0.92;
-  max-width: 780px;
+  max-width: 8ch;
 }
