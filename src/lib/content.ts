@@ -323,6 +323,48 @@ export const process = {
       description: "[Short principle description placeholder.]",
     },
   ],
+  thinkingTag: "HOW I THINK",
+  thinking: [
+    "Diagnose friction",
+    "Map dependencies",
+    "Simplify workflows",
+    "Measure outcomes",
+    "Iterate continuously",
+  ],
+  systemTag: "SYSTEM VIEW",
+  system: [
+    {
+      title: "Intake",
+      description: "Capture requests, inputs, and business needs.",
+    },
+    {
+      title: "Validation",
+      description: "Check data quality, requirements, and ownership.",
+    },
+    {
+      title: "Execution",
+      description: "Move work through structured processes.",
+    },
+    {
+      title: "Reporting",
+      description: "Track outcomes, bottlenecks, and performance.",
+    },
+  ],
+  signalsTag: "CASE STUDY SIGNALS",
+  signals: [
+    {
+      label: "Before",
+      text: "Manual handoffs, unclear ownership, limited process visibility.",
+    },
+    {
+      label: "After",
+      text: "Mapped workflows, defined ownership, dashboard-ready reporting.",
+    },
+    {
+      label: "Impact",
+      text: "Improved clarity, faster execution, and measurable operating rhythm.",
+    },
+  ],
 };
 
 export type Article = {

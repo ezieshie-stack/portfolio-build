@@ -18,6 +18,58 @@ export default function ProcessPage() {
         </p>
       </Reveal>
 
+      <Reveal as="section" className="py-12">
+        <SectionTag>{processContent.thinkingTag}</SectionTag>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-2">
+          {processContent.thinking.map((item, i) => (
+            <article key={item} className="glass-card p-5">
+              <span className="font-mono text-xs text-[color:var(--primary)] block mb-4">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-base font-semibold leading-snug">{item}</h3>
+            </article>
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal as="section" className="py-12">
+        <SectionTag>{processContent.systemTag}</SectionTag>
+        <div className="glass-card p-6 md:p-8 mt-2">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {processContent.system.map((item, i) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-[color:var(--primary)]/20 bg-[color:var(--primary)]/[0.06] p-5"
+              >
+                <span className="font-mono text-xs text-[color:var(--primary)]">
+                  STEP {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-base font-semibold mt-3 mb-2">{item.title}</h3>
+                <p className="text-sm text-[color:var(--text-dim)] leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" className="py-12">
+        <SectionTag>{processContent.signalsTag}</SectionTag>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+          {processContent.signals.map((item) => (
+            <article key={item.label} className="glass-card p-6">
+              <span className="font-mono text-xs text-[color:var(--primary)] block mb-4 tracking-wider">
+                {item.label.toUpperCase()}
+              </span>
+              <p className="text-sm text-[color:var(--text-dim)] leading-relaxed">
+                {item.text}
+              </p>
+            </article>
+          ))}
+        </div>
+      </Reveal>
+
       <Reveal as="section" className="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center mb-20">
         <ol className="space-y-4">
           {processContent.steps.map((step) => (
