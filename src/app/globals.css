@@ -2303,3 +2303,26 @@ button:focus-visible {
     font-size: 56px;
   }
 }
+
+/* ============================================================
+   Mobile-only oversized portrait
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-portrait-column {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: visible;
+    margin-top: -40px;
+  }
+
+  .hero-portrait {
+    width: 155vw;
+    max-width: none;
+    min-width: 620px;
+    height: auto;
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translateX(10px);
+  }
+}
