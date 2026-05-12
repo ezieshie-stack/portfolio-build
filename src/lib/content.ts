@@ -254,23 +254,103 @@ export const projects: Project[] = [
 ];
 
 export const work = {
-  tag: "MY WORK",
-  title: "[Work index headline placeholder line 1]\n[Work index headline placeholder line 2]",
+  tag: "// SELECTED WORK",
+  title: "Operational systems, analytics projects, and process improvements.",
   intro:
-    "[Work intro paragraph placeholder. Briefly describe the kinds of projects collected here.]",
+    "A curated view of projects across business analysis, workflow optimization, reporting systems, and operational execution.",
   filters: [
     "All",
+    "Business Analysis",
     "Process Design",
-    "Data Analysis",
-    "System Design",
-    "Improvement",
+    "Analytics",
+    "Systems",
+    "Reporting",
   ],
-  cta: {
-    title: "Have a project in mind?",
-    body: "[Closing line placeholder describing willingness to chat.]",
-    label: "Let's Connect",
-    href: "/contact",
+  featured: {
+    pill: "Featured Case Study",
+    title: "FIIT Co Operational Ecosystem",
+    meta: "Business Analysis • Workflow Systems • Platform Administration",
+    description:
+      "Designed and deployed a live operational ecosystem supporting class management, internal workflows, customer engagement, and platform administration.",
+    primaryCta: { label: "View Case Study", href: "/work/fiitco" },
+    secondaryCta: { label: "Project Details", href: "/work/fiitco" },
+    metrics: [
+      {
+        icon: "Rocket",
+        title: "Live Deployment",
+        sub: "Production Environment",
+      },
+      {
+        icon: "Layers",
+        title: "2 Platforms",
+        sub: "Web + Admin Portal",
+      },
+      {
+        icon: "Users",
+        title: "Workflow Ownership",
+        sub: "End-to-end Ownership",
+      },
+    ],
   },
+  cards: [
+    {
+      icon: "BarChart3",
+      category: "Predictive Analytics",
+      title: "SLA Optimization Dashboard",
+      desc: "Built a predictive dashboard to identify high-risk SLA breaches and improve operational performance.",
+      tags: ["Dashboard", "ML", "Operations"],
+      href: "/work",
+    },
+    {
+      icon: "Database",
+      category: "Data Systems",
+      title: "Fraud Detection Pipeline",
+      desc: "Designed a SQL-based monitoring pipeline that tracks risk signals and potential fraudulent activities.",
+      tags: ["SQL", "Risk", "Monitoring"],
+      href: "/work",
+    },
+    {
+      icon: "FileText",
+      category: "Business Analysis",
+      title: "Requirements Documentation",
+      desc: "Created BRDs, process maps, user stories, and requirements artifacts to support product development.",
+      tags: ["BRD", "BPMN", "Requirements"],
+      href: "/work",
+    },
+    {
+      icon: "GitBranch",
+      category: "Process Improvement",
+      title: "Workflow Redesign System",
+      desc: "Redesigned internal operational workflows to improve efficiency, clarity, and task ownership.",
+      tags: ["Process", "Ops", "Systems"],
+      href: "/work",
+    },
+    {
+      icon: "TrendingUp",
+      category: "Operational Reporting",
+      title: "Executive Reporting Suite",
+      desc: "Built executive dashboards and automated reports that support data-driven decision making.",
+      tags: ["Reporting", "KPI", "Automation"],
+      href: "/work",
+    },
+    {
+      icon: "Settings",
+      category: "Systems Administration",
+      title: "Platform Administration",
+      desc: "Managed user roles, system settings, data integrity, and day-to-day platform administration.",
+      tags: ["Admin", "Security", "Governance"],
+      href: "/work",
+    },
+  ],
+  philosophyTag: "// HOW I APPROACH WORK",
+  philosophyHeading: "I focus on projects that connect:",
+  philosophy: [
+    { icon: "FileText", title: "Requirements", desc: "Understand the need" },
+    { icon: "GitBranch", title: "Workflows", desc: "Design the process" },
+    { icon: "Layers", title: "Systems", desc: "Build or optimize" },
+    { icon: "BarChart3", title: "Reporting", desc: "Make it visible" },
+    { icon: "Target", title: "Outcomes", desc: "Drive impact" },
+  ],
 };
 
 export const processPage = {

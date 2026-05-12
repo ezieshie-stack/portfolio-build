@@ -2,76 +2,105 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import type { Project } from "@/lib/content";
+import type { LucideIcon } from "lucide-react";
+import {
+  BarChart3,
+  Database,
+  FileText,
+  GitBranch,
+  Settings,
+  TrendingUp,
+} from "lucide-react";
 
-type Props = {
-  filters: string[];
-  projects: Project[];
+const iconMap: Record<string, LucideIcon> = {
+  BarChart3,
+  Database,
+  FileText,
+  GitBranch,
+  Settings,
+  TrendingUp,
 };
 
-export function WorkGrid({ filters, projects }: Props) {
+type Card = {
+  icon: string;
+  category: string;
+  title: string;
+  desc: string;
+  tags: readonly string[];
+  href: string;
+};
+
+type Props = {
+  filters: readonly string[];
+  cards: readonly Card[];
+};
+
+const matchesFilter = (card: Card, filter: string) => {
+  if (filter === "All") return true;
+  return card.category.toLowerCase().includes(filter.toLowerCase());
+};
+
+export function WorkGrid({ filters, cards }: Props) {
   const [active, setActive] = useState(filters[0] ?? "All");
 
-  const visible = useMemo(() => {
-    if (active === "All") return projects;
-    return projects.filter((p) => p.category === active);
-  }, [active, projects]);
+  const visible = useMemo(
+    () => cards.filter((c) => matchesFilter(c, active)),
+    [active, cards],
+  );
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="work-filters">
         {filters.map((f) => (
           <button
             key={f}
             type="button"
             onClick={() => setActive(f)}
             data-active={active === f}
-            className="filter-pill"
           >
             {f}
           </button>
         ))}
       </div>
 
-      <div className="grid gap-5">
-        {visible.map((p) => (
-          <article
-            key={p.slug}
-            className="glass-card p-6 md:p-8 grid md:grid-cols-[1.2fr_2fr] gap-6 items-start"
-          >
-            <div
-              className="rounded-2xl border min-h-[140px] relative overflow-hidden"
-              style={{
-                borderColor: "var(--glass-border)",
-                background:
-                  "linear-gradient(135deg, rgba(139,92,246,0.18), rgba(20,20,30,0.9))",
-              }}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+        {visible.map((card) => {
+          const Icon = iconMap[card.icon] ?? Settings;
+          return (
+            <article
+              key={card.title}
+              className="work-project-card glass-card p-7 min-h-[300px] flex flex-col justify-between"
             >
-              <div className="absolute inset-0 flex items-center justify-center text-[10px] uppercase tracking-[0.2em] text-[color:var(--text-dim)]">
-                [Project visual]
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold mb-3">{p.title}</h3>
-              <p className="text-sm text-[color:var(--text-dim)] mb-5">
-                {p.summary}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-5">
-                {p.tags.map((tag) => (
-                  <span key={tag} className="chip">
-                    {tag}
-                  </span>
-                ))}
+              <div>
+                <div className="work-project-icon">
+                  <Icon size={22} />
+                </div>
+                <span className="text-[11px] tracking-[0.2em] uppercase text-[#a78bfa] font-semibold">
+                  {card.category}
+                </span>
+                <h3 className="text-[24px] font-bold leading-[1.15] tracking-[-0.04em] my-3">
+                  {card.title}
+                </h3>
+                <p className="text-[color:var(--text-dim)] text-[15px] leading-[1.65]">
+                  {card.desc}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-5">
+                  {card.tags.map((tag) => (
+                    <span key={tag} className="work-project-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
               <Link
-                href={`/work/${p.slug}`}
-                className="text-[13px] font-semibold text-[color:var(--primary)] hover:text-white transition-colors"
+                href={card.href}
+                className="text-[#c4b5fd] text-sm self-end mt-6 hover:text-white transition-colors"
               >
-                View Case Study <span aria-hidden>↗</span>
+                View Project ↗
               </Link>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </>
   );

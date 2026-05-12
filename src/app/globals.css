@@ -2599,3 +2599,235 @@ button:focus-visible {
     min-height: 320px;
   }
 }
+
+/* WORK PAGE */
+
+.work-featured-card,
+.work-philosophy-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.22), transparent 35%),
+    rgba(255, 255, 255, 0.035);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
+}
+
+.work-featured-pill {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #c4b5fd;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.btn-secondary {
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.work-dashboard-preview {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  height: 210px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  background: rgba(5, 5, 10, 0.7);
+  margin-bottom: 22px;
+}
+
+.work-dash-sidebar {
+  background: rgba(255, 255, 255, 0.03);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.work-dash-content {
+  padding: 16px;
+}
+
+.work-dash-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.work-dash-row.small {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.work-dash-row div,
+.work-dash-chart {
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.16);
+}
+
+.work-dash-row div {
+  height: 42px;
+}
+
+.work-dash-chart {
+  height: 86px;
+  margin: 12px 0;
+}
+
+.work-featured-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.work-featured-metrics > div {
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.work-featured-metrics svg {
+  color: #a78bfa;
+  margin-bottom: 10px;
+}
+
+.work-featured-metrics strong {
+  display: block;
+  font-size: 14px;
+  color: white;
+}
+
+.work-featured-metrics span {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.work-filters {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.work-filters button {
+  min-width: 140px;
+  padding: 13px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.work-filters button:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+  color: #c4b5fd;
+}
+
+.work-filters button[data-active="true"] {
+  border-color: #8b5cf6;
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.work-project-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #a78bfa;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.24);
+  margin-bottom: 20px;
+}
+
+.work-project-tag {
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  color: #c4b5fd;
+  font-size: 12px;
+}
+
+.work-philosophy-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+.work-flow-item {
+  position: relative;
+}
+
+.work-flow-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  display: grid;
+  place-items: center;
+  color: #a78bfa;
+  margin-bottom: 12px;
+}
+
+.work-flow-item strong {
+  display: block;
+  font-size: 14px;
+  color: white;
+}
+
+.work-flow-item span {
+  display: block;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.work-flow-arrow {
+  position: absolute;
+  top: 18px;
+  right: -18px;
+  color: #a78bfa;
+}
+
+@media (max-width: 1024px) {
+  .work-philosophy-flow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .work-flow-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .work-featured-metrics {
+    grid-template-columns: 1fr;
+  }
+  .work-dashboard-preview {
+    height: 170px;
+    grid-template-columns: 52px 1fr;
+  }
+  .work-filters {
+    justify-content: flex-start;
+  }
+  .work-filters button {
+    min-width: auto;
+  }
+  .work-philosophy-flow {
+    grid-template-columns: 1fr;
+  }
+}
