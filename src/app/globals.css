@@ -2303,3 +2303,51 @@ button:focus-visible {
     font-size: 56px;
   }
 }
+
+/* ============================================================
+   Hero portrait reset — balanced, non-oversized scaling
+   Overrides every earlier .hero-portrait sizing rule via source order.
+   ============================================================ */
+
+.hero-portrait-column {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: visible;
+}
+
+.hero-portrait {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  object-fit: contain;
+  margin-inline: auto;
+  transform: none;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero-portrait-column {
+    margin-top: 20px;
+  }
+
+  .hero-portrait {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-portrait {
+    max-width: 380px;
+  }
+}
