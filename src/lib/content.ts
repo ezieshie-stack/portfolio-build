@@ -23,13 +23,14 @@ export const site = {
 } as const;
 
 export const home = {
-  tag: "OPERATIONS & BUSINESS SYSTEMS ANALYST",
-  titleStart: "Designing Systems That Drive",
-  titleHighlight: "Operational Excellence.",
+  tag: "// OPERATIONS & BUSINESS SYSTEMS",
+  titleStart:
+    "I translate operational complexity into scalable workflows, reporting systems, and business processes",
+  titleHighlight: "teams can actually use.",
   subtitle:
-    "I analyze, design, and optimize operational workflows and systems that improve efficiency, align teams, and drive measurable business outcomes.",
-  primaryCta: { label: "View My Work", href: "/work" },
-  secondaryCta: { label: "Let's Connect", href: "/contact" },
+    "I design and optimize operational systems that improve workflow visibility, decision-making, and execution. From business analysis and process mapping to analytics and platform administration, I build structures teams can actually rely on.",
+  primaryCta: { label: "VIEW CASE STUDIES", href: "/work" },
+  secondaryCta: { label: "EXPLORE PROCESS", href: "/process" },
   competencies: [
     { label: "Process Optimization", icon: "Workflow" as const },
     { label: "Data-Informed Decisions", icon: "BarChart3" as const },
@@ -288,7 +289,7 @@ export const processPage = {
       subtitle: "Understanding the operational landscape",
       title: "Discovery & Analysis",
       description:
-        "I begin by auditing workflows, stakeholder pain points, business objectives, and existing systems to uncover inefficiencies and identify opportunities for optimization.",
+        "I begin by identifying operational bottlenecks, stakeholder pain points, workflow gaps, and process inefficiencies through structured analysis and requirements gathering.",
       tags: [
         "Stakeholder Interviews",
         "Workflow Mapping",
@@ -298,10 +299,10 @@ export const processPage = {
     },
     {
       number: "02",
-      subtitle: "Building scalable operational frameworks",
+      subtitle: "Building structured operational systems",
       title: "Systems Design",
       description:
-        "After identifying constraints and opportunities, I design operational systems that simplify execution, improve visibility, and align teams around measurable outcomes.",
+        "After identifying opportunities, I design scalable workflows, reporting structures, and operational frameworks aligned with measurable business outcomes.",
       tags: [
         "Process Architecture",
         "Automation Opportunities",
@@ -311,10 +312,10 @@ export const processPage = {
     },
     {
       number: "03",
-      subtitle: "Deploying structured solutions",
+      subtitle: "Deploying scalable execution systems",
       title: "Implementation",
       description:
-        "I collaborate with stakeholders and cross-functional teams to implement systems efficiently while ensuring usability, adoption, and long-term sustainability.",
+        "I collaborate with stakeholders and cross-functional teams to configure, document, and operationalize systems with a focus on usability, adoption, and sustainability.",
       tags: [
         "Cross-team Coordination",
         "System Deployment",
@@ -327,7 +328,7 @@ export const processPage = {
       subtitle: "Continuous improvement through data",
       title: "Optimization",
       description:
-        "Operational excellence is iterative. I monitor metrics, gather feedback, and continuously refine workflows to improve performance and scalability over time.",
+        "Operational systems evolve continuously. I use reporting, feedback loops, and performance monitoring to refine workflows and improve long-term efficiency.",
       tags: [
         "Performance Monitoring",
         "Operational Reporting",

@@ -1,20 +1,20 @@
 import {
   BarChart3,
+  ClipboardList,
   Database,
-  Gauge,
+  Settings,
   Target,
-  Users,
   Workflow,
 } from "lucide-react";
 
 export function CoreCapabilities() {
   const capabilities = [
-    { label: "Process Optimization", icon: Gauge },
-    { label: "Workflow Design", icon: Workflow },
-    { label: "Operational Reporting", icon: BarChart3 },
-    { label: "Systems Analysis", icon: Database },
-    { label: "Cross-Functional Coordination", icon: Users },
-    { label: "Performance Improvement", icon: Target },
+    { label: "Business Analysis", icon: Database },
+    { label: "Process Design", icon: Workflow },
+    { label: "Workflow Optimization", icon: Target },
+    { label: "Platform Administration", icon: Settings },
+    { label: "Operational Analytics", icon: BarChart3 },
+    { label: "Requirements Engineering", icon: ClipboardList },
   ];
 
   return (
