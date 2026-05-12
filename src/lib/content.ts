@@ -400,9 +400,8 @@ export const insights = {
   ] as Article[],
   cta: {
     tag: "// CONTINUE THE CONVERSATION",
-    title: "Have a process, system, or workflow problem worth unpacking?",
-    ctaLabel: "Let's Connect",
-    ctaHref: "/contact",
+    title: "Operational thinking, practical execution.",
+    body: "Insights on systems analysis, workflow design, reporting infrastructure, and operational improvement.",
   },
 };
 

@@ -56,15 +56,15 @@ export default function InsightsPage() {
         <InsightsGrid filters={[...insights.filters]} articles={insights.articles} />
       </Reveal>
 
-      {/* ── CTA ──────────────────────────────────────── */}
-      <Reveal as="section" className="insights-cta-card p-10 md:p-14">
+      {/* ── TRANSITION (no button — footer handles conversion) ─ */}
+      <Reveal as="section" className="insights-cta-card px-7 py-12 md:px-12 md:py-14 max-w-[820px]">
         <SectionTag>{cta.tag}</SectionTag>
-        <h2 className="text-[clamp(36px,5vw,72px)] font-extrabold leading-none tracking-[-0.05em] mt-6 mb-8 max-w-[800px]">
+        <h2 className="text-[clamp(28px,4vw,44px)] font-extrabold leading-[1.05] tracking-[-0.04em] mt-5 mb-5">
           {cta.title}
         </h2>
-        <Link href={cta.ctaHref} className="btn-primary inline-flex">
-          {cta.ctaLabel} →
-        </Link>
+        <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[600px]">
+          {cta.body}
+        </p>
       </Reveal>
     </PageShell>
   );
