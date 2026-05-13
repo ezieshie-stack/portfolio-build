@@ -7,7 +7,7 @@ import { deepMerge, fetchPublishedArticles, fetchSectionContent } from "@/lib/cm
 import { insights as insightsDefault } from "@/lib/content";
 import type { Article } from "@/lib/content";
 
-export const metadata = { title: "Insights — Portfolio" };
+export const metadata = { title: "Insights | Portfolio" };
 
 export default async function InsightsPage() {
   const override = await fetchSectionContent<typeof insightsDefault>("insights");

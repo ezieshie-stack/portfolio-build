@@ -44,7 +44,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Fiitco — Fitness Platform Process Redesign",
+    title: "Fiitco: Fitness Platform Process Redesign",
     category: "Process Redesign",
     description:
       "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency and team accountability.",

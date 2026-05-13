@@ -20,7 +20,7 @@ const categories: Category[] = [
     featured: {
       title:
         "Operational systems are only valuable when people can actually use them.",
-      body: "Good systems reduce friction, clarify ownership, and improve visibility — so teams make better decisions faster.",
+      body: "Good systems reduce friction, clarify ownership, and improve visibility, so teams make better decisions faster.",
       pills: ["Process", "Systems", "Analytics"],
       date: "5 min read",
     },
@@ -39,7 +39,7 @@ const categories: Category[] = [
     name: "Systems",
     featured: {
       title:
-        "Systems aren't built once — they're maintained as living infrastructure.",
+        "Systems aren't built once. They're maintained as living infrastructure.",
       body: "Governance, documentation, and feedback loops keep systems healthy long after launch.",
       pills: ["Systems", "Governance", "Process"],
       date: "6 min read",
@@ -59,7 +59,7 @@ const categories: Category[] = [
     name: "Analytics",
     featured: {
       title:
-        "Reporting isn't the end of the system — it's the steering wheel.",
+        "Reporting isn't the end of the system. It's the steering wheel.",
       body: "Insight without action is just noise. Reporting should drive operating cadence, not just visualization.",
       pills: ["Analytics", "Reporting", "Metrics"],
       date: "4 min read",

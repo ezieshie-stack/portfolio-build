@@ -4,7 +4,7 @@ import { ResumeViewer } from "@/components/cms/ResumeViewer";
 import { resume } from "@/lib/content";
 import { fetchImageBySlot } from "@/lib/cms";
 
-export const metadata = { title: "Resume — Portfolio" };
+export const metadata = { title: "Resume | Portfolio" };
 
 export default async function ResumePage() {
   // Convex slot wins if uploaded; falls back to the static /public/resume.pdf

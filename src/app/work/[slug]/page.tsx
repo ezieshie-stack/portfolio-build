@@ -15,7 +15,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const p = projects.find((x) => x.slug === slug);
-  return { title: p ? `${p.title} — Portfolio` : "Project — Portfolio" };
+  return { title: p ? `${p.title} | Portfolio` : "Project | Portfolio" };
 }
 
 export default async function ProjectDetailPage({

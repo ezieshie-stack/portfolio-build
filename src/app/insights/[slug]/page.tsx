@@ -18,8 +18,8 @@ export async function generateMetadata({
   const article = await fetchArticleBySlug(slug);
   const fallback = insights.articles.find((a) => a.slug === slug);
   const title = article?.title ?? fallback?.title;
-  if (!title) return { title: "Insight — Portfolio" };
-  return { title: `${title} — Insights` };
+  if (!title) return { title: "Insight | Portfolio" };
+  return { title: `${title} | Insights` };
 }
 
 export default async function InsightArticlePage({

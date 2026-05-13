@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { contact } from "@/lib/content";
 
-export const metadata = { title: "Contact — Portfolio" };
+export const metadata = { title: "Contact | Portfolio" };
 
 export default function ContactPage() {
   return (

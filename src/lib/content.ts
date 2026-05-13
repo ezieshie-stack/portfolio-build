@@ -71,7 +71,7 @@ export const home = {
   featured: {
     tag: "FEATURED PROJECT",
     pill: "Process Redesign",
-    title: "Fiitco — Fitness Platform Process Redesign",
+    title: "Fiitco: Fitness Platform Process Redesign",
     description:
       "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency by 28%.",
     workflow: {
@@ -141,12 +141,12 @@ export const about = {
     {
       degree: "[Degree placeholder]",
       school: "[Institution placeholder]",
-      dates: "[Start year]—[End year]",
+      dates: "[Start year] – [End year]",
     },
     {
       degree: "[Degree placeholder]",
       school: "[Institution placeholder]",
-      dates: "[Start month year]—[End month year]",
+      dates: "[Start month year] – [End month year]",
     },
   ],
 };
@@ -182,7 +182,7 @@ export const projects: Project[] = [
       { value: "[00+]", label: "[Metric D]" },
     ],
     client: "[Client name]",
-    timeline: "[Start]—[End]",
+    timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
     tools: ["SQL", "Python", "Looker Studio", "Jira", "Notion"],
@@ -212,7 +212,7 @@ export const projects: Project[] = [
       { value: "[00%]", label: "[Metric B]" },
     ],
     client: "[Client name]",
-    timeline: "[Start]—[End]",
+    timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
     tools: ["SQL", "Looker Studio"],
@@ -238,7 +238,7 @@ export const projects: Project[] = [
       { value: "[00%]", label: "[Metric B]" },
     ],
     client: "[Client name]",
-    timeline: "[Start]—[End]",
+    timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
     tools: ["SQL", "Python"],
@@ -484,7 +484,7 @@ export const contact = {
   tag: "GET IN TOUCH",
   title: "Let's build the systems that make your operations run.",
   intro:
-    "Whether you're untangling a workflow, scoping a new internal tool, or trying to turn scattered data into a real reporting story — I'm always open to conversations that move things from ambiguity to action.",
+    "Whether you're untangling a workflow, scoping a new internal tool, or trying to turn scattered data into a real reporting story, I'm always open to conversations that move things from ambiguity to action.",
   channels: [
     { label: "Email", value: "Ezieshie@gmail.com", href: "mailto:Ezieshie@gmail.com" },
     { label: "LinkedIn", value: "linkedin.com/in/david-ezieshi", href: "https://www.linkedin.com/in/david-ezieshi/" },

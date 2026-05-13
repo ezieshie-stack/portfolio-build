@@ -16,7 +16,7 @@ import { WorkGrid } from "@/components/work/WorkGrid";
 import { work as workDefault } from "@/lib/content";
 import { deepMerge, fetchImageBySlot, fetchSectionContent } from "@/lib/cms";
 
-export const metadata = { title: "Work — Portfolio" };
+export const metadata = { title: "Work | Portfolio" };
 
 const metricIconMap: Record<string, LucideIcon> = {
   Rocket,

@@ -4,7 +4,7 @@ import { OpControlSystem } from "@/components/process/OpControlSystem";
 import { processPage as processPageDefault } from "@/lib/content";
 import { deepMerge, fetchSectionContent } from "@/lib/cms";
 
-export const metadata = { title: "Process — Portfolio" };
+export const metadata = { title: "Process | Portfolio" };
 
 function MetricIcon({ name }: { name: string }) {
   const common = "w-6 h-6 text-[color:var(--primary)]";

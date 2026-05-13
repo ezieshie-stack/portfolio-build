@@ -15,7 +15,7 @@ import {
 import { LiveImage } from "@/components/cms/LiveImage";
 import { LiveText } from "@/components/cms/LiveText";
 
-export const metadata = { title: "About — Portfolio" };
+export const metadata = { title: "About | Portfolio" };
 
 export default function AboutPage() {
 
@@ -28,17 +28,17 @@ export default function AboutPage() {
 
   const experience = [
     {
-      year: "2024 — Present",
+      year: "2024 – Present",
       title: "Operations & Business Systems",
       text: "Focused on workflow redesign, operational visibility, reporting systems, and cross-functional process alignment.",
     },
     {
-      year: "2023 — Present",
+      year: "2023 – Present",
       title: "Workflow Optimization Projects",
       text: "Built operational structures that reduced reporting delays, improved accountability, and streamlined execution.",
     },
     {
-      year: "2023 — Present",
+      year: "2023 – Present",
       title: "Systems Analysis & Reporting",
       text: "Created reporting frameworks, dashboard systems, and process documentation for operational clarity.",
     },
@@ -82,12 +82,12 @@ export default function AboutPage() {
     {
       school: "Bow Valley College",
       program: "Business Administration Diploma",
-      date: "Jan 2019 — Dec 2019",
+      date: "Jan 2019 – Dec 2019",
     },
     {
       school: "Bow Valley College",
       program: "Bachelor of Management",
-      date: "Mar 2020 — Apr 2022",
+      date: "Mar 2020 – Apr 2022",
     },
   ];
 

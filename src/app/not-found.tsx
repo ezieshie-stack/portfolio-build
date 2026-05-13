@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
 import { notFound as content } from "@/lib/content";
 
-export const metadata = { title: "Page Not Found — Portfolio" };
+export const metadata = { title: "Page Not Found | Portfolio" };
 
 export default function NotFound() {
   return (
