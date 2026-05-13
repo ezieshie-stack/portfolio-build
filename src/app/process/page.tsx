@@ -1,7 +1,8 @@
 import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { OpControlSystem } from "@/components/process/OpControlSystem";
-import { processPage } from "@/lib/content";
+import { processPage as processPageDefault } from "@/lib/content";
+import { deepMerge, fetchSectionContent } from "@/lib/cms";
 
 export const metadata = { title: "Process — Portfolio" };
 
@@ -33,7 +34,12 @@ function MetricIcon({ name }: { name: string }) {
   );
 }
 
-export default function ProcessPage() {
+export default async function ProcessPage() {
+  const override = await fetchSectionContent<typeof processPageDefault>(
+    "processPage",
+  );
+  const processPage = deepMerge(processPageDefault, override);
+
   return (
     <PageShell>
       {/* ── HERO ─────────────────────────────────────── */}

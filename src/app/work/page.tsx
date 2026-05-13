@@ -12,7 +12,8 @@ import {
 import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { WorkGrid } from "@/components/work/WorkGrid";
-import { work } from "@/lib/content";
+import { work as workDefault } from "@/lib/content";
+import { deepMerge, fetchSectionContent } from "@/lib/cms";
 
 export const metadata = { title: "Work — Portfolio" };
 
@@ -30,7 +31,9 @@ const philosophyIconMap: Record<string, LucideIcon> = {
   Target,
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const override = await fetchSectionContent<typeof workDefault>("work");
+  const work = deepMerge(workDefault, override);
   const { featured, philosophy } = work;
 
   return (

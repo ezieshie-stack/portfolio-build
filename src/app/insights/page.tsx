@@ -3,13 +3,15 @@ import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { InsightLibrary } from "@/components/insights/InsightLibrary";
 import { InsightsGrid } from "@/components/insights/InsightsGrid";
-import { fetchPublishedArticles } from "@/lib/cms";
-import { insights } from "@/lib/content";
+import { deepMerge, fetchPublishedArticles, fetchSectionContent } from "@/lib/cms";
+import { insights as insightsDefault } from "@/lib/content";
 import type { Article } from "@/lib/content";
 
 export const metadata = { title: "Insights — Portfolio" };
 
 export default async function InsightsPage() {
+  const override = await fetchSectionContent<typeof insightsDefault>("insights");
+  const insights = deepMerge(insightsDefault, override);
   const { featured } = insights;
 
   // Try Convex first; fall back to static articles in lib/content.ts.
