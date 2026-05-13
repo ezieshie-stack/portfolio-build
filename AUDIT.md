@@ -85,7 +85,7 @@ Each phase is a separate PR.
 | 3 | Replace border-radius literals with tokens | done |
 | 4 | Replace hover lift / glow / transition values with tokens | done |
 | 5 | Typography normalization (replace clamp() literals + weight pairings) | done |
-| 6 | Replace ad-hoc easing curves + durations | pending |
+| 6 | Replace ad-hoc easing curves + durations | done |
 | 7 | UX: loading skeletons + button progress indicators | pending |
 
 ### Radius mapping applied (Phase 3)
@@ -157,6 +157,32 @@ print eyebrow tags), `0.9em`, `0`, and `text-[clamp(96px,18vw,200px)]`
 
 Net: 14 px literals + 13 clamp formulas (CSS) + 11 px literals + 10
 clamp formulas (TSX) → 9 token tiers + 4 intentional literals.
+
+### Easing + duration mapping applied (Phase 6)
+
+**Easing curves** (the cubic-bezier values already matched the tokens
+verbatim; replacement is consistency-only, zero visual change):
+
+| Old value | New token |
+|---|---|
+| `cubic-bezier(0.2, 0.8, 0.2, 1)` (8 uses) | `var(--ease-out)` |
+| `cubic-bezier(0.4, 0, 0.2, 1)` (4 uses) | `var(--ease-in-out)` |
+| `cubic-bezier(0.34, 1.56, 0.64, 1)` (1 use) | `var(--ease-spring)` |
+| `ease` keyword in transitions | `var(--ease-out)` |
+| `ease-out` / `ease-in-out` keyword in animations | `var(--ease-out)` / `var(--ease-in-out)` |
+
+**Transition durations:**
+
+| Old duration | New token |
+|---|---|
+| 150ms, 180ms, 200ms, 240ms | `var(--duration-fast)` (150ms) |
+| 250ms, 300ms, 320ms | `var(--duration-base)` (250ms) |
+| 400ms, 600ms, 800ms | `var(--duration-slow)` (400ms — caps over-slow transitions) |
+
+Kept as literals (intentional motion design): long animation durations
+for infinite/looped motion (1.8s opPulse, 5s opTravel, 7s dashFlow, 8s
+heroGridPulse, 25s orbFloat, 28s toolsScroll, 40s marquee) and the
+0.001ms reduced-motion media-query overrides.
 
 Each subsequent PR replaces literals with the relevant tokens. Run
 `git grep` against the audit categories to verify zero remaining

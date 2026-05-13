@@ -57,9 +57,9 @@
   --lift-md: -4px;
 
   /* Easing curves */
-  --ease-out:    cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+  --ease-spring: var(--ease-spring);
 
   /* Durations */
   --duration-fast: 150ms;
@@ -100,9 +100,9 @@ body {
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform var(--duration-slow) var(--ease-out),
+    border-color var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out);
   position: relative;
   overflow: hidden;
 }
@@ -133,9 +133,9 @@ body {
   letter-spacing: 0.04em;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform var(--duration-base) var(--ease-in-out),
+    box-shadow var(--duration-base) var(--ease-in-out),
+    border-color var(--duration-base) var(--ease-in-out);
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -155,7 +155,7 @@ body {
   inset: 0;
   background: linear-gradient(135deg, var(--primary) 0%, transparent 100%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--duration-base) var(--ease-out);
   z-index: -1;
 }
 
@@ -233,7 +233,7 @@ body {
   z-index: -1;
   filter: blur(80px);
   opacity: 0.5;
-  animation: orbFloat 25s infinite alternate ease-in-out;
+  animation: orbFloat 25s infinite alternate var(--ease-in-out);
   pointer-events: none;
   top: -200px;
   left: -100px;
@@ -251,8 +251,8 @@ body {
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
   will-change: opacity, transform;
 }
 
@@ -299,7 +299,7 @@ body {
 }
 
 .hero-grid-pulse {
-  animation: heroGridPulse 8s ease-in-out infinite;
+  animation: heroGridPulse 8s var(--ease-in-out) infinite;
 }
 
 @keyframes heroGridPulse {
@@ -483,7 +483,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  animation: drawerSlideIn 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: drawerSlideIn var(--duration-base) var(--ease-out);
 }
 
 @keyframes drawerSlideIn {
@@ -514,7 +514,7 @@ body {
   color: #fff;
   font-size: var(--text-base);
   font-weight: 500;
-  transition: background 0.2s ease;
+  transition: background var(--duration-fast) var(--ease-out);
 }
 
 .mobile-drawer__link:hover,
@@ -633,7 +633,7 @@ body {
 .slider-track {
   display: flex;
   width: 100%;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform var(--duration-slow) var(--ease-out);
   will-change: transform;
 }
 
@@ -662,7 +662,7 @@ body {
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
 }
 
 .slider-arrow:hover {
@@ -699,7 +699,7 @@ body {
   padding: 0;
   background: rgba(255, 255, 255, 0.22);
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .slider-dot[aria-current="true"] {
@@ -1123,7 +1123,7 @@ body {
   font-family: inherit;
   font-size: var(--text-base);
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--duration-base) var(--ease-out);
 }
 
 .form-input:focus {
@@ -1146,7 +1146,7 @@ body {
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--glass-border);
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
 }
 
 .chip:hover {
@@ -1166,8 +1166,8 @@ body {
   background: transparent;
   border: 1px solid var(--glass-border);
   cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease,
-    background 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
 }
 
 .filter-pill:hover {
@@ -1552,7 +1552,7 @@ body {
   align-items: center;
   gap: 10px;
   margin-top: 8px;
-  transition: 0.25s ease;
+  transition: var(--duration-base) var(--ease-out);
 }
 
 .footerColumn a:hover {
@@ -1780,11 +1780,11 @@ button,
 .exploringCard,
 .featuredProjectCard {
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease,
-    box-shadow 180ms ease;
+    transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 a:hover,
@@ -1826,7 +1826,7 @@ button:focus-visible {
 .textLink svg,
 .footerInlineCTA svg,
 .heroSocialLinks svg {
-  transition: transform 180ms ease;
+  transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .textLink:hover svg,
@@ -1837,7 +1837,7 @@ button:focus-visible {
 /* Nav underline */
 .navLink {
   position: relative;
-  transition: color 180ms ease;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .navLink::after {
@@ -1848,7 +1848,7 @@ button:focus-visible {
   width: 0;
   height: 1px;
   background: #a78bfa;
-  transition: width 180ms ease;
+  transition: width var(--duration-fast) var(--ease-out);
 }
 
 .navLink:hover::after,
@@ -1859,9 +1859,9 @@ button:focus-visible {
 /* Carousel arrows */
 .slider-arrow {
   transition:
-    transform 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease;
+    transform var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
 }
 
 .slider-arrow:hover {
@@ -2789,7 +2789,7 @@ button:focus-visible {
   font-size: var(--text-sm);
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+  transition: border-color var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 
 .work-filters button:hover {
@@ -3008,7 +3008,7 @@ button:focus-visible {
   text-transform: uppercase;
   box-shadow: 0 0 35px rgba(139, 92, 246, 0.22);
   backdrop-filter: blur(16px);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
   cursor: pointer;
   z-index: 3;
 }
@@ -3136,7 +3136,7 @@ button:focus-visible {
   line-height: 1.3;
   backdrop-filter: blur(16px);
   box-shadow: 0 0 36px rgba(139, 92, 246, 0.18);
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
   z-index: 3;
 }
 
@@ -3227,7 +3227,7 @@ button:focus-visible {
   border-radius: 50%;
   background: #a78bfa;
   box-shadow: 0 0 12px #a78bfa;
-  animation: opPulse 1.8s ease-in-out infinite;
+  animation: opPulse 1.8s var(--ease-in-out) infinite;
 }
 
 @keyframes opPulse {
@@ -3261,7 +3261,7 @@ button:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.02);
   color: rgba(255, 255, 255, 0.72);
-  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  transition: background var(--duration-base), border-color var(--duration-base), color var(--duration-base);
 }
 
 .opStep span {
@@ -3313,7 +3313,7 @@ button:focus-visible {
   border-radius: 50%;
   background: #a78bfa;
   box-shadow: 0 0 18px #a78bfa, 0 0 36px rgba(139, 92, 246, 0.5);
-  animation: opTravel 5s ease-in-out infinite;
+  animation: opTravel 5s var(--ease-in-out) infinite;
 }
 
 @keyframes opTravel {
@@ -3461,7 +3461,7 @@ button:focus-visible {
   font-size: var(--text-xs);
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--duration-fast);
 }
 
 .libTab:hover {
@@ -3553,7 +3553,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
 }
 
 .libCard:hover {
@@ -3612,7 +3612,7 @@ button:focus-visible {
 .opWorkflow,
 .libFeatured,
 .libCards {
-  animation: panelFade 320ms ease-out;
+  animation: panelFade var(--duration-base) var(--ease-out);
 }
 
 @keyframes panelFade {
@@ -3677,7 +3677,7 @@ button:focus-visible {
   text-decoration: underline;
   text-decoration-color: rgba(196, 181, 253, 0.4);
   text-underline-offset: 3px;
-  transition: color 0.2s, text-decoration-color 0.2s;
+  transition: color var(--duration-fast), text-decoration-color var(--duration-fast);
 }
 
 .article-body a:hover {
@@ -3820,7 +3820,7 @@ button:focus-visible {
   color: white;
   font: inherit;
   font-size: var(--text-sm);
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
 }
 
 .admin-textarea {
@@ -3856,7 +3856,7 @@ button:focus-visible {
   color: white;
   border: 1px solid #7c3aed;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+  transition: background var(--duration-fast), border-color var(--duration-fast), opacity var(--duration-fast);
 }
 
 .admin-button-secondary {
@@ -3951,7 +3951,7 @@ button:focus-visible {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: background var(--duration-fast), color var(--duration-fast);
 }
 
 .admin-nav-item:hover {
@@ -3985,7 +3985,7 @@ button:focus-visible {
   font-size: var(--text-xs);
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  transition: color 0.2s, background 0.2s;
+  transition: color var(--duration-fast), background var(--duration-fast);
 }
 
 .admin-sidebar-link:hover {
@@ -4072,7 +4072,7 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.025);
   text-decoration: none;
   color: white;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
 }
 
 .admin-quick-card:hover {
@@ -4293,7 +4293,7 @@ button:focus-visible {
   font: inherit;
   font-size: var(--text-xs);
   cursor: pointer;
-  transition: 0.15s;
+  transition: var(--duration-fast);
 }
 
 .admin-row-btn:hover {
@@ -4319,7 +4319,7 @@ button:focus-visible {
   place-items: center;
   z-index: 100;
   padding: 24px;
-  animation: fadeIn 0.2s ease-out;
+  animation: fadeIn var(--duration-fast) var(--ease-out);
 }
 
 @keyframes fadeIn {
@@ -4479,7 +4479,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background var(--duration-fast), border-color var(--duration-fast);
 }
 
 .admin-content-item strong {
@@ -4615,7 +4615,7 @@ button:focus-visible {
   gap: 4px;
   font: inherit;
   color: white;
-  transition: 0.15s;
+  transition: var(--duration-fast);
 }
 
 .admin-suggested-card:hover {
@@ -4780,7 +4780,7 @@ button:focus-visible {
   display: grid;
   place-items: center;
   padding: 24px;
-  animation: resume-fade-in 0.2s ease-out;
+  animation: resume-fade-in var(--duration-fast) var(--ease-out);
 }
 
 @keyframes resume-fade-in {
@@ -4836,7 +4836,7 @@ button:focus-visible {
   font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .resume-modal-download:hover {
@@ -4855,7 +4855,7 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.04);
   color: white;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
 }
 
 .resume-modal-close:hover {
