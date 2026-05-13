@@ -86,7 +86,7 @@ Each phase is a separate PR.
 | 4 | Replace hover lift / glow / transition values with tokens | done |
 | 5 | Typography normalization (replace clamp() literals + weight pairings) | done |
 | 6 | Replace ad-hoc easing curves + durations | done |
-| 7 | UX: loading skeletons + button progress indicators | pending |
+| 7 | UX: loading skeletons + button progress indicators | done |
 
 ### Radius mapping applied (Phase 3)
 
@@ -183,6 +183,33 @@ Kept as literals (intentional motion design): long animation durations
 for infinite/looped motion (1.8s opPulse, 5s opTravel, 7s dashFlow, 8s
 heroGridPulse, 25s orbFloat, 28s toolsScroll, 40s marquee) and the
 0.001ms reduced-motion media-query overrides.
+
+### UX behaviors added (Phase 7)
+
+- **`Spinner` component** — Pure-CSS rotating ring. Uses
+  `var(--duration-slow)` for the rotation period; `currentColor` so it
+  inherits parent text color. Includes `role="status"` and `sr-only`
+  label for screen readers.
+- **`PageSkeleton` component** — Generic page-level skeleton with a
+  tag/title block and a 3-card grid placeholder. Uses the new
+  `.skeleton` class (gradient shimmer keyframed at 1.4s).
+- **`loading.tsx`** files added for `/`, `/about`, `/work`, `/process`,
+  `/insights`. Next.js auto-renders these while the server component
+  streams. Layout shape matches the real page closely enough to avoid
+  a visible jump on hydration.
+- **ContactForm** — wired a real sending state. `sending` flag disables
+  all fields, swaps button text to "Sending…" with an inline Spinner,
+  and uses `aria-busy={true}` for AT. Placeholder 800ms timeout stands
+  in for the real submission; replace with the actual fetch when the
+  form is wired to mailto/Formspree/Resend.
+- **ResumeViewer modal** — tracks `frameLoaded`. Until the iframe
+  fires its `onLoad`, a centered Spinner overlay sits above the dark
+  iframe background so the modal never looks empty during the PDF
+  fetch. Resets to "loading" when the modal closes/reopens.
+- **CSS additions** — `.spinner`, `.sr-only`, `.skeleton` +
+  `skeletonShimmer` keyframe, `spin` keyframe, plus
+  `.resume-modal-frame-wrap` / `.resume-modal-frame-loader` for the
+  iframe overlay.
 
 Each subsequent PR replaces literals with the relevant tokens. Run
 `git grep` against the audit categories to verify zero remaining

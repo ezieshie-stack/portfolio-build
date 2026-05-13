@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X, Download } from "lucide-react";
+import { Spinner } from "@/components/cms/Spinner";
 
 type Props = {
   pdfUrl: string | null;
@@ -19,9 +20,13 @@ type Props = {
  */
 export function ResumeViewer({ pdfUrl, downloadLabel, viewLabel }: Props) {
   const [open, setOpen] = useState(false);
+  const [frameLoaded, setFrameLoaded] = useState(false);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setFrameLoaded(false);
+      return;
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
@@ -96,11 +101,19 @@ export function ResumeViewer({ pdfUrl, downloadLabel, viewLabel }: Props) {
                 </button>
               </div>
             </div>
-            <iframe
-              src={pdfUrl}
-              className="resume-modal-frame"
-              title="Resume PDF"
-            />
+            <div className="resume-modal-frame-wrap">
+              {!frameLoaded && (
+                <div className="resume-modal-frame-loader" aria-hidden>
+                  <Spinner size={24} />
+                </div>
+              )}
+              <iframe
+                src={pdfUrl}
+                className="resume-modal-frame"
+                title="Resume PDF"
+                onLoad={() => setFrameLoaded(true)}
+              />
+            </div>
           </div>
         </div>
       )}
