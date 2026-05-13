@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
@@ -13,7 +14,7 @@ import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { WorkGrid } from "@/components/work/WorkGrid";
 import { work as workDefault } from "@/lib/content";
-import { deepMerge, fetchSectionContent } from "@/lib/cms";
+import { deepMerge, fetchImageBySlot, fetchSectionContent } from "@/lib/cms";
 
 export const metadata = { title: "Work — Portfolio" };
 
@@ -35,6 +36,7 @@ export default async function WorkPage() {
   const override = await fetchSectionContent<typeof workDefault>("work");
   const work = deepMerge(workDefault, override);
   const { featured, philosophy } = work;
+  const featuredImage = await fetchImageBySlot("work-featured-image");
 
   return (
     <PageShell>
@@ -72,18 +74,29 @@ export default async function WorkPage() {
             </Link>
           </div>
 
-          <div className="work-dashboard-preview">
-            <div className="work-dash-sidebar" />
-            <div className="work-dash-content">
-              <div className="work-dash-row">
-                <div /><div /><div /><div />
-              </div>
-              <div className="work-dash-chart" />
-              <div className="work-dash-row small">
-                <div /><div /><div />
+          {featuredImage?.imageUrl ? (
+            <Image
+              src={featuredImage.imageUrl}
+              alt={featuredImage.altText || `${featured.title} screenshot`}
+              width={1200}
+              height={630}
+              className="work-featured-image"
+              unoptimized={featuredImage.imageUrl.startsWith("http")}
+            />
+          ) : (
+            <div className="work-dashboard-preview">
+              <div className="work-dash-sidebar" />
+              <div className="work-dash-content">
+                <div className="work-dash-row">
+                  <div /><div /><div /><div />
+                </div>
+                <div className="work-dash-chart" />
+                <div className="work-dash-row small">
+                  <div /><div /><div />
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="work-featured-metrics">
             {featured.metrics.map((m) => {
