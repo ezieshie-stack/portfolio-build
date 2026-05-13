@@ -2777,10 +2777,9 @@ button:focus-visible {
 
 .work-philosophy-flow {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 18px;
-  max-width: 900px;
-  margin: 0 auto;
+  grid-template-columns: repeat(5, minmax(120px, 160px));
+  gap: 28px;
+  justify-content: start;
 }
 
 .work-flow-item {

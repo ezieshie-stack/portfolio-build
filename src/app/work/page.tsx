@@ -66,10 +66,10 @@ export default async function WorkPage() {
           </p>
 
           <div className="flex flex-wrap gap-3 mb-7">
-            <Link href={featured.primaryCta.href} className="btn-primary inline-flex">
+            <Link href={featured.primaryCta.href} className="btn-pill btn-primary">
               {featured.primaryCta.label}
             </Link>
-            <Link href={featured.secondaryCta.href} className="btn-secondary inline-flex">
+            <Link href={featured.secondaryCta.href} className="btn-pill">
               {featured.secondaryCta.label}
             </Link>
           </div>
