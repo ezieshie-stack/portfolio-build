@@ -2777,9 +2777,10 @@ button:focus-visible {
 
 .work-philosophy-flow {
   display: grid;
-  grid-template-columns: repeat(5, minmax(120px, 160px));
-  gap: 28px;
-  justify-content: start;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 36px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .work-flow-item {
@@ -2812,9 +2813,29 @@ button:focus-visible {
 
 .work-flow-arrow {
   position: absolute;
-  top: 18px;
-  right: -18px;
-  color: #a78bfa;
+  top: 22px;
+  left: 58px;
+  right: -30px;
+  height: 1.5px;
+  background: linear-gradient(
+    to right,
+    rgba(167, 139, 250, 0.25),
+    rgba(167, 139, 250, 0.95)
+  );
+  font-size: 0;
+  border-radius: 2px;
+}
+
+.work-flow-arrow::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid #a78bfa;
 }
 
 @media (max-width: 1024px) {
