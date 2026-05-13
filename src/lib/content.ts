@@ -482,14 +482,14 @@ export const insights = {
 
 export const contact = {
   tag: "GET IN TOUCH",
-  title: "[Contact headline placeholder]",
+  title: "Let's build the systems that make your operations run.",
   intro:
-    "[Contact intro paragraph placeholder. One or two sentences describing availability and what you're open to.]",
+    "Whether you're untangling a workflow, scoping a new internal tool, or trying to turn scattered data into a real reporting story — I'm always open to conversations that move things from ambiguity to action.",
   channels: [
     { label: "Email", value: "Ezieshie@gmail.com", href: "mailto:Ezieshie@gmail.com" },
     { label: "LinkedIn", value: "linkedin.com/in/david-ezieshi", href: "https://www.linkedin.com/in/david-ezieshi/" },
     { label: "GitHub", value: "github.com/ezieshie-stack", href: "https://github.com/ezieshie-stack" },
-    { label: "Availability", value: "[Availability statement placeholder]" },
+    { label: "Availability", value: "Open to operations, systems analysis, and business analyst roles, plus short-term project work." },
   ],
   formTitle: "Send a Message",
   altCtas: [
