@@ -27,7 +27,7 @@ export function Nav() {
           borderColor: "var(--glass-border)",
         }}
       >
-        <div className="mx-auto max-w-[1440px] flex items-center justify-between gap-4 px-5 md:px-8 lg:px-12 py-4 lg:py-5">
+        <div className="mx-auto max-w-[1600px] flex items-center justify-between gap-4 px-5 md:px-8 lg:px-12 py-4 lg:py-5">
           <Link href="/" className="flex items-center gap-3 min-w-0">
             <span
               className="flex h-11 w-11 items-center justify-center rounded-xl border font-bold text-sm shrink-0"

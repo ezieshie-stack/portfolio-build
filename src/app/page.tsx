@@ -15,13 +15,13 @@ export default async function Home() {
 
   return (
     <>
-      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12 pt-0 md:pt-8 lg:pt-12">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 pt-0 md:pt-8 lg:pt-12">
         <Hero data={home} />
       </div>
       <CoreCapabilities />
       <AboutPreview />
       <ToolsCarousel />
-      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
         <OperationalFramework
           diagram={home.diagram}
           metricCard={home.metricCard}
