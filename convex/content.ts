@@ -34,3 +34,21 @@ export const set = mutation({
     });
   },
 });
+
+export const remove = mutation({
+  args: { section: v.string() },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("siteContent")
+      .withIndex("by_section", (q) => q.eq("section", args.section))
+      .unique();
+    if (existing) await ctx.db.delete(existing._id);
+  },
+});
+
+export const list = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("siteContent").collect();
+  },
+});
