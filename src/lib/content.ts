@@ -349,8 +349,8 @@ export const work = {
     { icon: "FileText", title: "Requirements", desc: "Understand the need" },
     { icon: "GitBranch", title: "Workflows", desc: "Design the process" },
     { icon: "Layers", title: "Systems", desc: "Build or optimize" },
-    { icon: "BarChart3", title: "Reporting", desc: "Make it visible" },
-    { icon: "Target", title: "Outcomes", desc: "Drive impact" },
+    { icon: "BarChart3", title: "Reporting", desc: "Trace every metric" },
+    { icon: "Target", title: "Outcomes", desc: "Ship the change" },
   ],
 };
 
