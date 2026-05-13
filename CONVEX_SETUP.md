@@ -89,3 +89,46 @@ Open https://dashboard.convex.dev → your project → Data tab.
 
 If the schema in `convex/schema.ts` changes, re-run `npx convex dev` locally —
 it'll regenerate `_generated/`. Commit those files and push.
+
+---
+
+# Admin UI Setup
+
+The admin lives at `/admin/login` (publicly reachable) and `/admin/*` (protected by middleware). Two env vars are required for admin to work.
+
+## Step A — Generate a session secret
+
+In your terminal:
+
+```bash
+openssl rand -hex 32
+```
+
+Copy the output. This is your `ADMIN_SECRET`.
+
+## Step B — Pick an admin password
+
+Pick a strong password. Save it in a password manager.
+
+## Step C — Add both to `.env.local` (local dev)
+
+Append to `.env.local`:
+
+```
+ADMIN_PASSWORD=your-chosen-password-here
+ADMIN_SECRET=the-hex-string-from-step-A
+```
+
+Restart `npm run dev` if it's running. Note: `npx convex dev` does NOT need restarting — these are Next.js env vars, not Convex env vars.
+
+## Step D — Add both to Vercel
+
+Vercel → Settings → Environment Variables. Add `ADMIN_PASSWORD` and `ADMIN_SECRET` (Production + Preview).
+
+## Using the admin
+
+1. Visit `/admin/login` on your deployed site
+2. Enter your password
+3. You'll land at `/admin` (dashboard)
+4. Manage articles, page copy, images via the sidebar
+5. Click "Logout" in the sidebar footer to end your session (cookie expires in 30 days otherwise)
