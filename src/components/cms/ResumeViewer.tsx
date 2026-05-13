@@ -21,12 +21,18 @@ type Props = {
 export function ResumeViewer({ pdfUrl, downloadLabel, viewLabel }: Props) {
   const [open, setOpen] = useState(false);
   const [frameLoaded, setFrameLoaded] = useState(false);
+  const [lastOpenState, setLastOpenState] = useState(false);
+
+  // Reset frameLoaded when the modal closes. Uses the "adjust state
+  // during render" pattern instead of useEffect to satisfy
+  // react-hooks/set-state-in-effect.
+  if (open !== lastOpenState) {
+    setLastOpenState(open);
+    if (!open) setFrameLoaded(false);
+  }
 
   useEffect(() => {
-    if (!open) {
-      setFrameLoaded(false);
-      return;
-    }
+    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };

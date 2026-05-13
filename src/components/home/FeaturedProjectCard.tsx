@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowUpRight,
   Calendar,
@@ -91,12 +92,12 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="projectActions">
-          <a href="/work/fiitco" className="primaryAction">
+          <Link href="/work/fiitco" className="primaryAction">
             View Case Study <ArrowUpRight size={16} />
-          </a>
-          <a href="/work/fiitco" className="secondaryAction">
+          </Link>
+          <Link href="/work/fiitco" className="secondaryAction">
             Project Details
-          </a>
+          </Link>
         </div>
 
         <div className="keyHighlights">

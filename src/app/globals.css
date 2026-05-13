@@ -4935,3 +4935,10 @@ button:focus-visible {
   color: var(--text-dim);
   z-index: 1;
 }
+
+.form-input-error {
+  border-color: #f87171 !important;
+}
+.form-input-error:focus {
+  outline-color: #f87171;
+}
