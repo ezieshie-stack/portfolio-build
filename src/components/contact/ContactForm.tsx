@@ -48,7 +48,7 @@ export function ContactForm() {
             className="form-input resize-y"
           />
           <button type="submit" className="btn-pill btn-primary">
-            Send Message <span aria-hidden className="ml-1">↗</span>
+            Send Message
           </button>
         </form>
       )}

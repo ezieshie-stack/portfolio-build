@@ -72,7 +72,6 @@ export function Nav() {
               style={{ background: "rgb(124, 58, 237)" }}
             >
               {site.cta.label}
-              <span aria-hidden>↗</span>
             </Link>
 
             <button

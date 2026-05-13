@@ -19,7 +19,7 @@ export default function NotFound() {
             {content.description}
           </p>
           <Link href={content.cta.href} className="btn-pill btn-primary">
-            {content.cta.label} <span aria-hidden className="ml-1">↗</span>
+            {content.cta.label}
           </Link>
         </div>
 

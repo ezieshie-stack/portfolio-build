@@ -67,7 +67,7 @@ export default async function WorkPage() {
 
           <div className="flex flex-wrap gap-3 mb-7">
             <Link href={featured.primaryCta.href} className="btn-primary inline-flex">
-              {featured.primaryCta.label} ↗
+              {featured.primaryCta.label}
             </Link>
             <Link href={featured.secondaryCta.href} className="btn-secondary inline-flex">
               {featured.secondaryCta.label}
@@ -83,20 +83,7 @@ export default async function WorkPage() {
               className="work-featured-image"
               unoptimized={featuredImage.imageUrl.startsWith("http")}
             />
-          ) : (
-            <div className="work-dashboard-preview">
-              <div className="work-dash-sidebar" />
-              <div className="work-dash-content">
-                <div className="work-dash-row">
-                  <div /><div /><div /><div />
-                </div>
-                <div className="work-dash-chart" />
-                <div className="work-dash-row small">
-                  <div /><div /><div />
-                </div>
-              </div>
-            </div>
-          )}
+          ) : null}
 
           <div className="work-featured-metrics">
             {featured.metrics.map((m) => {

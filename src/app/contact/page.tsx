@@ -53,7 +53,7 @@ export default function ContactPage() {
         <div className="flex flex-wrap gap-3">
           {contact.altCtas.map((cta) => (
             <Link key={cta.label} href={cta.href} className="btn-pill">
-              {cta.label} <span aria-hidden className="ml-1">↗</span>
+              {cta.label}
             </Link>
           ))}
         </div>

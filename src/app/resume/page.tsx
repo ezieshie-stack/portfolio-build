@@ -27,10 +27,10 @@ export default function ResumePage() {
           </div>
           <div className="flex flex-wrap gap-3 mt-5">
             <Link href={resume.downloadCta.href} className="btn-pill btn-primary">
-              {resume.downloadCta.label} <span aria-hidden className="ml-1">↗</span>
+              {resume.downloadCta.label}
             </Link>
             <Link href={resume.viewCta.href} className="btn-pill">
-              {resume.viewCta.label} <span aria-hidden className="ml-1">↗</span>
+              {resume.viewCta.label}
             </Link>
           </div>
         </Reveal>

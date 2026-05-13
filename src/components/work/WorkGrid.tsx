@@ -96,7 +96,7 @@ export function WorkGrid({ filters, cards }: Props) {
                 href={card.href}
                 className="text-[#c4b5fd] text-sm self-end mt-6 hover:text-white transition-colors"
               >
-                View Project ↗
+                View Project
               </Link>
             </article>
           );
