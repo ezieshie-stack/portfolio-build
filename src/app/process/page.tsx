@@ -1,5 +1,6 @@
 import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
+import { OpControlSystem } from "@/components/process/OpControlSystem";
 import { processPage } from "@/lib/content";
 
 export const metadata = { title: "Process — Portfolio" };
@@ -61,68 +62,7 @@ export default function ProcessPage() {
         </div>
 
         {/* Operational control system visualization */}
-        <div className="opControlSystem">
-          <header className="opControlHead">
-            <span className="opEyebrow">OPERATIONAL CONTROL SYSTEM</span>
-            <span className="opStatus">
-              <span className="opStatusDot" aria-hidden /> Live
-            </span>
-          </header>
-
-          <div className="opControlBody">
-            <ol className="opStepRail">
-              <li className="opStep">
-                <span>01</span>
-                <strong>Analyze</strong>
-              </li>
-              <li className="opStep is-active">
-                <span>02</span>
-                <strong>Design</strong>
-              </li>
-              <li className="opStep">
-                <span>03</span>
-                <strong>Deploy</strong>
-              </li>
-              <li className="opStep">
-                <span>04</span>
-                <strong>Improve</strong>
-              </li>
-            </ol>
-
-            <div className="opWorkflow">
-              <span className="opWorkflowTrack" aria-hidden />
-              <span className="opWorkflowPulse" aria-hidden />
-
-              <div className="opEvent">
-                <p className="opEventLabel">Intake mapped</p>
-                <p className="opEventMeta">Requirements captured</p>
-              </div>
-              <div className="opEvent">
-                <p className="opEventLabel">Workflow built</p>
-                <p className="opEventMeta">Process architecture set</p>
-              </div>
-              <div className="opEvent">
-                <p className="opEventLabel">System launched</p>
-                <p className="opEventMeta">Feedback loop active</p>
-              </div>
-            </div>
-
-            <aside className="opMetricRail">
-              <div className="opMetric">
-                <span>Visibility</span>
-                <strong>92%</strong>
-              </div>
-              <div className="opMetric">
-                <span>Efficiency</span>
-                <strong>4.2×</strong>
-              </div>
-              <div className="opMetric">
-                <span>Adoption</span>
-                <strong>100%</strong>
-              </div>
-            </aside>
-          </div>
-        </div>
+        <OpControlSystem />
       </Reveal>
 
       {/* ── EXECUTION MODEL ──────────────────────────── */}

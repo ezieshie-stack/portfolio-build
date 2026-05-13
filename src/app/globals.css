@@ -3503,3 +3503,43 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── INTERACTIVE STATE OVERRIDES (Process + Insights) ── */
+
+/* Process step rail is now a button-based tablist */
+.opStep {
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.opStep:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  color: white;
+}
+
+.opStep:focus-visible {
+  outline: 2px solid rgba(196, 181, 253, 0.7);
+  outline-offset: 2px;
+}
+
+/* Fade-in when the workflow panel swaps content */
+.opWorkflow,
+.libFeatured,
+.libCards {
+  animation: panelFade 320ms ease-out;
+}
+
+@keyframes panelFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
