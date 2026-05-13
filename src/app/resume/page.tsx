@@ -16,7 +16,7 @@ export default async function ResumePage() {
     <PageShell>
       <Reveal as="section" className="pb-12">
         <SectionTag>{resume.tag}</SectionTag>
-        <h1 className="text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6 whitespace-pre-line">
+        <h1 className="text-[length:var(--text-4xl)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6 whitespace-pre-line">
           {resume.title}
         </h1>
         <p className="text-[color:var(--text-dim)] max-w-prose mb-10">

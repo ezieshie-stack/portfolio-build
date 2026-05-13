@@ -39,7 +39,7 @@ export function StepWheel({ steps }: { steps: readonly Step[] }) {
           boxShadow: "0 0 60px rgba(139, 92, 246, 0.3)",
         }}
       >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--text-dim)] mb-1">
+        <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)] mb-1">
           Process
         </span>
         <span className="text-base font-semibold text-white">5 Steps</span>
@@ -51,7 +51,7 @@ export function StepWheel({ steps }: { steps: readonly Step[] }) {
           className="absolute -translate-x-1/2 -translate-y-1/2 w-[20%] aspect-square rounded-full flex flex-col items-center justify-center text-center glass-card"
           style={{ left: `${pos.x}%`, top: `${pos.y}%`, padding: 0 }}
         >
-          <span className="text-[10px] text-[color:var(--primary)] font-mono mb-1">
+          <span className="text-xs text-[color:var(--primary)] font-mono mb-1">
             {steps[i].number}
           </span>
           <span className="text-xs font-semibold leading-tight px-1">

@@ -41,17 +41,17 @@ export function InsightsGrid({ filters, articles }: Props) {
             className="insight-card glass-card p-7 md:p-8 flex flex-col justify-between min-h-[320px] group"
           >
             <div>
-              <span className="text-[12px] tracking-[0.18em] uppercase text-[#a78bfa] font-semibold">
+              <span className="text-xs tracking-[0.18em] uppercase text-[#a78bfa] font-semibold">
                 {a.category}
               </span>
-              <h3 className="text-[26px] font-bold leading-[1.1] tracking-[-0.04em] my-5 group-hover:text-[color:var(--primary)] transition-colors">
+              <h3 className="text-2xl font-bold leading-[1.1] tracking-[-0.04em] my-5 group-hover:text-[color:var(--primary)] transition-colors">
                 {a.title}
               </h3>
-              <p className="text-[color:var(--text-dim)] text-[15px] leading-relaxed">
+              <p className="text-[color:var(--text-dim)] text-base leading-relaxed">
                 {a.excerpt}
               </p>
             </div>
-            <div className="mt-8 flex justify-between text-[13px] text-white/40">
+            <div className="mt-8 flex justify-between text-sm text-white/40">
               <span>{a.date}</span>
               <span>{a.readTime}</span>
             </div>

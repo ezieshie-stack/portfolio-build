@@ -37,7 +37,7 @@ export function Hero({
 
       <div className="hero-text relative z-[20]">
         <div
-          className="inline-flex rounded-full border px-4 py-2 text-[11px] tracking-[0.2em] uppercase mb-7"
+          className="inline-flex rounded-full border px-4 py-2 text-xs tracking-[0.2em] uppercase mb-7"
           style={{
             borderColor: "rgba(139, 92, 246, 0.25)",
             background: "rgba(139, 92, 246, 0.08)",

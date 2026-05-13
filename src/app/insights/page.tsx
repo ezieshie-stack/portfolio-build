@@ -35,7 +35,7 @@ export default async function InsightsPage() {
       {/* ── HERO ─────────────────────────────────────── */}
       <Reveal as="section" className="pb-24 max-w-[900px]">
         <SectionTag>{insights.tag}</SectionTag>
-        <h1 className="text-[clamp(52px,7vw,104px)] font-extrabold leading-[0.95] tracking-[-0.06em] my-6">
+        <h1 className="text-[length:var(--text-display)] font-extrabold leading-[0.95] tracking-[-0.06em] my-6">
           {insights.title}
         </h1>
         <p className="text-[color:var(--text-dim)] text-lg leading-relaxed max-w-[680px]">
@@ -52,7 +52,7 @@ export default async function InsightsPage() {
           <span className="filter-pill" data-active="true">
             {featured.pill}
           </span>
-          <h2 className="text-[clamp(34px,4vw,64px)] font-extrabold leading-none tracking-[-0.05em] mt-6 mb-6">
+          <h2 className="text-[length:var(--text-4xl)] font-extrabold leading-none tracking-[-0.05em] mt-6 mb-6">
             {featured.title}
           </h2>
           <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[560px] mb-8">

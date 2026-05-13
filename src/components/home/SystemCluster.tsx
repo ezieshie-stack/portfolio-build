@@ -70,7 +70,7 @@ function SystemCard({
         >
           <Icon className="text-[color:var(--primary)]" size={16} />
         </span>
-        <span className="text-[11px] font-medium text-white leading-tight">
+        <span className="text-xs font-medium text-white leading-tight">
           {label}
         </span>
       </div>
@@ -155,7 +155,7 @@ export function SystemCluster({
           boxShadow: "0 14px 36px rgba(0, 0, 0, 0.5)",
         }}
       >
-        <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
+        <div className="text-xs uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
           {metricCard.label}
         </div>
         <div className="flex items-end justify-between gap-4">
@@ -163,7 +163,7 @@ export function SystemCluster({
             <div className="gradient-text text-3xl font-extrabold tracking-tight">
               {metricCard.value}
             </div>
-            <div className="text-[11px] text-[color:var(--text-dim)] mt-1">
+            <div className="text-xs text-[color:var(--text-dim)] mt-1">
               {metricCard.sublabel}
             </div>
           </div>

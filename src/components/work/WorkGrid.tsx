@@ -75,13 +75,13 @@ export function WorkGrid({ filters, cards }: Props) {
                 <div className="work-project-icon">
                   <Icon size={22} />
                 </div>
-                <span className="text-[11px] tracking-[0.2em] uppercase text-[#a78bfa] font-semibold">
+                <span className="text-xs tracking-[0.2em] uppercase text-[#a78bfa] font-semibold">
                   {card.category}
                 </span>
-                <h3 className="text-[24px] font-bold leading-[1.15] tracking-[-0.04em] my-3">
+                <h3 className="text-2xl font-bold leading-[1.15] tracking-[-0.04em] my-3">
                   {card.title}
                 </h3>
-                <p className="text-[color:var(--text-dim)] text-[15px] leading-[1.65]">
+                <p className="text-[color:var(--text-dim)] text-base leading-[1.65]">
                   {card.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-5">

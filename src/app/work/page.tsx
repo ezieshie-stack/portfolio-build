@@ -47,17 +47,17 @@ export default async function WorkPage() {
       >
         <div>
           <SectionTag>{work.tag}</SectionTag>
-          <h1 className="text-[clamp(42px,5.5vw,76px)] font-extrabold leading-[0.98] tracking-[-0.06em] my-6">
+          <h1 className="text-[length:var(--text-4xl)] font-extrabold leading-[0.98] tracking-[-0.06em] my-6">
             {work.title}
           </h1>
-          <p className="text-[color:var(--text-dim)] text-[17px] leading-[1.8] max-w-[520px]">
+          <p className="text-[color:var(--text-dim)] text-lg leading-[1.8] max-w-[520px]">
             {work.intro}
           </p>
         </div>
 
         <div className="work-featured-card p-8 md:p-9">
           <span className="work-featured-pill">{featured.pill}</span>
-          <h2 className="text-[clamp(28px,3vw,42px)] font-bold leading-[1.05] tracking-[-0.04em] mt-5 mb-2">
+          <h2 className="text-[length:var(--text-3xl)] font-bold leading-[1.05] tracking-[-0.04em] mt-5 mb-2">
             {featured.title}
           </h2>
           <p className="text-[#c4b5fd] text-sm mb-6">{featured.meta}</p>
@@ -108,7 +108,7 @@ export default async function WorkPage() {
       {/* ── PHILOSOPHY FLOW ─────────────────────────── */}
       <Reveal as="section" className="work-philosophy-card p-8 md:p-10">
         <SectionTag>{work.philosophyTag}</SectionTag>
-        <h2 className="text-[clamp(26px,3vw,36px)] font-bold tracking-[-0.04em] mb-9 mt-3">
+        <h2 className="text-[length:var(--text-3xl)] font-bold tracking-[-0.04em] mb-9 mt-3">
           {work.philosophyHeading}
         </h2>
 

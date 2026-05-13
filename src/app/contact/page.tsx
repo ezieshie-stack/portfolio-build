@@ -11,7 +11,7 @@ export default function ContactPage() {
     <PageShell>
       <Reveal as="section" className="pb-12">
         <SectionTag>{contact.tag}</SectionTag>
-        <h1 className="text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6">
+        <h1 className="text-[length:var(--text-4xl)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6">
           {contact.title}
         </h1>
         <p className="text-[color:var(--text-dim)] max-w-prose mb-12">
@@ -24,7 +24,7 @@ export default function ContactPage() {
           <ul className="grid gap-4">
             {contact.channels.map((c) => (
               <li key={c.label} className="glass-card p-6">
-                <div className="text-[10px] uppercase tracking-[0.18em] text-[color:var(--primary)] mb-2">
+                <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--primary)] mb-2">
                   {c.label}
                 </div>
                 {c.href ? (

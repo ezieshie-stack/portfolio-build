@@ -42,13 +42,13 @@ export function Nav() {
               <span className="text-sm font-semibold text-white truncate">
                 {site.brand.name}
               </span>
-              <span className="text-[11px] text-[color:var(--text-dim)] truncate">
+              <span className="text-xs text-[color:var(--text-dim)] truncate">
                 {site.brand.role}
               </span>
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 text-[13px]">
+          <nav className="hidden lg:flex items-center gap-8 text-sm">
             {site.navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -68,7 +68,7 @@ export function Nav() {
           <div className="flex items-center gap-3">
             <Link
               href={site.cta.href}
-              className="inline-flex items-center gap-1.5 rounded-2xl px-4 py-2.5 lg:px-5 lg:py-3 text-[12px] lg:text-[13px] font-medium text-white transition shrink-0"
+              className="inline-flex items-center gap-1.5 rounded-2xl px-4 py-2.5 lg:px-5 lg:py-3 text-xs lg:text-sm font-medium text-white transition shrink-0"
               style={{ background: "rgb(124, 58, 237)" }}
             >
               {site.cta.label}
@@ -107,7 +107,7 @@ export function Nav() {
             aria-modal="true"
           >
             <div className="mobile-drawer__header">
-              <span className="text-[11px] uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
+              <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
                 Menu
               </span>
               <button

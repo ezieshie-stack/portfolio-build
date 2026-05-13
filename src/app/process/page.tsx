@@ -49,7 +49,7 @@ export default async function ProcessPage() {
       >
         <div>
           <SectionTag>{processPage.hero.eyebrow}</SectionTag>
-          <h1 className="text-[clamp(48px,8vw,108px)] font-extrabold leading-[0.9] tracking-[-0.05em] mb-8">
+          <h1 className="text-[length:var(--text-display)] font-extrabold leading-[0.9] tracking-[-0.05em] mb-8">
             Systems designed for{" "}
             <span
               style={{
@@ -82,7 +82,7 @@ export default async function ProcessPage() {
             >
               <div className="flex items-start">
                 <span
-                  className="text-[56px] md:text-[64px] font-extrabold leading-none tracking-[-0.05em]"
+                  className="text-[length:var(--text-display)] md:text-[length:var(--text-display)] font-extrabold leading-none tracking-[-0.05em]"
                   style={{ color: "rgba(139,92,246,0.95)" }}
                 >
                   {step.number}
@@ -92,10 +92,10 @@ export default async function ProcessPage() {
               <div className="hidden md:block w-px self-stretch bg-white/8" />
 
               <div>
-                <p className="text-[11px] tracking-[0.22em] font-semibold text-[#c084fc] mb-3">
+                <p className="text-xs tracking-[0.22em] font-semibold text-[#c084fc] mb-3">
                   {step.subtitle.toUpperCase()}
                 </p>
-                <h2 className="text-2xl md:text-[28px] font-bold tracking-[-0.02em] mb-4">
+                <h2 className="text-2xl md:text-2xl font-bold tracking-[-0.02em] mb-4">
                   {step.title}
                 </h2>
                 <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[720px] mb-6">
@@ -105,7 +105,7 @@ export default async function ProcessPage() {
                   {step.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-4 py-2 rounded-full border border-white/8 bg-white/[0.03] text-[13px] text-white/70"
+                      className="px-4 py-2 rounded-full border border-white/8 bg-white/[0.03] text-sm text-white/70"
                     >
                       {tag}
                     </span>
@@ -125,7 +125,7 @@ export default async function ProcessPage() {
             <article key={metric.label} className="glass-card p-8 flex flex-col gap-5">
               <div className="flex items-start justify-between gap-4">
                 <span
-                  className="text-[56px] font-extrabold leading-none tracking-[-0.05em]"
+                  className="text-[length:var(--text-display)] font-extrabold leading-none tracking-[-0.05em]"
                   style={{
                     background: "linear-gradient(135deg, #c084fc, #8B5CF6)",
                     WebkitBackgroundClip: "text",
@@ -138,7 +138,7 @@ export default async function ProcessPage() {
                 <MetricIcon name={metric.icon} />
               </div>
               <div className="h-px bg-white/8" />
-              <span className="text-[12px] tracking-[0.2em] text-white/60 uppercase">
+              <span className="text-xs tracking-[0.2em] text-white/60 uppercase">
                 {metric.label}
               </span>
             </article>
