@@ -14,10 +14,11 @@ export const site = {
   ],
   cta: { label: "Let's Connect", href: "/contact" },
   footer: {
-    text: "© [YEAR] [NAME PLACEHOLDER]. All rights reserved.",
+    text: "© [YEAR] David Ezieshi. All rights reserved.",
     links: [
-      { label: "LinkedIn", href: "#" },
-      { label: "Email", href: "mailto:placeholder@example.com" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/david-ezieshi/" },
+      { label: "Email", href: "mailto:Ezieshie@gmail.com" },
+      { label: "GitHub", href: "https://github.com/ezieshie-stack" },
     ],
   },
 } as const;
@@ -485,15 +486,15 @@ export const contact = {
   intro:
     "[Contact intro paragraph placeholder. One or two sentences describing availability and what you're open to.]",
   channels: [
-    { label: "Email", value: "[your-email@example.com]", href: "mailto:placeholder@example.com" },
-    { label: "LinkedIn", value: "[linkedin.com/in/your-handle]", href: "#" },
-    { label: "Location", value: "[City, Region, Country]" },
+    { label: "Email", value: "Ezieshie@gmail.com", href: "mailto:Ezieshie@gmail.com" },
+    { label: "LinkedIn", value: "linkedin.com/in/david-ezieshi", href: "https://www.linkedin.com/in/david-ezieshi/" },
+    { label: "GitHub", value: "github.com/ezieshie-stack", href: "https://github.com/ezieshie-stack" },
     { label: "Availability", value: "[Availability statement placeholder]" },
   ],
   formTitle: "Send a Message",
   altCtas: [
-    { label: "View My LinkedIn", href: "#" },
-    { label: "Email Me", href: "mailto:placeholder@example.com" },
+    { label: "View My LinkedIn", href: "https://www.linkedin.com/in/david-ezieshi/" },
+    { label: "Email Me", href: "mailto:Ezieshie@gmail.com" },
   ],
 };
 

@@ -80,16 +80,16 @@ export function PortfolioFooter() {
 
         <div className="footerColumn">
           <h4>Resources</h4>
-          <a href="/resume.pdf">
+          <a href="/resume">
             <FileText size={16} /> Resume
           </a>
-          <a href="https://linkedin.com/in/YOUR-LINKEDIN">
+          <a href="https://www.linkedin.com/in/david-ezieshi/" target="_blank" rel="noreferrer">
             <LinkedInIcon size={16} /> LinkedIn
           </a>
-          <a href="mailto:YOUR-EMAIL">
+          <a href="mailto:Ezieshie@gmail.com">
             <Mail size={16} /> Email
           </a>
-          <a href="https://github.com/YOUR-GITHUB">
+          <a href="https://github.com/ezieshie-stack" target="_blank" rel="noreferrer">
             <GitHubIcon size={16} /> GitHub
           </a>
         </div>

@@ -32,14 +32,14 @@ export function HeroSocialLinks() {
   const links = [
     {
       label: "LinkedIn",
-      href: "https://linkedin.com/in/YOUR-LINKEDIN",
+      href: "https://www.linkedin.com/in/david-ezieshi/",
       icon: LinkedInIcon,
     },
-    { label: "Email", href: "mailto:YOUR-EMAIL", icon: Mail },
-    { label: "Resume", href: "/resume.pdf", icon: FileText },
+    { label: "Email", href: "mailto:Ezieshie@gmail.com", icon: Mail },
+    { label: "Resume", href: "/resume", icon: FileText },
     {
       label: "GitHub",
-      href: "https://github.com/YOUR-GITHUB",
+      href: "https://github.com/ezieshie-stack",
       icon: GitHubIcon,
     },
   ];
