@@ -67,3 +67,10 @@ export const upsert = mutation({
     return await ctx.db.insert("articles", { ...args, publishedAt });
   },
 });
+
+export const remove = mutation({
+  args: { id: v.id("articles") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
+  },
+});
