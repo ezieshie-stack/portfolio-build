@@ -80,13 +80,28 @@ Each phase is a separate PR.
 
 | # | Phase | Status |
 |---|---|---|
-| 1 | Define tokens, audit, no visual change | **this PR** |
-| 2 | Copy + non-functional icon cleanup | pending |
-| 3 | Replace border-radius literals with tokens | pending |
+| 1 | Define tokens, audit, no visual change | done |
+| 2 | Copy + non-functional icon cleanup | done |
+| 3 | Replace border-radius literals with tokens | done |
 | 4 | Replace hover lift / glow / transition values with tokens | pending |
 | 5 | Typography normalization (replace clamp() literals + weight pairings) | pending |
 | 6 | Replace ad-hoc easing curves + durations | pending |
 | 7 | UX: loading skeletons + button progress indicators | pending |
+
+### Radius mapping applied (Phase 3)
+
+| Old literal(s) | New token |
+|---|---|
+| 6px, 7px, 8px, 10px, 12px (in CSS), `rounded-xl` (Tailwind 12px), `9px` inline | `var(--radius-sm)` = 8px |
+| 14px, 16px, 18px, 20px, `rounded-[20px]` arbitrary | `var(--radius-md)` = 16px |
+| 24px, 28px, 32px | `var(--radius-lg)` = 24px |
+| 100px, 999px | `var(--radius-pill)` |
+
+Kept as literals (intentional): `0`, `2px` (2 uses — tiny inset accents),
+`4px` (1 use), `50%` (5 uses — circular avatars), asymmetric
+`36px 36px 0 0` and `0 0 36px 36px` (decorative nav corner).
+
+Net: 21 distinct values → 4 tokens + 4 intentional literals (down from 21).
 
 Each subsequent PR replaces literals with the relevant tokens. Run
 `git grep` against the audit categories to verify zero remaining

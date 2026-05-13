@@ -128,7 +128,7 @@ export function WorkflowDiagramSection() {
             return (
               <div
                 key={step.label}
-                className={`relative rounded-[20px] border ${colStartClass[step.col]} ${rowStartClass[step.row]}`}
+                className={`relative rounded-2xl border ${colStartClass[step.col]} ${rowStartClass[step.row]}`}
                 style={{
                   minHeight: "112px",
                   padding: "18px 20px",
@@ -144,7 +144,7 @@ export function WorkflowDiagramSection() {
                     style={{
                       width: "30px",
                       height: "30px",
-                      borderRadius: "9px",
+                      borderRadius: "var(--radius-sm)",
                       background: "rgba(139,92,246,0.16)",
                       border: "1px solid rgba(139,92,246,0.35)",
                       color: "rgb(167, 139, 250)",

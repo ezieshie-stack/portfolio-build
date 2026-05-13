@@ -30,7 +30,7 @@ export function Nav() {
         <div className="mx-auto max-w-[1800px] flex items-center justify-between gap-4 px-5 md:px-8 lg:px-12 py-4 lg:py-5">
           <Link href="/" className="flex items-center gap-3 min-w-0">
             <span
-              className="flex h-11 w-11 items-center justify-center rounded-xl border font-bold text-sm shrink-0"
+              className="flex h-11 w-11 items-center justify-center rounded-2xl border font-bold text-sm shrink-0"
               style={{
                 borderColor: "rgba(139, 92, 246, 0.4)",
                 background: "rgba(139, 92, 246, 0.12)",
@@ -68,7 +68,7 @@ export function Nav() {
           <div className="flex items-center gap-3">
             <Link
               href={site.cta.href}
-              className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2.5 lg:px-5 lg:py-3 text-[12px] lg:text-[13px] font-medium text-white transition shrink-0"
+              className="inline-flex items-center gap-1.5 rounded-2xl px-4 py-2.5 lg:px-5 lg:py-3 text-[12px] lg:text-[13px] font-medium text-white transition shrink-0"
               style={{ background: "rgb(124, 58, 237)" }}
             >
               {site.cta.label}
@@ -79,7 +79,7 @@ export function Nav() {
               aria-label="Open menu"
               aria-expanded={open}
               onClick={() => setOpen(true)}
-              className="lg:hidden flex items-center justify-center rounded-xl border shrink-0"
+              className="lg:hidden flex items-center justify-center rounded-2xl border shrink-0"
               style={{
                 width: 44,
                 height: 44,
@@ -114,7 +114,7 @@ export function Nav() {
                 type="button"
                 aria-label="Close menu"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center rounded-xl border"
+                className="flex items-center justify-center rounded-2xl border"
                 style={{
                   width: 40,
                   height: 40,
