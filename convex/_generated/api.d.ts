@@ -1,53 +1,51 @@
 /* eslint-disable */
 /**
- * Generated `api` utility.
+ * Vendored Convex API types — public read surface only.
  *
- * THIS CODE IS AUTOMATICALLY GENERATED.
+ * The admin repo owns the full schema and regenerates this from
+ * `npx convex dev`. Here we hand-curate the subset of queries this
+ * website actually calls, so it can keep typed `fetchQuery` calls
+ * without dragging in admin-only handlers.
  *
- * To regenerate, run `npx convex dev`.
- * @module
+ * When the admin repo adds or changes a public query, copy the
+ * matching signature into this file.
  */
 
-import type * as articles from "../articles.js";
-import type * as content from "../content.js";
-import type * as images from "../images.js";
+import type { FunctionReference } from "convex/server";
 
-import type {
-  ApiFromModules,
-  FilterApi,
-  FunctionReference,
-} from "convex/server";
+type ArticleDoc = {
+  slug: string;
+  title: string;
+  subtitle?: string;
+  category: string;
+  excerpt: string;
+  body: string;
+  date: string;
+  readTime: string;
+  published: boolean;
+  featured?: boolean;
+  pills?: string[];
+  publishedAt?: number;
+};
 
-declare const fullApi: ApiFromModules<{
-  articles: typeof articles;
-  content: typeof content;
-  images: typeof images;
-}>;
+type ImageDoc = {
+  imageUrl?: string;
+  videoUrl?: string;
+  altText: string;
+};
 
-/**
- * A utility for referencing Convex functions in your app's public API.
- *
- * Usage:
- * ```js
- * const myFunctionReference = api.myModule.myFunction;
- * ```
- */
-export declare const api: FilterApi<
-  typeof fullApi,
-  FunctionReference<any, "public">
->;
+export declare const api: {
+  articles: {
+    getBySlug: FunctionReference<"query", "public", { slug: string }, ArticleDoc | null>;
+    list: FunctionReference<"query", "public", Record<string, never>, ArticleDoc[]>;
+  };
+  content: {
+    get: FunctionReference<"query", "public", { section: string }, unknown>;
+  };
+  images: {
+    getBySlot: FunctionReference<"query", "public", { slot: string }, ImageDoc | null>;
+  };
+};
 
-/**
- * A utility for referencing Convex functions in your app's internal API.
- *
- * Usage:
- * ```js
- * const myFunctionReference = internal.myModule.myFunction;
- * ```
- */
-export declare const internal: FilterApi<
-  typeof fullApi,
-  FunctionReference<any, "internal">
->;
-
-export declare const components: {};
+export declare const internal: never;
+export declare const components: Record<string, never>;

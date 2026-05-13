@@ -4,7 +4,6 @@ import "./globals.css";
 import { BackgroundCanvas } from "@/components/BackgroundCanvas";
 import { Nav } from "@/components/Nav";
 import { PortfolioFooter } from "@/components/PortfolioFooter";
-import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,13 +39,11 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <ConvexClientProvider>
-          <BackgroundCanvas />
-          <div className="orb" aria-hidden />
-          <Nav />
-          <main className="flex-1">{children}</main>
-          <PortfolioFooter />
-        </ConvexClientProvider>
+        <BackgroundCanvas />
+        <div className="orb" aria-hidden />
+        <Nav />
+        <main className="flex-1">{children}</main>
+        <PortfolioFooter />
       </body>
     </html>
   );
