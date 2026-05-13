@@ -108,7 +108,7 @@ body {
 }
 
 .glass-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(var(--lift-md));
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
@@ -160,8 +160,8 @@ body {
 }
 
 .btn-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--primary-glow);
+  transform: translateY(var(--lift-sm));
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   border-color: var(--primary);
 }
 
@@ -1790,7 +1790,7 @@ button,
 a:hover,
 button:hover,
 .clickable:hover {
-  transform: translateY(-2px);
+  transform: translateY(var(--lift-sm));
 }
 
 a:active,
@@ -1816,7 +1816,7 @@ button:focus-visible {
 .toolCard:hover,
 .capabilityCard:hover,
 .exploringCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(var(--lift-md));
   border-color: rgba(167, 139, 250, 0.55);
   background: rgba(139, 92, 246, 0.09);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
@@ -3018,7 +3018,7 @@ button:focus-visible {
 }
 
 .processNode:hover {
-  transform: translateY(-6px);
+  transform: translateY(var(--lift-md));
   border-color: rgba(196, 181, 253, 0.85);
   box-shadow: 0 0 60px rgba(139, 92, 246, 0.38);
 }
@@ -4840,8 +4840,8 @@ button:focus-visible {
 }
 
 .resume-modal-download:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px var(--primary-glow);
+  transform: translateY(var(--lift-sm));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .resume-modal-close {

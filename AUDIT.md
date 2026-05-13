@@ -83,7 +83,7 @@ Each phase is a separate PR.
 | 1 | Define tokens, audit, no visual change | done |
 | 2 | Copy + non-functional icon cleanup | done |
 | 3 | Replace border-radius literals with tokens | done |
-| 4 | Replace hover lift / glow / transition values with tokens | pending |
+| 4 | Replace hover lift / glow / transition values with tokens | done |
 | 5 | Typography normalization (replace clamp() literals + weight pairings) | pending |
 | 6 | Replace ad-hoc easing curves + durations | pending |
 | 7 | UX: loading skeletons + button progress indicators | pending |
@@ -102,6 +102,29 @@ Kept as literals (intentional): `0`, `2px` (2 uses — tiny inset accents),
 `36px 36px 0 0` and `0 0 36px 36px` (decorative nav corner).
 
 Net: 21 distinct values → 4 tokens + 4 intentional literals (down from 21).
+
+### Hover lift mapping applied (Phase 4)
+
+| Old translateY | New token |
+|---|---|
+| -1px, -2px | `var(--lift-sm)` = -2px |
+| -4px, -6px, -8px | `var(--lift-md)` = -4px (caps over-lifts per the 4px ceiling) |
+
+Kept unchanged: `translateY(-50%)` (vertical centering), `translateY(0)`
+(reset states), `translateY(30px)` (Reveal entry), `translateY(6px)`
+(keyframe initial), and compound `translateY(...) scale(...)` expressions.
+
+### Glow removal applied (Phase 4)
+
+Two generic purple-glow hover shadows replaced with neutral elevation
+shadows:
+- `.btn-pill:hover` was `box-shadow: 0 8px 25px var(--primary-glow)`
+  → `0 6px 18px rgba(0, 0, 0, 0.35)`
+- `.resume-modal-download:hover` was `0 6px 18px var(--primary-glow)`
+  → `0 4px 12px rgba(0, 0, 0, 0.3)`
+
+Kept: `.status-dot` uses `var(--primary-glow)` as its decorative pulse,
+not a hover effect.
 
 Each subsequent PR replaces literals with the relevant tokens. Run
 `git grep` against the audit categories to verify zero remaining
