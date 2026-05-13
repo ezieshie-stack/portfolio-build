@@ -3,12 +3,30 @@ import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
 import { InsightLibrary } from "@/components/insights/InsightLibrary";
 import { InsightsGrid } from "@/components/insights/InsightsGrid";
+import { fetchPublishedArticles } from "@/lib/cms";
 import { insights } from "@/lib/content";
+import type { Article } from "@/lib/content";
 
 export const metadata = { title: "Insights — Portfolio" };
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
   const { featured } = insights;
+
+  // Try Convex first; fall back to static articles in lib/content.ts.
+  // If Convex returns an empty list (set up but no articles yet), still
+  // show the static placeholders so the page never feels broken.
+  const convexArticles = await fetchPublishedArticles();
+  const articles: Article[] =
+    convexArticles.length > 0
+      ? convexArticles.map((a) => ({
+          slug: a.slug,
+          title: a.title,
+          excerpt: a.excerpt,
+          category: a.category,
+          date: a.date,
+          readTime: a.readTime,
+        }))
+      : insights.articles;
 
   return (
     <PageShell>
@@ -48,7 +66,7 @@ export default function InsightsPage() {
 
       {/* ── CATEGORIES + ARTICLE GRID ────────────────── */}
       <Reveal as="section">
-        <InsightsGrid filters={[...insights.filters]} articles={insights.articles} />
+        <InsightsGrid filters={[...insights.filters]} articles={articles} />
       </Reveal>
     </PageShell>
   );

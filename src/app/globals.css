@@ -3543,3 +3543,123 @@ button:focus-visible {
     transform: translateY(0);
   }
 }
+
+/* ── ARTICLE BODY (markdown rendering) ──────────────── */
+
+.article-body {
+  font-size: 17px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.article-body > * + * {
+  margin-top: 1.4em;
+}
+
+.article-body h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: white;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+
+.article-body h3 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: white;
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+}
+
+.article-body p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.article-body strong {
+  color: white;
+  font-weight: 700;
+}
+
+.article-body em {
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+}
+
+.article-body a {
+  color: #c4b5fd;
+  text-decoration: underline;
+  text-decoration-color: rgba(196, 181, 253, 0.4);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.article-body a:hover {
+  color: white;
+  text-decoration-color: white;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.article-body li {
+  margin-top: 0.5em;
+  line-height: 1.7;
+}
+
+.article-body li::marker {
+  color: #a78bfa;
+}
+
+.article-body blockquote {
+  border-left: 3px solid rgba(168, 139, 250, 0.5);
+  padding-left: 1.2em;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+}
+
+.article-body code {
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  color: #c4b5fd;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 0.9em;
+}
+
+.article-body pre {
+  background: rgba(8, 8, 14, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.article-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 2.5em 0;
+}
+
+.article-body img {
+  max-width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
