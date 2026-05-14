@@ -71,9 +71,14 @@ export async function submitContact(
 
   try {
     const resend = new Resend(apiKey);
+    // NOTE: Resend's test domain (onboarding@resend.dev) only delivers
+    // when `to` matches the Resend signup email exactly (case-sensitive).
+    // Lowercased here to match the signup. Gmail itself ignores case and
+    // delivers either form to the same inbox. Once a custom domain is
+    // verified at resend.com/domains, this restriction goes away.
     const result = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["Ezieshie@gmail.com"],
+      to: ["ezieshie@gmail.com"],
       replyTo: email,
       subject: subject?.length
         ? `[Portfolio] ${subject}`
