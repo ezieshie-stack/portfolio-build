@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
+import { site } from "@/lib/content";
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
   return (
@@ -53,9 +54,9 @@ export function PortfolioFooter() {
               Let’s Connect <ArrowUpRight size={18} />
             </a>
 
-            <a href="/resume.pdf" className="footerSecondaryBtn">
+            <Link href="/resume" className="footerSecondaryBtn">
               View Resume
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -73,10 +74,11 @@ export function PortfolioFooter() {
 
         <div className="footerColumn">
           <h4>Navigation</h4>
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/work">Projects</Link>
-          <Link href="/contact">Contact</Link>
+          {site.navLinks.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         <div className="footerColumn">
