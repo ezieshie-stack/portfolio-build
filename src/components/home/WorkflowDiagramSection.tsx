@@ -1,100 +1,47 @@
 import {
-  BarChart3,
   ChevronDown,
-  ChevronLeft,
   ChevronRight,
-  Cog,
-  FileText,
-  Gauge,
-  Inbox,
-  RefreshCw,
-  ShieldCheck,
-  Workflow,
+  Ear,
+  Hammer,
+  Map,
+  Search,
+  Send,
   type LucideIcon,
 } from "lucide-react";
 
-type Direction = "right" | "down" | "left" | null;
-
 type Step = {
   label: string;
+  body: string;
   icon: LucideIcon;
-  next: Direction;
-  /** Column in the lg+ snake layout. 1-based. */
-  col: 1 | 2 | 3 | 4;
-  /** Row in the lg+ snake layout. 1-based. */
-  row: 1 | 2;
 };
 
 const steps: Step[] = [
-  { label: "Request Intake", icon: Inbox, next: "right", col: 1, row: 1 },
-  { label: "Workflow Assignment", icon: Workflow, next: "right", col: 2, row: 1 },
-  { label: "Data Validation", icon: ShieldCheck, next: "right", col: 3, row: 1 },
-  { label: "Process Execution", icon: Cog, next: "down", col: 4, row: 1 },
-  { label: "Performance Tracking", icon: Gauge, next: "left", col: 4, row: 2 },
-  { label: "Operational Analytics", icon: BarChart3, next: "left", col: 3, row: 2 },
-  { label: "Reporting & Insights", icon: FileText, next: "left", col: 2, row: 2 },
-  { label: "Continuous Improvement", icon: RefreshCw, next: null, col: 1, row: 2 },
+  {
+    label: "Listen",
+    body: "Sit with stakeholders. Walk the current process. Note where they wince.",
+    icon: Ear,
+  },
+  {
+    label: "Map",
+    body: "Draw the as-is state in BPMN. Swimlanes, gateways, handoffs.",
+    icon: Map,
+  },
+  {
+    label: "Diagnose",
+    body: "Quantify the bottleneck. Time, cost, quality, or volume.",
+    icon: Search,
+  },
+  {
+    label: "Prototype",
+    body: "Build the tool or workflow that fixes it. Internal-tools platforms, AI-accelerated.",
+    icon: Hammer,
+  },
+  {
+    label: "Hand Off",
+    body: "Document the change. Train the user. Transition ownership.",
+    icon: Send,
+  },
 ];
-
-const colStartClass: Record<Step["col"], string> = {
-  1: "lg:col-start-1",
-  2: "lg:col-start-2",
-  3: "lg:col-start-3",
-  4: "lg:col-start-4",
-};
-
-const rowStartClass: Record<Step["row"], string> = {
-  1: "lg:row-start-1",
-  2: "lg:row-start-2",
-};
-
-function SnakeArrow({ direction }: { direction: Direction }) {
-  if (!direction) return null;
-
-  const common = {
-    position: "absolute" as const,
-    color: "rgba(167,139,250,0.9)",
-    pointerEvents: "none" as const,
-    filter: "drop-shadow(0 0 6px rgba(139,92,246,0.4))",
-  };
-
-  if (direction === "right") {
-    return (
-      <ChevronRight
-        size={20}
-        style={{
-          ...common,
-          right: "-22px",
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      />
-    );
-  }
-  if (direction === "down") {
-    return (
-      <ChevronDown
-        size={20}
-        style={{
-          ...common,
-          right: "20px",
-          bottom: "-22px",
-        }}
-      />
-    );
-  }
-  return (
-    <ChevronLeft
-      size={20}
-      style={{
-        ...common,
-        left: "-22px",
-        top: "50%",
-        transform: "translateY(-50%)",
-      }}
-    />
-  );
-}
 
 export function WorkflowDiagramSection() {
   return (
@@ -114,12 +61,12 @@ export function WorkflowDiagramSection() {
             color: "rgb(167, 139, 250)",
           }}
         >
-          End-to-End Workflow
+          Anatomy of an Engagement
         </p>
 
         <div
-          className="relative grid grid-cols-1 lg:grid-cols-4"
-          style={{ gap: "28px 32px" }}
+          className="relative grid grid-cols-1 lg:grid-cols-5"
+          style={{ gap: "28px 24px" }}
         >
           {steps.map((step, idx) => {
             const Icon = step.icon;
@@ -128,10 +75,10 @@ export function WorkflowDiagramSection() {
             return (
               <div
                 key={step.label}
-                className={`relative rounded-2xl border ${colStartClass[step.col]} ${rowStartClass[step.row]}`}
+                className="relative rounded-2xl border"
                 style={{
-                  minHeight: "112px",
-                  padding: "18px 20px",
+                  minHeight: "168px",
+                  padding: "20px 22px",
                   background:
                     "linear-gradient(180deg, rgba(139,92,246,0.10), rgba(255,255,255,0.025))",
                   borderColor: "rgba(255,255,255,0.10)",
@@ -161,36 +108,56 @@ export function WorkflowDiagramSection() {
                 </div>
                 <h3
                   style={{
-                    fontSize: "14px",
-                    lineHeight: 1.35,
+                    fontSize: "15px",
+                    lineHeight: 1.3,
                     color: "white",
-                    fontWeight: 500,
+                    fontWeight: 600,
+                    marginBottom: "8px",
                   }}
                 >
                   {step.label}
                 </h3>
+                <p
+                  style={{
+                    fontSize: "13px",
+                    lineHeight: 1.5,
+                    color: "rgba(255,255,255,0.7)",
+                  }}
+                >
+                  {step.body}
+                </p>
 
-                {/* Snake-path arrows: laptop+ only */}
-                <div className="hidden lg:block" aria-hidden>
-                  <SnakeArrow direction={step.next} />
-                </div>
-
-                {/* Vertical-flow arrow: tablet & mobile, between consecutive cards */}
                 {!isLast ? (
-                  <ChevronDown
-                    aria-hidden
-                    size={18}
-                    className="lg:hidden"
-                    style={{
-                      position: "absolute",
-                      left: "50%",
-                      bottom: "-22px",
-                      transform: "translateX(-50%)",
-                      color: "rgba(167,139,250,0.9)",
-                      pointerEvents: "none",
-                      filter: "drop-shadow(0 0 6px rgba(139,92,246,0.4))",
-                    }}
-                  />
+                  <>
+                    <ChevronRight
+                      aria-hidden
+                      size={20}
+                      className="hidden lg:block"
+                      style={{
+                        position: "absolute",
+                        right: "-18px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "rgba(167,139,250,0.9)",
+                        pointerEvents: "none",
+                        filter: "drop-shadow(0 0 6px rgba(139,92,246,0.4))",
+                      }}
+                    />
+                    <ChevronDown
+                      aria-hidden
+                      size={18}
+                      className="lg:hidden"
+                      style={{
+                        position: "absolute",
+                        left: "50%",
+                        bottom: "-22px",
+                        transform: "translateX(-50%)",
+                        color: "rgba(167,139,250,0.9)",
+                        pointerEvents: "none",
+                        filter: "drop-shadow(0 0 6px rgba(139,92,246,0.4))",
+                      }}
+                    />
+                  </>
                 ) : null}
               </div>
             );

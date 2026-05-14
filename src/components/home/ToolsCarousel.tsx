@@ -1,21 +1,19 @@
 import {
-  SiClaude,
+  SiAtlassian,
   SiFigma,
-  SiJira,
+  SiGooglesheets,
+  SiLooker,
   SiLucid,
   SiMiro,
-  SiPostman,
+  SiPostgresql,
+  SiPython,
+  SiR,
   SiRetool,
-  SiSnowflake,
   SiStreamlit,
+  SiUipath,
   SiZapier,
 } from "@icons-pack/react-simple-icons";
-import {
-  BarChart2,
-  BarChart3,
-  Database,
-  type LucideIcon,
-} from "lucide-react";
+import { BarChart2, Ticket, Zap, type LucideIcon } from "lucide-react";
 import type { ComponentType } from "react";
 
 type IconComponent = ComponentType<{ size?: number; color?: string }> | LucideIcon;
@@ -23,34 +21,38 @@ type IconComponent = ComponentType<{ size?: number; color?: string }> | LucideIc
 type Tool = { name: string; Icon: IconComponent };
 
 /**
- * Mid-Level Core Toolkit — grouped (in order) by:
- *   1. Data & BI Platforms
- *   2. Workflow & UI Design
- *   3. Automation & Rapid Frontends
- *   4. Agile & AI Environments
- *
- * Slashed labels (e.g. "Snowflake / BigQuery") deliberately preserve
- * grouping from the source spec — each card represents a tool family
- * the operator works in interchangeably.
+ * Operations & Process Analyst toolkit (16 cards).
+ * Grouped (carousel scrolls in this order):
+ *   1. Process & Workflow
+ *   2. Analysis & Data
+ *   3. Reporting & Build
+ *   4. Prototyping
+ *   5. Operations Platforms
+ *   6. Working Environment
  */
 const tools: Tool[] = [
-  // Data & BI Platforms
-  { name: "PostgreSQL / SQL Server / MySQL", Icon: Database },
-  { name: "Power BI", Icon: BarChart3 },
-  { name: "Tableau", Icon: BarChart2 },
-  { name: "Snowflake / BigQuery", Icon: SiSnowflake },
-  // Workflow & UI Design
+  // Process & Workflow
   { name: "Lucidchart / Visio", Icon: SiLucid },
   { name: "Miro / FigJam", Icon: SiMiro },
   { name: "Figma", Icon: SiFigma },
-  // Automation & Rapid Frontends
-  { name: "Retool", Icon: SiRetool },
+  // Analysis & Data
+  { name: "Excel / Google Sheets", Icon: SiGooglesheets },
+  { name: "PostgreSQL", Icon: SiPostgresql },
+  { name: "Python / Jupyter / pandas", Icon: SiPython },
+  { name: "R", Icon: SiR },
+  // Reporting & Build
   { name: "Streamlit", Icon: SiStreamlit },
+  { name: "Tableau", Icon: BarChart2 },
+  { name: "Power BI / Looker Studio", Icon: SiLooker },
+  // Prototyping
+  { name: "Retool", Icon: SiRetool },
   { name: "Zapier / Make", Icon: SiZapier },
-  // Agile & AI Environments
-  { name: "Jira / Linear", Icon: SiJira },
-  { name: "Postman", Icon: SiPostman },
-  { name: "Claude / Cursor", Icon: SiClaude },
+  // Operations Platforms
+  { name: "UiPath", Icon: SiUipath },
+  { name: "Power Automate", Icon: Zap },
+  { name: "ServiceNow", Icon: Ticket },
+  // Working Environment
+  { name: "Jira · Notion · Claude · Cursor", Icon: SiAtlassian },
 ];
 
 export function ToolsCarousel() {

@@ -158,30 +158,11 @@ export function SystemCluster({
         <div className="text-xs uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
           {metricCard.label}
         </div>
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <div className="gradient-text text-3xl font-extrabold tracking-tight">
-              {metricCard.value}
-            </div>
-            <div className="text-xs text-[color:var(--text-dim)] mt-1">
-              {metricCard.sublabel}
-            </div>
-          </div>
-          <svg
-            aria-hidden
-            viewBox="0 0 80 30"
-            className="h-9 w-24 shrink-0 opacity-90"
-          >
-            <polyline
-              points="0,22 12,18 24,20 36,12 48,14 60,7 72,9 80,4"
-              fill="none"
-              stroke="rgb(139, 92, 246)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="80" cy="4" r="2" fill="rgb(139, 92, 246)" />
-          </svg>
+        <div className="gradient-text text-xl font-extrabold tracking-tight leading-snug">
+          {metricCard.value}
+        </div>
+        <div className="text-xs text-[color:var(--text-dim)] mt-2">
+          {metricCard.sublabel}
         </div>
       </article>
     </div>
