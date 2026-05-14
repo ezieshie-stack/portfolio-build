@@ -56,7 +56,7 @@ export const projects: Project[] = [
     timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
-    tools: ["SQL", "Python", "Looker Studio", "Jira", "Notion"],
+    tools: ["SQL", "Power BI", "Lucidchart", "Jira", "Confluence"],
     challenge:
       "[Challenge paragraph placeholder. Describe the operational problem and the constraints that made it hard.]",
     approach: [
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
-    tools: ["SQL", "Python"],
+    tools: ["SQL", "Power BI"],
     challenge: "[Challenge paragraph placeholder.]",
     approach: ["[Approach bullet one.]", "[Approach bullet two.]"],
     deliverables: ["[Deliverable one.]", "[Deliverable two.]"],

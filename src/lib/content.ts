@@ -94,12 +94,14 @@ export const home = {
     items: [
       "Excel",
       "SQL",
-      "Python",
       "Power BI",
       "Looker Studio",
       "Jira",
+      "Confluence",
       "Notion",
-      "Figma",
+      "Lucidchart",
+      "Miro",
+      "Visio",
     ],
   },
 };
