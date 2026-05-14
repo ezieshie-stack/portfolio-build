@@ -1,64 +1,45 @@
 import {
-  Activity,
   ArrowLeftRight,
-  BarChart2,
-  BookOpen,
+  Bug,
+  Calculator,
   ClipboardCheck,
-  Compass,
-  FileCode,
-  FileText,
-  Filter,
-  GitBranch,
-  GitCompare,
-  Kanban,
   Layers,
-  ListChecks,
+  MessagesSquare,
   Network,
-  RefreshCw,
-  Scale,
+  Rocket,
+  Search,
+  Sigma,
   Sparkles,
   Timer,
-  TrendingDown,
+  Waypoints,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
 
 type Skill = { name: string; Icon: LucideIcon };
 
 /**
- * Skills carousel — the methodologies and competencies behind the tool stack.
- * Grouped (in order) by specialty per the BA matrix:
- *   1. Operations
- *   2. Business Systems (BSA)
- *   3. Process
- *   4. Data / BI
- *   5. Agile Product
+ * Mid-Level Skillset — grouped (in order) by:
+ *   1. Business Intelligence Architect
+ *   2. Automation & Efficiency Lead
  */
 const skills: Skill[] = [
-  // Operations
-  { name: "Capacity Modeling", Icon: Activity },
-  { name: "Bottleneck Identification", Icon: Filter },
-  { name: "Cost-Benefit Analysis", Icon: Scale },
-  { name: "SLA Tracking", Icon: Timer },
-  // Business Systems Analyst (BSA)
-  { name: "API & Data Mapping", Icon: ArrowLeftRight },
-  { name: "System Architecture", Icon: Network },
-  { name: "Technical User Stories", Icon: FileText },
+  // Business Intelligence Architect
+  { name: "Common Table Expressions", Icon: Layers },
+  { name: "Window Functions", Icon: Sigma },
+  { name: "Semantic Layer Calculation", Icon: Calculator },
+  { name: "Star Schema Navigation", Icon: Network },
+  { name: "Data Lineage Auditing", Icon: Search },
+  // Automation & Efficiency Lead
+  { name: "To-Be Workflow Optimization", Icon: Workflow },
+  { name: "BPMN 2.0 Compliance Mapping", Icon: Waypoints },
+  { name: "SLA Bottleneck Diagnostics", Icon: Timer },
   { name: "User Acceptance Testing", Icon: ClipboardCheck },
-  // Process
-  { name: "As-Is / To-Be Mapping", Icon: GitCompare },
-  { name: "BPMN 2.0", Icon: GitBranch },
-  { name: "Lean / Six Sigma", Icon: TrendingDown },
-  { name: "Change Management", Icon: RefreshCw },
-  // Data / BI
-  { name: "Data Cleaning & Wrangling", Icon: Sparkles },
-  { name: "Statistical Analysis", Icon: BarChart2 },
-  { name: "Data Storytelling", Icon: BookOpen },
-  { name: "Data Modeling", Icon: Layers },
-  // Agile Product
-  { name: "Backlog Grooming", Icon: ListChecks },
-  { name: "Scrum / Kanban", Icon: Kanban },
-  { name: "Gherkin Syntax", Icon: FileCode },
-  { name: "Competitor Benchmarking", Icon: Compass },
+  { name: "Requirements Elicitation", Icon: MessagesSquare },
+  { name: "AI UI Prototyping", Icon: Sparkles },
+  { name: "API Variable Mapping", Icon: ArrowLeftRight },
+  { name: "Automated Error Triage", Icon: Bug },
+  { name: "Independent Feature Delivery", Icon: Rocket },
 ];
 
 export function SkillsCarousel() {

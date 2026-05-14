@@ -1,16 +1,19 @@
 import {
-  SiConfluence,
+  SiClaude,
+  SiFigma,
   SiJira,
-  SiLooker,
   SiLucid,
   SiMiro,
-  SiNotion,
+  SiPostman,
+  SiRetool,
+  SiSnowflake,
+  SiStreamlit,
+  SiZapier,
 } from "@icons-pack/react-simple-icons";
 import {
+  BarChart2,
   BarChart3,
   Database,
-  FileSpreadsheet,
-  Workflow,
   type LucideIcon,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -19,17 +22,35 @@ type IconComponent = ComponentType<{ size?: number; color?: string }> | LucideIc
 
 type Tool = { name: string; Icon: IconComponent };
 
+/**
+ * Mid-Level Core Toolkit — grouped (in order) by:
+ *   1. Data & BI Platforms
+ *   2. Workflow & UI Design
+ *   3. Automation & Rapid Frontends
+ *   4. Agile & AI Environments
+ *
+ * Slashed labels (e.g. "Snowflake / BigQuery") deliberately preserve
+ * grouping from the source spec — each card represents a tool family
+ * the operator works in interchangeably.
+ */
 const tools: Tool[] = [
-  { name: "Excel", Icon: FileSpreadsheet },
-  { name: "SQL", Icon: Database },
+  // Data & BI Platforms
+  { name: "PostgreSQL / SQL Server / MySQL", Icon: Database },
   { name: "Power BI", Icon: BarChart3 },
-  { name: "Looker Studio", Icon: SiLooker },
-  { name: "Jira", Icon: SiJira },
-  { name: "Confluence", Icon: SiConfluence },
-  { name: "Notion", Icon: SiNotion },
-  { name: "Lucidchart", Icon: SiLucid },
-  { name: "Miro", Icon: SiMiro },
-  { name: "Visio", Icon: Workflow },
+  { name: "Tableau", Icon: BarChart2 },
+  { name: "Snowflake / BigQuery", Icon: SiSnowflake },
+  // Workflow & UI Design
+  { name: "Lucidchart / Visio", Icon: SiLucid },
+  { name: "Miro / FigJam", Icon: SiMiro },
+  { name: "Figma", Icon: SiFigma },
+  // Automation & Rapid Frontends
+  { name: "Retool", Icon: SiRetool },
+  { name: "Streamlit", Icon: SiStreamlit },
+  { name: "Zapier / Make", Icon: SiZapier },
+  // Agile & AI Environments
+  { name: "Jira / Linear", Icon: SiJira },
+  { name: "Postman", Icon: SiPostman },
+  { name: "Claude / Cursor", Icon: SiClaude },
 ];
 
 export function ToolsCarousel() {
