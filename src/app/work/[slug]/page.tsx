@@ -2,10 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
-import { projects } from "@/lib/content";
+import { publishedProjects } from "@/data/projects";
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return publishedProjects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -14,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = projects.find((x) => x.slug === slug);
+  const p = publishedProjects.find((x) => x.slug === slug);
   return { title: p ? `${p.title} | Portfolio` : "Project | Portfolio" };
 }
 
@@ -24,7 +24,7 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = publishedProjects.find((p) => p.slug === slug);
   if (!project) notFound();
 
   return (
