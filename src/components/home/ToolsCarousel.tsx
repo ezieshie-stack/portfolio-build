@@ -1,16 +1,16 @@
 import {
-  SiFigma,
-  SiGooglesheets,
+  SiConfluence,
   SiJira,
   SiLooker,
   SiLucid,
+  SiMiro,
   SiNotion,
-  SiPython,
 } from "@icons-pack/react-simple-icons";
 import {
   BarChart3,
   Database,
   FileSpreadsheet,
+  Workflow,
   type LucideIcon,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -20,16 +20,16 @@ type IconComponent = ComponentType<{ size?: number; color?: string }> | LucideIc
 type Tool = { name: string; Icon: IconComponent };
 
 const tools: Tool[] = [
-  { name: "Google Sheets", Icon: SiGooglesheets },
-  { name: "Lucidchart", Icon: SiLucid },
   { name: "Excel", Icon: FileSpreadsheet },
   { name: "SQL", Icon: Database },
-  { name: "Python", Icon: SiPython },
   { name: "Power BI", Icon: BarChart3 },
   { name: "Looker Studio", Icon: SiLooker },
   { name: "Jira", Icon: SiJira },
+  { name: "Confluence", Icon: SiConfluence },
   { name: "Notion", Icon: SiNotion },
-  { name: "Figma", Icon: SiFigma },
+  { name: "Lucidchart", Icon: SiLucid },
+  { name: "Miro", Icon: SiMiro },
+  { name: "Visio", Icon: Workflow },
 ];
 
 export function ToolsCarousel() {
