@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRef, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import {
@@ -87,9 +88,9 @@ export function FeaturedProjectsSlider() {
         ))}
       </div>
 
-      <a href="/work" className="viewAllButton">
+      <Link href="/work" className="viewAllButton">
         View All Projects <ArrowUpRight size={16} />
-      </a>
+      </Link>
     </section>
   );
 }

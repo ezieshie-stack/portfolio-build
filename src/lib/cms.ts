@@ -66,6 +66,33 @@ export async function fetchSectionContent<T = unknown>(
   }
 }
 
+/**
+ * Recursively merges an override object on top of a base value. Used to
+ * apply Convex `siteContent` overrides over static defaults in
+ * `src/lib/content.ts` so the public site never breaks when a field is
+ * missing — only present override fields take precedence.
+ *
+ * Rules:
+ *   - null / undefined override → base wins.
+ *   - Primitives or mismatched types → override wins.
+ *   - Arrays → override wins entirely (no element-wise merge).
+ *   - Plain objects → merged key-by-key.
+ */
+export function deepMerge<T>(base: T, override: unknown): T {
+  if (override === null || override === undefined) return base;
+  if (typeof base !== "object" || base === null) return override as T;
+  if (Array.isArray(base) || Array.isArray(override)) {
+    // Arrays: override wins entirely if provided.
+    return (override as T) ?? base;
+  }
+  if (typeof override !== "object") return override as T;
+  const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+  for (const [k, v] of Object.entries(override as Record<string, unknown>)) {
+    out[k] = deepMerge((base as Record<string, unknown>)[k], v);
+  }
+  return out as T;
+}
+
 /** Fetches an image URL by slot. Returns null if no override exists. */
 export async function fetchImageBySlot(
   slot: string,

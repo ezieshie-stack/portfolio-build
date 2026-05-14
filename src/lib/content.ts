@@ -14,10 +14,11 @@ export const site = {
   ],
   cta: { label: "Let's Connect", href: "/contact" },
   footer: {
-    text: "© [YEAR] [NAME PLACEHOLDER]. All rights reserved.",
+    text: "© [YEAR] David Ezieshi. All rights reserved.",
     links: [
-      { label: "LinkedIn", href: "#" },
-      { label: "Email", href: "mailto:placeholder@example.com" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/david-ezieshi/" },
+      { label: "Email", href: "mailto:Ezieshie@gmail.com" },
+      { label: "GitHub", href: "https://github.com/ezieshie-stack" },
     ],
   },
 } as const;
@@ -70,7 +71,7 @@ export const home = {
   featured: {
     tag: "FEATURED PROJECT",
     pill: "Process Redesign",
-    title: "Fiitco — Fitness Platform Process Redesign",
+    title: "Fiitco: Fitness Platform Process Redesign",
     description:
       "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency by 28%.",
     workflow: {
@@ -140,12 +141,12 @@ export const about = {
     {
       degree: "[Degree placeholder]",
       school: "[Institution placeholder]",
-      dates: "[Start year]—[End year]",
+      dates: "[Start year] – [End year]",
     },
     {
       degree: "[Degree placeholder]",
       school: "[Institution placeholder]",
-      dates: "[Start month year]—[End month year]",
+      dates: "[Start month year] – [End month year]",
     },
   ],
 };
@@ -181,7 +182,7 @@ export const projects: Project[] = [
       { value: "[00+]", label: "[Metric D]" },
     ],
     client: "[Client name]",
-    timeline: "[Start]—[End]",
+    timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
     tools: ["SQL", "Python", "Looker Studio", "Jira", "Notion"],
@@ -211,7 +212,7 @@ export const projects: Project[] = [
       { value: "[00%]", label: "[Metric B]" },
     ],
     client: "[Client name]",
-    timeline: "[Start]—[End]",
+    timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
     tools: ["SQL", "Looker Studio"],
@@ -237,7 +238,7 @@ export const projects: Project[] = [
       { value: "[00%]", label: "[Metric B]" },
     ],
     client: "[Client name]",
-    timeline: "[Start]—[End]",
+    timeline: "[Start] – [End]",
     role: "[Role]",
     team: "[Team composition]",
     tools: ["SQL", "Python"],
@@ -348,8 +349,8 @@ export const work = {
     { icon: "FileText", title: "Requirements", desc: "Understand the need" },
     { icon: "GitBranch", title: "Workflows", desc: "Design the process" },
     { icon: "Layers", title: "Systems", desc: "Build or optimize" },
-    { icon: "BarChart3", title: "Reporting", desc: "Make it visible" },
-    { icon: "Target", title: "Outcomes", desc: "Drive impact" },
+    { icon: "BarChart3", title: "Reporting", desc: "Trace every metric" },
+    { icon: "Target", title: "Outcomes", desc: "Ship the change" },
   ],
 };
 
@@ -481,19 +482,19 @@ export const insights = {
 
 export const contact = {
   tag: "GET IN TOUCH",
-  title: "[Contact headline placeholder]",
+  title: "Let's build the systems that make your operations run.",
   intro:
-    "[Contact intro paragraph placeholder. One or two sentences describing availability and what you're open to.]",
+    "Whether you're untangling a workflow, scoping a new internal tool, or trying to turn scattered data into a real reporting story, I'm always open to conversations that move things from ambiguity to action.",
   channels: [
-    { label: "Email", value: "[your-email@example.com]", href: "mailto:placeholder@example.com" },
-    { label: "LinkedIn", value: "[linkedin.com/in/your-handle]", href: "#" },
-    { label: "Location", value: "[City, Region, Country]" },
-    { label: "Availability", value: "[Availability statement placeholder]" },
+    { label: "Email", value: "Ezieshie@gmail.com", href: "mailto:Ezieshie@gmail.com" },
+    { label: "LinkedIn", value: "linkedin.com/in/david-ezieshi", href: "https://www.linkedin.com/in/david-ezieshi/" },
+    { label: "GitHub", value: "github.com/ezieshie-stack", href: "https://github.com/ezieshie-stack" },
+    { label: "Availability", value: "Open to operations, systems analysis, and business analyst roles, plus short-term project work." },
   ],
   formTitle: "Send a Message",
   altCtas: [
-    { label: "View My LinkedIn", href: "#" },
-    { label: "Email Me", href: "mailto:placeholder@example.com" },
+    { label: "View My LinkedIn", href: "https://www.linkedin.com/in/david-ezieshi/" },
+    { label: "Email Me", href: "mailto:Ezieshie@gmail.com" },
   ],
 };
 

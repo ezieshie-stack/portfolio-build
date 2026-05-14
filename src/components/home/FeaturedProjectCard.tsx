@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   ArrowUpRight,
   Calendar,
@@ -44,7 +45,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Fiitco — Fitness Platform Process Redesign",
+    title: "Fiitco: Fitness Platform Process Redesign",
     category: "Process Redesign",
     description:
       "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency and team accountability.",
@@ -91,12 +92,12 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="projectActions">
-          <a href="/work/fiitco" className="primaryAction">
+          <Link href="/work/fiitco" className="primaryAction">
             View Case Study <ArrowUpRight size={16} />
-          </a>
-          <a href="/work/fiitco" className="secondaryAction">
+          </Link>
+          <Link href="/work/fiitco" className="secondaryAction">
             Project Details
-          </a>
+          </Link>
         </div>
 
         <div className="keyHighlights">

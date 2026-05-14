@@ -18,8 +18,8 @@ export async function generateMetadata({
   const article = await fetchArticleBySlug(slug);
   const fallback = insights.articles.find((a) => a.slug === slug);
   const title = article?.title ?? fallback?.title;
-  if (!title) return { title: "Insight — Portfolio" };
-  return { title: `${title} — Insights` };
+  if (!title) return { title: "Insight | Portfolio" };
+  return { title: `${title} | Insights` };
 }
 
 export default async function InsightArticlePage({
@@ -54,14 +54,14 @@ export default async function InsightArticlePage({
       <Reveal as="section" className="pb-12 max-w-[820px]">
         <Link
           href="/insights"
-          className="text-[12px] tracking-[0.2em] uppercase text-[#a78bfa] hover:text-white transition-colors"
+          className="text-xs tracking-[0.2em] uppercase text-[#a78bfa] hover:text-white transition-colors"
         >
           ← All Insights
         </Link>
 
         <SectionTag>{`// ${data.category.toUpperCase()}`}</SectionTag>
 
-        <h1 className="text-[clamp(40px,6vw,80px)] font-extrabold leading-[0.98] tracking-[-0.05em] my-6">
+        <h1 className="text-[length:var(--text-4xl)] font-extrabold leading-[0.98] tracking-[-0.05em] my-6">
           {data.title}
         </h1>
 
@@ -71,7 +71,7 @@ export default async function InsightArticlePage({
           </p>
         )}
 
-        <div className="flex flex-wrap items-center gap-4 text-[12px] text-white/55 mb-12 border-b border-white/8 pb-6">
+        <div className="flex flex-wrap items-center gap-4 text-xs text-white/55 mb-12 border-b border-white/8 pb-6">
           <span>{data.date}</span>
           <span aria-hidden>·</span>
           <span>{data.readTime}</span>
@@ -81,7 +81,7 @@ export default async function InsightArticlePage({
               {data.pills.map((p) => (
                 <span
                   key={p}
-                  className="px-3 py-1 rounded-full border border-[#a78bfa]/40 text-[#c4b5fd] text-[10px] tracking-[0.12em] uppercase font-bold"
+                  className="px-3 py-1 rounded-full border border-[#a78bfa]/40 text-[#c4b5fd] text-xs tracking-[0.12em] uppercase font-bold"
                 >
                   {p}
                 </span>

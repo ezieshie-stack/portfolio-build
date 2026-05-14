@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/PageShell";
 import { notFound as content } from "@/lib/content";
 
-export const metadata = { title: "Page Not Found — Portfolio" };
+export const metadata = { title: "Page Not Found | Portfolio" };
 
 export default function NotFound() {
   return (
@@ -19,7 +19,7 @@ export default function NotFound() {
             {content.description}
           </p>
           <Link href={content.cta.href} className="btn-pill btn-primary">
-            {content.cta.label} <span aria-hidden className="ml-1">↗</span>
+            {content.cta.label}
           </Link>
         </div>
 

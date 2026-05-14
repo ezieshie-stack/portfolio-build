@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
@@ -72,24 +73,24 @@ export function PortfolioFooter() {
 
         <div className="footerColumn">
           <h4>Navigation</h4>
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/work">Projects</a>
-          <a href="/contact">Contact</a>
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
+          <Link href="/work">Projects</Link>
+          <Link href="/contact">Contact</Link>
         </div>
 
         <div className="footerColumn">
           <h4>Resources</h4>
-          <a href="/resume.pdf">
+          <Link href="/resume">
             <FileText size={16} /> Resume
-          </a>
-          <a href="https://linkedin.com/in/YOUR-LINKEDIN">
+          </Link>
+          <a href="https://www.linkedin.com/in/david-ezieshi/" target="_blank" rel="noreferrer">
             <LinkedInIcon size={16} /> LinkedIn
           </a>
-          <a href="mailto:YOUR-EMAIL">
+          <a href="mailto:Ezieshie@gmail.com">
             <Mail size={16} /> Email
           </a>
-          <a href="https://github.com/YOUR-GITHUB">
+          <a href="https://github.com/ezieshie-stack" target="_blank" rel="noreferrer">
             <GitHubIcon size={16} /> GitHub
           </a>
         </div>

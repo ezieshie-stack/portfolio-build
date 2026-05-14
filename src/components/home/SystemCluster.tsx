@@ -7,7 +7,7 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { home } from "@/lib/content";
+import { home as homeDefault } from "@/lib/content";
 
 const cardIcons: Record<string, LucideIcon> = {
   Users,
@@ -16,6 +16,22 @@ const cardIcons: Record<string, LucideIcon> = {
   CheckCircle2,
   GitBranch,
   BarChart3,
+};
+
+type DiagramData = {
+  centerLabel: string;
+  centerIcon: string;
+  nodes: ReadonlyArray<{
+    label: string;
+    position: string;
+    icon: string;
+  }>;
+};
+
+type MetricCardData = {
+  label: string;
+  value: string;
+  sublabel: string;
 };
 
 function SystemCard({
@@ -54,7 +70,7 @@ function SystemCard({
         >
           <Icon className="text-[color:var(--primary)]" size={16} />
         </span>
-        <span className="text-[11px] font-medium text-white leading-tight">
+        <span className="text-xs font-medium text-white leading-tight">
           {label}
         </span>
       </div>
@@ -77,9 +93,15 @@ function Connector() {
   );
 }
 
-export function SystemCluster() {
-  const { centerLabel, centerIcon, nodes } = home.diagram;
-  const CenterIcon = cardIcons[centerIcon];
+export function SystemCluster({
+  diagram = homeDefault.diagram,
+  metricCard = homeDefault.metricCard,
+}: {
+  diagram?: DiagramData;
+  metricCard?: MetricCardData;
+} = {}) {
+  const { centerLabel, centerIcon, nodes } = diagram;
+  const CenterIcon = cardIcons[centerIcon] ?? GitBranch;
 
   const stakeholders = nodes.find((n) => n.position === "top-left");
   const dataInputs = nodes.find((n) => n.position === "top-right");
@@ -91,13 +113,13 @@ export function SystemCluster() {
       <div className="grid grid-cols-2 gap-3">
         {stakeholders ? (
           <SystemCard
-            icon={cardIcons[stakeholders.icon]}
+            icon={cardIcons[stakeholders.icon] ?? Users}
             label={stakeholders.label}
           />
         ) : null}
         {dataInputs ? (
           <SystemCard
-            icon={cardIcons[dataInputs.icon]}
+            icon={cardIcons[dataInputs.icon] ?? Database}
             label={dataInputs.label}
           />
         ) : null}
@@ -111,11 +133,11 @@ export function SystemCluster() {
 
       <div className="grid grid-cols-2 gap-3">
         {outcomes ? (
-          <SystemCard icon={cardIcons[outcomes.icon]} label={outcomes.label} />
+          <SystemCard icon={cardIcons[outcomes.icon] ?? CheckCircle2} label={outcomes.label} />
         ) : null}
         {implementation ? (
           <SystemCard
-            icon={cardIcons[implementation.icon]}
+            icon={cardIcons[implementation.icon] ?? Settings}
             label={implementation.label}
           />
         ) : null}
@@ -133,16 +155,16 @@ export function SystemCluster() {
           boxShadow: "0 14px 36px rgba(0, 0, 0, 0.5)",
         }}
       >
-        <div className="text-[10px] uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
-          {home.metricCard.label}
+        <div className="text-xs uppercase tracking-[0.2em] text-[color:var(--primary)] mb-2">
+          {metricCard.label}
         </div>
         <div className="flex items-end justify-between gap-4">
           <div>
             <div className="gradient-text text-3xl font-extrabold tracking-tight">
-              {home.metricCard.value}
+              {metricCard.value}
             </div>
-            <div className="text-[11px] text-[color:var(--text-dim)] mt-1">
-              {home.metricCard.sublabel}
+            <div className="text-xs text-[color:var(--text-dim)] mt-1">
+              {metricCard.sublabel}
             </div>
           </div>
           <svg

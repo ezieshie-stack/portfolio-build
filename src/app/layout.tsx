@@ -18,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio — Operations & Business Systems Analyst",
+  title: "Portfolio | Operations & Business Systems Analyst",
   description:
     "Operations and business systems analyst portfolio. Workflow design, automation, and data-driven systems.",
 };

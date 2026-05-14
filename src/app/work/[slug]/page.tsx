@@ -15,7 +15,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const p = projects.find((x) => x.slug === slug);
-  return { title: p ? `${p.title} — Portfolio` : "Project — Portfolio" };
+  return { title: p ? `${p.title} | Portfolio` : "Project | Portfolio" };
 }
 
 export default async function ProjectDetailPage({
@@ -31,13 +31,13 @@ export default async function ProjectDetailPage({
     <PageShell>
       <Link
         href="/work"
-        className="text-[13px] text-[color:var(--text-dim)] hover:text-white transition-colors mb-6 inline-block"
+        className="text-sm text-[color:var(--text-dim)] hover:text-white transition-colors mb-6 inline-block"
       >
         ← Back to All Projects
       </Link>
 
       <Reveal as="section" className="mb-12">
-        <h1 className="text-[clamp(32px,5vw,52px)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-5">
+        <h1 className="text-[length:var(--text-3xl)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-5">
           {project.title}
         </h1>
         <p className="text-[color:var(--text-dim)] max-w-prose mb-8">
@@ -59,7 +59,7 @@ export default async function ProjectDetailPage({
           { label: "Tools", value: project.tools.join(", ") },
         ].map((m) => (
           <div key={m.label} className="glass-card p-4">
-            <div className="text-[10px] uppercase tracking-[0.18em] text-[color:var(--text-dim)] mb-2">
+            <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--text-dim)] mb-2">
               {m.label}
             </div>
             <div className="text-sm font-medium">{m.value}</div>
@@ -95,7 +95,7 @@ export default async function ProjectDetailPage({
               <div className="gradient-text text-3xl font-extrabold tracking-tight mb-2">
                 {m.value}
               </div>
-              <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--text-dim)] leading-tight">
+              <div className="text-xs uppercase tracking-[0.18em] text-[color:var(--text-dim)] leading-tight">
                 {m.label}
               </div>
             </article>

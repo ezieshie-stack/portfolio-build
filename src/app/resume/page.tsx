@@ -1,16 +1,22 @@
-import Link from "next/link";
 import { PageShell, SectionTag } from "@/components/PageShell";
 import { Reveal } from "@/components/Reveal";
+import { ResumeViewer } from "@/components/cms/ResumeViewer";
 import { resume } from "@/lib/content";
+import { fetchImageBySlot } from "@/lib/cms";
 
-export const metadata = { title: "Resume — Portfolio" };
+export const metadata = { title: "Resume | Portfolio" };
 
-export default function ResumePage() {
+export default async function ResumePage() {
+  // Convex slot wins if uploaded; falls back to the static /public/resume.pdf
+  // so the page is functional before an admin upload happens.
+  const resumeFile = await fetchImageBySlot("resume-pdf");
+  const pdfUrl = resumeFile?.imageUrl ?? "/resume.pdf";
+
   return (
     <PageShell>
       <Reveal as="section" className="pb-12">
         <SectionTag>{resume.tag}</SectionTag>
-        <h1 className="text-[clamp(36px,5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6 whitespace-pre-line">
+        <h1 className="text-[length:var(--text-4xl)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6 whitespace-pre-line">
           {resume.title}
         </h1>
         <p className="text-[color:var(--text-dim)] max-w-prose mb-10">
@@ -20,18 +26,25 @@ export default function ResumePage() {
 
       <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10 items-start">
         <Reveal>
-          <div
-            className="glass-card aspect-[3/4] flex items-center justify-center text-[color:var(--text-dim)] text-xs tracking-[0.2em] uppercase"
-          >
-            [Resume Preview Placeholder]
-          </div>
-          <div className="flex flex-wrap gap-3 mt-5">
-            <Link href={resume.downloadCta.href} className="btn-pill btn-primary">
-              {resume.downloadCta.label} <span aria-hidden className="ml-1">↗</span>
-            </Link>
-            <Link href={resume.viewCta.href} className="btn-pill">
-              {resume.viewCta.label} <span aria-hidden className="ml-1">↗</span>
-            </Link>
+          {pdfUrl ? (
+            <div className="resume-preview-card">
+              <iframe
+                src={`${pdfUrl}#toolbar=0&navpanes=0`}
+                className="resume-preview-frame"
+                title="Resume preview"
+              />
+            </div>
+          ) : (
+            <div className="glass-card aspect-[3/4] flex items-center justify-center text-[color:var(--text-dim)] text-xs tracking-[0.2em] uppercase">
+              [Resume Preview Placeholder]
+            </div>
+          )}
+          <div className="mt-5">
+            <ResumeViewer
+              pdfUrl={pdfUrl}
+              downloadLabel={resume.downloadCta.label}
+              viewLabel={resume.viewCta.label}
+            />
           </div>
         </Reveal>
 

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import {
   ArrowUpRight,
   BarChart3,
@@ -13,10 +12,13 @@ import {
   Users,
   Workflow,
 } from "lucide-react";
+import { LiveImage } from "@/components/cms/LiveImage";
+import { LiveText } from "@/components/cms/LiveText";
 
-export const metadata = { title: "About — Portfolio" };
+export const metadata = { title: "About | Portfolio" };
 
 export default function AboutPage() {
+
   const stats = [
     { value: "12+", label: "Operational Workflows Improved", icon: Workflow },
     { value: "25%", label: "Data Accuracy Improvement", icon: Database },
@@ -26,17 +28,17 @@ export default function AboutPage() {
 
   const experience = [
     {
-      year: "2024 — Present",
+      year: "2024 – Present",
       title: "Operations & Business Systems",
       text: "Focused on workflow redesign, operational visibility, reporting systems, and cross-functional process alignment.",
     },
     {
-      year: "2023 — Present",
+      year: "2023 – Present",
       title: "Workflow Optimization Projects",
       text: "Built operational structures that reduced reporting delays, improved accountability, and streamlined execution.",
     },
     {
-      year: "2023 — Present",
+      year: "2023 – Present",
       title: "Systems Analysis & Reporting",
       text: "Created reporting frameworks, dashboard systems, and process documentation for operational clarity.",
     },
@@ -80,12 +82,12 @@ export default function AboutPage() {
     {
       school: "Bow Valley College",
       program: "Business Administration Diploma",
-      date: "Jan 2019 — Dec 2019",
+      date: "Jan 2019 – Dec 2019",
     },
     {
       school: "Bow Valley College",
       program: "Bachelor of Management",
-      date: "Mar 2020 — Apr 2022",
+      date: "Mar 2020 – Apr 2022",
     },
   ];
 
@@ -93,7 +95,13 @@ export default function AboutPage() {
     <div className="aboutPage">
       <section className="aboutHero">
         <div className="aboutHeroCopy">
-          <p className="sectionEyebrow">About Me</p>
+          <LiveText
+            section="about"
+            field="tag"
+            fallback="About Me"
+            as="p"
+            className="sectionEyebrow"
+          />
           <h1>
             Building operational systems that create <span>clarity.</span>
           </h1>
@@ -105,7 +113,13 @@ export default function AboutPage() {
         </div>
 
         <div className="aboutHeroImage">
-          <img src="/portrait-2.png" alt="David Ezieshi" />
+          <LiveImage
+            slot="about-portrait"
+            fallbackSrc="/portrait-2.png"
+            alt="David Ezieshi"
+            width={800}
+            height={1000}
+          />
         </div>
       </section>
 

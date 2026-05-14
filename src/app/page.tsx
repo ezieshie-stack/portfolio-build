@@ -6,18 +6,26 @@ import { OperationalFramework } from "@/components/home/OperationalFramework";
 import { WorkflowDiagramSection } from "@/components/home/WorkflowDiagramSection";
 import { FeaturedProjectsSlider } from "@/components/home/FeaturedProjectsSlider";
 import { CurrentlyExploring } from "@/components/home/CurrentlyExploring";
+import { home as homeDefault } from "@/lib/content";
+import { deepMerge, fetchSectionContent } from "@/lib/cms";
 
-export default function Home() {
+export default async function Home() {
+  const override = await fetchSectionContent<typeof homeDefault>("home");
+  const home = deepMerge(homeDefault, override);
+
   return (
     <>
-      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12 pt-0 md:pt-8 lg:pt-12">
-        <Hero />
+      <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 pt-0 md:pt-8 lg:pt-12">
+        <Hero data={home} />
       </div>
       <CoreCapabilities />
       <AboutPreview />
       <ToolsCarousel />
-      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12">
-        <OperationalFramework />
+      <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
+        <OperationalFramework
+          diagram={home.diagram}
+          metricCard={home.metricCard}
+        />
         <WorkflowDiagramSection />
       </div>
       <FeaturedProjectsSlider />

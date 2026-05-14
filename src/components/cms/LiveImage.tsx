@@ -51,6 +51,7 @@ export async function LiveImage({
       width={width}
       height={height}
       priority={priority}
+      quality={90}
       className={className}
       sizes={sizes}
       style={style}
