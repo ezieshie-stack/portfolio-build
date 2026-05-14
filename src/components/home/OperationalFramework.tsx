@@ -27,7 +27,7 @@ export function OperationalFramework({
 } = {}) {
   return (
     <Reveal as="section" className="operational-framework">
-      <p className="operational-framework__eyebrow">Operational Framework</p>
+      <p className="operational-framework__eyebrow">My Approach</p>
       <div className="operational-framework__cluster">
         <SystemCluster diagram={diagram} metricCard={metricCard} />
       </div>

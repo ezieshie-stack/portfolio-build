@@ -24,49 +24,51 @@ export const site = {
 } as const;
 
 export const home = {
-  tag: "OPERATIONS & BUSINESS SYSTEMS ANALYST",
-  titleStart: "Designing Systems That Drive",
-  titleHighlight: "Operational Excellence.",
+  tag: "OPERATIONS & PROCESS ANALYST · TORONTO, CANADA",
+  titleStart: "Diagnosing Workflows.",
+  titleHighlight: "Building The Fix.",
   subtitle:
-    "I analyze, design, and optimize operational workflows and systems that improve efficiency, align teams, and drive measurable business outcomes.",
+    "I diagnose operational bottlenecks, redesign the workflows that cause them, and prototype the internal tools that ship the fix. Early-career analyst. Toronto.",
   primaryCta: { label: "View My Work", href: "/work" },
   secondaryCta: { label: "Let's Connect", href: "/contact" },
   competencies: [
-    { label: "Process Optimization", icon: "Workflow" as const },
-    { label: "Data-Informed Decisions", icon: "BarChart3" as const },
-    { label: "Cross-Functional Alignment", icon: "Users" as const },
-    { label: "Continuous Improvement", icon: "RefreshCw" as const },
+    { label: "Process Diagnosis", icon: "Workflow" as const },
+    { label: "Workflow Redesign", icon: "GitCompare" as const },
+    { label: "BPMN Mapping", icon: "Waypoints" as const },
+    { label: "Bottleneck Analysis", icon: "Filter" as const },
+    { label: "Rapid Prototyping", icon: "Sparkles" as const },
+    { label: "Internal Tooling", icon: "Wrench" as const },
   ],
   diagram: {
-    centerLabel: "Process & Workflow Design",
+    centerLabel: "Diagnose and Redesign",
     centerIcon: "GitBranch" as const,
     nodes: [
       {
-        label: "Stakeholder Alignment",
+        label: "Stakeholder Interviews",
         position: "top-left" as const,
         icon: "Users" as const,
       },
       {
-        label: "Data & System Inputs",
+        label: "Current-State Data",
         position: "top-right" as const,
         icon: "Database" as const,
       },
       {
-        label: "Implementation & Coordination",
+        label: "Documentation and Hand Off",
         position: "mid-bottom" as const,
         icon: "Settings" as const,
       },
       {
-        label: "Operational Outcomes",
+        label: "Prototype the Tool",
         position: "mid-right" as const,
         icon: "CheckCircle2" as const,
       },
     ],
   },
   metricCard: {
-    label: "PROCESS EFFICIENCY",
-    value: "28%",
-    sublabel: "Improvement vs. Previous Quarter",
+    label: "MY METHOD",
+    value: "Diagnose. Redesign. Prototype.",
+    sublabel: "Three steps. One analyst. No engineering ticket required.",
   },
   featured: {
     tag: "FEATURED PROJECT",
