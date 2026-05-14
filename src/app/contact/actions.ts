@@ -71,7 +71,7 @@ export async function submitContact(
 
   try {
     const resend = new Resend(apiKey);
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: ["Ezieshie@gmail.com"],
       replyTo: email,
@@ -83,9 +83,19 @@ export async function submitContact(
         `Subject: ${subject || "(no subject)"}\n\n` +
         `${message}\n`,
     });
+
+    // Resend SDK returns { data, error } instead of throwing. Inspect it.
+    if (result.error) {
+      console.error("[contact] Resend returned error:", result.error);
+      return {
+        status: "error",
+        message: `Couldn't send: ${result.error.message ?? "unknown error"}.`,
+      };
+    }
+    console.log("[contact] Resend accepted, id:", result.data?.id);
     return { status: "ok" };
   } catch (err) {
-    console.error("[contact] Resend send failed:", err);
+    console.error("[contact] Resend send threw:", err);
     return {
       status: "error",
       message:
