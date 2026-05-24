@@ -1,7 +1,7 @@
 import {
-  LayoutDashboard,
-  Sparkles,
-  FileText,
+  BarChart3,
+  Bot,
+  Database,
   Workflow,
   type LucideIcon,
 } from "lucide-react";
@@ -9,10 +9,10 @@ import {
 type Item = { label: string; icon: LucideIcon };
 
 const items: Item[] = [
-  { label: "Workflow Automation Systems", icon: Workflow },
-  { label: "Operational Dashboards", icon: LayoutDashboard },
-  { label: "AI-Assisted Operations", icon: Sparkles },
-  { label: "Process Documentation Frameworks", icon: FileText },
+  { label: "Advanced SQL & Window Functions", icon: Database },
+  { label: "RPA with UiPath & Power Automate", icon: Bot },
+  { label: "ServiceNow Workflows", icon: Workflow },
+  { label: "BI Dashboards (Tableau / Power BI)", icon: BarChart3 },
 ];
 
 export function CurrentlyExploring() {

@@ -2,7 +2,7 @@ export const site = {
   brand: {
     initials: "DE",
     name: "David Ezieshi",
-    role: "Operations & Business Systems Analyst",
+    role: "Operations & Process Analyst",
   },
   navLinks: [
     { label: "Home", href: "/" },
