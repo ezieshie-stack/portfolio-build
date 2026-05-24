@@ -1,78 +1,123 @@
-import Link from "next/link";
 import {
   ArrowUpRight,
-  Calendar,
   CheckCircle2,
-  Clock,
+  Crosshair,
   Database,
+  Film,
+  LayoutDashboard,
+  LayoutGrid,
   LineChart,
-  Search,
-  Settings,
+  Rocket,
+  Server,
+  Target,
   Users,
+  Workflow,
+  type LucideIcon,
 } from "lucide-react";
 
-const impactFlow = [
-  { label: "Process Discovery", icon: Search },
-  { label: "Workflow Redesign", icon: Settings },
-  { label: "System Implementation", icon: Database },
-  { label: "Team Training", icon: Users },
-  { label: "Operational Execution", icon: Settings },
-  { label: "Reporting & Analytics", icon: LineChart },
-  { label: "Performance Monitoring", icon: LineChart },
-  { label: "Continuous Improvement", icon: CheckCircle2 },
-];
-
-const metricMeta = [
-  { label: "Increase in Operational Efficiency", icon: LineChart },
-  { label: "Reduction in Response Time", icon: Clock },
-  { label: "Improvement in Data Accuracy", icon: Database },
-  { label: "Hours Saved Monthly", icon: Users },
-];
-
-const highlights = [
-  "Streamlined 12+ operational workflows",
-  "Introduced role-based access and data governance",
-  "Built real-time dashboards for operational visibility",
-  "Reduced manual reporting time by 32%",
-];
+type Metric = { value: string; label: string; icon: LucideIcon };
+type ProjectLink = { label: string; href: string };
 
 export type Project = {
   title: string;
   category: string;
   description: string;
-  metricValues: [string, string, string, string];
+  meta: [string, string];
+  metrics: [Metric, Metric, Metric, Metric];
+  highlights: string[];
+  outcomeNote: string;
+  builtWith: string[];
+  links: ProjectLink[];
 };
 
 export const projects: Project[] = [
   {
-    title: "Fiitco: Fitness Platform Process Redesign",
-    category: "Process Redesign",
+    title: "Fiitco: Fitness Operations Platform",
+    category: "Operations Platform",
     description:
-      "Redesigned end-to-end workflows, implemented role-based systems, and built operational reporting that improved efficiency and team accountability.",
-    metricValues: ["28%", "32%", "25%", "20+"],
+      "An end-to-end operations platform for a fitness business, built solo on Next.js 16 and Convex. Spans 27 modules and a 32-table data model covering class programming, instructor scheduling, delivery tracking, and a self-service CMS for the public website.",
+    meta: ["Full-stack build", "Live in production"],
+    metrics: [
+      { value: "27", label: "Operational Modules", icon: LayoutGrid },
+      { value: "32", label: "Data Tables", icon: Database },
+      { value: "9", label: "Backend Services", icon: Server },
+      { value: "Live", label: "In Production", icon: Rocket },
+    ],
+    highlights: [
+      "27 operational and website-CMS modules in one platform",
+      "Role-based access with custom auth and approval workflows",
+      "Instructor scheduling with automated buffer-conflict detection",
+      "Auto-generates a Word business-analysis report (scope, data model, risk matrix)",
+    ],
+    outcomeNote:
+      "A production operations tool built by one analyst, not an engineering team.",
+    builtWith: ["Next.js 16", "Convex", "TypeScript", "TipTap"],
+    links: [
+      { label: "View Repo", href: "https://github.com/ezieshie-stack/Fiitco-Operation" },
+      { label: "Live Site", href: "https://www.fiitco.ca" },
+    ],
   },
   {
-    title: "SLA & Escalation Optimization",
-    category: "Workflow Analysis",
+    title: "Telco Customer Churn Analysis",
+    category: "Churn Analytics",
     description:
-      "Analyzed escalation patterns, support bottlenecks, and SLA gaps to improve response workflows and operational visibility.",
-    metricValues: ["-28%", "-19%", "94%", "100%"],
+      "A churn analysis of 7,043 telecom customers using SQL segmentation and a logistic-regression model. Identifies the contract, tenure, and service patterns most predictive of churn and recommends operational retention interventions.",
+    meta: ["Public IBM dataset", "Solo analysis"],
+    metrics: [
+      { value: "7,043", label: "Customers Analyzed", icon: Users },
+      { value: "0.86", label: "Model ROC-AUC", icon: LineChart },
+      { value: "69%", label: "Churn Precision", icon: Target },
+      { value: "58%", label: "Churn Recall", icon: Crosshair },
+    ],
+    highlights: [
+      "Segmented 7,043 customers across contract, tenure, and service tiers with 8 SQL queries",
+      "Chi-square validated contract type as a churn driver (p < 5.8e-258)",
+      "Logistic regression at 0.86 ROC-AUC, 69% precision on flagged churners",
+      "Surfaced fiber-without-tech-support (~49% churn) as the highest-risk segment",
+    ],
+    outcomeNote:
+      "Month-to-month contracts emerged as the top churn driver, statistically validated.",
+    builtWith: ["SQLite", "Python", "scikit-learn", "SciPy"],
+    links: [
+      { label: "View Repo", href: "https://github.com/ezieshie-stack/telco-churn-analysis" },
+      {
+        label: "View Analysis",
+        href: "https://htmlpreview.github.io/?https://github.com/ezieshie-stack/telco-churn-analysis/blob/main/Telco%20Customer%20Churn%20Analysis.html",
+      },
+    ],
   },
   {
-    title: "Fraud Detection Analysis",
-    category: "Data Analysis",
+    title: "Movie Industry Profitability Analysis",
+    category: "Analytics Dashboard",
     description:
-      "Used SQL-driven analysis to identify suspicious patterns, high-risk transaction behavior, and reporting opportunities.",
-    metricValues: ["SQL", "Risk", "Patterns", "Insights"],
+      "An end-to-end analytics project on ~5,000 films from TMDB and IMDB. A 9-stage Python ETL pipeline feeds an 8-stage investment-to-profitability funnel and a 5-page interactive Streamlit dashboard that traces where studio capital is won and lost.",
+    meta: ["Public TMDB + IMDB data", "Live dashboard"],
+    metrics: [
+      { value: "5,000+", label: "Films Analyzed", icon: Film },
+      { value: "42", label: "Features Engineered", icon: Database },
+      { value: "9", label: "ETL Stages", icon: Workflow },
+      { value: "5", label: "Dashboard Pages", icon: LayoutDashboard },
+    ],
+    highlights: [
+      "Merged TMDB (4,803) and IMDB (5,043) into a ~5,000-film master dataset, 42 features",
+      "9-stage Python ETL pipeline outputting 6 analysis-ready datasets",
+      "8-stage investment-to-profitability funnel model",
+      "5-page interactive Streamlit dashboard with filterable movie browser",
+    ],
+    outcomeNote:
+      "An investment-funnel model that traces where film capital is lost, stage by stage.",
+    builtWith: ["Python", "pandas", "Streamlit", "Tableau"],
+    links: [
+      { label: "View Repo", href: "https://github.com/ezieshie-stack/movies-dataset" },
+      {
+        label: "Live Dashboard",
+        href: "https://movies-dataset-uhi6ckeurkswnkfjk5kree.streamlit.app",
+      },
+    ],
   },
 ];
 
 export function FeaturedProjectCard({ project }: { project: Project }) {
-  const metrics = metricMeta.map((meta, i) => ({
-    ...meta,
-    value: project.metricValues[i],
-  }));
-
   return (
     <article className="featuredProjectCard">
       <div className="projectIntro">
@@ -84,27 +129,33 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
 
         <div className="projectMeta">
           <span>
-            <Calendar size={16} /> Mar 2024 – May 2024
+            <CheckCircle2 size={16} /> {project.meta[0]}
           </span>
           <span>
-            <Users size={16} /> Cross-functional Project
+            <Rocket size={16} /> {project.meta[1]}
           </span>
         </div>
 
         <div className="projectActions">
-          <Link href="/work/fiitco" className="primaryAction">
-            View Case Study <ArrowUpRight size={16} />
-          </Link>
-          <Link href="/work/fiitco" className="secondaryAction">
-            Project Details
-          </Link>
+          {project.links.map((link, i) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={i === 0 ? "primaryAction" : "secondaryAction"}
+            >
+              {link.label}
+              {i === 0 ? <ArrowUpRight size={16} /> : null}
+            </a>
+          ))}
         </div>
 
         <div className="keyHighlights">
           <p>Key Highlights</p>
 
           <ul>
-            {highlights.map((h) => (
+            {project.highlights.map((h) => (
               <li key={h}>{h}</li>
             ))}
           </ul>
@@ -116,7 +167,7 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
           <p className="panelTitle">Project Outcomes</p>
 
           <div className="metricsGrid">
-            {metrics.map((metric) => {
+            {project.metrics.map((metric) => {
               const Icon = metric.icon;
 
               return (
@@ -131,35 +182,22 @@ export function FeaturedProjectCard({ project }: { project: Project }) {
 
           <div className="outcomeNote">
             <CheckCircle2 size={22} />
-            <span>
-              Delivered measurable improvement across processes, people, and
-              performance.
-            </span>
+            <span>{project.outcomeNote}</span>
           </div>
         </div>
 
         <div className="projectFlow">
-          <p className="panelTitle">Project Impact Flow</p>
+          <p className="panelTitle">Built With</p>
 
-          <div className="flowGrid">
-            {impactFlow.map((step, index) => {
-              const Icon = step.icon;
-
-              return (
-                <div className="flowStep" key={step.label}>
-                  <Icon size={22} />
-                  <span>{step.label}</span>
-
-                  {index !== impactFlow.length - 1 && (
-                    <span className="flowArrow">→</span>
-                  )}
-                </div>
-              );
-            })}
+          <div className="builtWithStrip">
+            {project.builtWith.map((tech) => (
+              <span className="techChip" key={tech}>
+                {tech}
+              </span>
+            ))}
           </div>
         </div>
       </div>
-
     </article>
   );
 }
