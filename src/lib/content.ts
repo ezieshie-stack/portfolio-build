@@ -255,69 +255,62 @@ export const processPage = {
     title: "Systems designed for execution.",
     highlight: "execution.",
     description:
-      "My process focuses on transforming operational complexity into scalable systems that improve efficiency, visibility, and organizational alignment.",
+      "My process turns operational complexity into working systems: I diagnose the bottleneck, redesign the workflow, and prototype the tool that ships the fix.",
   },
   executionTag: "// EXECUTION MODEL",
   steps: [
     {
       number: "01",
-      subtitle: "Understanding the operational landscape",
-      title: "Discovery & Analysis",
+      subtitle: "Stakeholder discovery",
+      title: "Listen",
       description:
-        "I begin by auditing workflows, stakeholder pain points, business objectives, and existing systems to uncover inefficiencies and identify opportunities for optimization.",
+        "I sit with the people who live the process, walk the current workflow end to end, and note exactly where they wince. The goal is the real problem, not just the one everyone complains about.",
       tags: [
         "Stakeholder Interviews",
-        "Workflow Mapping",
-        "Requirements Gathering",
-        "Gap Analysis",
+        "Requirements Elicitation",
+        "Current-State Walkthrough",
       ],
     },
     {
       number: "02",
-      subtitle: "Building scalable operational frameworks",
-      title: "Systems Design",
+      subtitle: "The as-is in BPMN",
+      title: "Map",
       description:
-        "After identifying constraints and opportunities, I design operational systems that simplify execution, improve visibility, and align teams around measurable outcomes.",
-      tags: [
-        "Process Architecture",
-        "Automation Opportunities",
-        "Documentation Systems",
-        "KPI Framework Design",
-      ],
+        "I draw the current state in BPMN with swimlanes, gateways, and handoffs, so the bottleneck is visible to everyone before anyone proposes a fix.",
+      tags: ["BPMN 2.0", "Swimlane Mapping", "Process Documentation"],
     },
     {
       number: "03",
-      subtitle: "Deploying structured solutions",
-      title: "Implementation",
+      subtitle: "Quantify the bottleneck",
+      title: "Diagnose",
       description:
-        "I collaborate with stakeholders and cross-functional teams to implement systems efficiently while ensuring usability, adoption, and long-term sustainability.",
-      tags: [
-        "Cross-team Coordination",
-        "System Deployment",
-        "Process Documentation",
-        "Change Management",
-      ],
+        "I find where time, cost, quality, or volume is leaking and put a number on it, so the redesign targets the real constraint instead of a symptom.",
+      tags: ["Bottleneck Analysis", "Root Cause Analysis", "Gap Analysis"],
     },
     {
       number: "04",
-      subtitle: "Continuous improvement through data",
-      title: "Optimization",
+      subtitle: "Build the fix",
+      title: "Prototype",
       description:
-        "Operational excellence is iterative. I monitor metrics, gather feedback, and continuously refine workflows to improve performance and scalability over time.",
-      tags: [
-        "Performance Monitoring",
-        "Operational Reporting",
-        "Workflow Refinement",
-        "Continuous Iteration",
-      ],
+        "I redesign the to-be workflow and, when the engineering queue can't move fast enough, prototype the tool that delivers it using internal-tools platforms and AI-accelerated builds.",
+      tags: ["To-Be Design", "Rapid Prototyping", "Internal Tooling"],
+    },
+    {
+      number: "05",
+      subtitle: "Document and transition",
+      title: "Hand Off",
+      description:
+        "I document the change in plain language, train the user, and transition ownership, so the fix sticks after I step away.",
+      tags: ["Documentation", "User Acceptance Testing", "Change Management"],
     },
   ],
-  metricsTag: "// PERFORMANCE IMPACT",
+  metricsTag: "// RECENT RESULTS",
   metrics: [
-    { value: "4.2×", label: "Workflow Efficiency", icon: "chart" },
-    { value: "65%", label: "Process Reduction", icon: "clock" },
-    { value: "100%", label: "Visibility Coverage", icon: "eye" },
+    { value: "27", label: "Module platform delivered (FIIT Co.)", icon: "chart" },
+    { value: "0.86", label: "Churn model ROC-AUC (Telco)", icon: "eye" },
+    { value: "5,000+", label: "Records analyzed (Movies)", icon: "data" },
   ],
+  resultsCta: { label: "See these phases applied — View Work", href: "/work" },
 };
 
 export type Article = {

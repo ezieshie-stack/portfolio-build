@@ -26,6 +26,15 @@ function MetricIcon({ name }: { name: string }) {
       </svg>
     );
   }
+  if (name === "data") {
+    return (
+      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+        <ellipse cx="12" cy="5" rx="8" ry="3" />
+        <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
+        <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+      </svg>
+    );
+  }
   return (
     <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
       <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
@@ -144,6 +153,13 @@ export default async function ProcessPage() {
             </article>
           ))}
         </div>
+
+        <a
+          href={processPage.resultsCta.href}
+          className="inline-flex items-center gap-2 mt-8 text-[#c4b5fd] hover:text-white transition-colors text-sm"
+        >
+          {processPage.resultsCta.label} →
+        </a>
       </Reveal>
     </PageShell>
   );
