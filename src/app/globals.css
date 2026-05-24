@@ -4942,3 +4942,40 @@ button:focus-visible {
 .form-input-error:focus {
   outline-color: #f87171;
 }
+
+/* ============================================================
+   Tools + Skills carousels: full-bleed marquees + tightened
+   gap between the two adjacent strips.
+   Appended last so it wins the cascade over the shared
+   `.coreCapabilities, .aboutPreview, .toolsSection` box rule
+   and the global vertical-rhythm pass.
+   ============================================================ */
+.toolsSection {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* First marquee (tools): keep its top gap from About, tighten the
+   bottom so it sits close to the skills strip below it. */
+.toolsSection:not(.skillsSection) {
+  padding-bottom: 18px;
+}
+
+/* Second marquee (skills): tighten the top so it hugs the tools
+   strip; its bottom keeps the full section gap from My Approach. */
+.skillsSection {
+  padding-top: 18px;
+}
+
+@media (max-width: 767px) {
+  .toolsSection:not(.skillsSection) {
+    padding-bottom: 12px;
+  }
+
+  .skillsSection {
+    padding-top: 12px;
+  }
+}
