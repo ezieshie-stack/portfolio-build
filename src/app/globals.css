@@ -2140,7 +2140,7 @@ button:focus-visible {
 .educationSection h2,
 .approachSection h2 {
   font-size: var(--text-display);
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.06em;
 }
 
