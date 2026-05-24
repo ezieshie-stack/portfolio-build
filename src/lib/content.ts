@@ -17,7 +17,7 @@ export const site = {
     text: "© [YEAR] David Ezieshi. All rights reserved.",
     links: [
       { label: "LinkedIn", href: "https://www.linkedin.com/in/david-ezieshi/" },
-      { label: "Email", href: "mailto:Ezieshie@gmail.com" },
+      { label: "Email", href: "mailto:ezieshie@gmail.com" },
       { label: "GitHub", href: "https://github.com/ezieshie-stack" },
     ],
   },
@@ -370,19 +370,19 @@ export const insights = {
 
 export const contact = {
   tag: "GET IN TOUCH",
-  title: "Let's build the systems that make your operations run.",
+  title: "Let's diagnose the problem and ship the fix.",
   intro:
-    "Whether you're untangling a workflow, scoping a new internal tool, or trying to turn scattered data into a real reporting story, I'm always open to conversations that move things from ambiguity to action.",
+    "Whether you're hiring for an operations or analyst role, untangling a workflow, or scoping an internal tool, I'm open to conversations that move things from ambiguity to action.",
   channels: [
-    { label: "Email", value: "Ezieshie@gmail.com", href: "mailto:Ezieshie@gmail.com" },
+    { label: "Email", value: "ezieshie@gmail.com", href: "mailto:ezieshie@gmail.com" },
     { label: "LinkedIn", value: "linkedin.com/in/david-ezieshi", href: "https://www.linkedin.com/in/david-ezieshi/" },
     { label: "GitHub", value: "github.com/ezieshie-stack", href: "https://github.com/ezieshie-stack" },
-    { label: "Availability", value: "Open to operations, systems analysis, and business analyst roles, plus short-term project work." },
+    { label: "Availability", value: "Toronto-based, eligible to work in Canada. Open to operations, process, and business analyst roles, plus short-term project work." },
   ],
   formTitle: "Send a Message",
   altCtas: [
     { label: "View My LinkedIn", href: "https://www.linkedin.com/in/david-ezieshi/" },
-    { label: "Email Me", href: "mailto:Ezieshie@gmail.com" },
+    { label: "Email Me", href: "mailto:ezieshie@gmail.com" },
   ],
 };
 

@@ -90,7 +90,7 @@ export function PortfolioFooter() {
           <a href="https://www.linkedin.com/in/david-ezieshi/" target="_blank" rel="noreferrer">
             <LinkedInIcon size={16} /> LinkedIn
           </a>
-          <a href="mailto:Ezieshie@gmail.com">
+          <a href="mailto:ezieshie@gmail.com">
             <Mail size={16} /> Email
           </a>
           <a href="https://github.com/ezieshie-stack" target="_blank" rel="noreferrer">
