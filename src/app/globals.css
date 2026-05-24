@@ -2121,9 +2121,9 @@ button:focus-visible {
 .aboutSplit,
 .educationSection,
 .approachSection {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 96px 64px;
+  padding: 96px clamp(24px, 5vw, 80px);
 }
 
 .aboutHero {
@@ -2166,9 +2166,9 @@ button:focus-visible {
 .statsGrid,
 .drivesMe,
 .strengthsSection {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 64px 96px;
+  padding: 0 clamp(24px, 5vw, 80px) 96px;
 }
 
 .statsGrid,
