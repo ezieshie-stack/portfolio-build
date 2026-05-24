@@ -39,14 +39,15 @@ export function PortfolioFooter() {
           <h2>
             Let’s Build
             <br />
-            Better Systems.
+            The Fix.
           </h2>
         </div>
 
         <div className="footerCTARight">
           <p>
-            Open to opportunities in operations, systems analysis, workflow
-            optimization, and business process improvement.
+            Open to operations, process, and business analyst roles. I
+            diagnose workflows, redesign them, and prototype the tools that
+            fix them.
           </p>
 
           <div className="footerCTAButtons">
@@ -65,7 +66,7 @@ export function PortfolioFooter() {
         <div className="footerBrand">
           <div className="footerLogo">DE</div>
           <h3>David Ezieshi</h3>
-          <p>Operations & Business Systems Analyst</p>
+          <p>Operations & Process Analyst</p>
           <span>
             Building systems that improve clarity, workflow design, and
             operational execution.
@@ -89,7 +90,7 @@ export function PortfolioFooter() {
           <a href="https://www.linkedin.com/in/david-ezieshi/" target="_blank" rel="noreferrer">
             <LinkedInIcon size={16} /> LinkedIn
           </a>
-          <a href="mailto:Ezieshie@gmail.com">
+          <a href="mailto:ezieshie@gmail.com">
             <Mail size={16} /> Email
           </a>
           <a href="https://github.com/ezieshie-stack" target="_blank" rel="noreferrer">
@@ -100,8 +101,8 @@ export function PortfolioFooter() {
         <div className="footerColumn">
           <h4>Availability</h4>
           <p>
-            Open to roles and projects across operations, systems analysis,
-            process improvement, and business analysis.
+            Toronto-based, eligible to work in Canada. Open to operations,
+            process, and business analyst roles.
           </p>
 
           <a href="/contact" className="footerInlineCTA">

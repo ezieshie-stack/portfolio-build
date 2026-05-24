@@ -2121,9 +2121,9 @@ button:focus-visible {
 .aboutSplit,
 .educationSection,
 .approachSection {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 96px 64px;
+  padding: 96px clamp(24px, 5vw, 80px);
 }
 
 .aboutHero {
@@ -2140,7 +2140,7 @@ button:focus-visible {
 .educationSection h2,
 .approachSection h2 {
   font-size: var(--text-display);
-  line-height: 0.95;
+  line-height: 1.05;
   letter-spacing: -0.06em;
 }
 
@@ -2166,9 +2166,9 @@ button:focus-visible {
 .statsGrid,
 .drivesMe,
 .strengthsSection {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 64px 96px;
+  padding: 0 clamp(24px, 5vw, 80px) 96px;
 }
 
 .statsGrid,
@@ -4941,4 +4941,65 @@ button:focus-visible {
 }
 .form-input-error:focus {
   outline-color: #f87171;
+}
+
+/* ============================================================
+   Tools + Skills carousels: full-bleed marquees + tightened
+   gap between the two adjacent strips.
+   Appended last so it wins the cascade over the shared
+   `.coreCapabilities, .aboutPreview, .toolsSection` box rule
+   and the global vertical-rhythm pass.
+   ============================================================ */
+.toolsSection {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* First marquee (tools): keep its top gap from About, tighten the
+   bottom so it sits close to the skills strip below it. */
+.toolsSection:not(.skillsSection) {
+  padding-bottom: 18px;
+}
+
+/* Second marquee (skills): tighten the top so it hugs the tools
+   strip; its bottom keeps the full section gap from My Approach. */
+.skillsSection {
+  padding-top: 18px;
+}
+
+@media (max-width: 767px) {
+  .toolsSection:not(.skillsSection) {
+    padding-bottom: 12px;
+  }
+
+  .skillsSection {
+    padding-top: 12px;
+  }
+}
+
+/* ============================================================
+   Featured project card: "Built With" tech-chip strip
+   (replaces the old 8-step Project Impact Flow)
+   ============================================================ */
+.builtWithStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.techChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.12);
+  color: #c4b5fd;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
 }

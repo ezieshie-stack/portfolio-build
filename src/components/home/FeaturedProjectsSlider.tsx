@@ -33,7 +33,7 @@ export function FeaturedProjectsSlider() {
   return (
     <section className="featuredProjectSection">
       <div className="featuredProjectHeader">
-        <h2 className="featuredTitle">Featured Project</h2>
+        <h2 className="featuredTitle">Featured Projects</h2>
       </div>
 
       <div

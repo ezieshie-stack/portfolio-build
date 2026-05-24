@@ -43,11 +43,21 @@ export default async function ProjectDetailPage({
         <p className="text-[color:var(--text-dim)] max-w-prose mb-8">
           {project.summary}
         </p>
-        <div
-          className="glass-card aspect-[16/9] flex items-center justify-center text-[color:var(--text-dim)] text-xs tracking-[0.2em] uppercase"
-        >
-          [Process Ecosystem Diagram Placeholder]
-        </div>
+        {project.links.length > 0 ? (
+          <div className="flex flex-wrap gap-3">
+            {project.links.map((link, i) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={i === 0 ? "btn-pill btn-primary" : "btn-pill"}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        ) : null}
       </Reveal>
 
       <Reveal as="section" className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">

@@ -1,45 +1,56 @@
 import {
   ArrowLeftRight,
-  Bug,
-  Calculator,
+  Bot,
+  BookOpen,
   ClipboardCheck,
-  Layers,
+  Database,
+  FileText,
+  GitCompare,
+  Hammer,
   MessagesSquare,
-  Network,
-  Rocket,
+  Recycle,
+  Scale,
   Search,
-  Sigma,
   Sparkles,
   Timer,
+  TrendingUp,
   Waypoints,
-  Workflow,
   type LucideIcon,
 } from "lucide-react";
 
 type Skill = { name: string; Icon: LucideIcon };
 
 /**
- * Mid-Level Skillset — grouped (in order) by:
- *   1. Business Intelligence Architect
- *   2. Automation & Efficiency Lead
+ * Operations & Process Analyst skillset (16 cards).
+ * Grouped (carousel scrolls in this order):
+ *   1. Process Analysis
+ *   2. Business Analysis Practice
+ *   3. Operations Practice
+ *   4. Analytical
+ *   5. Prototyping & Build
  */
 const skills: Skill[] = [
-  // Business Intelligence Architect
-  { name: "Common Table Expressions", Icon: Layers },
-  { name: "Window Functions", Icon: Sigma },
-  { name: "Semantic Layer Calculation", Icon: Calculator },
-  { name: "Star Schema Navigation", Icon: Network },
-  { name: "Data Lineage Auditing", Icon: Search },
-  // Automation & Efficiency Lead
-  { name: "To-Be Workflow Optimization", Icon: Workflow },
-  { name: "BPMN 2.0 Compliance Mapping", Icon: Waypoints },
-  { name: "SLA Bottleneck Diagnostics", Icon: Timer },
-  { name: "User Acceptance Testing", Icon: ClipboardCheck },
-  { name: "Requirements Elicitation", Icon: MessagesSquare },
-  { name: "AI UI Prototyping", Icon: Sparkles },
-  { name: "API Variable Mapping", Icon: ArrowLeftRight },
-  { name: "Automated Error Triage", Icon: Bug },
-  { name: "Independent Feature Delivery", Icon: Rocket },
+  // Process Analysis
+  { name: "As-Is / To-Be Workflow Mapping", Icon: GitCompare },
+  { name: "BPMN 2.0 Diagramming", Icon: Waypoints },
+  { name: "SLA & Bottleneck Diagnostics", Icon: Timer },
+  { name: "Stakeholder Interviews", Icon: MessagesSquare },
+  // Business Analysis Practice
+  { name: "Requirements Elicitation", Icon: FileText },
+  { name: "User Acceptance Testing (UAT)", Icon: ClipboardCheck },
+  { name: "Process Improvement", Icon: TrendingUp },
+  // Operations Practice
+  { name: "RPA Workflow Design", Icon: Bot },
+  { name: "Standard Operating Procedures (SOPs)", Icon: BookOpen },
+  { name: "Root Cause Analysis", Icon: Search },
+  { name: "Continuous Improvement (Lean)", Icon: Recycle },
+  // Analytical
+  { name: "SQL Analysis (Window Functions, Aggregations)", Icon: Database },
+  { name: "Risk Scoring & Feature Engineering", Icon: Scale },
+  { name: "ETL Pipeline Design", Icon: ArrowLeftRight },
+  // Prototyping & Build
+  { name: "AI-Accelerated Prototyping", Icon: Sparkles },
+  { name: "Internal Tool Prototyping", Icon: Hammer },
 ];
 
 export function SkillsCarousel() {

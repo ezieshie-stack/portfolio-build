@@ -22,6 +22,7 @@ const metricIconMap: Record<string, LucideIcon> = {
   Rocket,
   Layers,
   Users,
+  GitBranch,
 };
 
 const philosophyIconMap: Record<string, LucideIcon> = {

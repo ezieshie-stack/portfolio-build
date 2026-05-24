@@ -35,7 +35,7 @@ export function HeroSocialLinks() {
       href: "https://www.linkedin.com/in/david-ezieshi/",
       icon: LinkedInIcon,
     },
-    { label: "Email", href: "mailto:Ezieshie@gmail.com", icon: Mail },
+    { label: "Email", href: "mailto:ezieshie@gmail.com", icon: Mail },
     { label: "Resume", href: "/resume", icon: FileText },
     {
       label: "GitHub",

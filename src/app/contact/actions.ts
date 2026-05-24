@@ -63,7 +63,7 @@ export async function submitContact(
     return {
       status: "error",
       message:
-        "Email service isn't configured yet. Please email Ezieshie@gmail.com directly.",
+        "Email service isn't configured yet. Please email ezieshie@gmail.com directly.",
     };
   }
 
