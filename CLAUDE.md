@@ -127,6 +127,61 @@ convex/
 
 ---
 
+## Writing insights (MDX workflow)
+
+Articles can be authored as MDX files committed straight to this repo.
+The slug page picks the first source it finds, in this priority order:
+
+1. **Convex** — articles published via the admin app
+2. **MDX file** — `src/content/insights/<slug>.mdx`
+3. **Static fallback** — entries in `src/lib/content.ts` (no body → placeholder)
+
+### Adding an article via MDX
+
+1. Create `src/content/insights/<slug>.mdx` with YAML frontmatter:
+
+   ```mdx
+   ---
+   title: "Your title"
+   excerpt: "One-sentence hook (≤30 words)."
+   category: "Process"          # also: Tools, Build Notes, Ops Thinking, Opinion
+   date: "June 4, 2026"         # any human-readable date
+   readTime: "5 min read"
+   subtitle: "Optional deck line under the title"
+   pills: ["Workflow", "AI"]    # 2-3 tags, optional
+   featured: false              # optional
+   ---
+
+   Your markdown body here. Standard markdown plus these components:
+
+   <Callout type="story">An aside.</Callout>
+   <Figure src="/insights/<slug>/diagram.png" alt="..." caption="..." />
+   <VideoEmbed src="/insights/<slug>/walkthrough.mp4" />
+   <VideoEmbed src="https://youtu.be/abc123" />   {/* YouTube auto-detected */}
+   ```
+
+2. Drop any images / videos into `public/insights/<slug>/`.
+3. Commit + push → Vercel deploys → live at `/insights/<slug>`.
+
+### MDX components available
+
+| Component | Use |
+|---|---|
+| `<Callout type="story\|note\|warning\|key">` | Bordered aside with label |
+| `<Figure src caption alt>` | Image + caption |
+| `<VideoEmbed src caption poster>` | HTML5 video or YouTube (auto-detected from URL) |
+
+Standard markdown (headings, lists, links, code blocks, GFM tables) all
+work via `remark-gfm`.
+
+### Drafting workflow
+
+Drafts happen on **claude.ai** in a project tuned for portfolio voice
+(see Project instructions saved elsewhere). When a draft is ready, paste
+the finished MDX block into this code workspace; I commit + push.
+
+---
+
 ## Branches
 
 - `main` — production, deployed by Vercel

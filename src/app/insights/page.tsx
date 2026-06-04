@@ -6,6 +6,7 @@ import { InsightsGrid } from "@/components/insights/InsightsGrid";
 import { deepMerge, fetchPublishedArticles, fetchSectionContent } from "@/lib/cms";
 import { insights as insightsDefault } from "@/lib/content";
 import type { Article } from "@/lib/content";
+import { listInsights } from "@/lib/insights";
 
 export const metadata = { title: "Insights | Portfolio" };
 
@@ -14,21 +15,45 @@ export default async function InsightsPage() {
   const insights = deepMerge(insightsDefault, override);
   const { featured } = insights;
 
-  // Try Convex first; fall back to static articles in lib/content.ts.
-  // If Convex returns an empty list (set up but no articles yet), still
-  // show the static placeholders so the page never feels broken.
+  // Merge sources, in priority order: Convex (admin-managed) → MDX files →
+  // static placeholders. Dedupe by slug so the same article doesn't appear
+  // twice.
   const convexArticles = await fetchPublishedArticles();
-  const articles: Article[] =
-    convexArticles.length > 0
-      ? convexArticles.map((a) => ({
-          slug: a.slug,
-          title: a.title,
-          excerpt: a.excerpt,
-          category: a.category,
-          date: a.date,
-          readTime: a.readTime,
-        }))
-      : insights.articles;
+  const mdxArticles = listInsights();
+
+  const seen = new Set<string>();
+  const merged: Article[] = [];
+
+  const push = (a: Article) => {
+    if (seen.has(a.slug)) return;
+    seen.add(a.slug);
+    merged.push(a);
+  };
+
+  for (const a of convexArticles) {
+    push({
+      slug: a.slug,
+      title: a.title,
+      excerpt: a.excerpt,
+      category: a.category,
+      date: a.date,
+      readTime: a.readTime,
+    });
+  }
+  for (const a of mdxArticles) {
+    push({
+      slug: a.slug,
+      title: a.title,
+      excerpt: a.excerpt,
+      category: a.category,
+      date: a.date,
+      readTime: a.readTime,
+    });
+  }
+
+  // If neither source has anything, keep the static placeholders so the
+  // page never feels empty.
+  const articles: Article[] = merged.length > 0 ? merged : insights.articles;
 
   return (
     <PageShell>
