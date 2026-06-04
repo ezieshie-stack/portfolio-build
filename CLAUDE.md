@@ -174,11 +174,24 @@ The slug page picks the first source it finds, in this priority order:
 Standard markdown (headings, lists, links, code blocks, GFM tables) all
 work via `remark-gfm`.
 
-### Drafting workflow
+### Drafting workflow (brief → draft → ship)
 
-Drafts happen on **claude.ai** in a project tuned for portfolio voice
-(see Project instructions saved elsewhere). When a draft is ready, paste
-the finished MDX block into this code workspace; I commit + push.
+Articles tied to this repo (build notes, process pieces) split across
+two surfaces — Claude Code has the codebase but worse voice tuning;
+claude.ai has voice tuning but no repo access. Bridge them with a brief:
+
+1. **Brief, here in Claude Code.** Fill out a copy of
+   `docs/article-brief-template.md` — real file paths, commits,
+   decisions, screenshots from the live repo. Voice-neutral on purpose.
+2. **Draft, on claude.ai.** Paste the filled brief into a new chat in
+   the "Portfolio Insights — Drafting" Project. Project Instructions
+   handle voice; the brief supplies substance.
+3. **Ship, here in Claude Code.** Paste finished MDX back, I commit to
+   `src/content/insights/<slug>.mdx` + drop assets into
+   `public/insights/<slug>/`, push.
+
+For pure essays / opinions (not tied to a specific repo), skip the
+brief — go straight to the Project.
 
 ---
 
