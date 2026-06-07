@@ -35,8 +35,8 @@ export const projects: Project[] = [
     title: "Fiitco: Fitness Operations Platform",
     category: "Operations Platform",
     description:
-      "An end-to-end operations platform for a fitness business, built solo on Next.js 16 and Convex. Spans 27 modules and a 32-table data model covering class programming, instructor scheduling, delivery tracking, and a self-service CMS for the public website.",
-    meta: ["Full-stack build", "Live in production"],
+      "An end-to-end operations platform for a fitness business, delivered on Next.js 16 and Convex. Spans 27 modules and a 32-table data model covering class programming, instructor scheduling, delivery tracking, and a self-service CMS for the public website.",
+    meta: ["Delivered end to end", "Live in production"],
     metrics: [
       { value: "27", label: "Operational Modules", icon: LayoutGrid },
       { value: "32", label: "Data Tables", icon: Database },
@@ -50,7 +50,7 @@ export const projects: Project[] = [
       "Auto-generates a Word business-analysis report (scope, data model, risk matrix)",
     ],
     outcomeNote:
-      "A production operations tool built by one analyst, not an engineering team.",
+      "A production operations platform delivered end to end by one analyst.",
     builtWith: ["Next.js 16", "Convex", "TypeScript", "TipTap"],
     links: [
       { label: "View Repo", href: "https://github.com/ezieshie-stack/Fiitco-Operation" },

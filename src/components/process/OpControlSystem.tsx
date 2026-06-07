@@ -8,50 +8,59 @@ type Stage = { number: string; title: string; events: Event[] };
 const stages: Stage[] = [
   {
     number: "01",
-    title: "Analyze",
+    title: "Listen",
     events: [
-      { label: "Intake mapped", meta: "Requirements captured" },
-      { label: "Stakeholders aligned", meta: "Pain points identified" },
-      { label: "Workflow audit", meta: "Gaps documented" },
+      { label: "Stakeholders interviewed", meta: "Pain points captured" },
+      { label: "Current workflow walked", meta: "Friction noted" },
+      { label: "Requirements gathered", meta: "Scope agreed" },
     ],
   },
   {
     number: "02",
-    title: "Design",
+    title: "Map",
     events: [
-      { label: "Process drafted", meta: "Architecture defined" },
-      { label: "Workflow built", meta: "Process architecture set" },
-      { label: "KPIs framed", meta: "Success metrics agreed" },
+      { label: "As-is drawn in BPMN", meta: "Swimlanes set" },
+      { label: "Handoffs documented", meta: "Gaps made visible" },
+      { label: "Process baselined", meta: "Shared with the team" },
     ],
   },
   {
     number: "03",
-    title: "Deploy",
+    title: "Diagnose",
     events: [
-      { label: "System launched", meta: "Configuration live" },
-      { label: "Rollout started", meta: "Teams onboarded" },
-      { label: "Docs shipped", meta: "Knowledge captured" },
+      { label: "Bottleneck located", meta: "Constraint named" },
+      { label: "Impact quantified", meta: "Cost measured" },
+      { label: "Root cause traced", meta: "Evidence logged" },
     ],
   },
   {
     number: "04",
-    title: "Improve",
+    title: "Deliver",
     events: [
-      { label: "Feedback collected", meta: "Real usage tracked" },
-      { label: "Metrics reviewed", meta: "Performance assessed" },
-      { label: "Workflows refined", meta: "Iteration shipped" },
+      { label: "To-be designed", meta: "New flow defined" },
+      { label: "Solution delivered", meta: "Working deployment live" },
+      { label: "Output validated", meta: "UAT passed" },
+    ],
+  },
+  {
+    number: "05",
+    title: "Hand Off",
+    events: [
+      { label: "Change documented", meta: "Plain language" },
+      { label: "User trained", meta: "UAT signed off" },
+      { label: "Ownership transferred", meta: "Fix sticks" },
     ],
   },
 ];
 
 const metrics = [
-  { label: "Visibility", value: "92%" },
-  { label: "Efficiency", value: "4.2×" },
-  { label: "Adoption", value: "100%" },
+  { label: "Modules", value: "27" },
+  { label: "Churn AUC", value: "0.86" },
+  { label: "Records", value: "5K+" },
 ];
 
 export function OpControlSystem() {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(2);
   const active = stages[activeIndex];
 
   return (

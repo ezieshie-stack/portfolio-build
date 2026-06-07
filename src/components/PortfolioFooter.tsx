@@ -66,10 +66,10 @@ export function PortfolioFooter() {
         <div className="footerBrand">
           <div className="footerLogo">DE</div>
           <h3>David Ezieshi</h3>
-          <p>Operations & Process Analyst</p>
+          <p>Business Analyst</p>
           <span>
-            Building systems that improve clarity, workflow design, and
-            operational execution.
+            Requirements, process design, and the solutions that turn them
+            into decisions teams act on.
           </span>
         </div>
 
@@ -101,8 +101,8 @@ export function PortfolioFooter() {
         <div className="footerColumn">
           <h4>Availability</h4>
           <p>
-            Toronto-based, eligible to work in Canada. Open to operations,
-            process, and business analyst roles.
+            Toronto-based, eligible to work in Canada. Open to business
+            analyst, process, and operations roles.
           </p>
 
           <a href="/contact" className="footerInlineCTA">

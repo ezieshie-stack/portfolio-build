@@ -38,7 +38,7 @@ export const projects: Project[] = [
     title: "FIIT Co. Operational Ecosystem",
     category: "Operations Platform",
     summary:
-      "A two-application operations platform for a fitness business: an internal class-management system and a paired public site, built and administered end to end on Next.js and Convex.",
+      "A two-application operations platform for a fitness business: an internal class-management system and a paired public site, delivered and administered end to end on Next.js and Convex.",
     tags: ["Business Analysis", "Platform Administration", "Workflow Design"],
     metrics: [
       { value: "27", label: "Operational Modules" },
@@ -46,10 +46,10 @@ export const projects: Project[] = [
       { value: "9", label: "Backend Services" },
       { value: "Live", label: "In Production" },
     ],
-    client: "FIIT Co. (George Brown industry co-op)",
-    timeline: "Jan 2026 – Present",
+    client: "FIIT Co. (George Brown Work-Integrated Learning)",
+    timeline: "Feb 2026 – Present",
     role: "Business Analyst & Platform Administrator",
-    team: "Solo build",
+    team: "Within a six-person engagement",
     tools: ["Next.js 16", "Convex", "TypeScript", "TipTap", "Excel"],
     challenge:
       "FIIT Co. needed one system to run class programming, instructor scheduling, delivery tracking, and a public marketing site, without a dedicated engineering team. The work had to go from stakeholder requirements all the way to a live, maintainable deployment.",
@@ -61,6 +61,8 @@ export const projects: Project[] = [
     ],
     deliverables: [
       "BA Report documenting scope, data model, and requirements",
+      "UAT Report (12 slides; 8 bugs with severity and reproduction steps; 13 recommendations)",
+      "56-finding P0–P3 pre-walkthrough audit",
       "Internal class-management platform spanning 27 modules",
       "Public marketing site with a self-service CMS",
       "Role-based access, approval workflows, and Excel import tooling",
