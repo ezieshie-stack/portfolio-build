@@ -1,4 +1,5 @@
 import {
+  Award,
   BarChart3,
   Bot,
   Database,
@@ -12,7 +13,8 @@ const items: Item[] = [
   { label: "Advanced SQL & Window Functions", icon: Database },
   { label: "RPA with UiPath & Power Automate", icon: Bot },
   { label: "ServiceNow Workflows", icon: Workflow },
-  { label: "BI Dashboards (Tableau / Power BI)", icon: BarChart3 },
+  { label: "BI Dashboards (Power BI / Tableau)", icon: BarChart3 },
+  { label: "CTFL (ISTQB Foundation)", icon: Award },
 ];
 
 export function CurrentlyExploring() {

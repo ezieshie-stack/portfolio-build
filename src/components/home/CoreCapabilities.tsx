@@ -1,10 +1,10 @@
 import {
   Filter,
   GitCompare,
-  Sparkles,
+  MessagesSquare,
+  Rocket,
   Waypoints,
   Workflow,
-  Wrench,
 } from "lucide-react";
 
 export function CoreCapabilities() {
@@ -13,8 +13,8 @@ export function CoreCapabilities() {
     { label: "Workflow Redesign", icon: GitCompare },
     { label: "BPMN Mapping", icon: Waypoints },
     { label: "Bottleneck Analysis", icon: Filter },
-    { label: "Rapid Prototyping", icon: Sparkles },
-    { label: "Internal Tooling", icon: Wrench },
+    { label: "Requirements Elicitation", icon: MessagesSquare },
+    { label: "Solution Delivery", icon: Rocket },
   ];
 
   return (

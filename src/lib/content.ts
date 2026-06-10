@@ -2,7 +2,7 @@ export const site = {
   brand: {
     initials: "DE",
     name: "David Ezieshi",
-    role: "Operations & Process Analyst",
+    role: "Business Analyst",
   },
   navLinks: [
     { label: "Home", href: "/" },
@@ -23,11 +23,11 @@ export const site = {
 } as const;
 
 export const home = {
-  tag: "OPERATIONS & PROCESS ANALYST · TORONTO, CANADA",
+  tag: "BUSINESS ANALYST · TORONTO, CANADA",
   titleStart: "Diagnosing Workflows.",
   titleHighlight: "Building The Fix.",
   subtitle:
-    "I diagnose operational bottlenecks, redesign the workflows that cause them, and prototype the internal tools that ship the fix. Early-career analyst. Toronto.",
+    "I lead the full business-analysis lifecycle, from stakeholder requirements and process design to delivery, UAT, and evaluating the live solution. I owned exactly that on a six-person client engagement, and was the only analyst kept on to run the platform afterward. Business Analyst. Toronto.",
   primaryCta: { label: "View My Work", href: "/work" },
   secondaryCta: { label: "Let's Connect", href: "/contact" },
   competencies: [
@@ -35,8 +35,8 @@ export const home = {
     { label: "Workflow Redesign", icon: "GitCompare" as const },
     { label: "BPMN Mapping", icon: "Waypoints" as const },
     { label: "Bottleneck Analysis", icon: "Filter" as const },
-    { label: "Rapid Prototyping", icon: "Sparkles" as const },
-    { label: "Internal Tooling", icon: "Wrench" as const },
+    { label: "Requirements Elicitation", icon: "MessagesSquare" as const },
+    { label: "Solution Delivery", icon: "Rocket" as const },
   ],
   diagram: {
     centerLabel: "Diagnose and Redesign",
@@ -66,8 +66,8 @@ export const home = {
   },
   metricCard: {
     label: "MY METHOD",
-    value: "Diagnose. Redesign. Prototype.",
-    sublabel: "Three steps. One analyst. No engineering ticket required.",
+    value: "Diagnose. Redesign. Deliver.",
+    sublabel: "Three steps. One analyst. From problem to working solution.",
   },
   featured: {
     tag: "FEATURED PROJECT",
@@ -174,7 +174,7 @@ export const work = {
     title: "FIIT Co. Operational Ecosystem",
     meta: "Business Analysis • Platform Administration • Workflow Design",
     description:
-      "A two-application operations platform for a fitness business, built and administered end to end on Next.js and Convex: an internal class-management system spanning 27 modules plus a paired public site with a self-service CMS.",
+      "A two-application operations platform for a fitness business, delivered and administered end to end on Next.js and Convex: an internal class-management system spanning 27 modules plus a paired public site with a self-service CMS.",
     primaryCta: { label: "View Case Study", href: "/work/fiitco" },
     secondaryCta: { label: "Live Site", href: "https://www.fiitco.ca" },
     metrics: [
@@ -254,7 +254,7 @@ export const processPage = {
     title: "Systems designed for execution.",
     highlight: "execution.",
     description:
-      "My process turns operational complexity into working systems: I diagnose the bottleneck, redesign the workflow, and prototype the tool that ships the fix.",
+      "My process turns operational complexity into working systems: I diagnose the bottleneck, redesign the workflow, and deliver the solution that fixes it.",
   },
   executionTag: "// EXECUTION MODEL",
   steps: [
@@ -288,11 +288,11 @@ export const processPage = {
     },
     {
       number: "04",
-      subtitle: "Build the fix",
-      title: "Prototype",
+      subtitle: "Deliver the solution",
+      title: "Deliver",
       description:
-        "I redesign the to-be workflow and, when the engineering queue can't move fast enough, prototype the tool that delivers it using internal-tools platforms and AI-accelerated builds.",
-      tags: ["To-Be Design", "Rapid Prototyping", "Internal Tooling"],
+        "I redesign the to-be workflow and, when the engineering queue can't move fast enough, take the solution from design to a working, deployed system, ready for users.",
+      tags: ["To-Be Design", "Solution Delivery", "Working Deployment"],
     },
     {
       number: "05",
@@ -387,25 +387,26 @@ export const contact = {
 
 export const resume = {
   tag: "MY RESUME",
-  title: "[Resume headline placeholder line 1]\n[Resume headline placeholder line 2]",
-  intro: "[Resume intro paragraph placeholder.]",
+  title: "My resume.",
+  intro:
+    "A snapshot of how I work, the kinds of problems I solve, and where I've delivered. The full PDF is below.",
   whatTag: "WHAT YOU'LL FIND",
   what: [
-    "[Resume highlight one placeholder.]",
-    "[Resume highlight two placeholder.]",
-    "[Resume highlight three placeholder.]",
+    "End-to-end business analysis lifecycle, from requirements through delivery, UAT, and live solution support.",
+    "Real client engagement: a two-application FIIT Co. platform delivered through George Brown Work-Integrated Learning.",
+    "Analytical projects in SQL, Python, and Streamlit covering churn prediction, fraud detection, and SLA optimization.",
   ],
   expertiseTag: "AREAS OF EXPERTISE",
   expertise: [
-    "Process Optimization",
-    "Data Analysis & Reporting",
-    "Systems Design",
-    "Workflow Automation",
-    "Business Analysis",
+    "Requirements Elicitation",
+    "Process Design & BPMN",
+    "Solution Delivery & UAT",
     "Stakeholder Management",
+    "Business Analysis Documentation",
+    "Data Analysis & Reporting",
   ],
-  downloadCta: { label: "Download Resume", href: "#" },
-  viewCta: { label: "View Resume Online", href: "#" },
+  downloadCta: { label: "Download Resume", href: "/resume.pdf" },
+  viewCta: { label: "View Resume Online", href: "/resume" },
 };
 
 export const notFound = {

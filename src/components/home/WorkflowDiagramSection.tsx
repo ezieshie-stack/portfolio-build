@@ -32,8 +32,8 @@ const steps: Step[] = [
     icon: Search,
   },
   {
-    label: "Prototype",
-    body: "Build the tool or workflow that fixes it. Internal-tools platforms, AI-accelerated.",
+    label: "Deliver",
+    body: "Take the solution from design to a working, deployed system. Internal-tools platforms, ready for users.",
     icon: Hammer,
   },
   {

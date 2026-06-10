@@ -18,9 +18,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "David Ezieshi — Operations & Process Analyst",
+  title: "David Ezieshi — Business Analyst",
   description:
-    "Early-career Operations & Process Analyst in Toronto. I diagnose workflow bottlenecks, redesign them, and prototype the internal tools that ship the fix.",
+    "Business Analyst in Toronto. I take business problems through the full lifecycle, requirements, process and data design, delivery, and live solution support.",
 };
 
 export const viewport: Viewport = {

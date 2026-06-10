@@ -19,21 +19,21 @@ import {
 import { LiveImage } from "@/components/cms/LiveImage";
 import { LiveText } from "@/components/cms/LiveText";
 
-export const metadata = { title: "About — David Ezieshi" };
+export const metadata = { title: "About | David Ezieshi" };
 
 export default function AboutPage() {
   const stats = [
     { value: "ECBA", label: "IIBA Certified", icon: Award },
-    { value: "3.8", label: "GPA · Dean's List", icon: GraduationCap },
-    { value: "2", label: "Live Apps Shipped", icon: Rocket },
+    { value: "3.81", label: "GPA · Dean's List", icon: GraduationCap },
+    { value: "2", label: "Applications Delivered", icon: Rocket },
     { value: "5,000+", label: "Records Analyzed", icon: Database },
   ];
 
   const experience = [
     {
-      year: "Jan 2026 – Present",
+      year: "Feb 2026 – Present",
       title: "Business Analyst & Platform Administrator · FIIT Co.",
-      text: "Running and managing a two-application Next.js + Convex ecosystem (an internal class-management platform plus a public site) for an industry partner through my George Brown co-op. Authored the engagement's BA Report and translated it into working configuration: forms, workflows, and permissions, from requirements through deployment.",
+      text: "Owned the full delivery lifecycle of a two-application platform (an internal class-management system and a public site) for an industry partner through George Brown College Work-Integrated Learning. Ran requirements elicitation, authored the BA Report, and translated it into working configuration, forms, workflows, and permissions, from requirements through deployment and live administration.",
     },
     {
       year: "Apr 2024 – Present",
@@ -43,7 +43,7 @@ export default function AboutPage() {
     {
       year: "Dec 2023 – Mar 2024",
       title: "Sales Consultant · Canadian Tire Financial Services",
-      text: "Reduced processing delays by escalating recurring data-quality patterns I identified during compliance-validated credit application reviews.",
+      text: "Identified a recurring pattern of incomplete and incorrect information on incoming credit applications during compliance-validated reviews, and escalated it for follow-up.",
     },
     {
       year: "Apr 2021 – Aug 2022",
@@ -70,8 +70,8 @@ export default function AboutPage() {
       icon: Search,
     },
     {
-      title: "Builder's Hands",
-      text: "I don't wait for an engineering sprint to validate an idea. I prototype the tool, prove it works, and hand it off clean.",
+      title: "Delivery, Not Just Decks",
+      text: "I take the solution to a working, deployed state and hand it off clean. The artifact is a system someone can use, not just a slide that explains it.",
       icon: Wrench,
     },
     {
@@ -121,16 +121,20 @@ export default function AboutPage() {
             className="sectionEyebrow"
           />
           <h1>
-            I diagnose, document, and build the systems teams{" "}
+            I diagnose, document, and own the solutions teams{" "}
             <span>rely on.</span>
           </h1>
           <p>
-            I&apos;m David Ezieshi, an early-career Operations &amp; Process
-            Analyst based in Toronto. I own the full lifecycle, from
-            stakeholder requirements and BRD authoring to workflow design,
-            data integrity, and live administration, and I&apos;m currently
-            running and managing a two-application Next.js + Convex platform
-            for an industry partner through my George Brown co-op.
+            I&apos;m David Ezieshi, a Business Analyst in Toronto. I work
+            across the entire analysis lifecycle: I elicit and document
+            requirements, model the process and the data, lead delivery
+            through to a working deployed solution, run UAT, and then
+            evaluate and maintain the live system. On my FIIT Co.
+            engagement I led a six-person team through all of that for a
+            real client, authored the full requirements suite, the UAT
+            report, and a 56-finding pre-walkthrough audit, and was the
+            only analyst retained afterward to administer the platform I
+            helped deliver.
           </p>
         </div>
 
