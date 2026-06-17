@@ -217,6 +217,14 @@
 
     .pf-strengthlist { gap: 0; }
 
-    /* Hide the home hero portrait on phones per spec */
-    .pf-portrait { display: none; }
+    /* Tighten the home hero on phones — the desktop 64px top + 56px
+       bottom padding leaves an awkward gap below the sticky nav. */
+    .pf-hero { padding-top: 16px !important; padding-bottom: 28px !important; }
+
+    /* Show the home hero portrait on phones (override the spec's
+       hide rule). Constrained min-height so it doesn't dominate the
+       viewport on a small device. */
+    .pf-portrait { display: flex !important; min-height: 280px; }
+    .pf-portrait-frame { min-height: 280px; }
+    .pf-portrait img { min-height: 280px; }
   }
