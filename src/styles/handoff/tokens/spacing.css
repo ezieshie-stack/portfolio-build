@@ -1,0 +1,37 @@
+/* Spacing, layout, radii — multiples of 4, generous editorial rhythm. */
+
+:root {
+  /* ── Spacing scale (4px base) ─────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  22px;   /* card padding, capability tiles */
+  --space-6:  28px;
+  --space-7:  40px;
+  --space-8:  56px;
+  --space-9:  72px;
+
+  /* ── Section rhythm (responsive) ──────────────────── */
+  --section-y-desktop: 72px;
+  --section-y-tablet:  56px;
+  --section-y-mobile:  40px;
+
+  /* ── Card padding (responsive) ────────────────────── */
+  --card-pad-desktop: 48px;
+  --card-pad-tablet:  36px;
+  --card-pad-mobile:  24px;
+
+  /* ── Layout ───────────────────────────────────────── */
+  --content:        1240px;  /* body / reading column */
+  --container:      1440px;  /* nav + hero shell (recommended) */
+  --container-wide: 1760px;  /* fluid / near full-bleed sections */
+  --gutter:         clamp(20px, 4vw, 56px);  /* @kind spacing */ /* responsive side padding */
+
+  /* ── Radii ────────────────────────────────────────── */
+  --radius-sm:   8px;    /* chips, solid buttons, inputs */
+  --radius-md:   16px;   /* nav logo tile, pill buttons in hero */
+  --radius-lg:   18px;   /* capability tiles */
+  --radius-xl:   24px;   /* glass cards */
+  --radius-pill: 999px;  /* badges, pill buttons */
+}

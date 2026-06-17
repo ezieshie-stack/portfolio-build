@@ -64,11 +64,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="ds-canvas min-h-full flex flex-col font-sans">
         <BackgroundCanvas />
-        <div className="orb" aria-hidden />
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 relative z-[1]">{children}</main>
         <PortfolioFooter />
       </body>
     </html>

@@ -1,0 +1,47 @@
+/* Background system — reusable utility classes.
+   Flat themed canvas + masked dot-grid + faint grain. No glow/orb.
+
+   Usage:
+     <div class="ds-canvas">            ← sets bg + text color, positions layers
+       <div class="ds-bg" aria-hidden></div>  ← fixed dot-grid + grain
+       <main> … your content (give it position:relative; z-index:1) … </main>
+     </div>
+*/
+
+.ds-canvas {
+  position: relative;
+  background: var(--bg);
+  color: var(--text-body);
+  min-height: 100vh;
+}
+
+/* fixed layer that holds the texture */
+.ds-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ds-bg::before {   /* dot-grid, radially masked so it fades behind content */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1.5px);
+  background-size: var(--dot-size) var(--dot-size);
+  -webkit-mask-image: var(--dot-mask);
+  mask-image: var(--dot-mask);
+}
+
+.ds-bg::after {    /* film grain — kills banding, adds texture */
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: soft-light;
+  background-image: var(--grain-svg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ds-canvas { transition: background var(--duration-slow) var(--ease-out); }
+}

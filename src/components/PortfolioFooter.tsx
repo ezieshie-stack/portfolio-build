@@ -1,121 +1,124 @@
 import Link from "next/link";
 import { ArrowUpRight, FileText, Mail } from "lucide-react";
 import { site } from "@/lib/content";
-
-function LinkedInIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.89 1.62-1.85 3.34-1.85 3.57 0 4.23 2.35 4.23 5.4v6.34zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
-    </svg>
-  );
-}
-
-function GitHubIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.01c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.04 11.04 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.26 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.55A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
-    </svg>
-  );
-}
+import { Button } from "@/components/ui/Button";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { BrandIcon } from "@/components/ui/BrandIcon";
 
 export function PortfolioFooter() {
   return (
-    <footer className="portfolioFooter">
-      <section className="footerCTA">
-        <div>
-          <p className="footerEyebrow">Have a project in mind?</p>
-          <h2>
-            Let’s Build
-            <br />
-            The Fix.
-          </h2>
-        </div>
+    <footer className="pf-footer">
+      <div className="pf-shell">
+        {/* CTA band */}
+        <section className="pf-cta">
+          <div>
+            <Eyebrow className="mb-4">Working on something I can help with?</Eyebrow>
+            <h2 className="pf-cta-title">
+              Let&rsquo;s talk
+              <br />
+              through it.
+            </h2>
+          </div>
+          <div>
+            <p className="pf-cta-body">
+              Open to business analyst roles in Toronto. I take initiatives from
+              the first stakeholder interview through to the system people use
+              every day.
+            </p>
+            <div className="pf-btnrow">
+              <Button
+                variant="primary"
+                size="lg"
+                href={site.cta.href}
+                iconRight={<ArrowUpRight size={18} aria-hidden />}
+              >
+                {site.cta.label}
+              </Button>
+              <Button variant="secondary" size="lg" href="/resume">
+                View Resume
+              </Button>
+            </div>
+          </div>
+        </section>
 
-        <div className="footerCTARight">
-          <p>
-            Open to operations, process, and business analyst roles. I
-            diagnose workflows, redesign them, and prototype the tools that
-            fix them.
-          </p>
+        {/* 4-column row */}
+        <section className="pf-footcols">
+          <div className="pf-footbrand">
+            <span className="pf-tile" style={{ marginBottom: 18 }}>
+              {site.brand.initials}
+            </span>
+            <h3>{site.brand.name}</h3>
+            <p className="pf-footrole">{site.brand.role}</p>
+            <p className="pf-footblurb">
+              Full-lifecycle business analyst. Requirements, modeling, delivery,
+              and live operation.
+            </p>
+          </div>
 
-          <div className="footerCTAButtons">
-            <a href="/contact" className="footerPrimaryBtn">
-              Let’s Connect <ArrowUpRight size={18} />
-            </a>
+          <div className="pf-footcol">
+            <p className="pf-mono-h">Navigation</p>
+            <ul>
+              {site.navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <Link href="/resume" className="footerSecondaryBtn">
-              View Resume
+          <div className="pf-footcol">
+            <p className="pf-mono-h">Resources</p>
+            <ul>
+              <li>
+                <Link href="/resume">
+                  <FileText size={15} aria-hidden /> Resume
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/david-ezieshi/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <BrandIcon name="linkedin" size={15} /> LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="mailto:ezieshie@gmail.com">
+                  <Mail size={15} aria-hidden /> Email
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/ezieshie-stack"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <BrandIcon name="github" size={15} /> GitHub
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="pf-footcol">
+            <p className="pf-mono-h">Availability</p>
+            <p className="pf-footblurb">
+              Toronto-based, eligible to work in Canada. Open to business analyst
+              roles.
+            </p>
+            <Link href="/contact" className="pf-textlink" style={{ marginTop: 14 }}>
+              Get In Touch <ArrowUpRight size={15} aria-hidden />
             </Link>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="footerMain">
-        <div className="footerBrand">
-          <div className="footerLogo">DE</div>
-          <h3>David Ezieshi</h3>
-          <p>Business Analyst</p>
+        {/* Bottom bar */}
+        <div className="pf-footbar">
           <span>
-            Requirements, process design, and the solutions that turn them
-            into decisions teams act on.
+            © {new Date().getFullYear()} {site.brand.name}. All rights reserved.
           </span>
+          <span>Built with clarity and purpose.</span>
         </div>
-
-        <div className="footerColumn">
-          <h4>Navigation</h4>
-          {site.navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="footerColumn">
-          <h4>Resources</h4>
-          <Link href="/resume">
-            <FileText size={16} /> Resume
-          </Link>
-          <a href="https://www.linkedin.com/in/david-ezieshi/" target="_blank" rel="noreferrer">
-            <LinkedInIcon size={16} /> LinkedIn
-          </a>
-          <a href="mailto:ezieshie@gmail.com">
-            <Mail size={16} /> Email
-          </a>
-          <a href="https://github.com/ezieshie-stack" target="_blank" rel="noreferrer">
-            <GitHubIcon size={16} /> GitHub
-          </a>
-        </div>
-
-        <div className="footerColumn">
-          <h4>Availability</h4>
-          <p>
-            Toronto-based, eligible to work in Canada. Open to business
-            analyst, process, and operations roles.
-          </p>
-
-          <a href="/contact" className="footerInlineCTA">
-            Get In Touch <ArrowUpRight size={16} />
-          </a>
-        </div>
-      </section>
-
-      <div className="footerBottom">
-        <span>
-          © {new Date().getFullYear()} David Ezieshi. All rights reserved.
-        </span>
-        <span>Built with clarity and purpose.</span>
       </div>
     </footer>
   );

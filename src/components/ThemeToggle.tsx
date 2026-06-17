@@ -14,12 +14,10 @@ function readStoredTheme(): Theme {
 
 /**
  * Sun/moon segmented pill. Sets `data-theme` on <html> and persists to
- * localStorage(`pf-theme`). Renders nothing until mounted to avoid
- * hydration mismatch — the pre-paint init script in layout.tsx handles
- * applying the theme before first paint.
- *
- * Not yet wired into the live nav (Phase 0); Phase 1 surfaces it in the
- * redesigned Nav.
+ * localStorage("pf-theme"). Uses .ds-toggle / .ds-toggle__btn classes
+ * from components.css. Returns null pre-mount to avoid hydration
+ * mismatch — the pre-paint init script in layout.tsx handles applying
+ * the theme before first paint.
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
@@ -36,7 +34,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
-      // localStorage unavailable (private mode) — theme still applies for the session
+      /* localStorage unavailable — theme still applies for the session */
     }
   };
 
@@ -46,23 +44,14 @@ export function ThemeToggle({ className }: { className?: string }) {
     <div
       role="group"
       aria-label="Theme"
-      className={[
-        "inline-flex items-center gap-0 rounded-full p-0.5",
-        "border border-[color:var(--border-strong)] bg-[color:var(--surface-2)]",
-        className ?? "",
-      ].join(" ")}
+      className={`ds-toggle ${className ?? ""}`.trim()}
     >
       <button
         type="button"
         aria-label="Light theme"
         aria-pressed={theme === "light"}
         onClick={() => apply("light")}
-        className={[
-          "h-7 w-7 inline-flex items-center justify-center rounded-full transition-colors",
-          theme === "light"
-            ? "bg-[color:var(--accent-solid)] text-[color:var(--text-on-accent)]"
-            : "text-[color:var(--text-body)] hover:text-[color:var(--text-heading)]",
-        ].join(" ")}
+        className={`ds-toggle__btn ${theme === "light" ? "on" : ""}`.trim()}
       >
         <Sun size={14} aria-hidden />
       </button>
@@ -71,12 +60,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         aria-label="Dark theme"
         aria-pressed={theme === "dark"}
         onClick={() => apply("dark")}
-        className={[
-          "h-7 w-7 inline-flex items-center justify-center rounded-full transition-colors",
-          theme === "dark"
-            ? "bg-[color:var(--accent-solid)] text-[color:var(--text-on-accent)]"
-            : "text-[color:var(--text-body)] hover:text-[color:var(--text-heading)]",
-        ].join(" ")}
+        className={`ds-toggle__btn ${theme === "dark" ? "on" : ""}`.trim()}
       >
         <Moon size={14} aria-hidden />
       </button>

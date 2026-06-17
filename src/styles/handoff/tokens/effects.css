@@ -1,0 +1,32 @@
+/* Effects — shadows, blur, motion, and the background system. */
+
+:root {
+  /* ── Elevation / shadow ───────────────────────────── */
+  --shadow-card:  var(--card-shadow);                 /* themed (see colors.css) */
+  --shadow-btn:   0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-glow:  0 0 32px rgba(139, 92, 246, 0.45);  /* primary btn hover (dark) */
+  --shadow-drop:  drop-shadow(0 30px 90px rgba(124, 58, 237, 0.22)); /* portrait */
+
+  /* ── Blur ─────────────────────────────────────────── */
+  --blur-glass: 24px;   /* glass cards (dark) */
+  --blur-nav:   16px;   /* sticky nav backdrop */
+
+  /* ── Background system ────────────────────────────────
+     Flat canvas + masked dot-grid + grain. No orb/glow.
+     --dot-color and --grain-opacity are themed in colors.css. */
+  --dot-size:   26px;   /* dot-grid cell */
+  --dot-mask:   radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%); /* @kind other */
+  --grain-svg:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); /* @kind other */
+
+  /* ── Hover lift (max 4px) ─────────────────────────── */
+  --lift-sm: -2px;
+  --lift-md: -4px;
+
+  /* ── Motion ───────────────────────────────────────── */
+  --duration-fast: 150ms; /* @kind other */
+  --duration-base: 250ms; /* @kind other */
+  --duration-slow: 400ms; /* @kind other */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* @kind other */
+}
