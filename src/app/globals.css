@@ -1,79 +1,62 @@
 @import "tailwindcss";
 
+/* ────────────────────────────────────────────────────────────
+ * REDESIGN — design system (handoff)
+ *   styles.css       — pulls in tokens/colors, typography,
+ *                      spacing, effects, background (the
+ *                      authoritative token layer).
+ *   portfolio.css    — 127 .pf-* component styles for nav,
+ *                      footer, page sections (hero, work grid,
+ *                      pipeline rail, lifecycle ring, opsystem,
+ *                      insight cards, article reader, etc.).
+ *   components.css   — .ds-* primitives (Button, Badge, Chip,
+ *                      Card, MetricStat, Input, ThemeToggle)
+ *                      that the prototype referenced from an
+ *                      external library not shipped in the zip.
+ *                      Hand-written here to spec from README.
+ * ──────────────────────────────────────────────────────── */
+@import "../styles/handoff/tokens/colors.css";
+@import "../styles/handoff/tokens/typography.css";
+@import "../styles/handoff/tokens/spacing.css";
+@import "../styles/handoff/tokens/effects.css";
+@import "../styles/handoff/tokens/background.css";
+@import "../styles/handoff/portfolio.css";
+@import "../styles/handoff/pages-home.css";
+@import "../styles/handoff/pages-case-study.css";
+@import "../styles/handoff/components.css";
+
+/* Aliases — keep legacy refs (--bg, --primary, --text-main,
+   --font-sans/-mono) resolving after handoff tokens take over.
+   Lets existing pages render against the new theme until they're
+   rebuilt page-by-page in later phases. */
 :root {
-  --bg: #030305;
-  --primary: #8b5cf6;
+  --font-sans:    var(--font-geist);
+  --font-mono:    var(--font-geist-mono);
+
+  --text-main:    var(--text-heading);
+  --primary:      var(--accent);
   --primary-glow: rgba(139, 92, 246, 0.4);
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --text-main: #ffffff;
-  --text-dim: #94a3b8;
-  --container: 1280px;
 
-  /* Global spacing tokens */
+  /* Glass refs used by legacy .glass-card */
+  --glass:        var(--surface);
+  --glass-border: var(--border);
+
+  /* Section/card spacing — not in handoff tokens (legacy-only) */
   --section-y-desktop: 72px;
-  --section-y-tablet: 56px;
-  --section-y-mobile: 40px;
-  --card-pad-desktop: 48px;
-  --card-pad-tablet: 36px;
-  --card-pad-mobile: 24px;
-
-  /* ─────────────────────────────────────────────────────────
-   * DESIGN TOKENS (Phase 1: defined, not yet enforced)
-   * ──────────────────────────────────────────────────────── */
-
-  /* Type scale — 9 steps, fluid where it matters */
-  --text-xs:      12px;
-  --text-sm:      14px;
-  --text-base:    16px;
-  --text-lg:      18px;
-  --text-xl:      24px;
-  --text-2xl:     32px;
-  --text-3xl:     clamp(36px, 4vw, 48px);
-  --text-4xl:     clamp(48px, 6vw, 72px);
-  --text-display: clamp(56px, 7vw, 104px);
-
-  /* Line heights */
-  --leading-tight:   1.1;
-  --leading-snug:    1.3;
-  --leading-normal:  1.5;
-  --leading-relaxed: 1.7;
-
-  /* Font weights */
-  --weight-regular:  400;
-  --weight-medium:   500;
-  --weight-semibold: 600;
-  --weight-bold:     700;
-  --weight-black:    900;
-
-  /* Border radius — 3 + pill */
-  --radius-sm:   8px;
-  --radius-md:   16px;
-  --radius-lg:   24px;
-  --radius-pill: 999px;
-
-  /* Hover lift — max 4px per design rule */
-  --lift-sm: -2px;
-  --lift-md: -4px;
-
-  /* Easing curves */
-  --ease-out:    var(--ease-out);
-  --ease-in-out: var(--ease-in-out);
-  --ease-spring: var(--ease-spring);
-
-  /* Durations */
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 400ms;
+  --section-y-tablet:  56px;
+  --section-y-mobile:  40px;
+  --card-pad-desktop:  48px;
+  --card-pad-tablet:   36px;
+  --card-pad-mobile:   24px;
 }
 
 @theme inline {
   --color-background: var(--bg);
-  --color-foreground: var(--text-main);
-  --color-primary: var(--primary);
-  --color-dim: var(--text-dim);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains);
+  --color-foreground: var(--text-heading);
+  --color-primary:    var(--accent);
+  --color-dim:        var(--text-dim);
+  --font-sans:        var(--font-sans);
+  --font-mono:        var(--font-mono);
 }
 
 * {

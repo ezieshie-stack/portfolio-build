@@ -6,6 +6,60 @@ David Ezieshi's portfolio site. Next.js 16 + React 19, deployed to Vercel.
 
 ---
 
+## ⚠️ Design system implementation contract
+
+**Read [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before writing
+any redesign code.** That doc is the canonical contract authored by the
+design lead — section-by-section "deployed → must be" table, light-mode
+token values, behavior to port, and definition of done.
+
+The summary below is a quick reference. When the two disagree,
+`docs/IMPLEMENTATION.md` wins.
+
+The visual design ships as a **set of CSS files** in
+`src/styles/handoff/` — these are the authoritative source for tokens,
+component styles, and page-level styling. **They are not to be
+re-derived in Tailwind utilities.**
+
+### Rules
+
+1. **Import only.** `globals.css` already imports the handoff CSS layer:
+   - `tokens/colors.css` `tokens/typography.css` `tokens/spacing.css`
+     `tokens/effects.css` `tokens/background.css` — the token layer
+   - `portfolio.css` — 127 `.pf-*` classes for nav, footer, work,
+     process, about, insights, contact
+   - `pages-home.css` — homepage-specific classes (extracted from
+     `index.html`'s inline `<style>` block)
+   - `components.css` — `.ds-*` primitives (Button, Badge, Chip,
+     Card, MetricStat, CapabilityCard, Input, ThemeToggle) that the
+     handoff prototype referenced from an external library not shipped
+     in the zip
+2. **Component shells reference handoff classes by name.** When
+   building a section, mirror the JSX from `sections.jsx` /
+   `sections-extra.jsx` / `pages.jsx` (kept under the handoff zip),
+   using the same `.pf-*` / `.ds-*` className strings. Do not invent
+   parallel Tailwind utilities for the same visual.
+3. **COPY.md is the canonical text** for every page section. Do not
+   paraphrase headlines, hero copy, or principle wording — paste it.
+4. **Reserve Tailwind for net-new layout** the prototype didn't cover
+   (margins between sections, simple flex utilities, etc.). The moment
+   you find yourself rewriting `border-radius`, `background`, or
+   `color` in Tailwind, stop — there's a class for it.
+5. **Theming is automatic.** Both light and dark themes are driven by
+   the same semantic CSS vars. Setting `data-theme="light"` on
+   `<html>` flips every component that reads `var(--bg)`,
+   `var(--text-heading)`, `var(--accent)` etc. Don't ship per-component
+   light/dark code paths.
+
+### Unverified copy
+
+Five claims in `COPY.md` are flagged as unverified — Marketing GPA,
+Ralph Lauren tense, Telco metrics, "9 Backend Services", and "2
+Production Systems / 6 Analyst Team Led". Ship them as written and
+have the owner review on the preview deploy.
+
+---
+
 ## Architecture
 
 ```

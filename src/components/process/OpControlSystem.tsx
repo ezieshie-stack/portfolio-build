@@ -1,115 +1,213 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  Check,
+  GitCompare,
+  Rocket,
+  Search,
+  Settings,
+} from "lucide-react";
 
-type Event = { label: string; meta: string };
-type Stage = { number: string; title: string; events: Event[] };
+type Phase = {
+  n: string;
+  name: string;
+  timeline: Array<[string, string]>;
+  metrics: Array<[string, number, string]>;
+};
 
-const stages: Stage[] = [
+const PHASES: Phase[] = [
   {
-    number: "01",
-    title: "Listen",
-    events: [
-      { label: "Stakeholders interviewed", meta: "Pain points captured" },
-      { label: "Current workflow walked", meta: "Friction noted" },
-      { label: "Requirements gathered", meta: "Scope agreed" },
+    n: "01",
+    name: "Analyze",
+    timeline: [
+      ["Stakeholders Mapped", "Inputs gathered"],
+      ["Current-State Documented", "As-is captured"],
+      ["Gaps Quantified", "Bottlenecks identified"],
+    ],
+    metrics: [
+      ["Visibility", 58, "%"],
+      ["Throughput", 1.6, "×"],
+      ["Adoption", 15, "%"],
     ],
   },
   {
-    number: "02",
-    title: "Map",
-    events: [
-      { label: "As-is drawn in BPMN", meta: "Swimlanes set" },
-      { label: "Handoffs documented", meta: "Gaps made visible" },
-      { label: "Process baselined", meta: "Shared with the team" },
+    n: "02",
+    name: "Design",
+    timeline: [
+      ["Requirements Authored", "BRD signed off"],
+      ["Process & Data Modeled", "BPMN + ERD"],
+      ["Acceptance Criteria Set", "Test conditions defined"],
+    ],
+    metrics: [
+      ["Visibility", 92, "%"],
+      ["Throughput", 4.2, "×"],
+      ["Adoption", 100, "%"],
     ],
   },
   {
-    number: "03",
-    title: "Diagnose",
-    events: [
-      { label: "Bottleneck located", meta: "Constraint named" },
-      { label: "Impact quantified", meta: "Cost measured" },
-      { label: "Root cause traced", meta: "Evidence logged" },
+    n: "03",
+    name: "Deliver",
+    timeline: [
+      ["Solution Configured", "Built to spec"],
+      ["UAT Completed", "Validated against need"],
+      ["System in Production", "Live deployment"],
+    ],
+    metrics: [
+      ["Visibility", 96, "%"],
+      ["Throughput", 5.1, "×"],
+      ["Adoption", 78, "%"],
     ],
   },
   {
-    number: "04",
-    title: "Deliver",
-    events: [
-      { label: "To-be designed", meta: "New flow defined" },
-      { label: "Solution delivered", meta: "Working deployment live" },
-      { label: "Output validated", meta: "UAT passed" },
+    n: "04",
+    name: "Operate",
+    timeline: [
+      ["Live Performance Monitored", "Usage tracked"],
+      ["Issues Resolved", "Defects closed"],
+      ["Improvements Shipped", "Continuous evaluation"],
     ],
-  },
-  {
-    number: "05",
-    title: "Hand Off",
-    events: [
-      { label: "Change documented", meta: "Plain language" },
-      { label: "User trained", meta: "UAT signed off" },
-      { label: "Ownership transferred", meta: "Fix sticks" },
+    metrics: [
+      ["Visibility", 99, "%"],
+      ["Throughput", 6.4, "×"],
+      ["Adoption", 94, "%"],
     ],
   },
 ];
 
-const metrics = [
-  { label: "Modules", value: "27" },
-  { label: "Churn AUC", value: "0.86" },
-  { label: "Records", value: "5K+" },
-];
+const NODE_ICONS = [Search, GitCompare, Rocket, Settings];
+
+function useCountUp(target: number, duration = 600) {
+  const [val, setVal] = useState(target);
+  const from = useRef(target);
+
+  useEffect(() => {
+    const a = from.current;
+    const b = target;
+    if (a === b) return;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const e = 1 - Math.pow(1 - t, 3);
+      setVal(a + (b - a) * e);
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else from.current = b;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+
+  return val;
+}
+
+function OpMetric({
+  label,
+  value,
+  unit,
+}: {
+  label: string;
+  value: number;
+  unit: string;
+}) {
+  const v = useCountUp(value);
+  const display = unit === "×" ? v.toFixed(1) : Math.round(v).toString();
+  return (
+    <div className="pf-opmetric">
+      <span className="lab">{label}</span>
+      <span className="val">
+        {display}
+        {unit}
+      </span>
+    </div>
+  );
+}
+
+function nodePos(i: number) {
+  const R = 41;
+  const ang = (-90 + i * 90) * (Math.PI / 180);
+  return {
+    left: `${50 + R * Math.cos(ang)}%`,
+    top: `${50 + R * Math.sin(ang)}%`,
+  };
+}
 
 export function OpControlSystem() {
-  const [activeIndex, setActiveIndex] = useState(2);
-  const active = stages[activeIndex];
+  const [phase, setPhase] = useState(0);
+  const p = PHASES[phase];
+  const sweep = ((phase + 1) / PHASES.length) * 360;
 
   return (
-    <div className="opControlSystem">
-      <header className="opControlHead">
-        <span className="opEyebrow">OPERATIONAL CONTROL SYSTEM</span>
-        <span className="opStatus">
-          <span className="opStatusDot" aria-hidden /> Live
+    <div className="pf-opsystem">
+      <div className="pf-ophead">
+        <span className="pf-mono-h" style={{ margin: 0 }}>
+          Lifecycle Control
         </span>
-      </header>
+        <span className="pf-oplive">
+          <span className="dot" /> Live
+        </span>
+      </div>
 
-      <div className="opControlBody">
-        <div className="opStepRail" role="tablist" aria-label="Operating stage">
-          {stages.map((s, i) => (
-            <button
-              key={s.number}
-              type="button"
-              role="tab"
-              aria-selected={i === activeIndex}
-              className={`opStep ${i === activeIndex ? "is-active" : ""}`}
-              onMouseEnter={() => setActiveIndex(i)}
-              onFocus={() => setActiveIndex(i)}
-              onClick={() => setActiveIndex(i)}
-            >
-              <span>{s.number}</span>
-              <strong>{s.title}</strong>
-            </button>
-          ))}
+      <div className="pf-opbody">
+        {/* Radial ring */}
+        <div className="pf-opring">
+          <div className="pf-ring-track" />
+          <div
+            className="pf-ring-prog"
+            style={{
+              background: `conic-gradient(var(--accent) ${sweep}deg, transparent ${sweep}deg)`,
+            }}
+          />
+          <div className="pf-ring-inner">
+            <span className="pf-ring-n">{p.n}</span>
+            <span className="pf-ring-name">{p.name}</span>
+            <span className="pf-ring-of">Phase {phase + 1} of 4</span>
+          </div>
+          {PHASES.map((ph, i) => {
+            const Ico = NODE_ICONS[i];
+            return (
+              <button
+                key={ph.name}
+                type="button"
+                className={`pf-ring-node${i === phase ? " on" : ""}${
+                  i < phase ? " done" : ""
+                }`}
+                style={nodePos(i)}
+                onClick={() => setPhase(i)}
+                aria-label={ph.name}
+              >
+                <Ico size={18} aria-hidden />
+                <span className="lbl">{ph.name}</span>
+              </button>
+            );
+          })}
         </div>
 
-        <div className="opWorkflow" key={active.number}>
-          <span className="opWorkflowTrack" aria-hidden />
-          <span className="opWorkflowPulse" aria-hidden />
-          {active.events.map((e) => (
-            <div key={e.label} className="opEvent">
-              <p className="opEventLabel">{e.label}</p>
-              <p className="opEventMeta">{e.meta}</p>
-            </div>
-          ))}
+        {/* Detail panel */}
+        <div className="pf-oppanel">
+          <div className="pf-oppanel-head">
+            <span className="num">{p.n}</span>
+            <h4>{p.name}</h4>
+          </div>
+          <div className="pf-opchecks">
+            {p.timeline.map(([t, s]) => (
+              <div className="pf-opcheck" key={t}>
+                <span className="tick">
+                  <Check size={13} aria-hidden />
+                </span>
+                <div>
+                  <strong>{t}</strong>
+                  <span>{s}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="pf-opmetrics">
+            {p.metrics.map(([l, v, u]) => (
+              <OpMetric key={l} label={l} value={v} unit={u} />
+            ))}
+          </div>
         </div>
-
-        <aside className="opMetricRail">
-          {metrics.map((m) => (
-            <div key={m.label} className="opMetric">
-              <span>{m.label}</span>
-              <strong>{m.value}</strong>
-            </div>
-          ))}
-        </aside>
       </div>
     </div>
   );

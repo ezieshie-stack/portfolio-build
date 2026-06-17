@@ -1,71 +1,43 @@
 import {
   ArrowLeftRight,
-  Bot,
   BookOpen,
+  CheckCircle2,
   ClipboardCheck,
   Database,
   FileText,
   GitCompare,
-  Hammer,
+  GitPullRequest,
   MessagesSquare,
   Recycle,
-  Scale,
   Search,
-  Sparkles,
-  Timer,
+  Settings,
   TrendingUp,
+  Users,
   Waypoints,
-  type LucideIcon,
+  Workflow,
 } from "lucide-react";
+import { Marquee } from "@/components/ui/Marquee";
 
-type Skill = { name: string; Icon: LucideIcon };
-
-/**
- * Operations & Process Analyst skillset (16 cards).
- * Grouped (carousel scrolls in this order):
- *   1. Process Analysis
- *   2. Business Analysis Practice
- *   3. Operations Practice
- *   4. Analytical
- *   5. Prototyping & Build
- */
-const skills: Skill[] = [
-  // Process Analysis
-  { name: "As-Is / To-Be Workflow Mapping", Icon: GitCompare },
-  { name: "BPMN 2.0 Diagramming", Icon: Waypoints },
-  { name: "SLA & Bottleneck Diagnostics", Icon: Timer },
-  { name: "Stakeholder Interviews", Icon: MessagesSquare },
-  // Business Analysis Practice
-  { name: "Requirements Elicitation", Icon: FileText },
-  { name: "User Acceptance Testing (UAT)", Icon: ClipboardCheck },
-  { name: "Process Improvement", Icon: TrendingUp },
-  // Operations Practice
-  { name: "RPA Workflow Design", Icon: Bot },
-  { name: "Standard Operating Procedures (SOPs)", Icon: BookOpen },
-  { name: "Root Cause Analysis", Icon: Search },
-  { name: "Continuous Improvement (Lean)", Icon: Recycle },
-  // Analytical
-  { name: "SQL Analysis (Window Functions, Aggregations)", Icon: Database },
-  { name: "Risk Scoring & Feature Engineering", Icon: Scale },
-  { name: "ETL Pipeline Design", Icon: ArrowLeftRight },
-  // Prototyping & Build
-  { name: "AI-Accelerated Prototyping", Icon: Sparkles },
-  { name: "Internal Tool Prototyping", Icon: Hammer },
+const SKILLS = [
+  { label: "Requirements Elicitation", icon: <MessagesSquare size={20} /> },
+  { label: "BRD & FRD Authoring", icon: <FileText size={20} /> },
+  { label: "As-Is / To-Be Process Modeling", icon: <GitCompare size={20} /> },
+  { label: "BPMN 2.0", icon: <Waypoints size={20} /> },
+  { label: "Data Modeling", icon: <Database size={20} /> },
+  { label: "Stakeholder Engagement", icon: <Users size={20} /> },
+  { label: "User Acceptance Testing", icon: <ClipboardCheck size={20} /> },
+  { label: "Process Improvement", icon: <TrendingUp size={20} /> },
+  { label: "Root Cause Analysis", icon: <Search size={20} /> },
+  { label: "SQL Analysis", icon: <Database size={20} /> },
+  { label: "Gap Analysis", icon: <GitPullRequest size={20} /> },
+  { label: "Solution Validation", icon: <CheckCircle2 size={20} /> },
+  { label: "Standard Operating Procedures", icon: <BookOpen size={20} /> },
+  { label: "Continuous Improvement", icon: <Recycle size={20} /> },
+  { label: "ETL Pipeline Design", icon: <ArrowLeftRight size={20} /> },
+  { label: "Workflow Automation", icon: <Workflow size={20} /> },
+  { label: "Platform Administration", icon: <Settings size={20} /> },
 ];
 
 export function SkillsCarousel() {
-  return (
-    <section className="toolsSection skillsSection">
-      <div className="toolsTrack">
-        {[...skills, ...skills].map(({ name, Icon }, index) => (
-          <div className="toolCard" key={`${name}-${index}`}>
-            <span className="toolIcon">
-              <Icon size={22} />
-            </span>
-            <span>{name}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+  return <Marquee items={SKILLS} title="Skills & Practice" reverse />;
 }

@@ -1,33 +1,33 @@
 import {
-  Filter,
+  ClipboardCheck,
   GitCompare,
   MessagesSquare,
   Rocket,
+  Settings,
   Waypoints,
-  Workflow,
 } from "lucide-react";
+import { CapabilityCard } from "@/components/ui/CapabilityCard";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+
+const CAPS: Array<{ label: string; icon: React.ReactNode }> = [
+  { label: "Requirements Elicitation", icon: <MessagesSquare size={22} aria-hidden /> },
+  { label: "Process & Data Modeling", icon: <GitCompare size={22} aria-hidden /> },
+  { label: "BPMN Diagramming", icon: <Waypoints size={22} aria-hidden /> },
+  { label: "User Acceptance Testing", icon: <ClipboardCheck size={22} aria-hidden /> },
+  { label: "Solution Delivery", icon: <Rocket size={22} aria-hidden /> },
+  { label: "Platform Administration", icon: <Settings size={22} aria-hidden /> },
+];
 
 export function CoreCapabilities() {
-  const capabilities = [
-    { label: "Process Diagnosis", icon: Workflow },
-    { label: "Workflow Redesign", icon: GitCompare },
-    { label: "BPMN Mapping", icon: Waypoints },
-    { label: "Bottleneck Analysis", icon: Filter },
-    { label: "Requirements Elicitation", icon: MessagesSquare },
-    { label: "Solution Delivery", icon: Rocket },
-  ];
-
   return (
-    <section className="coreCapabilities">
-      <p className="sectionEyebrow">Core Capabilities</p>
-
-      <div className="capabilityGrid">
-        {capabilities.map(({ label, icon: Icon }) => (
-          <div className="capabilityCard" key={label}>
-            <Icon size={22} />
-            <span>{label}</span>
-          </div>
-        ))}
+    <section className="pf-section">
+      <div className="pf-shell">
+        <Eyebrow>Core Capabilities</Eyebrow>
+        <div className="pf-capgrid">
+          {CAPS.map((c) => (
+            <CapabilityCard key={c.label} icon={c.icon} label={c.label} />
+          ))}
+        </div>
       </div>
     </section>
   );

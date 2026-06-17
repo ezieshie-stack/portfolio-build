@@ -1,146 +1,105 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { site } from "@/lib/content";
+import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Nav() {
-  const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!open) return;
-    const original = document.body.style.overflow;
+    if (!menuOpen) return;
+    const orig = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = original;
+      document.body.style.overflow = orig;
     };
-  }, [open]);
+  }, [menuOpen]);
+
+  // close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
-    <>
-      <header
-        className="sticky top-0 z-50 border-b backdrop-blur-xl"
-        style={{
-          background: "rgba(5, 5, 5, 0.7)",
-          borderColor: "var(--glass-border)",
-        }}
-      >
-        <div className="mx-auto max-w-[1600px] flex items-center justify-between gap-4 px-5 md:px-8 lg:px-12 py-4 lg:py-5">
-          <Link href="/" className="flex items-center gap-3 min-w-0">
-            <span
-              className="flex h-11 w-11 items-center justify-center rounded-2xl border font-bold text-sm shrink-0"
-              style={{
-                borderColor: "rgba(139, 92, 246, 0.4)",
-                background: "rgba(139, 92, 246, 0.12)",
-              }}
-            >
-              {site.brand.initials}
-            </span>
-            <div className="hidden sm:flex flex-col leading-tight min-w-0">
-              <span className="text-sm font-semibold text-white truncate">
-                {site.brand.name}
-              </span>
-              <span className="text-xs text-[color:var(--text-dim)] truncate">
-                {site.brand.role}
-              </span>
-            </div>
-          </Link>
+    <header className="pf-nav">
+      <div className="pf-shell pf-navrow">
+        <Link href="/" className="pf-brand">
+          <span className="pf-tile">{site.brand.initials}</span>
+          <span className="pf-brandtext">
+            <span className="pf-name">{site.brand.name}</span>
+            <span className="pf-role">{site.brand.role}</span>
+          </span>
+        </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 text-sm">
-            {site.navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`navLink text-[color:var(--text-dim)] hover:text-white${
-                    isActive ? " active" : ""
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href={site.cta.href}
-              className="inline-flex items-center gap-1.5 rounded-2xl px-4 py-2.5 lg:px-5 lg:py-3 text-xs lg:text-sm font-medium text-white transition shrink-0"
-              style={{ background: "rgb(124, 58, 237)" }}
-            >
-              {site.cta.label}
-            </Link>
-
-            <button
-              type="button"
-              aria-label="Open menu"
-              aria-expanded={open}
-              onClick={() => setOpen(true)}
-              className="lg:hidden flex items-center justify-center rounded-2xl border shrink-0"
-              style={{
-                width: 44,
-                height: 44,
-                borderColor: "rgba(139, 92, 246, 0.35)",
-                background: "rgba(139, 92, 246, 0.08)",
-              }}
-            >
-              <Menu size={20} className="text-white" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {open ? (
-        <div className="mobile-drawer lg:hidden">
-          <button
-            type="button"
-            aria-label="Close menu"
-            onClick={() => setOpen(false)}
-            className="mobile-drawer__backdrop"
-          />
-          <aside
-            className="mobile-drawer__panel"
-            role="dialog"
-            aria-modal="true"
-          >
-            <div className="mobile-drawer__header">
-              <span className="text-xs uppercase tracking-[0.3em] text-[color:var(--text-dim)]">
-                Menu
-              </span>
-              <button
-                type="button"
-                aria-label="Close menu"
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-center rounded-2xl border"
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderColor: "var(--glass-border)",
-                  background: "rgba(255,255,255,0.04)",
-                }}
+        <nav className="pf-navlinks">
+          {site.navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={active ? "on" : ""}
               >
-                <X size={18} className="text-white" />
-              </button>
-            </div>
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-            <nav className="mobile-drawer__links">
-              {site.navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="mobile-drawer__link"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </aside>
+        <div className="pf-navactions">
+          <ThemeToggle />
+          <Button variant="primary" size="sm" pill href={site.cta.href}>
+            {site.cta.label}
+          </Button>
         </div>
-      ) : null}
-    </>
+
+        <button
+          type="button"
+          className="pf-burger"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((m) => !m)}
+        >
+          {menuOpen ? <X size={22} aria-hidden /> : <Menu size={22} aria-hidden />}
+        </button>
+      </div>
+
+      <div className={`pf-mobilemenu${menuOpen ? " open" : ""}`}>
+        <nav className="pf-mobilelinks">
+          {site.navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={active ? "on" : ""}
+                onClick={() => setMenuOpen(false)}
+              >
+                <span>{link.label}</span>
+                <ArrowUpRight size={16} aria-hidden />
+              </Link>
+            );
+          })}
+        </nav>
+        <div className="pf-mobilefoot">
+          <ThemeToggle />
+          <Button
+            variant="primary"
+            size="md"
+            pill
+            href={site.cta.href}
+            className="grow"
+          >
+            {site.cta.label}
+          </Button>
+        </div>
+      </div>
+    </header>
   );
 }

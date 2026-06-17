@@ -1,0 +1,148 @@
+/* Colors — David Ezieshi Design System
+   ──────────────────────────────────────────────────────────────
+   Structure:
+   1. BASE PALETTE  — raw scales (violet, amber, slate, dataviz, semantic).
+      Theme-independent; never reference these directly in components.
+   2. SEMANTIC LAYER — role tokens (--surface, --text-heading, --accent…).
+      DARK is the default on :root; [data-theme="light"] overrides.
+   Components reference ONLY the semantic layer, so they theme for free. */
+
+:root {
+  /* ═══════════════ 1 · BASE PALETTE ═══════════════ */
+
+  /* Primary — Violet */
+  --violet-50:  #f4f1fe;
+  --violet-100: #ebe5fd;
+  --violet-200: #d9cefb;
+  --violet-300: #bca6f6;
+  --violet-400: #9b79f0;
+  --violet-500: #8b5cf6;   /* core accent (dark) */
+  --violet-600: #7c3aed;   /* solid / light accent */
+  --violet-700: #6d28d9;
+  --violet-800: #5b21b6;
+  --violet-900: #4c1d95;
+
+  /* Spark — Amber (used sparingly: status, key metric, highlight) */
+  --amber-100: #fef3c7;
+  --amber-200: #fde68a;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+
+  /* Neutrals — violet-tinted slate */
+  --slate-50:  #f7f6fb;
+  --slate-100: #efedf5;
+  --slate-200: #e2e0ec;
+  --slate-300: #cbc8d8;
+  --slate-400: #9d99ad;
+  --slate-500: #716e80;
+  --slate-600: #56535f;
+  --slate-700: #3d3a47;
+  --slate-800: #28252f;
+  --slate-900: #18151f;
+  --slate-950: #0b0a0f;
+
+  /* Semantic status */
+  --color-success: #2dbe8c;
+  --color-warning: #f59e0b;
+  --color-error:   #f2547d;
+  --color-info:    #8b5cf6;
+
+  /* Data-viz categorical (charts, dashboards, case studies) */
+  --viz-1: #8b5cf6;   /* violet  */
+  --viz-2: #2dd4bf;   /* teal    */
+  --viz-3: #fbbf24;   /* amber   */
+  --viz-4: #fb7185;   /* rose    */
+  --viz-5: #818cf8;   /* indigo  */
+
+
+  /* ═══════════════ 2 · SEMANTIC LAYER · DARK (default) ═══════════════ */
+
+  /* Canvas / surfaces */
+  --bg:            #050509;
+  --surface:       rgba(255, 255, 255, 0.04);   /* glass card */
+  --surface-2:     rgba(255, 255, 255, 0.025);  /* inset / inputs */
+  --surface-raised:rgba(20, 20, 24, 0.85);      /* opaque raised */
+  --nav-bg:        rgba(5, 5, 9, 0.72);          /* sticky nav (pre-blur) */
+
+  /* Borders */
+  --border:        rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-hover:  rgba(255, 255, 255, 0.24);
+
+  /* Text */
+  --text-heading:  #ffffff;
+  --text-body:     #a7a3b2;
+  --text-dim:      #817e8d;
+  --text-faint:    rgba(255, 255, 255, 0.20);
+  --text-on-accent:#ffffff;
+
+  /* Accent (violet) — resolved per theme */
+  --accent:        var(--violet-500);
+  --accent-solid:  var(--violet-600);
+  --accent-hover:  var(--violet-500);
+  --accent-text:   var(--violet-300);   /* violet text on dark */
+  --violet-fill:   rgba(139, 92, 246, 0.13);
+  --violet-fill-strong: rgba(139, 92, 246, 0.20);
+  --violet-border: rgba(139, 92, 246, 0.38);
+
+  /* Spark (amber) — resolved per theme */
+  --spark:         var(--amber-400);
+  --spark-fill:    rgba(245, 158, 11, 0.16);
+  --spark-border:  rgba(245, 158, 11, 0.38);
+
+  /* Effects */
+  --card-shadow:   0 24px 48px rgba(0, 0, 0, 0.45);
+  --glass-blur:    blur(24px);  /* @kind other */ /* glass cards (dark) */
+
+  /* Background system */
+  --dot-color:     rgba(255, 255, 255, 0.14);
+  --grain-opacity: 0.05; /* @kind other */
+}
+
+
+/* ═══════════════ SEMANTIC LAYER · LIGHT ═══════════════ */
+[data-theme="light"] {
+  /* Canvas / surfaces */
+  --bg:            #f6f5fb;
+  --surface:       #ffffff;
+  --surface-2:     #ffffff;
+  --surface-raised:#ffffff;
+  --nav-bg:        rgba(246, 245, 251, 0.74);
+
+  /* Borders */
+  --border:        #e7e6f0;
+  --border-strong: #d8d6e6;
+  --border-hover:  #cbc8d8;
+
+  /* Text */
+  --text-heading:  #15131c;
+  --text-body:     #56535f;
+  --text-dim:      #817e8d;
+  --text-faint:    rgba(21, 19, 28, 0.34);
+  --text-on-accent:#ffffff;
+
+  /* Accent (violet) — darker for AA contrast on light */
+  --accent:        var(--violet-600);
+  --accent-solid:  var(--violet-600);
+  --accent-hover:  var(--violet-700);
+  --accent-text:   var(--violet-700);
+  --violet-fill:   rgba(124, 58, 237, 0.07);
+  --violet-fill-strong: rgba(124, 58, 237, 0.12);
+  --violet-border: rgba(124, 58, 237, 0.28);
+
+  /* Spark (amber) — darker for contrast on light */
+  --spark:         var(--amber-700);
+  --spark-fill:    rgba(245, 158, 11, 0.14);
+  --spark-border:  rgba(245, 158, 11, 0.32);
+
+  /* Effects — soft violet-tinted shadow instead of blur-over-black */
+  --card-shadow:   0 1px 2px rgba(24, 20, 40, 0.04), 0 16px 40px rgba(91, 53, 176, 0.10);
+  --glass-blur:    blur(8px);  /* @kind other */
+
+  /* Background system */
+  --dot-color:     rgba(91, 53, 176, 0.18);
+  --grain-opacity: 0.045; /* @kind other */
+}

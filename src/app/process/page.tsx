@@ -1,166 +1,148 @@
-import { PageShell, SectionTag } from "@/components/PageShell";
-import { Reveal } from "@/components/Reveal";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { OpControlSystem } from "@/components/process/OpControlSystem";
-import { processPage as processPageDefault } from "@/lib/content";
-import { deepMerge, fetchSectionContent } from "@/lib/cms";
+import { Chip } from "@/components/ui/Chip";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
-export const metadata = { title: "Process | Portfolio" };
+export const metadata = { title: "Process | David Ezieshi" };
 
-function MetricIcon({ name }: { name: string }) {
-  const common = "w-6 h-6 text-[color:var(--primary)]";
-  if (name === "chart") {
-    return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M3 20h18" />
-        <path d="M6 17V9" />
-        <path d="M11 17V5" />
-        <path d="M16 17v-6" />
-      </svg>
-    );
-  }
-  if (name === "clock") {
-    return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
-      </svg>
-    );
-  }
-  if (name === "data") {
-    return (
-      <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <ellipse cx="12" cy="5" rx="8" ry="3" />
-        <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
-        <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
-      </svg>
-    );
-  }
+const STEPS: Array<{
+  num: string;
+  sub: string;
+  title: string;
+  desc: string;
+  tags: string[];
+}> = [
+  {
+    num: "01",
+    sub: "Stakeholder discovery",
+    title: "Elicit",
+    desc: "I interview the people who run the process and walk it end to end. The objective is the underlying problem, not the surface complaint.",
+    tags: [
+      "Stakeholder Interviews",
+      "Requirements Elicitation",
+      "Current-State Walkthrough",
+    ],
+  },
+  {
+    num: "02",
+    sub: "Process and data",
+    title: "Model",
+    desc: "I model the current state in BPMN and the data behind it. The picture lines up before any change is proposed.",
+    tags: ["BPMN 2.0", "Data Modeling", "As-Is Mapping"],
+  },
+  {
+    num: "03",
+    sub: "To-be and requirements",
+    title: "Design",
+    desc: "I define the to-be process, the data structure, and the requirements. Each one is testable and tied to the business need.",
+    tags: ["To-Be Design", "BRD / FRD", "Acceptance Criteria"],
+  },
+  {
+    num: "04",
+    sub: "Solution into production",
+    title: "Deliver",
+    desc: "I take the design through UAT and into production, with the documentation that makes it operable.",
+    tags: [
+      "User Acceptance Testing",
+      "Solution Delivery",
+      "Documentation",
+    ],
+  },
+  {
+    num: "05",
+    sub: "Live evaluation",
+    title: "Operate",
+    desc: "I administer the live system, evaluate performance against the requirement, and improve what doesn't hold up.",
+    tags: [
+      "Platform Administration",
+      "Performance Evaluation",
+      "Continuous Improvement",
+    ],
+  },
+];
+
+const RESULTS: Array<{ val: string; label: string }> = [
+  { val: "27", label: "Modules in production (FIIT Co.)" },
+  { val: "0.86", label: "Churn model ROC-AUC (Telco)" },
+  { val: "5,000+", label: "Records analyzed (Movies)" },
+];
+
+export default function ProcessPage() {
   return (
-    <svg className={common} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-export default async function ProcessPage() {
-  const override = await fetchSectionContent<typeof processPageDefault>(
-    "processPage",
-  );
-  const processPage = deepMerge(processPageDefault, override);
-
-  return (
-    <PageShell>
-      {/* ── HERO ─────────────────────────────────────── */}
-      <Reveal
-        as="section"
-        className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center pb-24"
-      >
-        <div>
-          <SectionTag>{processPage.hero.eyebrow}</SectionTag>
-          <h1 className="text-[length:var(--text-display)] font-extrabold leading-[0.9] tracking-[-0.05em] mb-8">
-            Systems designed for{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #c084fc, #8B5CF6)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+    <div className="pf-page">
+      <div className="pf-shell">
+        {/* Hero */}
+        <section className="pf-proc-hero">
+          <div className="pf-proc-herotext">
+            <Eyebrow className="mb-[22px]">Process Framework</Eyebrow>
+            <h1
+              className="pf-page-title"
+              style={{ fontSize: "clamp(40px, 4.6vw, 68px)" }}
             >
-              {processPage.hero.highlight}
-            </span>
-          </h1>
-          <p className="text-[color:var(--text-dim)] text-lg leading-relaxed max-w-[560px]">
-            {processPage.hero.description}
-          </p>
-        </div>
+              Five phases from requirement to <em>live operation.</em>
+            </h1>
+            <p className="pf-page-intro" style={{ maxWidth: 620 }}>
+              I run the same lifecycle on every engagement. Elicit what&rsquo;s
+              needed. Model the process and the data. Deliver the solution.
+              Operate it through evaluation. Click through the phases to see
+              what happens at each one.
+            </p>
+          </div>
+        </section>
 
-        {/* Operational control system visualization */}
-        <OpControlSystem />
-      </Reveal>
+        {/* Lifecycle Ring */}
+        <section style={{ paddingBottom: 56 }}>
+          <OpControlSystem />
+        </section>
 
-      {/* ── EXECUTION MODEL ──────────────────────────── */}
-      <Reveal as="section" className="py-12">
-        <SectionTag>{processPage.executionTag}</SectionTag>
-        <div className="flex flex-col gap-6 mt-2">
-          {processPage.steps.map((step) => (
-            <article
-              key={step.number}
-              className="glass-card p-8 md:p-10 grid grid-cols-1 md:grid-cols-[140px_1px_1fr] gap-6 md:gap-10 items-start"
-            >
-              <div className="flex items-start">
-                <span
-                  className="text-[length:var(--text-display)] md:text-[length:var(--text-display)] font-extrabold leading-none tracking-[-0.05em]"
-                  style={{ color: "rgba(139,92,246,0.95)" }}
-                >
-                  {step.number}
-                </span>
-              </div>
-
-              <div className="hidden md:block w-px self-stretch bg-white/8" />
-
-              <div>
-                <p className="text-xs tracking-[0.22em] font-semibold text-[#c084fc] mb-3">
-                  {step.subtitle.toUpperCase()}
-                </p>
-                <h2 className="text-2xl md:text-2xl font-bold tracking-[-0.02em] mb-4">
-                  {step.title}
-                </h2>
-                <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[720px] mb-6">
-                  {step.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {step.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-4 py-2 rounded-full border border-white/8 bg-white/[0.03] text-sm text-white/70"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+        {/* Execution Model */}
+        <section style={{ paddingBottom: 24 }}>
+          <Eyebrow className="mb-[22px]">Execution Model</Eyebrow>
+          <div className="pf-steps">
+            {STEPS.map((s) => (
+              <article className="pf-stepblock" key={s.num}>
+                <span className="num">{s.num}</span>
+                <span className="div" />
+                <div>
+                  <p className="sub">{s.sub}</p>
+                  <h2>{s.title}</h2>
+                  <p>{s.desc}</p>
+                  <div className="pf-steptags">
+                    {s.tags.map((t) => (
+                      <Chip key={t}>{t}</Chip>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Reveal>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      {/* ── PERFORMANCE IMPACT ───────────────────────── */}
-      <Reveal as="section" className="py-12">
-        <SectionTag>{processPage.metricsTag}</SectionTag>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-2">
-          {processPage.metrics.map((metric) => (
-            <article key={metric.label} className="glass-card p-8 flex flex-col gap-5">
-              <div className="flex items-start justify-between gap-4">
-                <span
-                  className="text-[length:var(--text-display)] font-extrabold leading-none tracking-[-0.05em]"
-                  style={{
-                    background: "linear-gradient(135deg, #c084fc, #8B5CF6)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {metric.value}
-                </span>
-                <MetricIcon name={metric.icon} />
-              </div>
-              <div className="h-px bg-white/8" />
-              <span className="text-xs tracking-[0.2em] text-white/60 uppercase">
-                {metric.label}
-              </span>
-            </article>
-          ))}
-        </div>
-
-        <a
-          href={processPage.resultsCta.href}
-          className="inline-flex items-center gap-2 mt-8 text-[#c4b5fd] hover:text-white transition-colors text-sm"
-        >
-          {processPage.resultsCta.label} →
-        </a>
-      </Reveal>
-    </PageShell>
+        {/* Recent Results */}
+        <section style={{ paddingTop: 24, paddingBottom: 8 }}>
+          <Eyebrow className="mb-[22px]">Recent Results</Eyebrow>
+          <div className="pf-resultgrid">
+            {RESULTS.map((r) => (
+              <article className="pf-resultcard" key={r.label}>
+                <div className="top">
+                  <span className="val">{r.val}</span>
+                </div>
+                <div className="div" />
+                <span className="lab">{r.label}</span>
+              </article>
+            ))}
+          </div>
+          <Link
+            href="/work"
+            className="pf-textlink"
+            style={{ marginTop: 28, display: "inline-flex" }}
+          >
+            See these phases applied. View Work.{" "}
+            <ArrowRight size={15} aria-hidden />
+          </Link>
+        </section>
+      </div>
+    </div>
   );
 }

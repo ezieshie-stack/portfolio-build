@@ -1,0 +1,297 @@
+/* Component primitives — Button, Badge, Chip, Card, CapabilityCard,
+   MetricStat, Input, ThemeToggle.
+   The handoff prototype referenced these from window.DavidEzieshi_DesignSystem
+   (external library, not shipped in the zip). Hand-written here to the
+   README spec. Same .ds-* convention as the background utilities. */
+
+
+/* ═════════════ Button ═════════════ */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+.ds-btn--sm { height: 40px; padding: 0 18px; font-size: 14px; }
+.ds-btn--md { height: 48px; padding: 0 22px; font-size: 15px; }
+.ds-btn--lg { height: 56px; padding: 0 28px; font-size: 16px; }
+.ds-btn--pill { border-radius: var(--radius-pill); }
+
+.ds-btn--primary {
+  background: var(--accent-solid);
+  color: var(--text-on-accent);
+  border-color: var(--accent-solid);
+}
+.ds-btn--primary:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(var(--lift-sm));
+}
+
+.ds-btn--secondary {
+  background: var(--surface);
+  color: var(--text-heading);
+  border-color: var(--border-strong);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+}
+.ds-btn--secondary:hover {
+  border-color: var(--border-hover);
+  transform: translateY(var(--lift-sm));
+}
+
+.ds-btn--ghost {
+  background: transparent;
+  color: var(--accent-text);
+}
+.ds-btn--ghost:hover { background: var(--violet-fill); }
+
+.ds-btn[disabled] { opacity: 0.5; pointer-events: none; }
+
+
+/* ═════════════ Badge ═════════════ */
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tag);
+}
+.ds-badge--violet {
+  background: var(--violet-fill);
+  border-color: var(--violet-border);
+  color: var(--accent-text);
+}
+.ds-badge--subtle {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--text-body);
+}
+.ds-badge--outline {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--text-body);
+}
+.ds-badge--spark {
+  background: var(--spark-fill);
+  border-color: var(--spark-border);
+  color: var(--spark);
+}
+.ds-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+
+/* ═════════════ Chip (squared violet tag) ═════════════ */
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--violet-border);
+  background: var(--violet-fill);
+  color: var(--accent-text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* ═════════════ Card (glass surface) ═════════════ */
+.ds-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  overflow: hidden;
+}
+.ds-card--interactive {
+  cursor: pointer;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+.ds-card--interactive:hover {
+  transform: translateY(var(--lift-md));
+  border-color: var(--border-hover);
+  box-shadow: var(--card-shadow);
+}
+.ds-card--glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, var(--violet-fill-strong), transparent 60%);
+}
+
+
+/* ═════════════ CapabilityCard ═════════════ */
+.ds-capability {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  color: var(--text-heading);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+.ds-capability:hover {
+  transform: translateY(var(--lift-md));
+  border-color: var(--border-hover);
+}
+.ds-capability__ic {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--violet-fill);
+  border: 1px solid var(--violet-border);
+  color: var(--accent);
+}
+.ds-capability__label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+/* ═════════════ MetricStat ═════════════ */
+.ds-metricstat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ds-metricstat__ic {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--violet-fill);
+  border: 1px solid var(--violet-border);
+  color: var(--accent);
+}
+.ds-metricstat--spark .ds-metricstat__ic {
+  background: var(--spark-fill);
+  border-color: var(--spark-border);
+  color: var(--spark);
+}
+.ds-metricstat__val {
+  color: var(--text-heading);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.ds-metricstat__lab {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tag);
+  color: var(--text-dim);
+}
+
+
+/* ═════════════ Input + Textarea ═════════════ */
+.ds-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ds-input-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-tag);
+  color: var(--text-dim);
+}
+.ds-input-label .req { color: var(--spark); margin-left: 4px; }
+.ds-input,
+.ds-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-heading);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+.ds-textarea { min-height: 120px; resize: vertical; }
+.ds-input::placeholder,
+.ds-textarea::placeholder { color: var(--text-faint); }
+.ds-input:focus,
+.ds-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--violet-fill);
+}
+
+
+/* ═════════════ ThemeToggle ═════════════ */
+.ds-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+}
+.ds-toggle__btn {
+  height: 28px;
+  width: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  border: 0;
+  background: transparent;
+  color: var(--text-body);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+.ds-toggle__btn:hover { color: var(--text-heading); }
+.ds-toggle__btn.on {
+  background: var(--accent-solid);
+  color: var(--text-on-accent);
+}
