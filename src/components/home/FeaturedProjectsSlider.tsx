@@ -119,7 +119,7 @@ const PROJECTS: Project[] = [
 function ProjectSlide({ p }: { p: Project }) {
   return (
     <div className="pf-featgrid">
-      <Card glow>
+      <Card glow padding="40px">
         <Badge className="mb-[22px]">{p.category}</Badge>
         <h2 className="pf-feat-title">{p.title}</h2>
         <p className="pf-feat-desc">{p.description}</p>

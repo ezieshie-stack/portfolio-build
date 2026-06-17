@@ -134,7 +134,7 @@ export function WorkPageContent() {
             </p>
           </div>
 
-          <Card glow>
+          <Card glow padding="36px">
             <span className="pf-work-featpill">Featured Case Study</span>
             <h2
               className="pf-feat-title"
@@ -226,7 +226,7 @@ export function WorkPageContent() {
         </section>
 
         {/* How I Approach Work — 5-node pipeline rail */}
-        <Card>
+        <Card padding="44px">
           <div className="pf-pipe-head">
             <Eyebrow className="mb-[14px]">How I Approach Work</Eyebrow>
             <h2 className="pf-feat-title" style={{ marginBottom: 10 }}>

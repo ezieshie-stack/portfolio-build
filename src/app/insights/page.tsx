@@ -1,75 +1,7 @@
-import Link from "next/link";
-import { PageShell, SectionTag } from "@/components/PageShell";
-import { Reveal } from "@/components/Reveal";
-import { InsightLibrary } from "@/components/insights/InsightLibrary";
-import { InsightsGrid } from "@/components/insights/InsightsGrid";
-import { deepMerge, fetchPublishedArticles, fetchSectionContent } from "@/lib/cms";
-import { insights as insightsDefault } from "@/lib/content";
-import type { Article } from "@/lib/content";
+import { InsightsPageContent } from "@/components/insights/InsightsPageContent";
 
-export const metadata = { title: "Insights | Portfolio" };
+export const metadata = { title: "Insights | David Ezieshi" };
 
-export default async function InsightsPage() {
-  const override = await fetchSectionContent<typeof insightsDefault>("insights");
-  const insights = deepMerge(insightsDefault, override);
-  const { featured } = insights;
-
-  // Try Convex first; fall back to static articles in lib/content.ts.
-  // If Convex returns an empty list (set up but no articles yet), still
-  // show the static placeholders so the page never feels broken.
-  const convexArticles = await fetchPublishedArticles();
-  const articles: Article[] =
-    convexArticles.length > 0
-      ? convexArticles.map((a) => ({
-          slug: a.slug,
-          title: a.title,
-          excerpt: a.excerpt,
-          category: a.category,
-          date: a.date,
-          readTime: a.readTime,
-        }))
-      : insights.articles;
-
-  return (
-    <PageShell>
-      {/* ── HERO ─────────────────────────────────────── */}
-      <Reveal as="section" className="pb-24 max-w-[900px]">
-        <SectionTag>{insights.tag}</SectionTag>
-        <h1 className="text-[length:var(--text-display)] font-extrabold leading-[0.95] tracking-[-0.06em] my-6">
-          {insights.title}
-        </h1>
-        <p className="text-[color:var(--text-dim)] text-lg leading-relaxed max-w-[680px]">
-          {insights.intro}
-        </p>
-      </Reveal>
-
-      {/* ── FEATURED INSIGHT ─────────────────────────── */}
-      <Reveal
-        as="section"
-        className="insights-featured-card grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-10 p-8 md:p-12 mb-20"
-      >
-        <div>
-          <span className="filter-pill" data-active="true">
-            {featured.pill}
-          </span>
-          <h2 className="text-[length:var(--text-4xl)] font-extrabold leading-none tracking-[-0.05em] mt-6 mb-6">
-            {featured.title}
-          </h2>
-          <p className="text-[color:var(--text-dim)] leading-relaxed max-w-[560px] mb-8">
-            {featured.body}
-          </p>
-          <Link href={featured.ctaHref} className="btn-primary inline-flex">
-            {featured.ctaLabel} →
-          </Link>
-        </div>
-
-        <InsightLibrary />
-      </Reveal>
-
-      {/* ── CATEGORIES + ARTICLE GRID ────────────────── */}
-      <Reveal as="section">
-        <InsightsGrid filters={[...insights.filters]} articles={articles} />
-      </Reveal>
-    </PageShell>
-  );
+export default function InsightsPage() {
+  return <InsightsPageContent />;
 }

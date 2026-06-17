@@ -116,9 +116,9 @@ body { font-family: var(--font-sans); }
 .pf-opbody { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 28px; padding: 32px; align-items: center; }
 /* radial lifecycle ring */
 .pf-opring { position: relative; width: 100%; max-width: 340px; aspect-ratio: 1; margin: 0 auto; }
-.pf-ring-track { position: absolute; inset: 0; border-radius: 50%; padding: 0; background: var(--surface-2); border: 1px solid var(--border); }
-.pf-ring-prog { position: absolute; inset: 0; border-radius: 50%; -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px)); mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px)); transition: background var(--duration-slow) var(--ease-out); }
-.pf-ring-inner { position: absolute; inset: 22%; border-radius: 50%; background: linear-gradient(165deg, var(--violet-fill-strong), var(--surface)); border: 1px solid var(--violet-border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: var(--card-shadow); }
+.pf-ring-track { position: absolute; inset: 0; border-radius: 50%; padding: 0; background: var(--surface-2); border: 1px solid var(--border); pointer-events: none; }
+.pf-ring-prog { pointer-events: none; position: absolute; inset: 0; border-radius: 50%; -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px)); mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px)); transition: background var(--duration-slow) var(--ease-out); }
+.pf-ring-inner { pointer-events: none; position: absolute; inset: 22%; border-radius: 50%; background: linear-gradient(165deg, var(--violet-fill-strong), var(--surface)); border: 1px solid var(--violet-border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: var(--card-shadow); }
 .pf-ring-n { font-family: var(--font-mono); font-size: 13px; color: var(--accent-text); }
 .pf-ring-name { color: var(--text-heading); font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
 .pf-ring-of { font-size: 11px; color: var(--text-dim); }

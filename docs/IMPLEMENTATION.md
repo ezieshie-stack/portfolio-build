@@ -106,3 +106,69 @@ Theme is driven by `data-theme="light|dark"` on `<html>`, persisted to `localSto
 
 ## Still unconfirmed (owner must verify before public)
 Marketing PG GPA (shown as "Dean's List" only), Ralph Lauren "Present", Telco metrics (0.86 ROC-AUC / 69% precision), "9 Backend Services", "2 Production Systems / 6 Analyst Team Led".
+
+---
+
+# ROUND 2 — remaining fixes (build is close; these still fail)
+
+Most of the contract landed. These specific items are still wrong in the latest deploy:
+
+### 1. Light-mode BUTTON text is invisible (Contact page worst)
+Secondary buttons ("View My LinkedIn", "Email Me") and the full-width "Send Message" submit render **white text on a white/light fill** — unreadable.
+- **Primary button:** fill `--accent-solid #7c3aed`, text **`#ffffff`** (`--text-on-accent`) in BOTH themes.
+- **Secondary button:** fill `--surface` (`#ffffff` light), text **`--text-heading #15131c`** (light) / `#fff` (dark), border `--border-strong`.
+- The "Send Message" submit must be a **primary** button (solid violet, white text), not a faint gradient.
+- Audit every `Button` variant in light mode — text must hit `--text-on-accent` (primary) or `--text-heading` (secondary). Never white-on-light.
+
+### 2. Article Reader shows "Article body coming soon" — render the REAL body
+The reader is falling back to the repo's Convex placeholder. It must render the written body from `pages.jsx` → `INSIGHTS_ARTICLES[i].body` / `INSIGHTS_FEATURED.body` (array of `{p}` / `{h}` / `{ul}` blocks). Every one of the 7 articles HAS a full body in the prototype. Do not show "coming soon".
+
+### 3. Light-mode faint body text (article reader + contact intro)
+Article subtitle, body, and the Contact hero intro render near-white on light = invisible. Use `--text-body #56535f` (light) for all body copy and `--text-heading #15131c` for the headline. The Contact headline "Let's diagnose the problem and ship the fix." must be `--text-heading`, not faint gray.
+
+### 4. Insights "Featured Insight" right panel is dev-invented
+The deploy shows an "INSIGHT LIBRARY / 12 ARTICLES" tabbed widget. That is **not** in the design. Replace with our simple decorative art panel (`.pf-insight-feat-art`): radial violet wash + centered lightbulb icon + "Operational Systems" mono label. No "12 articles", no tabs.
+
+### 5. Featured Projects — "PROJECT OUTCOMES" label clipped
+The outcomes card label renders as "ROJECT OUTCOMES" (left edge clipped) and the metric tiles overlap their labels. Give the outcomes card proper padding and let the metric grid use the prototype's `.pf-metrics` spacing so nothing overflows.
+
+### Re-verify after these
+- [ ] Toggle to **light mode** and confirm EVERY button's text is readable.
+- [ ] Open any insight → full article body renders (no "coming soon").
+- [ ] Contact hero + form: headline and intro readable in light mode; submit button is solid violet with white text.
+- [ ] Insights featured panel = lightbulb art, not a library widget.
+
+---
+
+# INTERACTIVE ELEMENTS — required behavior (verified in the reference build)
+
+Every interaction below works in the prototype. Match this behavior exactly.
+
+### Process — Lifecycle ring (most fragile; get this right)
+- 4 phase nodes (`.pf-ring-node`) clickable → set `phase` (0–3). Active node = solid violet + glow + `scale(1.12)`; completed nodes = violet outline. Conic sweep (`.pf-ring-prog`) animates to the active phase.
+- **CRITICAL — decorative layers must NOT intercept the pointer.** Set `pointer-events: none` on `.pf-ring-track`, `.pf-ring-prog`, AND `.pf-ring-inner`. If you skip this, the conic/inner discs sit over the nodes and (a) swallow clicks and (b) show a `pointer` cursor in dead zones between icons — exactly the "cursor moves when pointing at the icons" bug you're seeing. Only `.pf-ring-node` buttons should be interactive (they carry `cursor: pointer`).
+- On phase change, the 3 metric tiles (`.pf-opmetric .val`) **count up** to the new values (cubic ease, ~600ms; `×` → 1 decimal, `%` → rounded). Use `requestAnimationFrame`, not a CSS transition on text.
+- Each node is a real `<button>` with an `aria-label` of the phase name.
+
+### Featured Projects slider (Home)
+- `cur` index 0–2; `.pf-slider-track` uses `transform: translateX(-cur*100%)` with `--duration-slow` ease. Prev/next arrows wrap around; dot indicators jump; active dot (`.pf-dot.on`) elongates to a violet pill. Exactly one dot active at a time.
+
+### Filter pills (Work + Insights)
+- Client state; clicking filters the array by `group`/`category`; "All" shows everything. Active pill = solid `--accent-solid` with white text. Re-render the grid on change.
+
+### Theme toggle
+- Sun/moon segmented control sets `data-theme` on `<html>`, persists to `localStorage["pf-theme"]`, re-reads on mount. Every token-driven color flips automatically.
+
+### Article reader (Insights)
+- Card or featured "Read Insight" click → `open` = that article; overlay (`.pf-reader`) fades/rises in. Close via ×, backdrop click, or **Escape** (keydown listener, cleaned up on unmount). Body scrolls. Renders the real body blocks (see Round 2 #2).
+
+### Marquees (Home tools/skills)
+- CSS keyframe `translateX(0 → -50%)` over the duplicated list; `animation-play-state: paused` on hover. Respect `prefers-reduced-motion`.
+
+### Mobile nav (≤760px)
+- Hamburger toggles the menu (max-height transition). Links + theme toggle + Let's Connect live inside it. Name/role, desktop links, and desktop actions hide.
+
+### General interaction-cursor rule
+Anything clickable gets `cursor: pointer`; **decorative overlays get `pointer-events: none`** so the cursor never changes over non-interactive areas and clicks always reach the control beneath. Audit every absolutely-positioned decorative layer (ring discs, card glows, gradient edges) for this.
+
+### Verify all of the above in BOTH themes before redeploy.

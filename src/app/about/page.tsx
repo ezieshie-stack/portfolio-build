@@ -236,7 +236,7 @@ export default function AboutPage() {
         </section>
 
         {/* Education & Certifications */}
-        <Card glow className="pf-edu-card">
+        <Card glow padding="48px" className="pf-edu-card">
           <div className="pf-edu-grid">
             <div>
               <Eyebrow className="mb-[22px]">

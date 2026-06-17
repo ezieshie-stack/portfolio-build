@@ -25,7 +25,7 @@ export function AboutPreview() {
   return (
     <section className="pf-section">
       <div className="pf-shell">
-        <Card glow className="pf-about-card" >
+        <Card glow padding="44px" className="pf-about-card">
           <div className="pf-about-grid">
             <div>
               <Eyebrow className="mb-[18px]">About</Eyebrow>
