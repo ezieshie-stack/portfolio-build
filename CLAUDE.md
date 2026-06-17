@@ -8,6 +8,14 @@ David Ezieshi's portfolio site. Next.js 16 + React 19, deployed to Vercel.
 
 ## ⚠️ Design system implementation contract
 
+**Read [`docs/IMPLEMENTATION.md`](docs/IMPLEMENTATION.md) before writing
+any redesign code.** That doc is the canonical contract authored by the
+design lead — section-by-section "deployed → must be" table, light-mode
+token values, behavior to port, and definition of done.
+
+The summary below is a quick reference. When the two disagree,
+`docs/IMPLEMENTATION.md` wins.
+
 The visual design ships as a **set of CSS files** in
 `src/styles/handoff/` — these are the authoritative source for tokens,
 component styles, and page-level styling. **They are not to be
