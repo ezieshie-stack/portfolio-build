@@ -185,3 +185,38 @@
     box-shadow: var(--card-shadow); opacity: 0; transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
     z-index: 100; pointer-events: none; backdrop-filter: var(--glass-blur); }
   .pf-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ─────────────────────────────────────────────────────────
+   * RESPONSIVE OVERRIDES — Round 3 fix
+   * Source-order safety net. The extracted index.html block has an
+   * unconditional `.pf-explore-list { grid-template-columns: 1fr 1fr }`
+   * at line ~165 that ships AFTER the `@media (max-width: 760px)`
+   * block above, so it wins on phones and the grid overflows the
+   * viewport. Same risk for several other grids when re-rasterized.
+   * These rules MUST live last so the cascade collapses every
+   * multi-column grid to 1 column on mobile.
+   * ──────────────────────────────────────────────────────── */
+  @media (max-width: 760px) {
+    .pf-explore-list,
+    .pf-principles,
+    .pf-capgrid,
+    .pf-strengthlist,
+    .pf-about-grid,
+    .pf-hero-grid,
+    .pf-featgrid,
+    .pf-proc-herotext,
+    .pf-about-hero,
+    .pf-contact-grid,
+    .pf-insight-feat-grid,
+    .pf-edu-grid,
+    .pf-exp-sec,
+    .pf-work-hero,
+    .pf-workgrid,
+    .pf-insightgrid,
+    .pf-footcols { grid-template-columns: 1fr !important; }
+
+    .pf-strengthlist { gap: 0; }
+
+    /* Hide the home hero portrait on phones per spec */
+    .pf-portrait { display: none; }
+  }

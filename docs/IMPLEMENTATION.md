@@ -172,3 +172,31 @@ Every interaction below works in the prototype. Match this behavior exactly.
 Anything clickable gets `cursor: pointer`; **decorative overlays get `pointer-events: none`** so the cursor never changes over non-interactive areas and clicks always reach the control beneath. Audit every absolutely-positioned decorative layer (ring discs, card glows, gradient edges) for this.
 
 ### Verify all of the above in BOTH themes before redeploy.
+
+---
+
+# ROUND 3 — RESPONSIVE IS BROKEN (grids not collapsing on mobile)
+
+**Symptom (confirmed on a real phone):** "Currently Exploring" renders as **2 columns and overflows off the right edge** — cards bleed past the viewport. This is happening because the dev's build **dropped our mobile media queries**. The grids stay multi-column at phone widths.
+
+**Root cause & rule:** every multi-column grid MUST collapse to 1 column at `≤760px`. Do not use bare `repeat(auto-fit, minmax(220px,1fr))` without a hard single-column fallback — on a 360–410px phone that still tries 2 columns and overflows. Either set explicit columns + a media query, OR use `minmax(min(100%, 220px), 1fr)` so it can shrink to full width.
+
+**Every one of these must be 1 column ≤760px** (verify each on a 390px viewport, no horizontal scroll):
+- `.pf-explore-list` (Currently Exploring) → `grid-template-columns: 1fr`
+- `.pf-principles` (My Approach) → 1fr
+- `.pf-capgrid` (Core Capabilities) → 1 col (or 2 at most)
+- `.pf-workgrid` (Work projects) → 1fr
+- `.pf-insightgrid` (Insights) → 1fr
+- `.pf-strengthlist` (Core Strengths) → 1fr, gap 0
+- `.pf-footcols` (footer) → 1fr (or 2)
+- `.pf-metrics` / `.pf-opmetrics` (project outcomes, lifecycle metrics) → keep readable; never overflow
+- `.pf-hero-grid`, `.pf-featgrid`, `.pf-proc-herotext`, `.pf-about-hero`, `.pf-contact-grid`, `.pf-insight-feat-grid` → 1 col
+- Hero portrait hidden ≤760px; nav → hamburger.
+
+**Global guardrails the build is missing:**
+1. `html, body { overflow-x: hidden; }` as a safety net AND fix the actual overflowing grid (don't rely on hidden alone).
+2. Every page section is wrapped in the shell with `padding-left/right: var(--gutter)` where `--gutter: clamp(20px, 4vw, 56px)` — confirm the gutter applies on mobile so cards aren't edge-to-edge.
+3. `box-sizing: border-box` globally.
+4. The simplest correct path: **copy our `portfolio.css` media queries verbatim** (`@media (max-width: 980px)` and `@media (max-width: 760px)` blocks) and the `index.html` inline `<style>` media queries. They already collapse every grid correctly. If you re-derived the CSS in Tailwind, you lost them — re-add `lg:`/`md:` → single-column variants for each grid above.
+
+**Test matrix before redeploy:** 390px (phone), 768px (tablet), 1024px, 1440px. No horizontal scroll at any width; no card past the right edge; nav hamburger ≤760px.
