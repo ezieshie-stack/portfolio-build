@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   ArrowLeftRight,
   ArrowUpRight,
@@ -5,258 +6,261 @@ import {
   BarChart3,
   ClipboardCheck,
   Database,
-  FileSpreadsheet,
   FileText,
+  GitCompare,
   GraduationCap,
   MessagesSquare,
   Rocket,
   Search,
+  Settings,
   Users,
   Waypoints,
   Workflow,
-  Wrench,
 } from "lucide-react";
-import { LiveImage } from "@/components/cms/LiveImage";
-import { LiveText } from "@/components/cms/LiveText";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 export const metadata = { title: "About | David Ezieshi" };
 
+const STATS: Array<{ icon: React.ReactNode; value: string; label: string }> = [
+  { icon: <Award size={22} aria-hidden />, value: "ECBA", label: "IIBA Certified" },
+  {
+    icon: <GraduationCap size={22} aria-hidden />,
+    value: "3.81",
+    label: "GPA · Dean's List",
+  },
+  { icon: <Rocket size={22} aria-hidden />, value: "2", label: "Production Systems Delivered" },
+  { icon: <Users size={22} aria-hidden />, value: "6", label: "Analyst Team Led" },
+];
+
+const EXPERIENCE: Array<{ date: string; role: string; body: string }> = [
+  {
+    date: "Feb 2026 – Present",
+    role: "Business Analyst & Platform Administrator · FIIT Co.",
+    body: "I led the analyst team on a two-application Next.js and Convex platform for an industry partner through my George Brown placement. The platform runs as an internal class-management system and a public site. I authored the engagement's BRD, PRD, and process design, then turned them into the working configuration. That meant the forms, workflows, permissions, and CMS. After the team rolled off, I was retained as the sole administrator. I now operate and improve the platform in production.",
+  },
+  {
+    date: "Apr 2024 – Present",
+    role: "Brand Ambassador · Ralph Lauren",
+    body: "I assess what each client needs and build the complete look around it. The numbers carry the result. I hit 184% of my sales goal and $815 in sales per hour against a $450 target, among the top in the store.",
+  },
+  {
+    date: "Dec 2023 – Mar 2024",
+    role: "Sales Consultant · Canadian Tire Financial Services",
+    body: "I reviewed credit-card applications under compliance validation. I identified a recurring pattern of incomplete and incorrect submissions and escalated it for follow-up.",
+  },
+  {
+    date: "Apr 2021 – Aug 2022",
+    role: "Reporter & Programme Coordinator · Kaftan TV",
+    body: "I ran the daily news segment to a hard broadcast deadline. I coordinated reporters and production handoffs across the technical and editorial crews to keep it on air.",
+  },
+];
+
+const DRIVES: Array<{ icon: React.ReactNode; title: string; body: string }> = [
+  {
+    icon: <Search size={22} aria-hidden />,
+    title: "Diagnose before designing",
+    body: "I map what's actually happening before I propose a change. Redesigning around the wrong problem costs more than taking the time to look.",
+  },
+  {
+    icon: <Rocket size={22} aria-hidden />,
+    title: "Own it through operation",
+    body: "I carry a problem from the first interview to the live system, and I stay accountable for whether it holds up. Being retained to operate what my team delivered is what I'm proudest of, because the work held in real use.",
+  },
+  {
+    icon: <FileText size={22} aria-hidden />,
+    title: "Write it plainly",
+    body: "I document so the people who run the system can understand it. Plain language is part of the deliverable.",
+  },
+  {
+    icon: <ArrowLeftRight size={22} aria-hidden />,
+    title: "Useful in both rooms",
+    body: "I translate between the business side and the technical side. I know enough of each language to be credible in both.",
+  },
+];
+
+const STRENGTHS: Array<{ icon: React.ReactNode; label: string }> = [
+  { icon: <MessagesSquare size={16} aria-hidden />, label: "Requirements Elicitation" },
+  { icon: <FileText size={16} aria-hidden />, label: "BRD / FRD Authoring" },
+  { icon: <Waypoints size={16} aria-hidden />, label: "BPMN Process Modeling" },
+  { icon: <GitCompare size={16} aria-hidden />, label: "Data Modeling" },
+  { icon: <Database size={16} aria-hidden />, label: "SQL Analysis" },
+  { icon: <ClipboardCheck size={16} aria-hidden />, label: "User Acceptance Testing" },
+  { icon: <BarChart3 size={16} aria-hidden />, label: "Power BI / Tableau" },
+  { icon: <Workflow size={16} aria-hidden />, label: "Workflow Configuration" },
+  { icon: <Users size={16} aria-hidden />, label: "Stakeholder Engagement" },
+  { icon: <Settings size={16} aria-hidden />, label: "Platform Administration" },
+];
+
+const EDUCATION: Array<{ period: string; degree: string; sub: string }> = [
+  {
+    period: "Certification, 2026",
+    degree: "ECBA, Entry Certificate in Business Analysis",
+    sub: "IIBA (International Institute of Business Analysis)",
+  },
+  {
+    period: "2025 – 2026",
+    degree: "PG Cert., Information Systems & Business Analysis",
+    sub: "George Brown College. Dean's List, 3.81 / 4",
+  },
+  {
+    period: "2023 – 2024",
+    degree: "PG Cert., Marketing Management & Digital Media",
+    sub: "George Brown College. Dean's List",
+  },
+  {
+    period: "2017 – 2021",
+    degree: "B.Sc., Mass Communication",
+    sub: "Mountain Top University, Nigeria. Second Class Upper",
+  },
+];
+
 export default function AboutPage() {
-  const stats = [
-    { value: "ECBA", label: "IIBA Certified", icon: Award },
-    { value: "3.81", label: "GPA · Dean's List", icon: GraduationCap },
-    { value: "2", label: "Applications Delivered", icon: Rocket },
-    { value: "5,000+", label: "Records Analyzed", icon: Database },
-  ];
-
-  const experience = [
-    {
-      year: "Feb 2026 – Present",
-      title: "Business Analyst & Platform Administrator · FIIT Co.",
-      text: "Owned the full delivery lifecycle of a two-application platform (an internal class-management system and a public site) for an industry partner through George Brown College Work-Integrated Learning. Ran requirements elicitation, authored the BA Report, and translated it into working configuration, forms, workflows, and permissions, from requirements through deployment and live administration.",
-    },
-    {
-      year: "Apr 2024 – Present",
-      title: "Sales Ambassador · Ralph Lauren",
-      text: "At Ralph Lauren I read what a client needs, build the complete outfit around it, and make every visit feel effortless. That consultative service shows in the results: I ranked among the store's top performers at 184% of sales goal and $815 in sales per hour against a $450 target.",
-    },
-    {
-      year: "Dec 2023 – Mar 2024",
-      title: "Sales Consultant · Canadian Tire Financial Services",
-      text: "Identified a recurring pattern of incomplete and incorrect information on incoming credit applications during compliance-validated reviews, and escalated it for follow-up.",
-    },
-    {
-      year: "Apr 2021 – Aug 2022",
-      title: "Reporter & Programme Coordinator · Kaftan TV",
-      text: "Improved broadcast operational reliability by 25% by streamlining editorial workflows and coordinating handoffs across technical and production crews under strict deadlines.",
-    },
-  ];
-
-  const strengths = [
-    { label: "Requirements Elicitation", icon: MessagesSquare },
-    { label: "BRD / FRD Authoring", icon: FileSpreadsheet },
-    { label: "BPMN Process Mapping", icon: Waypoints },
-    { label: "SQL & Data Integrity", icon: Database },
-    { label: "User Acceptance Testing", icon: ClipboardCheck },
-    { label: "Power BI / Tableau", icon: BarChart3 },
-    { label: "Workflow Configuration", icon: Workflow },
-    { label: "Stakeholder Management", icon: Users },
-  ];
-
-  const drivers = [
-    {
-      title: "Diagnostic-First",
-      text: "I map the current state before proposing a change. Redesigning the wrong thing costs more than taking the time to look.",
-      icon: Search,
-    },
-    {
-      title: "Delivery, Not Just Decks",
-      text: "I take the solution to a working, deployed state and hand it off clean. The artifact is a system someone can use, not just a slide that explains it.",
-      icon: Wrench,
-    },
-    {
-      title: "Plain-Language Documentation",
-      text: "I write so the people who use a system can actually understand it, a habit carried over from my communications background.",
-      icon: FileText,
-    },
-    {
-      title: "Bridge Operator",
-      text: "I translate between business stakeholders and technical implementation, speaking both languages well enough to be useful in both rooms.",
-      icon: ArrowLeftRight,
-    },
-  ];
-
-  const education = [
-    {
-      program: "ECBA — Entry Certificate in Business Analysis",
-      school: "IIBA (International Institute of Business Analysis)",
-      date: "Certification",
-    },
-    {
-      program: "PG Cert., Information Systems & Business Analysis",
-      school: "George Brown College · Dean's List, 3.8 / 4",
-      date: "2025 – 2026",
-    },
-    {
-      program: "PG Cert., Marketing Management & Digital Media",
-      school: "George Brown College · Dean's List, 3.7 / 4",
-      date: "2023 – 2024",
-    },
-    {
-      program: "B.Sc., Mass Communication",
-      school: "Mountain Top University, Nigeria · Second Class Upper",
-      date: "2017 – 2021",
-    },
-  ];
-
   return (
-    <div className="aboutPage">
-      <section className="aboutHero">
-        <div className="aboutHeroCopy">
-          <LiveText
-            section="about"
-            field="tag"
-            fallback="About Me"
-            as="p"
-            className="sectionEyebrow"
-          />
-          <h1>
-            I diagnose, document, and own the solutions teams{" "}
-            <span>rely on.</span>
-          </h1>
-          <p>
-            I&apos;m David Ezieshi, a Business Analyst in Toronto. I work
-            across the entire analysis lifecycle: I elicit and document
-            requirements, model the process and the data, lead delivery
-            through to a working deployed solution, run UAT, and then
-            evaluate and maintain the live system. On my FIIT Co.
-            engagement I led a six-person team through all of that for a
-            real client, authored the full requirements suite, the UAT
-            report, and a 56-finding pre-walkthrough audit, and was the
-            only analyst retained afterward to administer the platform I
-            helped deliver.
-          </p>
-        </div>
-
-        <div className="aboutHeroImage">
-          <LiveImage
-            slot="about-portrait"
-            fallbackSrc="/portrait-2.png"
-            alt="David Ezieshi"
-            width={800}
-            height={1000}
-          />
-        </div>
-      </section>
-
-      <section className="statsGrid">
-        {stats.map(({ value, label, icon: Icon }) => (
-          <div className="statCard" key={label}>
-            <Icon size={28} />
-            <h3>{value}</h3>
-            <p>{label}</p>
+    <div className="pf-page">
+      <div className="pf-shell">
+        {/* Hero */}
+        <section className="pf-about-hero">
+          <div className="pf-about-body">
+            <Eyebrow className="mb-[22px]">About</Eyebrow>
+            <h1
+              className="pf-page-title"
+              style={{ fontSize: "clamp(38px, 4.4vw, 62px)" }}
+            >
+              Requirements through delivery, and the live operation after.
+            </h1>
+            <p>
+              I&rsquo;m David Ezieshi, a business analyst in Toronto. I work the
+              requirements lifecycle end to end. I sit with stakeholders, write
+              what&rsquo;s actually needed, model the process and the data
+              behind it, and validate through UAT before anything gets shipped.
+              After delivery I stay on. On my current engagement with FIIT Co.,
+              I led the analyst team through four scopes for a client, and I
+              was kept on as the sole administrator after the team rolled off.
+            </p>
+            <div className="pf-btnrow" style={{ marginTop: 8 }}>
+              <Button
+                variant="primary"
+                size="lg"
+                pill
+                href="/contact"
+                iconRight={<ArrowUpRight size={16} aria-hidden />}
+              >
+                Let&rsquo;s Connect
+              </Button>
+              <Button variant="secondary" size="lg" pill href="/work">
+                View My Work
+              </Button>
+            </div>
           </div>
-        ))}
-      </section>
+          <div className="pf-about-portrait">
+            <Image
+              src="/portrait-2.png"
+              alt="David Ezieshi portrait"
+              width={800}
+              height={1000}
+              priority
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
+          </div>
+        </section>
 
-      <section className="aboutSplit">
-        <div>
-          <p className="sectionEyebrow">Experience</p>
-          <h2>
-            Systems thinking, <br /> backed by real delivery.
-          </h2>
-          <p>
-            From a live BA co-op to luxury retail and broadcast operations, my
-            experience spans requirements, workflow design, data integrity, and
-            client-facing service.
-          </p>
-        </div>
-
-        <div className="timeline">
-          {experience.map((item) => (
-            <div className="timelineItem" key={item.title}>
-              <span>{item.year}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+        {/* Stat row */}
+        <div className="pf-statgrid" style={{ marginBottom: 72 }}>
+          {STATS.map((s) => (
+            <div className="pf-statcard" key={s.label}>
+              <span className="ic" aria-hidden>
+                {s.icon}
+              </span>
+              <span className="v">{s.value}</span>
+              <span className="l">{s.label}</span>
             </div>
           ))}
         </div>
-      </section>
 
-      <section className="drivesMe">
-        <p className="sectionEyebrow">What Drives Me</p>
+        {/* Experience */}
+        <section className="pf-exp-sec">
+          <div>
+            <Eyebrow className="mb-[22px]">Experience</Eyebrow>
+            <h2 className="pf-exp-title">
+              Four roles across business analysis, retail, financial services,
+              and broadcast.
+            </h2>
+            <p className="pf-exp-blurb">
+              A live BA engagement, a luxury retail floor, a financial services
+              compliance review, and a daily news broadcast. Different work each
+              time. The same instinct: read the process and the people in it,
+              then make it run.
+            </p>
+          </div>
+          <div className="pf-exp-list">
+            {EXPERIENCE.map((e) => (
+              <div className="pf-expitem" key={e.role}>
+                <span className="date">{e.date}</span>
+                <h3>{e.role}</h3>
+                <p>{e.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <div className="drivesGrid">
-          {drivers.map(({ title, text, icon: Icon }) => (
-            <div className="driveCard" key={title}>
-              <Icon size={24} />
-              <h3>{title}</h3>
-              <p>{text}</p>
+        {/* What Drives Me */}
+        <section style={{ marginBottom: 72 }}>
+          <Eyebrow className="mb-[22px]">What Drives Me</Eyebrow>
+          <div className="pf-drives">
+            {DRIVES.map((d) => (
+              <div className="pf-drivecard" key={d.title}>
+                <span className="ic" aria-hidden>
+                  {d.icon}
+                </span>
+                <h3>{d.title}</h3>
+                <p>{d.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Core Strengths */}
+        <section style={{ marginBottom: 72 }}>
+          <Eyebrow className="mb-[22px]">Core Strengths</Eyebrow>
+          <div className="pf-strengthlist">
+            {STRENGTHS.map((s, i) => (
+              <div className="pf-strengthrow" key={s.label}>
+                <span className="num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="lbl">{s.label}</span>
+                <span aria-hidden>{s.icon}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Education & Certifications */}
+        <Card glow className="pf-edu-card">
+          <div className="pf-edu-grid">
+            <div>
+              <Eyebrow className="mb-[22px]">
+                Education &amp; Certifications
+              </Eyebrow>
+              <h2 className="pf-edu-title">
+                Grounded in business analysis and systems.
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="strengthsSection">
-        <p className="sectionEyebrow">Core Strengths</p>
-
-        <div className="strengthsGrid">
-          {strengths.map(({ label, icon: Icon }) => (
-            <div className="strengthCard" key={label}>
-              <Icon size={24} />
-              <span>{label}</span>
+            <div className="pf-edu-list">
+              {EDUCATION.map((e) => (
+                <div className="pf-eduitem" key={e.degree}>
+                  <span className="dot" aria-hidden />
+                  <div>
+                    <span className="period">{e.period}</span>
+                    <h3>{e.degree}</h3>
+                    <span className="sub">{e.sub}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="educationSection">
-        <div>
-          <p className="sectionEyebrow">Education &amp; Certifications</p>
-          <h2>Grounded in business analysis and systems.</h2>
-        </div>
-
-        <div className="educationTimeline">
-          {education.map((item) => (
-            <div className="educationItem" key={item.program}>
-              <div className="educationDot" />
-              <span>{item.date}</span>
-              <h3>{item.program}</h3>
-              <p>{item.school}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="approachSection">
-        <div>
-          <p className="sectionEyebrow">My Approach</p>
-          <h2>
-            Diagnose. <br />
-            Redesign. <br />
-            Prototype.
-          </h2>
-        </div>
-
-        <div>
-          <p>
-            I diagnose before I design. I sit with stakeholders, map the
-            current workflow, and quantify where time or quality is leaking
-            before proposing a change.
-          </p>
-
-          <p>
-            Then I redesign the process and, when the engineering queue
-            can&apos;t move fast enough, prototype the tool that delivers it.
-            The goal is always a system the team can actually use, documented
-            in plain language and handed off clean.
-          </p>
-
-          <a href="/contact">
-            Let&apos;s Connect <ArrowUpRight size={18} />
-          </a>
-        </div>
-      </section>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }

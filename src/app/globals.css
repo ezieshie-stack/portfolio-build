@@ -21,6 +21,7 @@
 @import "../styles/handoff/tokens/effects.css";
 @import "../styles/handoff/tokens/background.css";
 @import "../styles/handoff/portfolio.css";
+@import "../styles/handoff/pages-home.css";
 @import "../styles/handoff/components.css";
 
 /* Aliases — keep legacy refs (--bg, --primary, --text-main,

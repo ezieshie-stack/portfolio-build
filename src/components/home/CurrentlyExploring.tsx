@@ -4,31 +4,42 @@ import {
   Bot,
   Database,
   Workflow,
-  type LucideIcon,
 } from "lucide-react";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
-type Item = { label: string; icon: LucideIcon };
-
-const items: Item[] = [
-  { label: "Advanced SQL & Window Functions", icon: Database },
-  { label: "RPA with UiPath & Power Automate", icon: Bot },
-  { label: "ServiceNow Workflows", icon: Workflow },
-  { label: "BI Dashboards (Power BI / Tableau)", icon: BarChart3 },
-  { label: "CTFL (ISTQB Foundation)", icon: Award },
+const ITEMS: Array<{ label: string; icon: React.ReactNode }> = [
+  {
+    label: "Advanced SQL & Window Functions",
+    icon: <Database size={18} aria-hidden />,
+  },
+  {
+    label: "RPA with UiPath & Power Automate",
+    icon: <Bot size={18} aria-hidden />,
+  },
+  { label: "ServiceNow Workflows", icon: <Workflow size={18} aria-hidden /> },
+  {
+    label: "BI Dashboards (Power BI / Tableau)",
+    icon: <BarChart3 size={18} aria-hidden />,
+  },
+  { label: "CTFL (ISTQB Foundation)", icon: <Award size={18} aria-hidden /> },
 ];
 
 export function CurrentlyExploring() {
   return (
-    <section className="currentlyExploring">
-      <p className="sectionEyebrow">Currently Exploring</p>
-
-      <div className="exploringGrid">
-        {items.map(({ label, icon: Icon }) => (
-          <div className="exploringCard" key={label}>
-            <Icon />
-            <span>{label}</span>
-          </div>
-        ))}
+    <section className="pf-section">
+      <div className="pf-shell">
+        <Eyebrow className="mb-[22px]">Currently Exploring</Eyebrow>
+        <div className="pf-explore-list">
+          {ITEMS.map((item) => (
+            <div className="pf-explore-row" key={item.label}>
+              <span className="pf-explore-ic" aria-hidden>
+                {item.icon}
+              </span>
+              <span className="lbl">{item.label}</span>
+              <span className="tag">In progress</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

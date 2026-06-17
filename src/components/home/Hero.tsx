@@ -1,120 +1,75 @@
 import Link from "next/link";
-import { Reveal } from "@/components/Reveal";
-import { HeroSocialLinks } from "@/components/home/HeroSocialLinks";
-import { LiveImage } from "@/components/cms/LiveImage";
-import { home as homeDefault, site } from "@/lib/content";
+import Image from "next/image";
+import { Mail, FileText } from "lucide-react";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { BrandIcon } from "@/components/ui/BrandIcon";
 
-type HeroData = typeof homeDefault;
-
-export function Hero({
-  data = homeDefault,
-  portraitAlt,
-}: {
-  data?: HeroData;
-  portraitAlt?: string;
-}) {
-  const altText = portraitAlt ?? `${site.brand.name} portrait`;
-
+export function Hero() {
   return (
-    <Reveal
-      as="section"
-      className="hero relative pb-0 border-b overflow-hidden"
-      style={{ borderColor: "var(--glass-border)" }}
-    >
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-30 pointer-events-none opacity-[0.06] hero-grid-pulse"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          maskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-        }}
-      />
+    <section className="pf-hero">
+      <div className="pf-shell">
+        <div className="pf-hero-grid">
+          <div className="pf-hero-copy">
+            <Badge tone="subtle" className="mb-[26px] whitespace-nowrap">
+              Business Analyst · Toronto, Canada
+            </Badge>
+            <h1 className="pf-hero-title">
+              I work the full lifecycle, from requirements{" "}
+              <em>to live operation.</em>
+            </h1>
+            <p className="pf-hero-sub">
+              My current engagement is with FIIT Co. I led the analyst team
+              through requirements, modeling, and delivery on two production
+              systems. After the team rolled off, I was retained as the sole
+              administrator. I now operate and improve the live platform myself.
+            </p>
+            <div className="pf-btnrow">
+              <Button variant="primary" size="lg" pill href="/work">
+                View My Work
+              </Button>
+              <Button variant="secondary" size="lg" pill href="/contact">
+                Let&rsquo;s Connect
+              </Button>
+            </div>
+            <div className="pf-social">
+              <a
+                href="https://www.linkedin.com/in/david-ezieshi/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <BrandIcon name="linkedin" size={18} /> LinkedIn
+              </a>
+              <a href="mailto:ezieshie@gmail.com">
+                <Mail size={18} aria-hidden /> Email
+              </a>
+              <Link href="/resume">
+                <FileText size={18} aria-hidden /> Resume
+              </Link>
+              <a
+                href="https://github.com/ezieshie-stack"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <BrandIcon name="github" size={18} /> GitHub
+              </a>
+            </div>
+          </div>
 
-      <div className="hero-text relative z-[20]">
-        <div
-          className="inline-flex rounded-full border px-4 py-2 text-xs tracking-[0.2em] uppercase mb-7"
-          style={{
-            borderColor: "rgba(139, 92, 246, 0.25)",
-            background: "rgba(139, 92, 246, 0.08)",
-            color: "rgb(196, 181, 253)",
-          }}
-        >
-          {data.tag}
+          <div className="pf-portrait">
+            <div className="pf-portrait-frame">
+              <Image
+                src="/portrait-home.png"
+                alt="David Ezieshi portrait"
+                width={1040}
+                height={1300}
+                priority
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "34% 26%" }}
+              />
+            </div>
+          </div>
         </div>
-
-        <h1 className="hero-title font-extrabold mb-7">
-          {data.titleStart}{" "}
-          <span className="text-[color:var(--primary)]">
-            {data.titleHighlight}
-          </span>
-        </h1>
-
-        <p className="hero-subtitle text-base lg:text-lg text-[color:var(--text-dim)] leading-relaxed mb-9 max-w-[480px]">
-          {data.subtitle}
-        </p>
-
-        <div className="hero-cta-row flex flex-wrap gap-3 mb-10">
-          <Link
-            href={data.primaryCta.href}
-            className="rounded-2xl px-7 py-3.5 font-medium text-white transition hover:brightness-110"
-            style={{ background: "rgb(124, 58, 237)" }}
-          >
-            {data.primaryCta.label}
-          </Link>
-          <Link
-            href={data.secondaryCta.href}
-            className="rounded-2xl border px-7 py-3.5 font-medium text-white backdrop-blur-xl transition"
-            style={{
-              borderColor: "var(--glass-border)",
-              background: "rgba(255,255,255,0.04)",
-            }}
-          >
-            {data.secondaryCta.label}
-          </Link>
-        </div>
-
-        <HeroSocialLinks />
       </div>
-
-      <div
-        className="hero-portrait-column relative flex items-end justify-center pointer-events-none"
-        style={{ zIndex: 10 }}
-      >
-        <div
-          aria-hidden
-          className="hero-portrait-glow absolute pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(124,58,237,0.28), transparent 68%)",
-            filter: "blur(70px)",
-            zIndex: -1,
-          }}
-        />
-        <LiveImage
-          slot="home-portrait"
-          fallbackSrc="/portrait.png"
-          alt={altText}
-          width={1040}
-          height={1300}
-          priority
-          sizes="(min-width: 1440px) 560px, (min-width: 1024px) 480px, (min-width: 768px) 380px, 90vw"
-          className="hero-portrait object-contain"
-          style={{
-            objectPosition: "center bottom",
-            filter: "drop-shadow(0 30px 90px rgba(124,58,237,0.25))",
-            maskImage:
-              "linear-gradient(to bottom, black 78%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 78%, transparent 100%)",
-          }}
-        />
-      </div>
-
-    </Reveal>
+    </section>
   );
 }
