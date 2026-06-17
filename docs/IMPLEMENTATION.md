@@ -175,6 +175,34 @@ Anything clickable gets `cursor: pointer`; **decorative overlays get `pointer-ev
 
 ---
 
+# ROUND 4 — CASE STUDY DETAIL PAGE (unspecified page, light-mode buttons broken)
+
+**Context:** the deployed build has a **project case-study detail page** (e.g. `/work/fiit-co`) reached from the Work grid / "View Case Study". **This page was never in our prototype or handoff** — the dev created it freehand, so it has no spec and is inheriting the same bugs. Two confirmed problems in the screenshot:
+
+### 4a. Primary buttons are illegible in light mode (FIX FIRST)
+"View Live Site" and "View Repo" render as a **pale violet fill with faint white text** — unreadable. This is the recurring token bug on a new surface. Buttons MUST use the shared Button component / `pf-*` button classes, never ad-hoc styles:
+- **Primary:** `background: var(--accent-solid)` (`#7c3aed`), `color: var(--text-on-accent)` (`#ffffff`). Solid violet, white text — in BOTH themes. (It must look identical in light and dark; `--accent-solid` does not change per theme.)
+- **Secondary:** `background: var(--surface)`, `color: var(--text-heading)`, `border: 1px solid var(--border-strong)`. In light mode that's **white fill, near-black text (`#15131c`), light-grey border** — NOT white text. The screenshot's "View Repo" has invisible text; it must be dark text on white.
+- Do not invent a translucent-violet primary. Re-use `<Button variant="primary">` / `variant="secondary"` exactly as every other page does.
+
+### 4b. The case-study page needs a real spec — build it to match the system
+Since it didn't exist in our files, build it from these rules (reuse existing tokens, `Card`, `Badge`, `Button`, `Eyebrow`, Lucide icons — same dot-grid `.ds-canvas` background, same nav/footer):
+
+- **Back link:** "← Back to All Projects" — mono, `--accent-text`, top of page, links to `/work`.
+- **Title:** project name, display weight 800, `--text-heading`, tight tracking (same as `.pf-page-title`).
+- **Lede:** one-paragraph summary, `--text-body`, max-width ~720px.
+- **Actions:** `View Live Site` (primary) + `View Repo` (secondary) — per 4a.
+- **Meta strip:** a row of glass cards (`.pf-card` / `--surface` + `--border` + `--radius-xl`), each = mono uppercase label (`--text-dim`, `0.2em` tracking) + value (`--text-heading`). Fields: Client · Timeline · My Role · Team · Tools. **Must wrap/collapse responsively** — `repeat(auto-fit, minmax(220px, 1fr))` is fine here BUT confirm it goes 1-column ≤760px (Round 3 rule). Do not let them overflow.
+- **Body sections:** two-column on desktop, stacking ≤980px. Each section = mono uppercase eyebrow (`--accent`, e.g. "THE CHALLENGE", "MY APPROACH") + content. Approach/Outcomes use bulleted lists with the violet dot marker (same as `.pf-article-body li`).
+- **Outcomes/metrics** (if shown): reuse `MetricStat` tiles.
+- All copy for case studies must come from `COPY.md` (add a "Case Study — FIIT Co." block there if missing; do not invent metrics — see Unverified Claims).
+
+**The floating round button at the right edge of the meta strip** in the screenshot (overlapping the Tools card) is a stray/misplaced control — remove it or position it so it doesn't overlap content.
+
+### Verify Round 4 in BOTH themes at 390 / 768 / 1024 / 1440px before redeploy.
+
+---
+
 # ROUND 3 — RESPONSIVE IS BROKEN (grids not collapsing on mobile)
 
 **Symptom (confirmed on a real phone):** "Currently Exploring" renders as **2 columns and overflows off the right edge** — cards bleed past the viewport. This is happening because the dev's build **dropped our mobile media queries**. The grids stay multi-column at phone widths.
