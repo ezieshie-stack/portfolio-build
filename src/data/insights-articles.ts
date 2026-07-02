@@ -47,7 +47,7 @@ export const FEATURED: Entry = {
     { p: "So there I was. A dark room, a gown, hundreds of us, and me half braced for a few forgettable hours." },
     { img: "/insight-grad-card.jpg", cap: "T405, Information Systems Business Analysis. The reason I was there." },
     { p: "Then Chancellor Geoff Smith began to speak, and it stopped feeling like a crowd. It started to feel like he was talking to me." },
-    { img: "/insight-podium.png", cap: "Chancellor Geoff Smith, George Brown College convocation." },
+    { img: "/insight-podium.jpg", cap: "Chancellor Geoff Smith, George Brown College convocation." },
     { q: "Life is going to beat you up a bit. It beats everyone up a bit. Some days it will break your heart." },
     { p: "That got me, because he wasn't describing a stranger. He was describing the last stretch of my life. The job hunt in a country that wasn't home yet, and the rejection email that kept me asking what the point was. The textbooks I cracked open at midnight after a shift had already emptied me out. The loneliness of building a whole new life from scratch, an ocean away from everyone who knew my name before I got here." },
     { p: "Here was someone who had clearly made it, standing up there and saying the heartbreak was part of the deal, that struggling didn't mean I was failing. Something I'd been carrying in secret set itself down. Gritty, resilient, determined. I'd always heard those as resume words. He made them sound like what they actually are, which is the tools you survive with." },

@@ -6,9 +6,14 @@ import { useEffect, useRef } from "react";
  * Full-page cursor-reactive constellation. Fixed layer behind all page
  * content. Reads --accent from CSS every frame so it themes automatically.
  * Ported from insights.html inline <script> per docs/INSIGHTS_PAGE.md §3.
+ *
+ * @param paused — when true, the render loop skips (used to save CPU
+ *                 while the article reader overlay is open).
  */
-export function Constellation() {
+export function Constellation({ paused = false }: { paused?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
 
   useEffect(() => {
     const cv = canvasRef.current;
@@ -66,6 +71,12 @@ export function Constellation() {
     }
 
     function tick() {
+      // Skip render + drift when paused (article reader open). Cheaper
+      // than tearing down/rebuilding the rAF loop on every open/close.
+      if (pausedRef.current) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
       const accent = readAccent();
       ctx!.clearRect(0, 0, W, H);
 
@@ -135,27 +146,51 @@ export function Constellation() {
       mouse.x = -9999;
       mouse.y = -9999;
     }
+    function onTouchMove(e: TouchEvent) {
+      // touchmove keeps firing while the browser is scrolling (unlike
+      // pointercancel, which fires the moment the browser hands the
+      // gesture off to scroll and kills pointer-event tracking). This
+      // is how the constellation stays glued to the finger while the
+      // page scrolls under it.
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }
+    function onTouchStart(e: TouchEvent) {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    }
+    function onTouchEnd(e: TouchEvent) {
+      // Only reset when the LAST finger lifts off.
+      if (e.touches.length === 0) onLeave();
+    }
 
     resize();
     raf = requestAnimationFrame(tick);
     window.addEventListener("resize", resize);
-    // Pointer events unify mouse (desktop) + touch (mobile) + stylus.
-    // On mobile, pointerdown/pointermove fire while a finger is down;
-    // pointerup/pointercancel + mouseleave reset the interaction point.
+    // Desktop: pointer events (mouse + stylus) — cheap, single-listener.
     window.addEventListener("pointermove", onMove);
-    window.addEventListener("pointerdown", onMove);
-    window.addEventListener("pointerup", onLeave);
-    window.addEventListener("pointercancel", onLeave);
     window.addEventListener("mouseleave", onLeave);
+    // Mobile: raw touch events, passive so scrolling is unaffected.
+    // We DON'T listen for pointercancel — the browser fires it the
+    // moment it decides to scroll, which would kill tracking mid-drag.
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerdown", onMove);
-      window.removeEventListener("pointerup", onLeave);
-      window.removeEventListener("pointercancel", onLeave);
       window.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
     };
   }, []);
 

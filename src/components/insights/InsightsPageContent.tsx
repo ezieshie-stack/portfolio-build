@@ -126,7 +126,7 @@ export function InsightsPageContent() {
 
   return (
     <>
-      <Constellation />
+      <Constellation paused={open !== null} />
       <div className="pf-page">
         <div className="pf-shell">
           <section className="pf-pagehead" style={{ marginBottom: 40 }}>
