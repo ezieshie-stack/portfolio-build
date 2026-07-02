@@ -127,7 +127,7 @@ export function Constellation() {
       raf = requestAnimationFrame(tick);
     }
 
-    function onMove(e: MouseEvent) {
+    function onMove(e: PointerEvent) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     }
@@ -139,13 +139,22 @@ export function Constellation() {
     resize();
     raf = requestAnimationFrame(tick);
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMove);
+    // Pointer events unify mouse (desktop) + touch (mobile) + stylus.
+    // On mobile, pointerdown/pointermove fire while a finger is down;
+    // pointerup/pointercancel + mouseleave reset the interaction point.
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerdown", onMove);
+    window.addEventListener("pointerup", onLeave);
+    window.addEventListener("pointercancel", onLeave);
     window.addEventListener("mouseleave", onLeave);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onMove);
+      window.removeEventListener("pointerup", onLeave);
+      window.removeEventListener("pointercancel", onLeave);
       window.removeEventListener("mouseleave", onLeave);
     };
   }, []);
