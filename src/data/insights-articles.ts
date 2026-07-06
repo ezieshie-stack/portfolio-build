@@ -67,3 +67,16 @@ export const FEATURED: Entry = {
 /** Additional entries appear here when they're ready. The old six BA
    think-pieces are parked and NOT rendered. */
 export const ENTRIES: Entry[] = [];
+
+/** All published entries, most-recent first. Used by the sitemap and
+   the /insights/[slug] route. FEATURED is always the head; ENTRIES are
+   the older reads. */
+export const ALL_ENTRIES: Entry[] = [FEATURED, ...ENTRIES];
+
+export function getEntry(slug: string): Entry | undefined {
+  return ALL_ENTRIES.find((e) => e.slug === slug);
+}
+
+export function listEntries(): Entry[] {
+  return ALL_ENTRIES;
+}

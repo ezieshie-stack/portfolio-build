@@ -1,111 +1,97 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { PageShell, SectionTag } from "@/components/PageShell";
-import { Reveal } from "@/components/Reveal";
-import { fetchArticleBySlug } from "@/lib/cms";
-import { insights } from "@/lib/content";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArticleBody } from "@/components/insights/ArticleBody";
+import { getEntry, listEntries } from "@/data/insights-articles";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 type Params = { slug: string };
+
+/** Prerender every entry at build time so Google gets a static HTML
+   page for each one — no on-demand render delay, no missing content. */
+export function generateStaticParams() {
+  return listEntries().map((e) => ({ slug: e.slug }));
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
-  const article = await fetchArticleBySlug(slug);
-  const fallback = insights.articles.find((a) => a.slug === slug);
-  const title = article?.title ?? fallback?.title;
-  if (!title) return { title: "Insight | Portfolio" };
-  return { title: `${title} | Insights` };
+  const entry = getEntry(slug);
+  if (!entry) {
+    return { title: "Not Found" };
+  }
+  const url = `${SITE_URL}/insights/${entry.slug}`;
+  const image = entry.image?.startsWith("http")
+    ? entry.image
+    : `${SITE_URL}${entry.image ?? ""}`;
+  return {
+    title: entry.title,
+    description: entry.sub,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title: entry.title,
+      description: entry.sub,
+      siteName: SITE_NAME,
+      images: entry.image ? [{ url: image, alt: entry.title }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description: entry.sub,
+      images: entry.image ? [image] : undefined,
+    },
+  };
 }
 
-export default async function InsightArticlePage({
+export default async function InsightEntryPage({
   params,
 }: {
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const article = await fetchArticleBySlug(slug);
-  const fallback = insights.articles.find((a) => a.slug === slug);
-
-  // 404 if neither Convex nor static fallback knows this slug
-  if (!article && !fallback) notFound();
-
-  // Article body lives only in Convex. If we only have the fallback, the
-  // article is "scaffolded but not yet written" — render a placeholder.
-  const data = article ?? {
-    slug,
-    title: fallback!.title,
-    subtitle: undefined,
-    category: fallback!.category,
-    excerpt: fallback!.excerpt,
-    body: "",
-    date: fallback!.date,
-    readTime: fallback!.readTime,
-    published: false,
-    pills: undefined as string[] | undefined,
-  };
+  const entry = getEntry(slug);
+  if (!entry) notFound();
 
   return (
-    <PageShell>
-      <Reveal as="section" className="pb-12 max-w-[820px]">
+    <div className="pf-page">
+      <div className="pf-shell" style={{ maxWidth: 760 }}>
         <Link
           href="/insights"
-          className="text-xs tracking-[0.2em] uppercase text-[#a78bfa] hover:text-white transition-colors"
+          className="pf-textlink"
+          style={{ marginBottom: 24, display: "inline-flex" }}
         >
-          ← All Insights
+          <ArrowLeft size={14} aria-hidden /> All Insights
         </Link>
 
-        <SectionTag>{`// ${data.category.toUpperCase()}`}</SectionTag>
-
-        <h1 className="text-[length:var(--text-4xl)] font-extrabold leading-[0.98] tracking-[-0.05em] my-6">
-          {data.title}
-        </h1>
-
-        {data.subtitle && (
-          <p className="text-[color:var(--text-dim)] text-xl leading-snug max-w-[680px] mb-8">
-            {data.subtitle}
-          </p>
-        )}
-
-        <div className="flex flex-wrap items-center gap-4 text-xs text-white/55 mb-12 border-b border-white/8 pb-6">
-          <span>{data.date}</span>
-          <span aria-hidden>·</span>
-          <span>{data.readTime}</span>
-          {data.pills && data.pills.length > 0 && (
-            <>
-              <span aria-hidden>·</span>
-              {data.pills.map((p) => (
-                <span
-                  key={p}
-                  className="px-3 py-1 rounded-full border border-[#a78bfa]/40 text-[#c4b5fd] text-xs tracking-[0.12em] uppercase font-bold"
-                >
-                  {p}
-                </span>
-              ))}
-            </>
-          )}
-        </div>
-
-        {data.body ? (
-          <div className="article-body">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{data.body}</ReactMarkdown>
+        <article
+          className="pf-reader-inner"
+          style={{ paddingTop: 12, paddingBottom: 0 }}
+        >
+          <p className="pf-reader-cat">{entry.tag}</p>
+          <h1 className="pf-reader-title">{entry.title}</h1>
+          {entry.sub && <p className="pf-reader-sub">{entry.sub}</p>}
+          <div className="pf-reader-meta">
+            <span>{entry.date}</span>
+            <span aria-hidden>·</span>
+            <span>{entry.read}</span>
           </div>
-        ) : (
-          <div className="article-body">
-            <p className="text-[color:var(--text-dim)] italic">
-              {data.excerpt}
-            </p>
-            <p className="mt-8 text-[color:var(--text-dim)]">
-              <em>Article body coming soon. Once published in Convex, this
-              page will render the full markdown content.</em>
-            </p>
+
+          <ArticleBody blocks={entry.body} />
+
+          <div className="pf-reader-foot" style={{ marginTop: 48 }}>
+            <span>Written by {SITE_NAME}</span>
+            <Link href="/insights" className="pf-textlink">
+              Back to Insights <ArrowRight size={14} aria-hidden />
+            </Link>
           </div>
-        )}
-      </Reveal>
-    </PageShell>
+        </article>
+      </div>
+    </div>
   );
 }
