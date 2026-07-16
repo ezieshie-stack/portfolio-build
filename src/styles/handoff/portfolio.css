@@ -1159,7 +1159,7 @@ body { font-family: var(--font-sans); }
 
 /* artifacts */
 .ff-artifacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.ff-artifact { display: flex; align-items: center; gap: 14px; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); backdrop-filter: var(--glass-blur); }
+.ff-artifact { display: flex; align-items: flex-start; gap: 14px; padding: 20px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); backdrop-filter: var(--glass-blur); }
 .ff-artifact-ic { flex-shrink: 0; width: 42px; height: 42px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; background: var(--violet-fill); border: 1px solid var(--violet-border); color: var(--accent); }
 .ff-artifact strong { display: block; color: var(--text-heading); font-size: 14.5px; font-weight: 600; margin-bottom: 4px; }
 .ff-artifact span { color: var(--text-body); font-size: 12.5px; line-height: 1.5; }
