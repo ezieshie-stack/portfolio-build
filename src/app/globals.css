@@ -15,7 +15,9 @@
  *                      external library not shipped in the zip.
  *                      Hand-written here to spec from README.
  * ──────────────────────────────────────────────────────── */
-@import "../styles/handoff/tokens/fonts.css";
+/* fonts are loaded via next/font in src/app/layout.tsx —
+   Geist + Geist Mono are exposed as --font-geist / --font-geist-mono
+   and aliased to --font-sans / --font-mono below. */
 @import "../styles/handoff/tokens/colors.css";
 @import "../styles/handoff/tokens/typography.css";
 @import "../styles/handoff/tokens/spacing.css";
