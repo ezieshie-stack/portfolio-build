@@ -1632,3 +1632,216 @@
   font-size: 12.5px;
   line-height: 1.5;
 }
+
+/* ─── Section 5  Slice 6 additions (Fraud · SLA · Movie) ────── */
+
+/* Tier grid (used on Movie budget tiers + Fraud thresholds) */
+.mv-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.mv-tier {
+  padding: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mv-tier.best {
+  border-color: var(--accent);
+  background: var(--violet-fill);
+}
+.mv-tier-k {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  color: var(--accent-text);
+  text-transform: uppercase;
+}
+.mv-tier-rate {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.mv-tier-bar {
+  height: 6px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 4px 0 6px;
+}
+.mv-tier-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  opacity: 0.7;
+  border-radius: 3px;
+}
+.mv-tier-meta {
+  color: var(--text-body);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.mv-tier-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* Row lists (used on Movie genre + Fraud rules + Movie funnel segments) */
+.mv-seg,
+.mv-genre {
+  display: grid;
+  gap: 8px;
+}
+.mv-seg-row,
+.mv-genre-row {
+  display: grid;
+  grid-template-columns: 200px 110px 1fr;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  align-items: center;
+}
+.mv-genre-row.hot {
+  border-color: var(--accent);
+  background: var(--violet-fill);
+}
+.mv-seg-name,
+.mv-genre-name {
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 14.5px;
+}
+.mv-seg-roi,
+.mv-genre-roi {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  text-align: center;
+  text-transform: uppercase;
+}
+.mv-seg-roi.pos { color: #10b981; background: rgba(16, 185, 129, 0.14); }
+.mv-seg-roi.neg { color: #ef4444; background: rgba(239, 68, 68, 0.14); }
+.mv-genre-roi.top { color: #10b981; background: rgba(16, 185, 129, 0.14); }
+.mv-genre-roi.mid { color: #f59e0b; background: rgba(245, 158, 11, 0.14); }
+.mv-genre-roi.low { color: var(--text-dim); background: var(--bg); border: 1px solid var(--border); }
+.mv-seg-rating {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-text);
+  text-align: right;
+}
+.mv-genre-why,
+.mv-seg-name + .mv-seg-track + .mv-seg-roi + .mv-seg-rating,
+.mv-genre-row .mv-genre-why {
+  color: var(--text-body);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.mv-seg-track {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.mv-seg-bar {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  opacity: 0.75;
+}
+.mv-seg-row {
+  grid-template-columns: 200px 1fr 140px 60px;
+}
+@media (max-width: 900px) {
+  .mv-seg-row,
+  .mv-genre-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* Funnel stages */
+.mv-stages {
+  display: grid;
+  gap: 8px;
+}
+.mv-stage {
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  display: grid;
+  gap: 6px;
+}
+.mv-stage.leak {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.06);
+}
+.mv-stage.leak.on {
+  border-color: #f59e0b;
+}
+.mv-stage-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.mv-stage-k {
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 14.5px;
+}
+.mv-stage-n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-text);
+  letter-spacing: 0.06em;
+}
+.mv-stage-track {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.mv-stage-bar {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  opacity: 0.65;
+}
+.mv-stage.leak .mv-stage-bar {
+  background: #f59e0b;
+  opacity: 0.85;
+}
+.mv-stage-drop {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* SQL read-tag (Fraud F1) */
+.tq-read-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--violet-fill);
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-right: 8px;
+}

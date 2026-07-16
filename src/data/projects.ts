@@ -118,8 +118,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/movie-profitability with hub + 5 sub-pages.
     slug: "movie-profitability",
-    published: true,
+    published: false,
     title: "Movie Industry Profitability Analysis",
     category: "Analytics Dashboard",
     summary:
@@ -159,8 +160,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/fraud-detection with hub + 5 sub-pages.
     slug: "fraud-detection",
-    published: true,
+    published: false,
     title: "Fraud Detection SQL Pipeline",
     category: "Data Engineering",
     summary:
@@ -199,8 +201,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/sla-optimization with hub + 5 sub-pages.
     slug: "sla-optimization",
-    published: true,
+    published: false,
     title: "Customer Support SLA Optimization",
     category: "Predictive Analytics",
     summary:
