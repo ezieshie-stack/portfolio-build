@@ -1,25 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BackgroundCanvas } from "@/components/BackgroundCanvas";
 import { Nav } from "@/components/Nav";
 import { PortfolioFooter } from "@/components/PortfolioFooter";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "800"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-});
-
-// Phase 0 — Geist + Geist Mono loaded but not yet bound to --font-sans /
-// --font-mono. New components opt in via var(--font-geist) / var(--font-geist-mono);
-// Phase 1 swaps the bindings site-wide.
+// Geist + Geist Mono are the ONLY fonts. Bound to --font-geist /
+// --font-geist-mono, then aliased site-wide to --font-sans / --font-mono
+// in globals.css. Inter / JetBrains were removed — they shipped ~200KB
+// of unused font-faces that fought the design contract.
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
@@ -52,7 +41,8 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${geist.variable} ${geistMono.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable} h-full`}
+      style={{ fontFamily: "var(--font-geist), system-ui, sans-serif" }}
     >
       <head>
         {/* Pre-paint theme init — reads pf-theme from localStorage and
@@ -64,7 +54,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="ds-canvas min-h-full flex flex-col font-sans">
+      <body className="ds-canvas min-h-full flex flex-col">
         <BackgroundCanvas />
         <Nav />
         <main className="flex-1 relative z-[1]">{children}</main>

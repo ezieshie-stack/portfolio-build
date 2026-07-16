@@ -3699,7 +3699,7 @@ button:focus-visible {
   color: #c4b5fd;
   padding: 2px 6px;
   border-radius: var(--radius-sm);
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-geist-mono), monospace;
   font-size: 0.9em;
 }
 
@@ -3810,7 +3810,7 @@ button:focus-visible {
 }
 
 .admin-textarea {
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-geist-mono), monospace;
   font-size: var(--text-sm);
   line-height: 1.6;
   min-height: 240px;
@@ -4227,7 +4227,7 @@ button:focus-visible {
 .admin-table-slug {
   font-size: var(--text-xs);
   color: rgba(255, 255, 255, 0.4);
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-geist-mono), monospace;
 }
 
 .admin-table-cell-muted {
@@ -4547,7 +4547,7 @@ button:focus-visible {
   border: 1px solid rgba(139, 92, 246, 0.2);
   padding: 1px 6px;
   border-radius: 4px;
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-geist-mono), monospace;
   font-size: var(--text-xs);
   color: #c4b5fd;
 }
@@ -4610,7 +4610,7 @@ button:focus-visible {
 }
 
 .admin-suggested-card code {
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-geist-mono), monospace;
   font-size: var(--text-xs);
   color: #c4b5fd;
 }
@@ -4670,7 +4670,7 @@ button:focus-visible {
 }
 
 .admin-image-slot {
-  font-family: var(--font-jetbrains), monospace;
+  font-family: var(--font-geist-mono), monospace;
   font-size: var(--text-xs);
   color: #c4b5fd;
 }
