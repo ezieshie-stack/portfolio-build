@@ -33,9 +33,9 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    // /work/fiitco now has its own dedicated route (src/app/work/fiitco/page.tsx)
-    // with an artifact hub + sub-pages. Marking unpublished so [slug] doesn't
-    // also generate — dedicated route wins the URL either way but keeps build clean.
+    // /work/fiitco + /work/telco-churn now have dedicated routes
+    // (src/app/work/{fiitco,telco-churn}/page.tsx) with artifact hubs + sub-pages.
+    // Marking unpublished so [slug] doesn't also generate.
     slug: "fiitco",
     published: false,
     title: "FIIT Co. Operational Ecosystem",
@@ -76,8 +76,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // See fiitco note above — dedicated route at /work/telco-churn/.
     slug: "telco-churn",
-    published: true,
+    published: false,
     title: "Telco Customer Churn Analysis",
     category: "Data Analytics",
     summary:

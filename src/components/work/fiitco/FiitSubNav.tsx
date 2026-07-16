@@ -14,9 +14,13 @@ export type FiitSubNavKey =
 
 const TABS: { key: FiitSubNavKey; label: string; href: string }[] = [
   { key: "process", label: "A1 · Process", href: "/work/fiitco/process" },
-  { key: "data", label: "A2 · Data & Scope", href: "/work/fiitco/data" },
+  { key: "data", label: "A2 · Data", href: "/work/fiitco/data" },
   { key: "rules", label: "A3 · Rules", href: "/work/fiitco/rules" },
-  { key: "docs", label: "A4 · Documents", href: "/work/fiitco/docs" },
+  { key: "docs", label: "A4 · Docs", href: "/work/fiitco/docs" },
+  { key: "stakeholder", label: "A5 · Stakeholder", href: "/work/fiitco/stakeholder" },
+  { key: "rtm", label: "A6 · RTM", href: "/work/fiitco/rtm" },
+  { key: "raid", label: "A7 · RAID", href: "/work/fiitco/raid" },
+  { key: "diagrams", label: "A8 · Diagrams", href: "/work/fiitco/diagrams" },
 ];
 
 export function FiitSubNav({ active }: { active: FiitSubNavKey }) {
