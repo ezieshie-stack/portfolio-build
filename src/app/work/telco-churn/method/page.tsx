@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TelcoSubNav } from "@/components/work/telco/TelcoSubNav";
+import { DiagramShell } from "@/components/work/fiitco/diagrams/DiagramShell";
 
 export const metadata = {
   title: "Telco · Methodology (T4) | David Ezieshi",
@@ -99,6 +100,7 @@ export default function TelcoMethodPage() {
         </section>
 
         <section className="pj-section" style={{ marginTop: 30 }}>
+          <DiagramShell title="Analysis pipeline · CSV → SQLite → SQL → Chi² → Model → Outputs">
           <div className="pj-flow-wrap">
             <svg
               className="pj-flow"
@@ -181,10 +183,7 @@ export default function TelcoMethodPage() {
               })}
             </svg>
           </div>
-          <p className="pj-caption" style={{ marginTop: 12 }}>
-            Static SVG. Interactive pan/zoom/fullscreen + hover-highlight ships
-            in a follow-up slice.
-          </p>
+          </DiagramShell>
         </section>
 
         <section className="pj-section">
