@@ -9,12 +9,14 @@ import {
   FileText,
   GitBranch,
   GitCompare,
+  Globe,
   HelpCircle,
   LayoutDashboard,
+  LayoutGrid,
   Network,
   Rocket,
   Scale,
-  Table2,
+  Table,
   TrendingUp,
   UserCheck,
   Users,
@@ -43,7 +45,7 @@ type LiveProduct = {
 const LIVE_PRODUCT: LiveProduct[] = [
   {
     href: "https://www.fiitco.ca",
-    icon: Rocket,
+    icon: Globe,
     title: "Public marketing site",
     host: "fiitco.ca",
     desc: "Customer-facing site: live schedule, trainer profiles, blog, referrals.",
@@ -72,16 +74,16 @@ const LIVE_ARTIFACTS: Artifact[] = [
     idx: "A1",
     icon: GitCompare,
     title: "Process Models",
-    desc: "As-is vs to-be, six core workflows.",
-    meta: "6 processes",
+    desc: "As-is vs to-be, five core workflows.",
+    meta: "5 processes",
   },
   {
     href: "/work/fiitco/data",
     idx: "A2",
-    icon: Table2,
+    icon: Table,
     title: "Data & Scope Model",
     desc: "The scope boundary and the entity model.",
-    meta: "24 entities · 28 tables",
+    meta: "24 entities",
   },
   {
     href: "/work/fiitco/rules",
@@ -89,18 +91,18 @@ const LIVE_ARTIFACTS: Artifact[] = [
     icon: Scale,
     title: "Business Rules",
     desc: "The rules and the booking decision table.",
-    meta: "8 rules",
+    meta: "11 rules",
   },
   {
     href: "/work/fiitco/docs",
     idx: "A4",
     icon: FileText,
     title: "Documents",
-    desc: "Charter, BRD, PDD and UAT in reading mode.",
+    desc: "Charter, BRD, PDD and UAT in a reading mode.",
     meta: "9 documents",
   },
   {
-    href: "/work/fiitco/docs#stakeholder",
+    href: "/work/fiitco/stakeholder",
     idx: "A5",
     icon: Users,
     title: "Stakeholder & RACI",
@@ -108,7 +110,7 @@ const LIVE_ARTIFACTS: Artifact[] = [
     meta: "8 stakeholders",
   },
   {
-    href: "/work/fiitco/docs#rtm",
+    href: "/work/fiitco/rtm",
     idx: "A6",
     icon: GitBranch,
     title: "Traceability",
@@ -116,7 +118,7 @@ const LIVE_ARTIFACTS: Artifact[] = [
     meta: "8 requirements",
   },
   {
-    href: "/work/fiitco/docs#raid",
+    href: "/work/fiitco/raid",
     idx: "A7",
     icon: ClipboardList,
     title: "RAID Log",
@@ -124,7 +126,7 @@ const LIVE_ARTIFACTS: Artifact[] = [
     meta: "5 categories",
   },
   {
-    href: "/work/fiitco/docs#diagrams",
+    href: "/work/fiitco/diagrams",
     idx: "A8",
     icon: Network,
     title: "Diagrams",
@@ -382,12 +384,12 @@ export default function FiitcoHubPage() {
             <MetricStat
               value="27"
               label="Modules delivered"
-              icon={<LayoutDashboard size={22} aria-hidden />}
+              icon={<LayoutGrid size={22} aria-hidden />}
             />
             <MetricStat
               value="32"
               label="Data tables modeled"
-              icon={<Table2 size={22} aria-hidden />}
+              icon={<Table size={22} aria-hidden />}
             />
             <MetricStat
               value="2"
