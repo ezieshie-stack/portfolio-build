@@ -1,25 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { BackgroundCanvas } from "@/components/BackgroundCanvas";
 import { Nav } from "@/components/Nav";
 import { PortfolioFooter } from "@/components/PortfolioFooter";
 
-// Geist + Geist Mono are the ONLY fonts. Bound to --font-geist /
-// --font-geist-mono, then aliased site-wide to --font-sans / --font-mono
-// in globals.css. Inter / JetBrains were removed — they shipped ~200KB
-// of unused font-faces that fought the design contract.
-const geist = Geist({
-  variable: "--font-geist",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
+// Vercel's official geist package — same release Claude Design ships,
+// avoids the Google Fonts mirror lag. Bound to --font-geist-sans /
+// --font-geist-mono, aliased to --font-sans / --font-mono in globals.css.
+const geist = GeistSans;
+const geistMono = GeistMono;
 
 export const metadata: Metadata = {
   title: "David Ezieshi — Business Analyst",
@@ -42,7 +33,7 @@ export default function RootLayout({
       lang="en"
       data-theme="dark"
       className={`${geist.variable} ${geistMono.variable} h-full`}
-      style={{ fontFamily: "var(--font-geist), system-ui, sans-serif" }}
+      style={{ fontFamily: "var(--font-geist-sans), system-ui, sans-serif" }}
     >
       <head>
         {/* Pre-paint theme init — reads pf-theme from localStorage and
