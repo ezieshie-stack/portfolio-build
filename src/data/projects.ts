@@ -242,8 +242,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/ba-process-design with hub + 4 sub-pages.
     slug: "ba-process-design",
-    published: true,
+    published: false,
     title: "Business Analysis & Process Design Portfolio",
     category: "Business Analysis",
     summary:
