@@ -14,6 +14,7 @@ export function ProcessClient() {
   const [mode, setMode] = useState<Mode>("asis");
   const sp = SUBPROCS[spIdx];
   const model = sp[mode];
+  const vpHeight = model.lanes.length * 112 + 76;
 
   return (
     <div className="fx-proc">
@@ -58,7 +59,10 @@ export function ProcessClient() {
           </div>
         </div>
 
-        <DiagramShell title={sp.name + " · " + (mode === "asis" ? "As-Is" : "To-Be")}>
+        <DiagramShell
+          title={sp.name + " · " + (mode === "asis" ? "As-Is" : "To-Be")}
+          viewportHeight={vpHeight}
+        >
           <div style={{ padding: "14px 10px" }}>
             <BpmnPool lanes={model.lanes} nodes={model.nodes} flows={model.flows} />
           </div>

@@ -11,10 +11,12 @@ import { TONE_PALETTE, type Tone } from "./types";
 export function DiagramShell({
   title,
   legend,
+  viewportHeight,
   children,
 }: {
   title?: string;
   legend?: [Tone, string][];
+  viewportHeight?: number | string;
   children: ReactNode;
 }) {
   const vpRef = useRef<HTMLDivElement>(null);
@@ -89,6 +91,11 @@ export function DiagramShell({
         onMouseMove={move}
         onMouseUp={up}
         onMouseLeave={up}
+        style={
+          viewportHeight !== undefined && !fs
+            ? { height: viewportHeight }
+            : undefined
+        }
       >
         <div className="mm-inner" ref={innerRef} style={{ transform: `scale(${scale})` }}>
           {children}
