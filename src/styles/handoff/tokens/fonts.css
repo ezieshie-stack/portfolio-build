@@ -1,0 +1,10 @@
+/* Fonts — Geist (display + UI/body) + Geist Mono (eyebrows, tags, metrics).
+   A unified modern-grotesk system: crisp, precise, "engineering product".
+   Shipped from Google Fonts. */
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", "SF Mono", ui-monospace, "Menlo", monospace;
+}

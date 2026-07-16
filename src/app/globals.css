@@ -15,6 +15,7 @@
  *                      external library not shipped in the zip.
  *                      Hand-written here to spec from README.
  * ──────────────────────────────────────────────────────── */
+@import "../styles/handoff/tokens/fonts.css";
 @import "../styles/handoff/tokens/colors.css";
 @import "../styles/handoff/tokens/typography.css";
 @import "../styles/handoff/tokens/spacing.css";
