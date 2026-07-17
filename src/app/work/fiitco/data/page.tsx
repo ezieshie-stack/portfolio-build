@@ -1,237 +1,248 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Box,
+  Check,
+  CheckCircle2,
+  GitMerge,
+  Info,
+  MinusCircle,
+  ShieldCheck,
+  Table,
+  X,
+} from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { MetricStat } from "@/components/ui/MetricStat";
 import { FiitSubNav } from "@/components/work/fiitco/FiitSubNav";
+import { FigFrame } from "@/components/work/fiitco/FigFrame";
 
 export const metadata = {
   title: "FIIT Co. · Data & Scope Model (A2) | David Ezieshi",
   description:
-    "The 28-table Convex schema grouped into 4 domains, with soft-FK relationships and scope-boundary reasoning.",
+    "The scope boundary agreed at kickoff plus the BA-authored 24-entity logical data model, and how it maps to the ~32-table Convex schema.",
 };
 
-type Domain = { name: string; count: number; tables: string[]; blurb: string };
-
-const DOMAINS: Domain[] = [
-  {
-    name: "Operational",
-    count: 15,
-    tables: [
-      "categories",
-      "subcategories",
-      "classes",
-      "instructors",
-      "tiers",
-      "equipment",
-      "pathways",
-      "exercises",
-      "weeklySchedule",
-      "classPrograms",
-      "deliveryLog",
-      "clientJourneys",
-      "availability",
-      "availabilityExceptions",
-      "pendingChanges",
-    ],
-    blurb:
-      "The real ops record. Staff-only. Every class, every attendance mark, every instructor availability block lands here.",
-  },
-  {
-    name: "Website content",
-    count: 12,
-    tables: [
-      "trainers",
-      "collaborators",
-      "classFormats",
-      "pricingPlans",
-      "blogPosts",
-      "locations",
-      "testimonials",
-      "faqEntries",
-      "promoVideos",
-      "websiteImages",
-      "websiteSchedule",
-      "legalDocs",
-    ],
-    blurb:
-      "Everything the public site reads anonymously. CMS-curated, soft-deleted (active: false) so nothing is ever lost from the UI.",
-  },
-  {
-    name: "Auth & security",
-    count: 4,
-    tables: ["users", "sessions", "passwordResetTokens", "rateLimits"],
-    blurb:
-      "Staff-only. 32-byte hex session tokens with 14-day sliding TTL. PBKDF2-SHA256 password hashes, 600k iterations. Rate limits on login + reset.",
-  },
-  {
-    name: "Customer forms",
-    count: 2,
-    tables: ["referrals", "guestPasses"],
-    blurb:
-      "The only two tables the public can write to. Both are pending-status inserts that the admin queue picks up.",
-  },
+// verbatim from ui_kits/portfolio/project-fiitco-data.jsx
+const ENTITIES: [string, string, string[]][] = [
+  ["User", "Person with any relationship to the platform", ["BR-02"]],
+  ["Role", "Admin / Instructor / Member permission bundle", ["BR-02"]],
+  ["RoleAssignment", "Join, user ↔ role, scoped + time-bounded", ["BR-02"]],
+  ["Session", "Auth session for a signed-in user", ["BR-02"]],
+  ["Instructor", "User subtype with credentials + assignments", ["BR-01", "BR-03", "BR-04"]],
+  ["InstructorAvailability", "Weekly blocks an instructor can be booked into", ["BR-01"]],
+  ["Member", "User subtype with membership + billing status", ["BR-06", "BR-07", "BR-08"]],
+  ["Class", "Reusable offering template (e.g. ‘HIIT 45’)", ["BR-01"]],
+  ["ClassSession", "An instance of a Class at a time, place, instructor", ["BR-01", "BR-03"]],
+  ["Location", "Studio / room the session is held in", ["BR-01"]],
+  ["AttendanceRecord", "Member checked in / marked at a session", ["BR-03", "BR-05"]],
+  ["Exercise", "Item in the curated training library", ["BR-04"]],
+  ["LessonPlan", "Ordered set of Exercises for a session", ["BR-04"]],
+  ["LessonPlanItem", "Join, plan ↔ exercise with sets/reps", ["BR-04"]],
+  ["TrainerProfile", "Public-site bio + certifications", ["BR-06"]],
+  ["WebsitePage", "CMS-editable public page", ["BR-06"]],
+  ["WebsiteBlock", "Modular content block within a page", ["BR-06"]],
+  ["BlogPost", "TipTap-authored article on the public site", ["BR-06"]],
+  ["ContactSubmission", "Inbound form submission from the site", ["BR-06"]],
+  ["Referral", "Trackable link + referrer/referee pair", ["BR-07"]],
+  ["Reward", "Payout / credit on a successful referral", ["BR-07"]],
+  ["GuestPass", "Monthly pass issued with a quota", ["BR-08"]],
+  ["Redemption", "Front-desk verification closing a GuestPass", ["BR-08"]],
+  ["AuditLog", "Append-only record of every mutation", ["NFR-03"]],
 ];
 
-type Relationship = { from: string; to: string; kind: string; note: string };
+const RELS: [string, string, string, string][] = [
+  ["Class", "1 ─∞", "ClassSession", "One ‘HIIT 45’ definition generates dozens of weekly sessions."],
+  ["ClassSession", "∞─ 1", "Instructor", "One instructor per session; the engine enforces no double-booking (BR-01)."],
+  ["ClassSession", "1 ─∞", "AttendanceRecord", "Attendance is per-session, not per-class-definition (BR-03)."],
+  ["User", "∞─∞", "Role", "Via RoleAssignment; an instructor can also hold time-bounded admin rights (BR-02)."],
+  ["Referral", "1 ─ 0..1", "Reward", "A reward exists only on a qualified referral (BR-07)."],
+];
 
-const REL: Relationship[] = [
-  {
-    from: "categories",
-    to: "subcategories",
-    kind: "1 : many",
-    note: "Two-level catalogue hierarchy",
-  },
-  {
-    from: "classes",
-    to: "weeklySchedule",
-    kind: "1 : many",
-    note: "One class definition, dozens of weekly sessions",
-  },
-  {
-    from: "instructors",
-    to: "weeklySchedule",
-    kind: "1 : many",
-    note: "Scheduling engine enforces no double-booking (BR-01)",
-  },
-  {
-    from: "classes",
-    to: "deliveryLog",
-    kind: "1 : many",
-    note: "Attendance is per-session, not per-class-definition (BR-03)",
-  },
-  {
-    from: "users ⇄ instructors",
-    to: "",
-    kind: "1 : 0..1",
-    note: "Not every user is an instructor; not every instructor has a login yet",
-  },
-  {
-    from: "pathways",
-    to: "clientJourneys",
-    kind: "1 : many",
-    note: "A pathway is the template; a journey is an instance",
-  },
+const IN_SCOPE: [string, string][] = [
+  ["Class Management Tool", "Scheduling, RBAC, real-time attendance, lesson library, reporting"],
+  ["Customer marketing website", "Live schedule, trainer profiles, brand, CMS"],
+  ["Refer-a-friend program", "Trackable links with attribution & rewards"],
+  ["Guest-pass program", "Monthly passes with front-desk verification"],
+];
+const OUT_SCOPE: [string, string][] = [
+  ["MindBody two-way sync", "Deferred to Wave 3+ (R-01); deep-link fallback shipped"],
+  ["WCAG 2.1 AA audit", "Wave 3 backlog (R-07); interim contrast/alt-text pass done"],
+  ["Trainerize pilot", "O3 recommendation, 30 days post-closure"],
+  ["Payments & billing", "External system of record"],
 ];
 
 export default function FiitDataPage() {
   return (
-    <div className="pf-page">
+    <div className="pf-page fx-wide">
       <div className="pf-shell">
         <FiitSubNav active="data" />
 
         <section className="pj-hero-head" style={{ marginTop: 28 }}>
           <Badge tone="violet" style={{ marginBottom: 16 }}>
-            Artifact A2 · Data &amp; Scope Model · ERD
+            Artifact A2 · Data &amp; Scope Model
           </Badge>
           <h1
             className="pf-page-title"
             style={{ fontSize: "clamp(30px,3.2vw,46px)" }}
           >
-            28 tables, 4 domains, one line separating public from operational.
+            What the platform owns, and the data behind it.
           </h1>
-          <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            Convex is a document-flavoured backend. It does not enforce
-            foreign-key constraints — relationships are encoded as string IDs
-            in indexed columns and maintained by the application code. That
-            trade-off is explicit and worth pointing at during any walkthrough.
+          <p className="pf-page-intro" style={{ maxWidth: 680 }}>
+            The scope boundary agreed at kickoff, and the BA-authored logical
+            data model the requirements traced to, 24 entities, their
+            relationships, and how the logical layer maps to the ~32-table
+            Convex schema.
           </p>
         </section>
 
-        {/* Four domains */}
-        <section className="pj-section" style={{ marginTop: 32 }}>
-          <Eyebrow style={{ marginBottom: 8 }}>Four domains</Eyebrow>
+        {/* scope model */}
+        <section className="pj-section" style={{ marginTop: 34 }}>
+          <Eyebrow style={{ marginBottom: 8 }}>Scope model</Eyebrow>
           <p className="pj-section-sub">
-            The 28 tables cluster into four business-meaningful groups.
-            Permissions map cleanly onto domain lines.
+            The line between what this engagement delivered and what stayed
+            with existing or third-party systems, agreed before a single
+            requirement was written.
           </p>
-          <div className="pj-data-domains">
-            {DOMAINS.map((d) => (
-              <article className="pj-data-domain" key={d.name}>
-                <header>
-                  <h3>{d.name}</h3>
-                  <span className="pj-data-count">{d.count} tables</span>
-                </header>
-                <p className="pj-data-blurb">{d.blurb}</p>
-                <ul className="pj-data-tables">
-                  {d.tables.map((t) => (
-                    <li key={t}>
-                      <code>{t}</code>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
+          <FigFrame name="scope-boundary" sub="in / out of scope">
+            <div className="fig-pad">
+              <div className="fx-scope-grid">
+                <div className="fx-scol in">
+                  <div className="fx-scol-hd">
+                    <CheckCircle2 size={16} aria-hidden /> In scope
+                  </div>
+                  <ul>
+                    {IN_SCOPE.map(([t, d]) => (
+                      <li key={t}>
+                        <Check size={16} aria-hidden />
+                        <span>
+                          <b>{t}</b>
+                          {d}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="fx-scol out">
+                  <div className="fx-scol-hd">
+                    <MinusCircle size={16} aria-hidden /> Out of scope
+                  </div>
+                  <ul>
+                    {OUT_SCOPE.map(([t, d]) => (
+                      <li key={t}>
+                        <X size={16} aria-hidden />
+                        <span>
+                          <b>{t}</b>
+                          {d}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </FigFrame>
         </section>
 
-        {/* Cardinality highlights */}
+        {/* ERD */}
         <section className="pj-section">
-          <Eyebrow style={{ marginBottom: 8 }}>Cardinality highlights</Eyebrow>
+          <Eyebrow style={{ marginBottom: 8 }}>
+            Logical data model · 24 entities
+          </Eyebrow>
           <p className="pj-section-sub">
-            The joins worth explaining when someone asks how the data holds
-            together.
+            The BA-authored logical model, the entities and relationships the
+            requirements need the platform to hold. Built before the schema,
+            iterated during the build, and now the reference for tracing any
+            production issue to an owning entity. Each entity traces to the BR
+            it serves.
           </p>
-          <div className="pj-data-rel">
-            {REL.map((r, i) => (
-              <div className="pj-data-rel-row" key={i}>
-                <span className="pj-data-rel-from">
-                  <code>{r.from}</code>
-                  {r.to && (
-                    <>
-                      {" → "}
-                      <code>{r.to}</code>
-                    </>
-                  )}
+          <FigFrame name="fiit_co · logical model" sub="BA-08 · 24 entities">
+            <div className="fig-pad">
+              <div className="fx-erd">
+                {ENTITIES.map(([name, purpose, trace]) => (
+                  <div className="fx-ent" key={name}>
+                    <div className="fx-ent-hd">
+                      <Box size={15} aria-hidden />
+                      <span className="fx-ent-name">{name}</span>
+                    </div>
+                    <div className="fx-ent-body">
+                      <p className="fx-ent-purpose">{purpose}</p>
+                      <div className="fx-ent-tr">
+                        {trace.map((t) => (
+                          <span key={t} className={t.startsWith("N") ? "nfr" : ""}>
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FigFrame>
+        </section>
+
+        {/* relationships */}
+        <section className="pj-section">
+          <Eyebrow style={{ marginBottom: 8 }}>Relationships</Eyebrow>
+          <p className="pj-section-sub">
+            Cardinalities the business rules and process models depend on.
+          </p>
+          <div className="fx-rels">
+            {RELS.map(([a, card, b, note], i) => (
+              <div className="fx-rel" key={i}>
+                <span className="fx-rel-e" style={{ textAlign: "right" }}>
+                  {a}
                 </span>
-                <span className="pj-data-rel-kind">{r.kind}</span>
-                <span className="pj-data-rel-note">{r.note}</span>
+                <span className="fx-rel-card">{card}</span>
+                <span className="fx-rel-e">{b}</span>
+                <span className="fx-rel-note">{note}</span>
               </div>
             ))}
           </div>
         </section>
 
-        {/* The two-schedule story */}
+        {/* metrics */}
         <section className="pj-section">
-          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
-            The two-schedule story
-          </Eyebrow>
-          <p className="pj-section-sub">
-            There are two schedule tables. That is intentional, not
-            duplication.
-          </p>
-          <div className="pj-data-callout">
-            <div className="pj-data-callout-row">
-              <strong>weeklySchedule</strong> · Operational domain
-              <span>
-                The real ops schedule with dates, capacity, and
-                buffer-conflict flags. Staff-only.
-              </span>
-            </div>
-            <div className="pj-data-callout-row">
-              <strong>websiteSchedule</strong> · Website content domain
-              <span>
-                A curated recurring template for what the public sees. Arden
-                edits it separately so a mid-week ops change doesn&rsquo;t
-                leak to visitors.
-              </span>
-            </div>
+          <div className="pj-metrics">
+            <MetricStat
+              value="24"
+              label="Logical entities"
+              icon={<Box size={22} aria-hidden />}
+            />
+            <MetricStat
+              value="~32"
+              label="Physical Convex tables"
+              icon={<Table size={22} aria-hidden />}
+            />
+            <MetricStat
+              value="8"
+              label="BRs traced to entities"
+              icon={<GitMerge size={22} aria-hidden />}
+            />
+            <MetricStat
+              value="100%"
+              label="Mutations audit-logged"
+              icon={<ShieldCheck size={22} aria-hidden />}
+            />
           </div>
         </section>
 
-        {/* Interactive ERD placeholder */}
-        <section className="pj-section">
-          <div className="pj-note">
-            The fully interactive ERD (hover-highlight, filter by domain,
-            click a table to see its indexed columns and soft-FK ins/outs)
-            renders on a later slice — the engine that drives it is being
-            ported from the prototype.
-          </div>
-        </section>
+        <div className="cov-note" style={{ marginTop: 8 }}>
+          <Info size={18} aria-hidden />
+          <p>
+            <b>Logical vs. physical:</b> this 24-entity logical model is
+            sponsor-readable and implementation-agnostic. The physical Convex
+            schema expands to <b>~32 tables</b> through materialised views
+            (attendance rollup, referral attribution), system tables, and audit
+            variants (soft-delete tombstones, versioned config).
+          </p>
+        </div>
 
         <Link href="/work/fiitco/rules" className="pj-next">
           <div>
             <span className="pj-next-lbl">Next artifact</span>
-            <span className="pj-next-title">Business Rules</span>
+            <span className="pj-next-title">Business Rules Model</span>
           </div>
           <ArrowRight size={20} aria-hidden />
         </Link>
