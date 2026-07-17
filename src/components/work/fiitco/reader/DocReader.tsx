@@ -180,21 +180,55 @@ export function DocReader({ doc }: { doc: Doc }) {
     .map((b) => ({ id: slug(b.text), label: b.text }));
 
   useEffect(() => {
+    if (!active) return;
+    const el = document.querySelector<HTMLButtonElement>(
+      `[data-toc-target="${active}"]`
+    );
+    if (el) el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [active]);
+
+  useEffect(() => {
     const heads = toc
       .map((t) => document.getElementById(t.id))
       .filter((el): el is HTMLElement => !!el);
     if (!heads.length) return;
+
+    // Track the set of headings currently inside the "reading zone" (the
+    // top slice of viewport defined by rootMargin). The observer only
+    // reports state changes, so we accumulate; each tick we pick the
+    // topmost element still in the zone as the active TOC item.
+    const inZone = new Set<string>();
+    const pickActive = () => {
+      if (inZone.size > 0) {
+        const topmost = heads
+          .filter((h) => inZone.has(h.id))
+          .sort(
+            (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top
+          )[0];
+        if (topmost) setActive(topmost.id);
+        return;
+      }
+      // Nothing in the zone — highlight the last heading the reader
+      // has scrolled past, so the trace still moves as they read
+      // between headings.
+      const above = heads
+        .filter((h) => h.getBoundingClientRect().top < 80)
+        .sort((a, b) => b.getBoundingClientRect().top - a.getBoundingClientRect().top);
+      setActive(above[0]?.id ?? heads[0].id);
+    };
+
     const obs = new IntersectionObserver(
       (entries) => {
-        const vis = entries
-          .filter((e) => e.isIntersecting)
-          .sort((x, y) => x.boundingClientRect.top - y.boundingClientRect.top);
-        if (vis[0]) setActive(vis[0].target.id);
+        entries.forEach((e) => {
+          if (e.isIntersecting) inZone.add(e.target.id);
+          else inZone.delete(e.target.id);
+        });
+        pickActive();
       },
       { rootMargin: "-80px 0px -68% 0px", threshold: 0 }
     );
     heads.forEach((h) => obs.observe(h));
-    setActive(toc[0].id);
+    pickActive();
     return () => obs.disconnect();
   }, [doc.id, toc]);
 
@@ -216,6 +250,7 @@ export function DocReader({ doc }: { doc: Doc }) {
           <button
             key={t.id}
             type="button"
+            data-toc-target={t.id}
             className={`dr-toc-item${active === t.id ? " on" : ""}`}
             onClick={() => jump(t.id)}
           >
