@@ -1524,10 +1524,15 @@ body { font-family: var(--font-sans); }
 .fig-frame-card, .fig-canvas { max-width: 100%; }
 .dr-twrap, .dr-ascii { max-width: 100%; }
 
-/* DiagramShell — shrink the artboard on phones so it hugs the diagram
-   instead of leaving a large empty white slab below the last node. */
-@media (max-width: 720px) {
-  .mm-viewport { height: 260px; }
+/* DiagramShell — on phones drop the internal viewport scroll entirely
+   and let the artboard hug the scaled sizer. Prior behavior kept a
+   fixed viewport height, leaving a large empty white slab below the
+   last node when the diagram was short. `height: auto` + `overflow:
+   visible` lets the mm-figure size to its content; the sizer is
+   already exactly `natSize * scale` from JS, so the artboard becomes
+   diagram-shaped. Page scroll handles anything taller than the phone. */
+@media (max-width: 900px) {
+  .mm-viewport { height: auto !important; min-height: 0 !important; overflow: visible !important; }
   .mm-inner { padding: 10px; }
   .mm-figure { margin: 8px 0 18px; }
   .mm-bar { padding: 7px 10px; }
@@ -1537,6 +1542,5 @@ body { font-family: var(--font-sans); }
   .fc-leg { font-size: 10.5px; }
 }
 @media (max-width: 480px) {
-  .mm-viewport { height: 220px; }
   .mm-inner { padding: 6px; }
 }
