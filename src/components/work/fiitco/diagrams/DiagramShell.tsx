@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Expand, Maximize2, Minus, Plus, X } from "lucide-react";
 import { TONE_PALETTE, type Tone } from "./types";
 
@@ -52,7 +52,7 @@ export function DiagramShell({
   }, []);
 
   // Refit on mount + resetKey change (process/mode swap).
-  useLayoutEffect(() => {
+  useEffect(() => {
     const t = setTimeout(fit, 60);
     return () => clearTimeout(t);
   }, [fit, resetKey]);
