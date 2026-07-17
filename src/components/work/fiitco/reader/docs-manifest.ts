@@ -10,7 +10,7 @@ export type DocLiveLink = {
 
 export type DocManifestEntry = {
   id: string;
-  group: "Initiate" | "Analyze" | "Design" | "Deliver" | "Close";
+  group: string;
   code: string;
   icon: string;
   file: string;

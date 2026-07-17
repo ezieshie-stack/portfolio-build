@@ -210,6 +210,18 @@ function parseStandard(md: string, opts?: ParseOpts): ParsedDoc {
       continue;
     }
 
+    // Triple-backtick code fence — swallow the fenced block silently
+    // for now (mermaid and other diagram syntaxes render as walls of
+    // ASCII in a plain reader; we drop them and let the surrounding
+    // talking-points paragraphs carry the meaning).
+    if (/^```/.test(line.trim())) {
+      flushPara(para);
+      i++;
+      while (i < lines.length && !/^```/.test(lines[i].trim())) i++;
+      if (i < lines.length) i++; // consume closing fence
+      continue;
+    }
+
     // Headings
     const h2m = line.match(/^##\s+(.*)$/);
     if (h2m) {

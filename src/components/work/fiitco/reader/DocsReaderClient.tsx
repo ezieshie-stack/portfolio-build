@@ -6,15 +6,18 @@ import {
   Flag,
   FlagTriangleRight,
   Gauge,
+  GitFork,
   LayoutTemplate,
   ListChecks,
+  Network,
   Scale,
   ShieldCheck,
+  Table,
   Users,
   type LucideIcon,
 } from "lucide-react";
 import { DocReader, type Doc } from "./DocReader";
-import { DOC_MANIFEST } from "./docs-manifest";
+import { DOC_MANIFEST, type DocManifestEntry } from "./docs-manifest";
 import { parseMarkdown } from "./parse-markdown";
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -27,21 +30,34 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "shield-check": ShieldCheck,
   scale: Scale,
   "flag-triangle-right": FlagTriangleRight,
+  network: Network,
+  table: Table,
+  "git-fork": GitFork,
 };
 
-const PHASE_ORDER = ["Initiate", "Analyze", "Design", "Deliver", "Close"] as const;
+const DEFAULT_PHASE_ORDER = ["Initiate", "Analyze", "Design", "Deliver", "Close"];
 
 type FetchState =
   | { kind: "loading" }
   | { kind: "ready"; doc: Doc }
   | { kind: "error"; message: string };
 
-export function DocsReaderClient() {
-  const [activeId, setActiveId] = useState<string>(DOC_MANIFEST[0].id);
+export function DocsReaderClient({
+  manifest = DOC_MANIFEST,
+  phaseOrder = DEFAULT_PHASE_ORDER,
+  loadingLabel = "Loading document…",
+  errorLabel = "Could not load this document",
+}: {
+  manifest?: DocManifestEntry[];
+  phaseOrder?: readonly string[];
+  loadingLabel?: string;
+  errorLabel?: string;
+} = {}) {
+  const [activeId, setActiveId] = useState<string>(manifest[0].id);
   const [state, setState] = useState<FetchState>({ kind: "loading" });
 
   useEffect(() => {
-    const entry = DOC_MANIFEST.find((d) => d.id === activeId);
+    const entry = manifest.find((d) => d.id === activeId);
     if (!entry) return;
     let alive = true;
     setState({ kind: "loading" });
@@ -78,11 +94,11 @@ export function DocsReaderClient() {
     return () => {
       alive = false;
     };
-  }, [activeId]);
+  }, [activeId, manifest]);
 
-  const groups = PHASE_ORDER.map((phase) => ({
+  const groups = phaseOrder.map((phase) => ({
     name: phase,
-    items: DOC_MANIFEST.filter((d) => d.group === phase),
+    items: manifest.filter((d) => d.group === phase),
   })).filter((g) => g.items.length > 0);
 
   return (
@@ -116,9 +132,9 @@ export function DocsReaderClient() {
       </div>
 
       {state.kind === "loading" ? (
-        <div className="dr-loading">Loading document…</div>
+        <div className="dr-loading">{loadingLabel}</div>
       ) : state.kind === "error" ? (
-        <div className="dr-loading">Could not load this document ({state.message}).</div>
+        <div className="dr-loading">{errorLabel} ({state.message}).</div>
       ) : (
         <DocReader doc={state.doc} key={state.doc.id} />
       )}
