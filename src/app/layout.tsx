@@ -32,7 +32,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${geist.variable} ${geistMono.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable}`}
       style={{ fontFamily: "var(--font-geist-sans), system-ui, sans-serif" }}
     >
       <head>
@@ -45,7 +45,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="ds-canvas min-h-full flex flex-col">
+      <body className="ds-canvas flex flex-col">
         <BackgroundCanvas />
         <Nav />
         <main className="flex-1 relative z-[1]">{children}</main>
