@@ -28,7 +28,19 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "flag-triangle-right": FlagTriangleRight,
 };
 
-const ORDERED_KEYS = ["charter", "exec", "brd", "closure"];
+// Reference DOC_LIB order (project-fiitco-docs.jsx). Preserved so the
+// picker groups fill the phase columns in a predictable order.
+const ORDERED_KEYS = [
+  "charter",
+  "exec",
+  "brd",
+  "personas",
+  "pdd",
+  "stories",
+  "uat",
+  "vendor",
+  "closure",
+];
 const PHASE_ORDER = ["Initiate", "Analyze", "Design", "Deliver", "Close"] as const;
 
 export function DocsReaderClient() {
@@ -41,13 +53,14 @@ export function DocsReaderClient() {
   })).filter((g) => g.items.length > 0);
 
   return (
-    <div className="dr-lib" style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: 32, alignItems: "start" }}>
-      <div className="dr-lib-sidebar">
+    <>
+      <div className="dr-lib">
         {groups.map((g) => (
           <div className="dr-lib-group" key={g.name}>
             <div className="dr-lib-phase">{g.name}</div>
             {g.items.map((d) => {
               const Ico = ICON_MAP[d.icon] || ClipboardList;
+              const [code, name] = d.code.split(" · ");
               return (
                 <button
                   type="button"
@@ -59,8 +72,8 @@ export function DocsReaderClient() {
                     <Ico size={16} aria-hidden />
                   </span>
                   <span className="dr-lib-tx">
-                    <span className="dr-lib-code">{d.code.split(" · ")[0]}</span>
-                    <span className="dr-lib-name">{d.code.split(" · ")[1]}</span>
+                    <span className="dr-lib-code">{code}</span>
+                    <span className="dr-lib-name">{name}</span>
                   </span>
                 </button>
               );
@@ -69,7 +82,7 @@ export function DocsReaderClient() {
         ))}
       </div>
 
-      <DocReader doc={active.doc as Doc} />
-    </div>
+      <DocReader doc={active.doc as Doc} key={activeId} />
+    </>
   );
 }

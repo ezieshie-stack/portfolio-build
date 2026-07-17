@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function FiitDocsPage() {
   return (
-    <div className="pf-page">
+    <div className="pf-page fx-wide">
       <div className="pf-shell">
         <FiitSubNav active="docs" />
 
