@@ -1454,3 +1454,72 @@ body { font-family: var(--font-sans); }
   .mv-genre-row { grid-template-columns: 1fr; gap: 6px; }
   .mv-seg-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ══ WORK / PROJECT PAGES — MOBILE ══════════════════════════════
+   Stacks every multi-column grid, tightens padding, and keeps
+   figures + code blocks from spilling out of the shell. */
+@media (max-width: 900px) {
+  .pj-hero-head { max-width: 100%; }
+  .pj-scorer { grid-template-columns: 1fr; gap: 22px; }
+  .pj-inputs-row { grid-template-columns: 1fr; }
+  .pj-readout { padding: 18px; }
+  .pj-gauge { width: 160px; height: 160px; }
+  .pj-beats { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+  .pj-metrics { grid-template-columns: 1fr 1fr; }
+  .pj-cohort { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+  .pj-cohort-k { grid-column: 1 / -1; }
+  .pj-cohort-n { position: static; text-align: right; }
+  .sla-brief { grid-template-columns: 1fr; }
+  .sla-approach-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 16px; }
+  .sla-frec-row { grid-template-columns: 1fr; gap: 10px; }
+  .sla-frec-arrow { display: none; }
+  .fx-index { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tm-perf { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .tm-grid2 { grid-template-columns: 1fr; }
+  .tm-metrics { grid-template-columns: 1fr 1fr; }
+  .ff-artifacts { grid-template-columns: 1fr; }
+  .tc-grid { grid-template-columns: 1fr; }
+  .dr-doc-title { font-size: clamp(22px, 6vw, 30px); }
+  .dr-p, .dr-quote, .dr-li { font-size: 14px; }
+  .dr-h2 { font-size: 19px; }
+  .dr-ascii { font-size: 11px; padding: 12px; }
+  .pj-hood-body, .pj-hero-head { padding-left: 0; padding-right: 0; }
+  .pj-next { padding: 18px 20px; }
+  .fig-canvas { padding: 18px; }
+  .cs-out { padding: 18px; }
+  .cs-drow { grid-template-columns: 88px 1fr; }
+  .fx-out { padding: 18px; }
+}
+
+@media (max-width: 640px) {
+  .pf-page-title { font-size: clamp(28px, 8vw, 40px); }
+  .pf-page-intro { font-size: 15px; }
+  .fx-index { grid-template-columns: 1fr; }
+  .mv-tiers { grid-template-columns: 1fr; }
+  .tm-metrics { grid-template-columns: 1fr; }
+  .pj-metrics { grid-template-columns: 1fr; }
+  .pj-scorer .pj-seg { flex-wrap: wrap; }
+  .pj-scorer .pj-seg-btn { min-width: 44px; padding: 8px 10px; font-size: 12px; }
+  .pj-gauge { width: 140px; height: 140px; }
+  .pj-gauge-pct { font-size: 32px; }
+  .fx-scorer { padding: 16px; }
+  .fx-seg { grid-template-columns: 1fr 1fr; }
+  .cs-card { padding: 16px; }
+  .cs-tog { padding: 9px 10px; font-size: 12px; }
+  .mv-stage { padding: 10px 12px; }
+  .mv-detail { padding: 16px; }
+  .mv-detail h3 { font-size: 17px; }
+  .mv-detail-big { font-size: 24px; }
+  .pj-cohorts { gap: 6px; }
+  .sla-brief-card { padding: 16px; }
+  .fx-idxcard { padding: 18px; }
+  .pj-back { margin-bottom: 20px; }
+}
+
+/* Diagram figures — always scroll horizontally when the natural
+   diagram is wider than the phone. DiagramShell scales to fit, so
+   this is a safety net for any raw SVG wrapper. */
+.pj-flow-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+.mm-figure { max-width: 100%; }
+.fig-frame-card, .fig-canvas { max-width: 100%; }
+.dr-twrap, .dr-ascii { max-width: 100%; }
