@@ -181,10 +181,27 @@ export function DocReader({ doc }: { doc: Doc }) {
 
   useEffect(() => {
     if (!active) return;
-    const el = document.querySelector<HTMLButtonElement>(
+    const el = document.querySelector<HTMLElement>(
       `[data-toc-target="${active}"]`
     );
-    if (el) el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    if (!el) return;
+    const toc = el.parentElement;
+    if (!toc) return;
+    // Only shift the TOC's own scrollTop — never bubble to window.
+    // scrollIntoView() walks the ancestor chain, which on mobile fights
+    // the user's touch scroll and produces a springy bounce.
+    const elTop = el.offsetTop - toc.offsetTop;
+    const elBottom = elTop + el.offsetHeight;
+    const viewTop = toc.scrollTop;
+    const viewBottom = viewTop + toc.clientHeight;
+    if (elTop < viewTop) {
+      toc.scrollTo({ top: Math.max(0, elTop - 8), behavior: "smooth" });
+    } else if (elBottom > viewBottom) {
+      toc.scrollTo({
+        top: elBottom - toc.clientHeight + 8,
+        behavior: "smooth",
+      });
+    }
   }, [active]);
 
   useEffect(() => {
