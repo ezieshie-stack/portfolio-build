@@ -14,21 +14,17 @@ import { TONE_PALETTE, type Tone } from "./types";
 /**
  * DiagramShell — pan / zoom / fullscreen wrapper for any diagram.
  *
- * Ports the reference `fiit-diagram-engine.jsx` DiagramShell:
- * - .mm-viewport (scroll area, drag-to-pan)
- *   > .mm-sizer   (width/height = natW*scale × natH*scale — the scroll
- *                  content is sized to the SCALED diagram so the whole
- *                  thing is reachable at any width)
- *     > .mm-inner (transform: scale(scale), origin top-left — the
- *                  un-transformed diagram)
+ * Structure per PROCESS_PAGE_UPDATE.md:
+ *   .mm-viewport (overflow:auto, drag-to-pan)
+ *     > .mm-sizer  (width = natW*scale, height = natH*scale, overflow:hidden)
+ *       > .mm-inner (transform: scale(scale), origin top-left)
  *
- * Refits synchronously (useLayoutEffect) on mount + `resetKey` change
- * so process/mode switches never flash a wrong-scale frame; also on
- * window resize.
+ * Refits synchronously on: mount, `resetKey` change (process/mode swap),
+ * and window resize. No async gates, no visibility flags — the sizer
+ * itself absorbs the intermediate frame because it's derived from state
+ * that useLayoutEffect flushes before paint.
  */
 
-// useLayoutEffect on the server logs a warning; alias to useEffect during
-// SSR so it stays silent. Client-side we get the real one.
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -50,7 +46,6 @@ export function DiagramShell({
   const sizerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [natSize, setNatSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
-  const [ready, setReady] = useState(false);
   const [fs, setFs] = useState(false);
   const drag = useRef({ on: false, x: 0, y: 0, l: 0, t: 0 });
 
@@ -59,33 +54,28 @@ export function DiagramShell({
     const inner = innerRef.current;
     const sizer = sizerRef.current;
     if (!vp || !inner) return;
-    // Temporarily strip the scale + sizer clamps so the SVG lays out at
-    // its natural, un-transformed dimensions. Do it imperatively so the
-    // measurement happens in one paintless pass.
+    // Strip the current transform + sizer clamps so we measure the SVG
+    // at its natural, un-transformed size.
     inner.style.transform = "scale(1)";
     if (sizer) {
       sizer.style.width = "auto";
       sizer.style.height = "auto";
       sizer.style.overflow = "visible";
     }
+    // Force layout so offsetWidth reflects the natural state.
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    inner.offsetWidth;
     const natW = inner.offsetWidth;
     const natH = inner.offsetHeight;
     const avail = vp.clientWidth - 40;
     const s = avail >= natW ? 1 : Math.max(0.25, avail / natW);
     setNatSize({ w: natW, h: natH });
     setScale(s);
-    setReady(true);
   }, []);
 
-  // Refit synchronously on mount + resetKey change (process/mode swap).
-  // Marking ready=false first hides the inner during the (in-frame) gap
-  // so a mis-scaled paint can never leak through.
+  // Synchronous refit before paint whenever the diagram content changes.
   useIsoLayoutEffect(() => {
-    setReady(false);
-    // rAF gives React one commit to swap the children DOM in before we
-    // measure, so we're always sizing the NEW content, not the old.
-    const id = requestAnimationFrame(fit);
-    return () => cancelAnimationFrame(id);
+    fit();
   }, [fit, resetKey]);
 
   // Refit on window resize.
@@ -115,17 +105,20 @@ export function DiagramShell({
     vpRef.current?.classList.remove("grabbing");
   };
 
-  const sizerStyle: React.CSSProperties =
-    ready && natSize.w > 0
-      ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
-      : { width: "auto", height: "auto", overflow: "visible" };
+  // Once natSize is known: sizer holds the scaled diagram footprint so
+  // the parent viewport can scroll it end-to-end.
+  const measured = natSize.w > 0 && natSize.h > 0;
+  const sizerStyle: React.CSSProperties = measured
+    ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
+    : { width: "auto", height: "auto", overflow: "visible" };
 
-  // Viewport height: match scaled content once measured so short diagrams
-  // don't leave a huge empty band below (which is what happens on mobile
-  // when scale clamps to 0.25 but the caller passed an un-scaled height).
+  // Viewport height: hug the scaled diagram (16px slack), min 200, max 520,
+  // so tall diagrams don't blow up the page and short ones don't leave a
+  // huge empty band on mobile. Falls back to the caller's prop (or the
+  // CSS default) until the first measurement.
   const vpStyle: React.CSSProperties | undefined = fs
     ? undefined
-    : ready && natSize.h > 0
+    : measured
       ? { height: Math.max(200, Math.min(natSize.h * scale + 16, 520)) }
       : viewportHeight !== undefined
         ? { height: viewportHeight }
@@ -134,7 +127,6 @@ export function DiagramShell({
   const innerStyle: React.CSSProperties = {
     transform: `scale(${scale})`,
     transformOrigin: "top left",
-    visibility: ready ? "visible" : "hidden",
   };
 
   const fig = (
