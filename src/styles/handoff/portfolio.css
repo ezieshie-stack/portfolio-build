@@ -1105,6 +1105,48 @@ body { font-family: var(--font-sans); }
 .ff-node-lbl { font-size: 11px; line-height: 1.3; color: var(--text-body); }
 .ff-node.k-flag { border-color: var(--error, #f2547d); background: color-mix(in srgb, var(--error, #f2547d) 12%, transparent); }
 
+/* ══ TELCO CHURN — INTERACTIVE SCORER (hub page) ═════════════════ */
+.cs-card { border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--surface-2); padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 18px; }
+.cs-row { display: flex; flex-direction: column; gap: 8px; }
+.cs-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.cs-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.cs-field-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); }
+.cs-toggle { display: grid; grid-auto-columns: 1fr; grid-auto-flow: column; gap: 8px; }
+.cs-tog { padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text-body); font-family: var(--font-sans); font-size: 13px; font-weight: 500; cursor: pointer; transition: all var(--duration-fast) var(--ease-out); }
+.cs-tog:hover { border-color: var(--border-hover); color: var(--text-heading); }
+.cs-tog.on { background: var(--accent-solid); border-color: transparent; color: var(--text-on-accent); font-weight: 600; }
+.cs-slider { display: flex; flex-direction: column; gap: 6px; }
+.cs-slider-head { display: flex; align-items: baseline; justify-content: space-between; }
+.cs-slider-v { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-heading); }
+.cs-slider-v em { font-style: normal; font-size: 12px; color: var(--text-dim); margin-left: 4px; }
+.cs-slider input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: linear-gradient(to right, var(--accent-solid) 0%, var(--accent-solid) var(--pct, 50%), var(--border) var(--pct, 50%), var(--border) 100%); outline: none; }
+.cs-slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 999px; background: var(--accent); border: 3px solid var(--surface); cursor: grab; box-shadow: 0 0 0 1px var(--accent-solid); }
+.cs-slider input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 999px; background: var(--accent); border: 3px solid var(--surface); cursor: grab; box-shadow: 0 0 0 1px var(--accent-solid); }
+.cs-out { margin-top: 10px; padding: 22px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 30px; align-items: center; }
+.cs-gauge { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.cs-risk { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; padding: 5px 12px; border-radius: 999px; border: 1px solid; }
+.cs-risk-hi { color: #f2547d; border-color: color-mix(in srgb, #f2547d 40%, transparent); background: color-mix(in srgb, #f2547d 12%, transparent); }
+.cs-risk-mid { color: #f0a744; border-color: color-mix(in srgb, #f0a744 40%, transparent); background: color-mix(in srgb, #f0a744 12%, transparent); }
+.cs-risk-lo { color: #3ec28f; border-color: color-mix(in srgb, #3ec28f 40%, transparent); background: color-mix(in srgb, #3ec28f 12%, transparent); }
+.cs-drivers { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.cs-drivers-h { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+.cs-drow { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px; align-items: center; }
+.cs-dlbl { font-size: 12px; color: var(--text-body); text-align: right; }
+.cs-dtrack { height: 8px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.cs-dbar { display: block; height: 100%; border-radius: 999px; transition: width 280ms var(--ease-out); }
+.cs-dbar.up { background: linear-gradient(to right, color-mix(in srgb, #f2547d 40%, transparent), #f2547d); }
+.cs-dbar.dn { background: linear-gradient(to right, color-mix(in srgb, #3ec28f 40%, transparent), #3ec28f); }
+.cs-dlegend { display: flex; align-items: center; gap: 12px; margin-top: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text-dim); }
+.cs-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; margin-left: 6px; vertical-align: -1px; }
+.cs-dot.up { background: #f2547d; }
+.cs-dot.dn { background: #3ec28f; }
+.cs-caption { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--text-dim); }
+@media (max-width: 720px) {
+  .cs-out { grid-template-columns: 1fr; }
+  .cs-row-2 { grid-template-columns: 1fr; }
+  .cs-drow { grid-template-columns: 92px minmax(0, 1fr); }
+}
+
 /* ══ TELCO CHURN — ARTIFACT SUB-PAGES ═══════════════════════════ */
 /* T1 · SQL explorer */
 .tq-grid { display: flex; flex-direction: column; gap: 18px; }

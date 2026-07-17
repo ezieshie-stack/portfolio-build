@@ -9,6 +9,7 @@ import {
   FileText,
   GitFork,
   HelpCircle,
+  Info,
   Table2,
   Target,
   TrendingUp,
@@ -20,6 +21,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
+import { ChurnScorer } from "@/components/work/telco/ChurnScorer";
 
 export const metadata = {
   title: "Telco Customer Churn Analysis | David Ezieshi",
@@ -87,7 +89,7 @@ export default function TelcoHubPage() {
 
         <section className="pj-hero-head">
           <Badge tone="violet" style={{ marginBottom: 18 }}>
-            Churn Analytics
+            Churn Analytics · Interactive
           </Badge>
           <h1
             className="pf-page-title"
@@ -96,15 +98,24 @@ export default function TelcoHubPage() {
             Score a customer for churn.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 680 }}>
-            A logistic-regression model on 7,043 telecom customers, backed by
-            eight SQL queries and a Chi-Square significance test. Every number
-            on every artifact page traces to a real run against the shipped
-            SQLite database.
+            This is the model I built on 7,043 telecom customers, running live
+            in your browser. Change the inputs and watch the prediction move.
+            No slides, the thing itself.
+          </p>
+        </section>
+
+        {/* interactive scorer — client-side reconstruction of T3 */}
+        <section className="pj-section" style={{ marginTop: 28 }}>
+          <ChurnScorer />
+          <p className="cs-caption">
+            <Info size={14} aria-hidden />
+            Interactive reconstruction of the logistic-regression model (0.86
+            ROC-AUC). Coefficients calibrated to the documented churn drivers.
           </p>
         </section>
 
         {/* analyst's brief */}
-        <section className="pj-section" style={{ marginTop: 36 }}>
+        <section className="pj-section" style={{ marginTop: 40 }}>
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>
             The analyst&rsquo;s brief
           </Eyebrow>
