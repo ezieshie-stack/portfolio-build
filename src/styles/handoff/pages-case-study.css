@@ -472,23 +472,10 @@
    portfolio.css with the reference values. Duplicates removed here. */
 
 /* ─ A5 · Stakeholder ─ */
-.sk-pigrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 12px;
-}
-.sk-quad {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  min-height: 140px;
-}
-.sk-quad.hot { border-color: var(--accent); background: var(--violet-fill); }
+/* .sk-pigrid / .sk-quad are fully styled in portfolio.css as a
+   single-panel 2×2 crosshair grid. The duplicate rules that lived
+   here (which turned each quad into its own rounded card) have been
+   removed so the reference layout wins. */
 .sk-quad-lbl {
   font-family: var(--font-mono);
   font-size: 11px;
