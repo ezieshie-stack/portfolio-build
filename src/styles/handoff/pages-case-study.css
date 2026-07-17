@@ -623,20 +623,10 @@
   letter-spacing: 0.12em;
 }
 .rd-row-t { color: var(--text-body); font-size: 13.5px; line-height: 1.55; }
-.rd-status {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--text-dim);
-  text-align: right;
-}
-.rd-status.confirmed, .rd-status.met, .rd-status.closed { color: #10b981; }
-.rd-status.mitigated, .rd-status.partially { color: #f59e0b; }
-.rd-status.open, .rd-status.blocked, .rd-status.pending { color: #ef4444; }
+/* .rd-status is fully styled in portfolio.css — pill shape, padding,
+   status→color mapping. Duplicates removed here so the pill wins. */
 @media (max-width: 760px) {
   .rd-row { grid-template-columns: 1fr; gap: 4px; }
-  .rd-status { text-align: left; }
 }
 
 /* ─ A6 · RTM ─ */

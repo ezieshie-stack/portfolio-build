@@ -546,8 +546,12 @@ body { font-family: var(--font-sans); }
 .dr-xlink svg { width: 12px; height: 12px; align-self: center; }
 /* tables */
 .dr-twrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); margin: 4px 0 22px; }
-.dr-table { border-collapse: collapse; width: 100%; font-size: 13px; }
-.dr-table th, .dr-table td { padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+.dr-table { border-collapse: collapse; width: 100%; font-size: 13px; table-layout: auto; }
+/* For 2-column tables where the first column is a short label (ROLE,
+   CONTEXT, GOALS…), give it a tight ceiling so the second column keeps
+   most of the room instead of a naive 50/50 split. */
+.dr-table th:first-child, .dr-table td:first-child { width: 22%; max-width: 240px; }
+.dr-table th, .dr-table td { padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); vertical-align: top; line-height: 1.45; word-break: break-word; }
 .dr-table th:last-child, .dr-table td:last-child { border-right: none; }
 .dr-table tbody tr:last-child td { border-bottom: none; }
 .dr-table thead th { background: var(--surface); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; white-space: nowrap; }
@@ -786,7 +790,7 @@ body { font-family: var(--font-sans); }
   .fx-wide .fx-spcard { min-width: 200px; }
 }
 /* ── stakeholder map & RACI (sk-*) ── */
-.sk-pigrid { display: grid; grid-template-columns: 60px 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
+.sk-pigrid { display: grid; grid-template-columns: 60px 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); max-width: 900px; margin: 0 auto; }
 .sk-axis-x { grid-column: 2 / 4; display: grid; grid-template-columns: 1fr 1fr; }
 .sk-axis-x span, .sk-axis-y span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); padding: 9px 12px; }
 .sk-axis-y { grid-row: 2 / 4; display: grid; grid-template-rows: 1fr 1fr; }
@@ -863,10 +867,23 @@ body { font-family: var(--font-sans); }
 .rd-score.mid .rd-score-v { color: var(--spark); }
 .rd-score.high { background: color-mix(in srgb, var(--error, #f2547d) 14%, transparent); }
 .rd-score.high .rd-score-v { color: var(--error, #f2547d); }
-.rd-status { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-dim); white-space: nowrap; text-align: center; }
-.rd-status.open { color: var(--spark); border-color: color-mix(in srgb, var(--spark) 40%, transparent); }
-.rd-status.closed, .rd-status.mitigated, .rd-status.met, .rd-status.confirmed { color: var(--success, #2dbe8c); border-color: color-mix(in srgb, var(--success, #2dbe8c) 40%, transparent); }
-.rd-status.blocked, .rd-status.pending, .rd-status.partially { color: var(--error, #f2547d); border-color: color-mix(in srgb, var(--error, #f2547d) 40%, transparent); }
+.rd-status { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border-strong); background: transparent; color: var(--text-dim); white-space: nowrap; text-align: center; line-height: 1; }
+/* status → semantic color, matching the RAID band conventions:
+   green = done / confirmed / mitigated
+   amber = watch / pending / partial
+   red   = open / blocked */
+.rd-status.closed, .rd-status.met, .rd-status.confirmed, .rd-status.mitigated {
+  color: #10b981; border-color: color-mix(in srgb, #10b981 45%, transparent);
+  background: color-mix(in srgb, #10b981 10%, transparent);
+}
+.rd-status.partially, .rd-status.pending, .rd-status.watch {
+  color: #f59e0b; border-color: color-mix(in srgb, #f59e0b 45%, transparent);
+  background: color-mix(in srgb, #f59e0b 10%, transparent);
+}
+.rd-status.open, .rd-status.blocked {
+  color: #ef4444; border-color: color-mix(in srgb, #ef4444 45%, transparent);
+  background: color-mix(in srgb, #ef4444 10%, transparent);
+}
 .rd-rows { display: flex; flex-direction: column; gap: 8px; }
 .rd-row { display: grid; grid-template-columns: 58px 1fr auto; gap: 16px; align-items: center; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
 .rd-row-id { font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--accent-text); }

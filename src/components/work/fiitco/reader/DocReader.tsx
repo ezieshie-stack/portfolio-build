@@ -39,7 +39,7 @@ const slug = (s: string) =>
 function parseInline(text: string, keyBase: string): ReactNode[] {
   if (typeof text !== "string") return [text];
   const out: ReactNode[] = [];
-  const re = /\[\[([^\]|]+)\|([^\]]+)\]\]|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`/g;
+  const re = /\[\[([^\]|]+)\|([^\]]+)\]\]|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`|<br\s*\/?>/gi;
   let last = 0;
   let m: RegExpExecArray | null;
   let k = 0;
@@ -76,6 +76,8 @@ function parseInline(text: string, keyBase: string): ReactNode[] {
       out.push(<em key={`${keyBase}-${k}`}>{m[6]}</em>);
     } else if (m[7] !== undefined) {
       out.push(<code key={`${keyBase}-${k}`}>{m[7]}</code>);
+    } else if (m[0].toLowerCase().startsWith("<br")) {
+      out.push(<br key={`${keyBase}-${k}`} />);
     }
     k++;
     last = re.lastIndex;
