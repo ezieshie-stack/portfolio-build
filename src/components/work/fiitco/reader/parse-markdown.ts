@@ -335,7 +335,7 @@ function enumerateDiagramSlots(registryKey: string): DocBlock[] {
   // pure and free of runtime data imports.
   const COUNTS: Record<string, number> = {
     arch: 5,
-    erd: 2,
+    erd: 1,
     dfd: 2,
     fdd: 1,
     usecase: 1,
