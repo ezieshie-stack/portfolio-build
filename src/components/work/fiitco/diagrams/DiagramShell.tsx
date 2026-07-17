@@ -67,8 +67,13 @@ export function DiagramShell({
     inner.offsetWidth;
     const natW = inner.offsetWidth;
     const natH = inner.offsetHeight;
-    const avail = vp.clientWidth - 40;
-    const s = avail >= natW ? 1 : Math.max(0.25, avail / natW);
+    const isMobile =
+      typeof window !== "undefined" && window.innerWidth <= 720;
+    const avail = vp.clientWidth - (isMobile ? 12 : 40);
+    // Let mobile shrink further (0.15) so very wide flow diagrams still
+    // fit end-to-end; desktop keeps a 0.25 floor for legibility.
+    const minScale = isMobile ? 0.15 : 0.25;
+    const s = avail >= natW ? 1 : Math.max(minScale, avail / natW);
     // Snap the pan back to origin so the fitted diagram is actually
     // visible (otherwise a manual zoom-in + pan leaves the viewport
     // scrolled onto empty space after the fit shrinks the content).
@@ -117,14 +122,18 @@ export function DiagramShell({
     ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
     : { width: "auto", height: "auto", overflow: "visible" };
 
-  // Viewport height: hug the scaled diagram (16px slack), min 200, max 520,
-  // so tall diagrams don't blow up the page and short ones don't leave a
-  // huge empty band on mobile. Falls back to the caller's prop (or the
-  // CSS default) until the first measurement.
+  // Viewport height: hug the scaled diagram (16px slack) so tall
+  // diagrams don't blow up the page and short ones don't leave a huge
+  // empty band on mobile. Falls back to the caller's prop (or the CSS
+  // default) until the first measurement.
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth <= 720;
+  const minVpH = isMobile ? 160 : 200;
+  const maxVpH = isMobile ? 320 : 520;
   const vpStyle: React.CSSProperties | undefined = fs
     ? undefined
     : measured
-      ? { height: Math.max(200, Math.min(natSize.h * scale + 16, 520)) }
+      ? { height: Math.max(minVpH, Math.min(natSize.h * scale + 16, maxVpH)) }
       : viewportHeight !== undefined
         ? { height: viewportHeight }
         : undefined;

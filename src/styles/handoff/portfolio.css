@@ -1523,3 +1523,20 @@ body { font-family: var(--font-sans); }
 .mm-figure { max-width: 100%; }
 .fig-frame-card, .fig-canvas { max-width: 100%; }
 .dr-twrap, .dr-ascii { max-width: 100%; }
+
+/* DiagramShell — shrink the artboard on phones so it hugs the diagram
+   instead of leaving a large empty white slab below the last node. */
+@media (max-width: 720px) {
+  .mm-viewport { height: 260px; }
+  .mm-inner { padding: 10px; }
+  .mm-figure { margin: 8px 0 18px; }
+  .mm-bar { padding: 7px 10px; }
+  .mm-bar-t { font-size: 9.5px; letter-spacing: 0.08em; }
+  .mm-btn { width: 26px; height: 24px; }
+  .fc-legend { padding: 8px 10px; gap: 10px; }
+  .fc-leg { font-size: 10.5px; }
+}
+@media (max-width: 480px) {
+  .mm-viewport { height: 220px; }
+  .mm-inner { padding: 6px; }
+}
