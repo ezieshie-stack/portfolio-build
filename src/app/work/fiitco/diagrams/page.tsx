@@ -2,11 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { FiitSubNav } from "@/components/work/fiitco/FiitSubNav";
-import { DocsReaderClient } from "@/components/work/fiitco/reader/DocsReaderClient";
-import {
-  DIAGRAM_MANIFEST,
-  DIAGRAM_PHASE_ORDER,
-} from "@/components/work/fiitco/reader/diagrams-manifest";
+import { DiagramsPageClient } from "@/components/work/fiitco/diagrams/DiagramsPageClient";
 
 export const metadata = {
   title: "FIIT Co. · Diagrams (A8) | David Ezieshi",
@@ -36,12 +32,7 @@ export default function FiitDiagramsPage() {
         </section>
 
         <section className="pj-section" style={{ marginTop: 32 }}>
-          <DocsReaderClient
-            manifest={DIAGRAM_MANIFEST}
-            phaseOrder={DIAGRAM_PHASE_ORDER}
-            loadingLabel="Loading diagrams…"
-            errorLabel="Could not load this diagram set"
-          />
+          <DiagramsPageClient />
         </section>
 
         <Link href="/work/fiitco" className="pj-next">
