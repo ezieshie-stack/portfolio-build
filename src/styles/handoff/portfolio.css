@@ -1524,23 +1524,24 @@ body { font-family: var(--font-sans); }
 .fig-frame-card, .fig-canvas { max-width: 100%; }
 .dr-twrap, .dr-ascii { max-width: 100%; }
 
-/* DiagramShell — on phones drop the internal viewport scroll entirely
-   and let the artboard hug the scaled sizer. Prior behavior kept a
-   fixed viewport height, leaving a large empty white slab below the
-   last node when the diagram was short. `height: auto` + `overflow:
-   visible` lets the mm-figure size to its content; the sizer is
-   already exactly `natSize * scale` from JS, so the artboard becomes
-   diagram-shaped. Page scroll handles anything taller than the phone. */
+/* DiagramShell — on phones keep the diagram at a readable scale and
+   let the artboard scroll internally. Fitting everything to phone
+   width shrinks the nodes past legibility; instead we render at a
+   floor scale (see DiagramShell.fit) and let the user pan the
+   overflow. The Expand button opens fullscreen for a wider view. */
 @media (max-width: 900px) {
-  .mm-viewport { height: auto !important; min-height: 0 !important; overflow: visible !important; }
-  .mm-inner { padding: 10px; }
+  .mm-viewport { height: 380px; overflow: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; }
+  .mm-inner { padding: 12px; }
   .mm-figure { margin: 8px 0 18px; }
   .mm-bar { padding: 7px 10px; }
   .mm-bar-t { font-size: 9.5px; letter-spacing: 0.08em; }
   .mm-btn { width: 26px; height: 24px; }
   .fc-legend { padding: 8px 10px; gap: 10px; }
   .fc-leg { font-size: 10.5px; }
+  .mm-scroll-hint { display: flex; }
 }
 @media (max-width: 480px) {
-  .mm-inner { padding: 6px; }
+  .mm-viewport { height: 340px; }
+  .mm-inner { padding: 8px; }
 }
+.mm-scroll-hint { display: none; align-items: center; gap: 6px; padding: 6px 12px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); background: var(--surface-2); border-bottom: 1px solid var(--border); }

@@ -70,9 +70,11 @@ export function DiagramShell({
     const isMobile =
       typeof window !== "undefined" && window.innerWidth <= 720;
     const avail = vp.clientWidth - (isMobile ? 12 : 40);
-    // Let mobile shrink further (0.15) so very wide flow diagrams still
-    // fit end-to-end; desktop keeps a 0.25 floor for legibility.
-    const minScale = isMobile ? 0.15 : 0.25;
+    // On mobile we deliberately keep the diagram at a readable scale
+    // (0.55 floor) and let the viewport scroll horizontally instead of
+    // shrinking text into illegibility. The Expand button opens
+    // fullscreen for a wider view.
+    const minScale = isMobile ? 0.55 : 0.25;
     const s = avail >= natW ? 1 : Math.max(minScale, avail / natW);
     // Snap the pan back to origin so the fitted diagram is actually
     // visible (otherwise a manual zoom-in + pan leaves the viewport
@@ -122,21 +124,20 @@ export function DiagramShell({
     ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
     : { width: "auto", height: "auto", overflow: "visible" };
 
-  // Viewport height: hug the scaled diagram (16px slack) so tall
-  // diagrams don't blow up the page and short ones don't leave a huge
-  // empty band on mobile. Falls back to the caller's prop (or the CSS
-  // default) until the first measurement.
+  // Viewport height: on desktop we hug the scaled diagram; on mobile
+  // we let CSS pin the artboard height so the user has a stable pan
+  // surface rather than a viewport that jumps between diagrams.
   const isMobile =
     typeof window !== "undefined" && window.innerWidth <= 720;
-  const minVpH = isMobile ? 160 : 200;
-  const maxVpH = isMobile ? 320 : 520;
   const vpStyle: React.CSSProperties | undefined = fs
     ? undefined
-    : measured
-      ? { height: Math.max(minVpH, Math.min(natSize.h * scale + 16, maxVpH)) }
-      : viewportHeight !== undefined
-        ? { height: viewportHeight }
-        : undefined;
+    : isMobile
+      ? undefined
+      : measured
+        ? { height: Math.max(200, Math.min(natSize.h * scale + 16, 520)) }
+        : viewportHeight !== undefined
+          ? { height: viewportHeight }
+          : undefined;
 
   const innerStyle: React.CSSProperties = {
     transform: `scale(${scale})`,
