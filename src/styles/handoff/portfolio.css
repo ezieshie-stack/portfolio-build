@@ -790,16 +790,23 @@ body { font-family: var(--font-sans); }
   .fx-wide .fx-spcard { min-width: 200px; }
 }
 /* ── stakeholder map & RACI (sk-*) ── */
-/* Power / interest grid — compact 2×2 quadrant panel. Axis labels sit
-   on a fixed 36px lane so they don't take a full column, and the
-   quads are sized to the content instead of stretching to fill any
-   wide fx-wide shell. */
-.sk-pigrid { display: grid; grid-template-columns: 36px minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 24px auto auto; gap: 8px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); max-width: 720px; margin: 0 auto; }
-.sk-axis-x { grid-column: 2 / 4; display: grid; grid-template-columns: 1fr 1fr; }
-.sk-axis-x span, .sk-axis-y span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); padding: 4px 8px; }
+/* Power / interest grid — full-width panel:
+     • axis labels live outside the quads (X row on top, Y column on
+       left) so they don't compete with the content
+     • quadrants share edges as a single 2×2 grid, split by one
+       horizontal + one vertical divider
+     • the top-right 'Manage closely' quad carries a violet tint */
+.sk-pigrid { display: grid; grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 22px minmax(180px, 1fr) minmax(180px, 1fr); gap: 0; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); }
+.sk-axis-x { grid-column: 2 / 4; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+.sk-axis-x span, .sk-axis-y span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 6px 14px; }
 .sk-axis-y { grid-row: 2 / 4; display: grid; grid-template-rows: 1fr 1fr; }
 .sk-axis-y span { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; justify-self: center; align-self: center; padding: 8px 0; }
-.sk-quad { padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 6px; min-height: 92px; background: var(--surface-2); }
+.sk-quad { padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+/* internal dividers: quads in the top row carry a bottom border,
+   quads in the left column carry a right border, so the panel reads
+   as one 2×2 grid split by a single crosshair. */
+.sk-quad.sk-top { border-bottom: 1px solid var(--border); }
+.sk-quad.sk-left { border-right: 1px solid var(--border); }
 .sk-quad.hot { background: var(--violet-fill); }
 .sk-quad-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 2px; }
 .sk-chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); font-size: 12px; color: var(--text-body); width: fit-content; }

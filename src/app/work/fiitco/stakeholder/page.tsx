@@ -93,10 +93,10 @@ export default function FiitStakeholderPage() {
                   <span>High power</span>
                   <span>Low power</span>
                 </div>
-                <div className="sk-quad" style={{ gridColumn: 2, gridRow: 2 }}>
+                <div className="sk-quad sk-top sk-left" style={{ gridColumn: 2, gridRow: 2 }}>
                   <span className="sk-quad-lbl">Keep satisfied</span>
                 </div>
-                <div className="sk-quad hot" style={{ gridColumn: 3, gridRow: 2 }}>
+                <div className="sk-quad hot sk-top" style={{ gridColumn: 3, gridRow: 2 }}>
                   <span className="sk-quad-lbl">Manage closely</span>
                   {STAKEHOLDERS.filter(
                     (s) => s[3] === "Manage Closely" || s[3] === "Continuous"
@@ -107,7 +107,7 @@ export default function FiitStakeholderPage() {
                     </span>
                   ))}
                 </div>
-                <div className="sk-quad" style={{ gridColumn: 2, gridRow: 3 }}>
+                <div className="sk-quad sk-left" style={{ gridColumn: 2, gridRow: 3 }}>
                   <span className="sk-quad-lbl">Monitor</span>
                   <span className="sk-chip">
                     <b>S8</b>Vendors
