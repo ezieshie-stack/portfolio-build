@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ClipboardList,
   Flag,
@@ -14,7 +14,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { DocReader, type Doc } from "./DocReader";
-import { DOCS_LIBRARY } from "./docs-data";
+import { DOC_MANIFEST } from "./docs-manifest";
+import { parseMarkdown } from "./parse-markdown";
 
 const ICON_MAP: Record<string, LucideIcon> = {
   flag: Flag,
@@ -28,28 +29,56 @@ const ICON_MAP: Record<string, LucideIcon> = {
   "flag-triangle-right": FlagTriangleRight,
 };
 
-// Reference DOC_LIB order (project-fiitco-docs.jsx). Preserved so the
-// picker groups fill the phase columns in a predictable order.
-const ORDERED_KEYS = [
-  "charter",
-  "exec",
-  "brd",
-  "personas",
-  "pdd",
-  "stories",
-  "uat",
-  "vendor",
-  "closure",
-];
 const PHASE_ORDER = ["Initiate", "Analyze", "Design", "Deliver", "Close"] as const;
 
+type FetchState =
+  | { kind: "loading" }
+  | { kind: "ready"; doc: Doc }
+  | { kind: "error"; message: string };
+
 export function DocsReaderClient() {
-  const [activeId, setActiveId] = useState<string>(ORDERED_KEYS[0]);
-  const active = DOCS_LIBRARY[activeId];
+  const [activeId, setActiveId] = useState<string>(DOC_MANIFEST[0].id);
+  const [state, setState] = useState<FetchState>({ kind: "loading" });
+
+  useEffect(() => {
+    const entry = DOC_MANIFEST.find((d) => d.id === activeId);
+    if (!entry) return;
+    let alive = true;
+    setState({ kind: "loading" });
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    fetch(entry.file)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.text();
+      })
+      .then((md) => {
+        if (!alive) return;
+        const parsed = parseMarkdown(md, { title: entry.title });
+        setState({
+          kind: "ready",
+          doc: {
+            id: entry.id,
+            code: entry.code,
+            title: parsed.title,
+            meta: parsed.meta,
+            blocks: parsed.blocks,
+            live: entry.live ?? undefined,
+          },
+        });
+      })
+      .catch((e: unknown) => {
+        if (!alive) return;
+        const message = e instanceof Error ? e.message : String(e);
+        setState({ kind: "error", message });
+      });
+    return () => {
+      alive = false;
+    };
+  }, [activeId]);
 
   const groups = PHASE_ORDER.map((phase) => ({
     name: phase,
-    items: ORDERED_KEYS.map((k) => DOCS_LIBRARY[k]).filter((d) => d.group === phase),
+    items: DOC_MANIFEST.filter((d) => d.group === phase),
   })).filter((g) => g.items.length > 0);
 
   return (
@@ -82,7 +111,13 @@ export function DocsReaderClient() {
         ))}
       </div>
 
-      <DocReader doc={active.doc as Doc} key={activeId} />
+      {state.kind === "loading" ? (
+        <div className="dr-loading">Loading document…</div>
+      ) : state.kind === "error" ? (
+        <div className="dr-loading">Could not load this document ({state.message}).</div>
+      ) : (
+        <DocReader doc={state.doc} key={state.doc.id} />
+      )}
     </>
   );
 }
