@@ -1,6 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { Expand, Maximize2, Minus, Plus, X } from "lucide-react";
 import { TONE_PALETTE, type Tone } from "./types";
 
@@ -15,8 +22,16 @@ import { TONE_PALETTE, type Tone } from "./types";
  *     > .mm-inner (transform: scale(scale), origin top-left — the
  *                  un-transformed diagram)
  *
- * Refits on: mount, `resetKey` change (process + mode), and window resize.
+ * Refits synchronously (useLayoutEffect) on mount + `resetKey` change
+ * so process/mode switches never flash a wrong-scale frame; also on
+ * window resize.
  */
+
+// useLayoutEffect on the server logs a warning; alias to useEffect during
+// SSR so it stays silent. Client-side we get the real one.
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function DiagramShell({
   title,
   legend,
@@ -32,33 +47,45 @@ export function DiagramShell({
 }) {
   const vpRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const sizerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [natSize, setNatSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
+  const [ready, setReady] = useState(false);
   const [fs, setFs] = useState(false);
   const drag = useRef({ on: false, x: 0, y: 0, l: 0, t: 0 });
 
   const fit = useCallback(() => {
     const vp = vpRef.current;
     const inner = innerRef.current;
+    const sizer = sizerRef.current;
     if (!vp || !inner) return;
-    // Reset scale to 1 first so we can measure the natural (un-transformed) size.
+    // Temporarily strip the scale + sizer clamps so the SVG lays out at
+    // its natural, un-transformed dimensions. Do it imperatively so the
+    // measurement happens in one paintless pass.
     inner.style.transform = "scale(1)";
+    if (sizer) {
+      sizer.style.width = "auto";
+      sizer.style.height = "auto";
+      sizer.style.overflow = "visible";
+    }
     const natW = inner.offsetWidth;
     const natH = inner.offsetHeight;
-    setNatSize({ w: natW, h: natH });
     const avail = vp.clientWidth - 40;
     const s = avail >= natW ? 1 : Math.max(0.25, avail / natW);
+    setNatSize({ w: natW, h: natH });
     setScale(s);
+    setReady(true);
   }, []);
 
-  // Refit on mount + resetKey change (process/mode swap). Reset natSize
-  // to 0 first so the sizer collapses to auto while the new content
-  // renders — otherwise a taller diagram gets clipped by the previous
-  // process's fixed sizer for the 60ms until fit measures again.
-  useEffect(() => {
-    setNatSize({ w: 0, h: 0 });
-    const t = setTimeout(fit, 60);
-    return () => clearTimeout(t);
+  // Refit synchronously on mount + resetKey change (process/mode swap).
+  // Marking ready=false first hides the inner during the (in-frame) gap
+  // so a mis-scaled paint can never leak through.
+  useIsoLayoutEffect(() => {
+    setReady(false);
+    // rAF gives React one commit to swap the children DOM in before we
+    // measure, so we're always sizing the NEW content, not the old.
+    const id = requestAnimationFrame(fit);
+    return () => cancelAnimationFrame(id);
   }, [fit, resetKey]);
 
   // Refit on window resize.
@@ -89,20 +116,26 @@ export function DiagramShell({
   };
 
   const sizerStyle: React.CSSProperties =
-    natSize.w > 0
+    ready && natSize.w > 0
       ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
-      : { overflow: "hidden" };
+      : { width: "auto", height: "auto", overflow: "visible" };
 
   // Viewport height: match scaled content once measured so short diagrams
   // don't leave a huge empty band below (which is what happens on mobile
   // when scale clamps to 0.25 but the caller passed an un-scaled height).
   const vpStyle: React.CSSProperties | undefined = fs
     ? undefined
-    : natSize.h > 0
+    : ready && natSize.h > 0
       ? { height: Math.max(200, Math.min(natSize.h * scale + 16, 520)) }
       : viewportHeight !== undefined
         ? { height: viewportHeight }
         : undefined;
+
+  const innerStyle: React.CSSProperties = {
+    transform: `scale(${scale})`,
+    transformOrigin: "top left",
+    visibility: ready ? "visible" : "hidden",
+  };
 
   const fig = (
     <div className={`mm-figure${fs ? " mm-fs" : ""}`}>
@@ -138,12 +171,8 @@ export function DiagramShell({
         onMouseLeave={up}
         style={vpStyle}
       >
-        <div className="mm-sizer" style={sizerStyle}>
-          <div
-            className="mm-inner"
-            ref={innerRef}
-            style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
-          >
+        <div className="mm-sizer" ref={sizerRef} style={sizerStyle}>
+          <div className="mm-inner" ref={innerRef} style={innerStyle}>
             {children}
           </div>
         </div>
