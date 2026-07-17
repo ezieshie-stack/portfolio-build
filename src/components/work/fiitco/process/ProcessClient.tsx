@@ -62,6 +62,7 @@ export function ProcessClient() {
         <DiagramShell
           title={sp.name + " · " + (mode === "asis" ? "As-Is" : "To-Be")}
           viewportHeight={vpHeight}
+          resetKey={`${sp.key}-${mode}`}
         >
           <div className="fx-bpmn">
             <BpmnPool lanes={model.lanes} nodes={model.nodes} flows={model.flows} />

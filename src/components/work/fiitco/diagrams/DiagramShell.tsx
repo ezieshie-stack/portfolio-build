@@ -1,41 +1,68 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Expand, Maximize2, Minus, Plus, X } from "lucide-react";
 import { TONE_PALETTE, type Tone } from "./types";
 
 /**
  * DiagramShell — pan / zoom / fullscreen wrapper for any diagram.
- * Ported from deploy/portfolio/fiit-diagram-engine.jsx (DiagramShell fn).
+ *
+ * Ports the reference `fiit-diagram-engine.jsx` DiagramShell:
+ * - .mm-viewport (scroll area, drag-to-pan)
+ *   > .mm-sizer   (width/height = natW*scale × natH*scale — the scroll
+ *                  content is sized to the SCALED diagram so the whole
+ *                  thing is reachable at any width)
+ *     > .mm-inner (transform: scale(scale), origin top-left — the
+ *                  un-transformed diagram)
+ *
+ * Refits on: mount, `resetKey` change (process + mode), and window resize.
  */
 export function DiagramShell({
   title,
   legend,
   viewportHeight,
+  resetKey,
   children,
 }: {
   title?: string;
   legend?: [Tone, string][];
   viewportHeight?: number | string;
+  resetKey?: string | number;
   children: ReactNode;
 }) {
   const vpRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [natSize, setNatSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [fs, setFs] = useState(false);
   const drag = useRef({ on: false, x: 0, y: 0, l: 0, t: 0 });
 
-  const fit = () => {
-    if (!vpRef.current || !innerRef.current) return;
-    const n = innerRef.current.offsetWidth;
-    const a = vpRef.current.clientWidth - 40;
-    setScale(n > a ? Math.max(0.3, a / n) : 1);
-  };
+  const fit = useCallback(() => {
+    const vp = vpRef.current;
+    const inner = innerRef.current;
+    if (!vp || !inner) return;
+    // Reset scale to 1 first so we can measure the natural (un-transformed) size.
+    inner.style.transform = "scale(1)";
+    const natW = inner.offsetWidth;
+    const natH = inner.offsetHeight;
+    setNatSize({ w: natW, h: natH });
+    const avail = vp.clientWidth - 40;
+    const s = avail >= natW ? 1 : Math.max(0.25, avail / natW);
+    setScale(s);
+  }, []);
 
-  useEffect(() => {
+  // Refit on mount + resetKey change (process/mode swap).
+  useLayoutEffect(() => {
     const t = setTimeout(fit, 60);
     return () => clearTimeout(t);
-  }, []);
+  }, [fit, resetKey]);
+
+  // Refit on window resize.
+  useEffect(() => {
+    const onResize = () => fit();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [fit]);
 
   const zoom = (f: number) =>
     setScale((s) => Math.min(3, Math.max(0.25, +(s * f).toFixed(2))));
@@ -57,12 +84,15 @@ export function DiagramShell({
     vpRef.current?.classList.remove("grabbing");
   };
 
+  const sizerStyle: React.CSSProperties =
+    natSize.w > 0
+      ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
+      : { overflow: "hidden" };
+
   const fig = (
     <div className={`mm-figure${fs ? " mm-fs" : ""}`}>
       <div className="mm-bar">
-        <span className="mm-bar-t">
-          {title || "Interactive diagram"} · hover to trace · drag to pan
-        </span>
+        <span className="mm-bar-t">{title || "Interactive diagram"}</span>
         <div className="mm-btns">
           <button className="mm-btn" type="button" title="Zoom out" onClick={() => zoom(0.8)} aria-label="Zoom out">
             <Minus size={15} aria-hidden />
@@ -97,8 +127,14 @@ export function DiagramShell({
             : undefined
         }
       >
-        <div className="mm-inner" ref={innerRef} style={{ transform: `scale(${scale})` }}>
-          {children}
+        <div className="mm-sizer" style={sizerStyle}>
+          <div
+            className="mm-inner"
+            ref={innerRef}
+            style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
+          >
+            {children}
+          </div>
         </div>
       </div>
       {legend && legend.length ? (
