@@ -751,6 +751,24 @@ body { font-family: var(--font-sans); }
 
 /* artifact index (hub) */
 .fx-index { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.fx-index-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* Wide mode — used on the FIIT hub and other artifact hubs. Widens the
+   shell to --container-wide (1760px), tightens top padding + section
+   gap + hero margin, drops the artifact grid to 3 columns with a
+   larger gap, and shrinks card padding. Reference values from Claude
+   Design's portfolio.css. */
+.fx-wide .pf-shell { max-width: var(--container-wide); }
+.fx-wide.pf-page, .pf-page.fx-wide { padding-top: 40px; }
+.fx-wide .pj-section { margin-top: 40px; }
+.fx-wide .pj-hero-head { margin-bottom: 18px; }
+.fx-wide .fx-index { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.fx-wide .fx-index-2 { grid-template-columns: repeat(2, 1fr); }
+.fx-wide .fx-idxcard { padding: 20px; }
+.fx-wide .sla-frec-f, .fx-wide .sla-frec-r { padding: 16px; }
+.fx-wide .pj-next { flex-direction: column; align-items: flex-start; padding: 20px 22px; }
+.fx-wide .pj-hood summary { padding: 16px 18px; font-size: 14px; }
+.fx-wide .pj-hood-body { padding: 0 18px 20px; }
 /* ── stakeholder map & RACI (sk-*) ── */
 .sk-pigrid { display: grid; grid-template-columns: 60px 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); }
 .sk-axis-x { grid-column: 2 / 4; display: grid; grid-template-columns: 1fr 1fr; }

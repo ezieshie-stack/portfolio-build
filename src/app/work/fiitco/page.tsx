@@ -169,7 +169,7 @@ const TOOL_CHIPS = [
 
 export default function FiitcoHubPage() {
   return (
-    <div className="pf-page">
+    <div className="pf-page fx-wide">
       <div className="pf-shell">
         <Link href="/work" className="pj-back">
           <ArrowLeft size={14} aria-hidden /> Back to All Projects
@@ -280,10 +280,7 @@ export default function FiitcoHubPage() {
           <p className="pj-section-sub">
             Two applications, shipped to production and still running.
           </p>
-          <div
-            className="fx-index"
-            style={{ gridTemplateColumns: "repeat(2, 1fr)" }}
-          >
+          <div className="fx-index fx-index-2">
             {LIVE_PRODUCT.map((p) => {
               const Ico = p.icon;
               return (
