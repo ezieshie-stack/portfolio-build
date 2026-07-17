@@ -63,7 +63,7 @@ export function ProcessClient() {
           title={sp.name + " · " + (mode === "asis" ? "As-Is" : "To-Be")}
           viewportHeight={vpHeight}
         >
-          <div style={{ padding: "14px 10px" }}>
+          <div className="fx-bpmn">
             <BpmnPool lanes={model.lanes} nodes={model.nodes} flows={model.flows} />
           </div>
         </DiagramShell>
