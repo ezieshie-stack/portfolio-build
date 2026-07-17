@@ -11,8 +11,6 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { DiagramRenderer } from "./DiagramRenderer";
-import { DIAGRAM_REGISTRY } from "./data";
 import { DocReader, type Doc } from "@/components/work/fiitco/reader/DocReader";
 import { parseMarkdown } from "@/components/work/fiitco/reader/parse-markdown";
 import {
@@ -31,16 +29,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 type FetchState =
   | { kind: "loading" }
-  | { kind: "ready"; doc: Doc | null }
+  | { kind: "ready"; doc: Doc }
   | { kind: "error"; message: string };
 
 export function DiagramsPageClient() {
   const [activeId, setActiveId] = useState<string>(DIAGRAM_MANIFEST[0].id);
   const [state, setState] = useState<FetchState>({ kind: "loading" });
-  const entry = DIAGRAM_MANIFEST.find((d) => d.id === activeId);
-  const diagrams = DIAGRAM_REGISTRY[activeId] ?? [];
 
   useEffect(() => {
+    const entry = DIAGRAM_MANIFEST.find((d) => d.id === activeId);
     if (!entry) return;
     let alive = true;
     setState({ kind: "loading" });
@@ -52,9 +49,13 @@ export function DiagramsPageClient() {
       })
       .then((md) => {
         if (!alive) return;
+        // diagramKey routes DIAGRAM_REGISTRY[activeId] entries into the
+        // parsed markdown at their `## Diagram N —` slots (or, if the
+        // source has none, prepended at the top).
         const parsed = parseMarkdown(md, {
           title: entry.title,
           metaLine: entry.metaLine,
+          diagramKey: activeId,
         });
         setState({
           kind: "ready",
@@ -76,7 +77,7 @@ export function DiagramsPageClient() {
     return () => {
       alive = false;
     };
-  }, [activeId, entry]);
+  }, [activeId]);
 
   const groups = DIAGRAM_PHASE_ORDER.map((phase) => ({
     name: phase,
@@ -113,25 +114,13 @@ export function DiagramsPageClient() {
         ))}
       </div>
 
-      {/* The actual interactive SVG diagrams for the selected key.
-          One DiagramRenderer per entry in DIAGRAM_REGISTRY[activeId]. */}
-      {diagrams.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 28, marginBottom: 32 }}>
-          {diagrams.map((d, i) => (
-            <DiagramRenderer entry={d} key={`${activeId}-${i}`} />
-          ))}
-        </div>
-      )}
-
-      {/* Below the diagrams: the narrative (talking points, decisions,
-          failure modes, glossary) from the source markdown. */}
       {state.kind === "loading" ? (
         <div className="dr-loading">Loading diagrams…</div>
       ) : state.kind === "error" ? (
         <div className="dr-loading">Could not load this diagram set ({state.message}).</div>
-      ) : state.doc ? (
+      ) : (
         <DocReader doc={state.doc} key={state.doc.id} />
-      ) : null}
+      )}
     </>
   );
 }

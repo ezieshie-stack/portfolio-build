@@ -2,6 +2,19 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, MousePointerClick, Sparkles } from "lucide-react";
+import { DiagramRenderer } from "@/components/work/fiitco/diagrams/DiagramRenderer";
+import { DIAGRAM_REGISTRY } from "@/components/work/fiitco/diagrams/data";
+
+function DiagramSlot({ registryKey, index }: { registryKey: string; index: number }) {
+  const entries = DIAGRAM_REGISTRY[registryKey];
+  const entry = entries?.[index];
+  if (!entry) return null;
+  return (
+    <div style={{ margin: "18px 0 24px" }}>
+      <DiagramRenderer entry={entry} />
+    </div>
+  );
+}
 
 /**
  * DocReader — long-form document reader with a scroll-spy TOC.
@@ -19,7 +32,10 @@ export type DocBlock =
   | { type: "quote"; text: string }
   | { type: "list"; items: string[] }
   | { type: "hr" }
-  | { type: "table"; head: string[]; rows: string[][]; center?: boolean };
+  | { type: "table"; head: string[]; rows: string[][]; center?: boolean }
+  /** Emitted by the diagrams parser after each `## Diagram N —` heading.
+   *  DocReader renders it as a <DiagramRenderer> at that exact position. */
+  | { type: "diagram"; registryKey: string; index: number };
 
 export type Doc = {
   id: string;
@@ -116,6 +132,8 @@ function BlockNode({ b, idx }: { b: DocBlock; idx: number }) {
       );
     case "hr":
       return <hr className="dr-hr" />;
+    case "diagram":
+      return <DiagramSlot registryKey={b.registryKey} index={b.index} />;
     case "table":
       return (
         <div className="dr-twrap">

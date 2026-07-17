@@ -53,6 +53,10 @@ export type ParseOpts = {
   title?: string;
   pdftext?: boolean;
   metaLine?: [string, string][];
+  /** When set, `## Diagram N — Title` headings in the source markdown
+   *  emit a `{ type: "diagram", registryKey, index: N-1 }` block after
+   *  the heading, so the reader inlines the SVG diagram in place. */
+  diagramKey?: string;
 };
 
 // -----------------------------------------------------------------
@@ -226,7 +230,20 @@ function parseStandard(md: string, opts?: ParseOpts): ParsedDoc {
     const h2m = line.match(/^##\s+(.*)$/);
     if (h2m) {
       flushPara(para);
-      blocks.push({ type: "h2", text: h2m[1].trim() });
+      const text = h2m[1].trim();
+      blocks.push({ type: "h2", text });
+      // Diagram slot injection — `## Diagram N — Title` inlines the
+      // corresponding entry from DIAGRAM_REGISTRY[opts.diagramKey].
+      if (opts?.diagramKey) {
+        const dm = text.match(/^Diagram\s+(\d+)\b/i);
+        if (dm) {
+          blocks.push({
+            type: "diagram",
+            registryKey: opts.diagramKey,
+            index: parseInt(dm[1], 10) - 1,
+          });
+        }
+      }
       i++;
       continue;
     }
@@ -291,9 +308,43 @@ function parseStandard(md: string, opts?: ParseOpts): ParsedDoc {
   }
   flushPara(para);
 
+  // Fallback: if the caller asked for a diagramKey but the source
+  // markdown didn't carry `## Diagram N —` markers, prepend every
+  // diagram in the registry so the reader still shows the SVGs.
+  const finalBlocks =
+    opts?.diagramKey && !blocks.some((b) => b.type === "diagram")
+      ? [
+          ...enumerateDiagramSlots(opts.diagramKey),
+          ...blocks,
+        ]
+      : blocks;
+
   return {
     title: opts?.title || fmTitle || "Untitled",
     meta,
-    blocks,
+    blocks: finalBlocks,
   };
+}
+
+// Injected at the top when the markdown has no explicit slots.
+// Kept as its own helper so the parser doesn't need to import the
+// registry directly — the caller can override this if needed.
+function enumerateDiagramSlots(registryKey: string): DocBlock[] {
+  // Match DIAGRAM_REGISTRY counts (arch:5, erd:2, dfd:2, fdd:1,
+  // usecase:1, fishbone:1) via a static map so parse-markdown stays
+  // pure and free of runtime data imports.
+  const COUNTS: Record<string, number> = {
+    arch: 5,
+    erd: 2,
+    dfd: 2,
+    fdd: 1,
+    usecase: 1,
+    fishbone: 1,
+  };
+  const n = COUNTS[registryKey] ?? 1;
+  return Array.from({ length: n }, (_, i) => ({
+    type: "diagram" as const,
+    registryKey,
+    index: i,
+  }));
 }
