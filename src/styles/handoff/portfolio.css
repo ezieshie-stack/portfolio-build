@@ -790,12 +790,16 @@ body { font-family: var(--font-sans); }
   .fx-wide .fx-spcard { min-width: 200px; }
 }
 /* ── stakeholder map & RACI (sk-*) ── */
-.sk-pigrid { display: grid; grid-template-columns: 60px 1fr 1fr; grid-template-rows: auto 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--surface); max-width: 900px; margin: 0 auto; }
+/* Power / interest grid — compact 2×2 quadrant panel. Axis labels sit
+   on a fixed 36px lane so they don't take a full column, and the
+   quads are sized to the content instead of stretching to fill any
+   wide fx-wide shell. */
+.sk-pigrid { display: grid; grid-template-columns: 36px minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 24px auto auto; gap: 8px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); max-width: 720px; margin: 0 auto; }
 .sk-axis-x { grid-column: 2 / 4; display: grid; grid-template-columns: 1fr 1fr; }
-.sk-axis-x span, .sk-axis-y span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); padding: 9px 12px; }
+.sk-axis-x span, .sk-axis-y span { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); padding: 4px 8px; }
 .sk-axis-y { grid-row: 2 / 4; display: grid; grid-template-rows: 1fr 1fr; }
-.sk-axis-y span { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; justify-self: center; align-self: center; }
-.sk-quad { border-left: 1px solid var(--border); border-top: 1px solid var(--border); padding: 14px; display: flex; flex-direction: column; gap: 7px; min-height: 120px; }
+.sk-axis-y span { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; justify-self: center; align-self: center; padding: 8px 0; }
+.sk-quad { padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 6px; min-height: 92px; background: var(--surface-2); }
 .sk-quad.hot { background: var(--violet-fill); }
 .sk-quad-lbl { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 2px; }
 .sk-chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); font-size: 12px; color: var(--text-body); width: fit-content; }
