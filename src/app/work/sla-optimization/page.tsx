@@ -8,6 +8,7 @@ import {
   FileText,
   GitFork,
   HelpCircle,
+  Info,
   ShieldCheck,
   Table2,
   Target,
@@ -20,11 +21,13 @@ import { Badge } from "@/components/ui/Badge";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
+import { SniperCenter } from "@/components/work/sla/SniperCenter";
+import { BreachFlatness } from "@/components/work/sla/BreachFlatness";
 
 export const metadata = {
   title: "Customer Support SLA Optimization | David Ezieshi",
   description:
-    "A cost-sensitive Random Forest predicting SLA breaches on 8,469 tickets — 0.83 ROC-AUC, 100% breach recall.",
+    "A cost-sensitive Random Forest predicting SLA breaches on 8,469 tickets — 0.83 ROC-AUC, 100% breach recall, wrapped in a capacity-aware Sniper Command Center.",
 };
 
 type Artifact = { href: string; idx: string; icon: LucideIcon; title: string; desc: string; meta: string };
@@ -32,17 +35,9 @@ type Artifact = { href: string; idx: string; icon: LucideIcon; title: string; de
 const ARTIFACTS: Artifact[] = [
   { href: "/work/sla-optimization/diagnostics", idx: "S1", icon: Activity, title: "Diagnostics", desc: "Where the money leaks, and the test that proved it is systemic.", meta: "8,469 tickets" },
   { href: "/work/sla-optimization/data", idx: "S2", icon: Table2, title: "Data Dictionary", desc: "Every column, and the ones engineered for the model.", meta: "17 + 6 fields" },
-  { href: "/work/sla-optimization/model", idx: "S3", icon: Target, title: "Model Card", desc: "The cost-sensitive Random Forest, real numbers, a live threshold.", meta: "0.83 ROC-AUC" },
-  { href: "/work/sla-optimization/method", idx: "S4", icon: GitFork, title: "Methodology", desc: "The 8-phase pipeline as an interactive diagram.", meta: "Phase 0 → 8" },
+  { href: "/work/sla-optimization/model", idx: "S3", icon: Target, title: "Model Card", desc: "The cost-sensitive Random Forest and a live threshold.", meta: "0.83 ROC-AUC" },
+  { href: "/work/sla-optimization/method", idx: "S4", icon: GitFork, title: "Methodology", desc: "The eight-phase pipeline as an interactive diagram.", meta: "Phase 0 → 8" },
   { href: "/work/sla-optimization/doc", idx: "S5", icon: FileText, title: "Write-up", desc: "The full case study in reading mode.", meta: "6 min read" },
-];
-
-const COHORTS = [
-  { k: "Cancellation request", rate: 8.3, n: 1695 },
-  { k: "Refund request", rate: 8.2, n: 1752 },
-  { k: "Technical issue", rate: 8.1, n: 1747 },
-  { k: "Product inquiry", rate: 7.7, n: 1641 },
-  { k: "Billing inquiry", rate: 7.7, n: 1634 },
 ];
 
 const FINDINGS = [
@@ -53,7 +48,6 @@ const FINDINGS = [
 ];
 
 const CHIPS = ["Python", "pandas", "scikit-learn", "SciPy", "Random Forest", "Streamlit"];
-const MAX_RATE = 10;
 
 export default function SlaHubPage() {
   return (
@@ -64,22 +58,44 @@ export default function SlaHubPage() {
         </Link>
 
         <section className="pj-hero-head">
-          <Badge tone="violet" style={{ marginBottom: 18 }}>Predictive Analytics</Badge>
+          <Badge tone="violet" style={{ marginBottom: 18 }}>
+            Predictive Analytics · Interactive
+          </Badge>
           <h1 className="pf-page-title" style={{ fontSize: "clamp(34px,3.6vw,52px)" }}>
             Escalate the right tickets.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 680 }}>
-            A cost-sensitive Random Forest that scores every incoming ticket for SLA-breach risk,
-            then a capacity-aware kill-list that turns reactive firefighting into targeted prevention.
+            This is the Sniper Command Center I built to intercept SLA breaches
+            before they happen, running live in your browser. Set the team&rsquo;s
+            daily review capacity and watch how much breach cost the model
+            catches. No slides, the thing itself.
           </p>
         </section>
 
-        <section className="pj-section" style={{ marginTop: 36 }}>
+        {/* interactive Sniper Command Center — the marquee widget */}
+        <section className="pj-section" style={{ marginTop: 24 }}>
+          <SniperCenter />
+          <p className="cs-caption">
+            <Info size={13} aria-hidden />
+            Interactive reconstruction of the capacity simulation. A seeded
+            day of tickets calibrated to the real data (8.03% breach rate,
+            Critical breach $500, High breach $200, per-ticket predicted risk).
+          </p>
+        </section>
+
+        {/* analyst's brief */}
+        <section className="pj-section">
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>The analyst&rsquo;s brief</Eyebrow>
+          <p className="pj-section-sub">
+            Before a line of code, the framing: why this matters, the question
+            it answers, and the payoff. A model that flags 500 tickets a day
+            is useless to a team that can review 50, so the business
+            constraint shaped the whole solution.
+          </p>
           <div className="sla-brief">
             <div className="sla-brief-card">
               <span className="sla-brief-k"><AlertCircle size={15} aria-hidden /> Why it matters</span>
-              <p>Every breached ticket is a direct, quantifiable loss: $500 on a Critical, $200 on a High. At an 8.03% breach rate across 8,469 tickets, the leak is continuous and invisible — escalation only reacts after the money is already gone.</p>
+              <p>Every breached ticket is a direct, quantifiable loss: $500 on a Critical, $200 on a High. At an 8.03% breach rate across 8,469 tickets, the leak is continuous and invisible, and escalation only reacts after the money is already gone.</p>
             </div>
             <div className="sla-brief-card">
               <span className="sla-brief-k"><HelpCircle size={15} aria-hidden /> The question</span>
@@ -97,41 +113,43 @@ export default function SlaHubPage() {
           </div>
         </section>
 
+        {/* story beats */}
+        <section className="pj-beats">
+          <div className="pj-beat">
+            <span className="pj-beat-n">01</span>
+            <Eyebrow style={{ marginBottom: 10 }}>The problem</Eyebrow>
+            <p>Support was losing money on missed deadlines with no early warning. Escalation was reactive: managers saw a breach only after it happened, and no one could quantify the cost.</p>
+          </div>
+          <div className="pj-beat">
+            <span className="pj-beat-n">02</span>
+            <Eyebrow style={{ marginBottom: 10 }}>The diagnosis</Eyebrow>
+            <p>Breach rates were nearly flat across ticket types and channels. A chi-square test confirmed the failure is structural, tied to SLA design under Critical load, not any one team underperforming.</p>
+          </div>
+          <div className="pj-beat">
+            <span className="pj-beat-n">03</span>
+            <Eyebrow style={{ marginBottom: 10 }}>The outcome</Eyebrow>
+            <p>A cost-sensitive Random Forest at 0.83 ROC-AUC that catches 100% of test-set breaches, wrapped in a capacity-aware tool a manager can actually run each morning.</p>
+          </div>
+        </section>
+
+        {/* diagnostic bars — the flatness IS the finding */}
         <section className="pj-section">
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>Breach rate by ticket type</Eyebrow>
           <p className="pj-section-sub">
-            The bars are almost level, 7.7% to 8.3%. That flatness is the finding: no single
-            ticket type is to blame, so the fix is structural, not disciplinary.
+            The bars are almost level, from 7.7% to 8.3%. That flatness is the
+            finding: no single ticket type is to blame, so the fix is
+            structural, not disciplinary.
           </p>
-          <div className="pj-cohorts">
-            {COHORTS.map((c) => (
-              <div className="pj-cohort" key={c.k}>
-                <span className="pj-cohort-k">{c.k}</span>
-                <div className="pj-cohort-track">
-                  <span className="pj-cohort-bar" style={{ width: `${(c.rate / MAX_RATE) * 100}%` }} />
-                </div>
-                <span className="pj-cohort-rate">{c.rate}%</span>
-                <span className="pj-cohort-n">{c.n.toLocaleString()} tickets</span>
-              </div>
-            ))}
-          </div>
+          <BreachFlatness />
         </section>
 
-        <section className="pj-section">
-          <Eyebrow prefix="" style={{ marginBottom: 8 }}>Findings, and what to do about them</Eyebrow>
-          <div className="sla-frec">
-            {FINDINGS.map((f, i) => (
-              <div className="sla-frec-row" key={i}>
-                <div className="sla-frec-f"><span className="sla-frec-tag find">Finding</span><p>{f.finding}</p></div>
-                <div className="sla-frec-arrow"><ArrowRight size={22} aria-hidden /></div>
-                <div className="sla-frec-r"><span className="sla-frec-tag rec">Recommendation</span><p>{f.rec}</p></div>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        {/* artifact index */}
         <section className="pj-section">
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>Go deeper</Eyebrow>
+          <p className="pj-section-sub">
+            Five artifacts open the analysis up, from the operational
+            diagnostics to the model card and the full write-up.
+          </p>
           <div className="fx-index">
             {ARTIFACTS.map((a) => {
               const Ico = a.icon;
@@ -153,6 +171,32 @@ export default function SlaHubPage() {
           </div>
         </section>
 
+        {/* findings → recommendations */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>Findings, and what to do about them</Eyebrow>
+          <p className="pj-section-sub">
+            A finding is only half the job. Each objective result below is
+            paired with the specific, data-backed action it justifies — the
+            &ldquo;what&rdquo; and the &ldquo;so what&rdquo;.
+          </p>
+          <div className="sla-frec">
+            {FINDINGS.map((f, i) => (
+              <div className="sla-frec-row" key={i}>
+                <div className="sla-frec-f">
+                  <span className="sla-frec-tag find">Finding</span>
+                  <p>{f.finding}</p>
+                </div>
+                <div className="sla-frec-arrow"><ArrowRight size={22} aria-hidden /></div>
+                <div className="sla-frec-r">
+                  <span className="sla-frec-tag rec">Recommendation</span>
+                  <p>{f.rec}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* outcomes */}
         <section className="pj-section">
           <div className="pj-metrics">
             <MetricStat value="8,469" label="Tickets analyzed" icon={<Ticket size={22} aria-hidden />} />
@@ -162,18 +206,33 @@ export default function SlaHubPage() {
           </div>
         </section>
 
+        {/* under the hood */}
         <details className="pj-hood">
-          <summary><Wrench size={16} aria-hidden /> Under the hood <span className="pj-hood-hint">method &amp; stack</span></summary>
+          <summary>
+            <Wrench size={16} aria-hidden /> Under the hood{" "}
+            <span className="pj-hood-hint">method &amp; stack</span>
+          </summary>
           <div className="pj-hood-body">
-            <p>SLA breach logic derived per priority (Critical 4h, High 8h, Normal 24h, Low 72h); patterns validated with SciPy chi-square; a Random Forest with balanced class weights trained in scikit-learn and evaluated on a held-out split (ROC-AUC 0.83). The escalation simulation reruns the logic client-side, matching the Streamlit command center in the repo.</p>
-            <div className="pj-chips">{CHIPS.map((t) => <Chip key={t}>{t}</Chip>)}</div>
+            <p>
+              SLA breach logic derived per priority (Critical 4h, High 8h,
+              Normal 24h, Low 72h); patterns validated with SciPy chi-square;
+              a Random Forest with balanced class weights trained in
+              scikit-learn and evaluated on a held-out split (ROC-AUC 0.83).
+              The Sniper simulation reruns the escalation logic client-side,
+              matching the Streamlit command center in the repo.
+            </p>
+            <div className="pj-chips">
+              {CHIPS.map((t) => (
+                <Chip key={t}>{t}</Chip>
+              ))}
+            </div>
           </div>
         </details>
 
-        <Link href="/work/sla-optimization/diagnostics" className="pj-next">
+        <Link href="/work" className="pj-next">
           <div>
-            <span className="pj-next-lbl">Start with</span>
-            <span className="pj-next-title">Operational Diagnostics</span>
+            <span className="pj-next-lbl">Back to</span>
+            <span className="pj-next-title">All Projects</span>
           </div>
           <ArrowRight size={20} aria-hidden />
         </Link>
