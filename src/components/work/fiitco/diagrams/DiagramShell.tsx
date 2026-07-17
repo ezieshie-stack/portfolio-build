@@ -51,8 +51,12 @@ export function DiagramShell({
     setScale(s);
   }, []);
 
-  // Refit on mount + resetKey change (process/mode swap).
+  // Refit on mount + resetKey change (process/mode swap). Reset natSize
+  // to 0 first so the sizer collapses to auto while the new content
+  // renders — otherwise a taller diagram gets clipped by the previous
+  // process's fixed sizer for the 60ms until fit measures again.
   useEffect(() => {
+    setNatSize({ w: 0, h: 0 });
     const t = setTimeout(fit, 60);
     return () => clearTimeout(t);
   }, [fit, resetKey]);
@@ -89,6 +93,17 @@ export function DiagramShell({
       ? { width: natSize.w * scale, height: natSize.h * scale, overflow: "hidden" }
       : { overflow: "hidden" };
 
+  // Viewport height: match scaled content once measured so short diagrams
+  // don't leave a huge empty band below (which is what happens on mobile
+  // when scale clamps to 0.25 but the caller passed an un-scaled height).
+  const vpStyle: React.CSSProperties | undefined = fs
+    ? undefined
+    : natSize.h > 0
+      ? { height: Math.max(200, Math.min(natSize.h * scale + 16, 520)) }
+      : viewportHeight !== undefined
+        ? { height: viewportHeight }
+        : undefined;
+
   const fig = (
     <div className={`mm-figure${fs ? " mm-fs" : ""}`}>
       <div className="mm-bar">
@@ -121,11 +136,7 @@ export function DiagramShell({
         onMouseMove={move}
         onMouseUp={up}
         onMouseLeave={up}
-        style={
-          viewportHeight !== undefined && !fs
-            ? { height: viewportHeight }
-            : undefined
-        }
+        style={vpStyle}
       >
         <div className="mm-sizer" style={sizerStyle}>
           <div
