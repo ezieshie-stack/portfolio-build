@@ -69,6 +69,11 @@ export function DiagramShell({
     const natH = inner.offsetHeight;
     const avail = vp.clientWidth - 40;
     const s = avail >= natW ? 1 : Math.max(0.25, avail / natW);
+    // Snap the pan back to origin so the fitted diagram is actually
+    // visible (otherwise a manual zoom-in + pan leaves the viewport
+    // scrolled onto empty space after the fit shrinks the content).
+    vp.scrollLeft = 0;
+    vp.scrollTop = 0;
     setNatSize({ w: natW, h: natH });
     setScale(s);
   }, []);

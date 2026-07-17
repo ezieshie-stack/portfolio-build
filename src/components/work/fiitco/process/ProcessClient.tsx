@@ -18,23 +18,6 @@ export function ProcessClient() {
 
   return (
     <div className="fx-proc">
-      <div className="fx-splist">
-        {SUBPROCS.map((s, i) => (
-          <button
-            key={s.key}
-            type="button"
-            className={"fx-spcard" + (i === spIdx ? " on" : "")}
-            onClick={() => setSpIdx(i)}
-          >
-            <div className="fx-spcard-top">
-              <span className="fx-spcard-n">{s.n}</span>
-            </div>
-            <span className="fx-spcard-t">{s.name}</span>
-            <span className="fx-spcard-d">{s.desc}</span>
-          </button>
-        ))}
-      </div>
-
       <div>
         <div className="fx-proc-head">
           <div>
@@ -85,6 +68,23 @@ export function ProcessClient() {
         </div>
 
         <BpmnLegend />
+      </div>
+
+      <div className="fx-splist">
+        {SUBPROCS.map((s, i) => (
+          <button
+            key={s.key}
+            type="button"
+            className={"fx-spcard" + (i === spIdx ? " on" : "")}
+            onClick={() => setSpIdx(i)}
+          >
+            <div className="fx-spcard-top">
+              <span className="fx-spcard-n">{s.n}</span>
+            </div>
+            <span className="fx-spcard-t">{s.name}</span>
+            <span className="fx-spcard-d">{s.desc}</span>
+          </button>
+        ))}
       </div>
     </div>
   );
