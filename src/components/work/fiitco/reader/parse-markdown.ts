@@ -214,15 +214,22 @@ function parseStandard(md: string, opts?: ParseOpts): ParsedDoc {
       continue;
     }
 
-    // Triple-backtick code fence — swallow the fenced block silently
-    // for now (mermaid and other diagram syntaxes render as walls of
-    // ASCII in a plain reader; we drop them and let the surrounding
-    // talking-points paragraphs carry the meaning).
+    // Triple-backtick code fence. Mermaid blocks are dropped (we render
+    // our own SVG diagrams from DIAGRAM_REGISTRY). Every other fence —
+    // ASCII art, YAML, plain text — is preserved as a `code` block so
+    // things like the trust-boundary ASCII diagram render verbatim.
     if (/^```/.test(line.trim())) {
       flushPara(para);
+      const fenceLang = line.trim().slice(3).trim().toLowerCase();
       i++;
-      while (i < lines.length && !/^```/.test(lines[i].trim())) i++;
+      const codeLines: string[] = [];
+      while (i < lines.length && !/^```/.test(lines[i].trim())) {
+        codeLines.push(lines[i]);
+        i++;
+      }
       if (i < lines.length) i++; // consume closing fence
+      if (fenceLang === "mermaid") continue;
+      blocks.push({ type: "code", text: codeLines.join("\n") });
       continue;
     }
 

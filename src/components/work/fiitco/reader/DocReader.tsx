@@ -32,6 +32,7 @@ export type DocBlock =
   | { type: "quote"; text: string }
   | { type: "list"; items: string[] }
   | { type: "hr" }
+  | { type: "code"; text: string }
   | { type: "table"; head: string[]; rows: string[][]; center?: boolean }
   /** Emitted by the diagrams parser after each `## Diagram N —` heading.
    *  DocReader renders it as a <DiagramRenderer> at that exact position. */
@@ -132,6 +133,8 @@ function BlockNode({ b, idx }: { b: DocBlock; idx: number }) {
       );
     case "hr":
       return <hr className="dr-hr" />;
+    case "code":
+      return <pre className="dr-ascii">{b.text}</pre>;
     case "diagram":
       return <DiagramSlot registryKey={b.registryKey} index={b.index} />;
     case "table":
