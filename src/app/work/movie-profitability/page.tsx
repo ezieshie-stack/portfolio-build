@@ -9,6 +9,7 @@ import {
   Filter,
   GitFork,
   HelpCircle,
+  Info,
   Scale,
   Table2,
   ThumbsUp,
@@ -20,6 +21,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
+import { FunnelExplorer } from "@/components/work/movie/FunnelExplorer";
 
 export const metadata = {
   title: "Movie Industry Profitability | David Ezieshi",
@@ -61,13 +63,32 @@ export default function MovieHubPage() {
         </Link>
 
         <section className="pj-hero-head">
-          <Badge tone="violet" style={{ marginBottom: 18 }}>Profitability Analytics</Badge>
+          <Badge tone="violet" style={{ marginBottom: 18 }}>Profitability Analytics · Interactive</Badge>
           <h1 className="pf-page-title" style={{ fontSize: "clamp(34px,3.6vw,52px)" }}>
             Where does the money die?
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            Nearly half of all films lose money. This project tracks 5,009 of them from investment
-            to profit, one stage at a time, and locates the biggest capital leak in the industry.
+            Nearly half of all films lose money. This funnel tracks 5,009 of
+            them from investment to profit, one stage at a time. Click any
+            stage to see how many films survive it, and where the most capital
+            is destroyed.
+          </p>
+        </section>
+
+        {/* interactive 7-stage funnel — the signature widget */}
+        <section className="pj-section" style={{ marginTop: 24 }}>
+          <FunnelExplorer />
+          <p className="cs-caption">
+            <Info size={13} aria-hidden />
+            Investment-to-Profitability funnel, 5,009 films (1970–2017).
+            Counts verbatim from the movies-dataset repo.{" "}
+            <a
+              href="https://ezieshie-stack-movies-dataset.streamlit.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open the live Streamlit dashboard →
+            </a>
           </p>
         </section>
 
