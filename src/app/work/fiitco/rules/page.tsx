@@ -1,214 +1,217 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarClock,
+  Globe,
+  IdCard,
+  ShieldCheck,
+  GitCommitHorizontal,
+  type LucideIcon,
+} from "lucide-react";
+import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FiitSubNav } from "@/components/work/fiitco/FiitSubNav";
+import { FigFrame } from "@/components/work/fiitco/FigFrame";
 
 export const metadata = {
-  title: "FIIT Co. · Business Rules (A3) | David Ezieshi",
+  title: "FIIT Co. · Business Rules Model (A3) | David Ezieshi",
   description:
-    "The 8 business rules that govern the FIIT Co. platform — plus the booking decision table.",
+    "Business rules catalogue — constraints, derivations, and computations — plus the decision table governing booking flow.",
 };
 
-type BusinessRule = { id: string; text: string; enforced: string; test: string };
+type RuleType = "constraint" | "derivation" | "computation";
+type Rule = [string, ReactNode, RuleType];
+type RuleGroup = { icon: LucideIcon; title: string; rules: Rule[] };
 
-const RULES: BusinessRule[] = [
+const RULE_GROUPS: RuleGroup[] = [
   {
-    id: "BUS-01",
-    text: "Only administrators may add, suspend, or remove instructor accounts.",
-    enforced:
-      "requireAdmin gate on auth.approveUser, changeUserRole, deactivateUser.",
-    test: "TC-041 · Direct URL as instructor → 302 to /login",
+    icon: CalendarClock,
+    title: "Scheduling & buffer",
+    rules: [
+      [
+        "BR-01",
+        <>A booking is <b>rejected</b> if it starts before the instructor&apos;s previous class end time plus their travel <b>buffer</b>.</>,
+        "constraint",
+      ],
+      [
+        "BR-02",
+        <>The applied buffer is <b>derived</b> from the instructor&apos;s <b>home studio</b> and the class type.</>,
+        "derivation",
+      ],
+      ["BR-03", <>A class cannot be booked beyond its defined <b>capacity</b>.</>, "constraint"],
+    ],
   },
   {
-    id: "BUS-02",
-    text: "Administrators may view and edit all records; instructors may only view other instructors' records in read-only form.",
-    enforced:
-      "Role-based query filtering + read-only render mode when role='instructor' and target != self.",
-    test: "TC-013 · Instructor cannot edit another instructor's classPrograms",
+    icon: IdCard,
+    title: "Membership & eligibility",
+    rules: [
+      [
+        "BR-04",
+        <>A member may only book classes their <b>membership tier</b> grants access to.</>,
+        "constraint",
+      ],
+      [
+        "BR-05",
+        <>Eligible classes shown to a member are <b>derived</b> from tier access rules at browse time.</>,
+        "derivation",
+      ],
+      [
+        "BR-06",
+        <>Remaining slots are <b>computed</b> as capacity minus confirmed bookings.</>,
+        "computation",
+      ],
+    ],
   },
   {
-    id: "BUS-03",
-    text: "Guest passes reset on the first day of each calendar month.",
-    enforced:
-      "monthKey column on guestPasses row. guestPasses.monthlyUsage query filters by current month.",
-    test: "TC-022 · Redemption in previous monthKey does not count against current quota",
+    icon: ShieldCheck,
+    title: "Access & approval",
+    rules: [
+      [
+        "BR-07",
+        <>A schedule change flagged <b>sensitive</b> stays <b>pending</b> until an owner approves it.</>,
+        "constraint",
+      ],
+      [
+        "BR-08",
+        <>Whether approval is required is <b>derived</b> from the actor&apos;s <b>role</b> and the change type.</>,
+        "derivation",
+      ],
+      [
+        "BR-09",
+        <>Every privileged action <b>must</b> be written to the audit log with actor and timestamp.</>,
+        "constraint",
+      ],
+    ],
   },
   {
-    id: "BUS-04",
-    text: "A member referral is considered successful only after the referred person completes their first paid class.",
-    enforced:
-      "Two-step admin action: referrals.markCompleted (paid class recorded) → referrals.markRewarded.",
-    test: "TC-020 · markRewarded cannot fire without prior markCompleted",
-  },
-  {
-    id: "BUS-05",
-    text: "Exercise library entries must be categorised by category, subcategory, and tier before they can be used in a lesson plan.",
-    enforced:
-      "Schema validators require all three foreign keys on exercises rows; classPrograms.addLessonPlanItem checks tier compatibility.",
-    test: "TC-030 · Add exercise missing tier → validation error at write time",
-  },
-  {
-    id: "BUS-06",
-    text: "A class cannot be scheduled without an assigned instructor.",
-    enforced:
-      "weeklySchedule.addScheduleSlot requires instructorId; conflict check runs before commit.",
-    test: "TC-010 · Add slot with null instructor → rejected",
-  },
-  {
-    id: "BUS-07",
-    text: "All pricing, membership structure, and class format information displayed on the customer website must match the canonical pricing sheet maintained by the sponsor.",
-    enforced:
-      "pricingPlans table is the canonical source; both admin CMS and public site read from it. No duplicated pricing elsewhere.",
-    test: "TC-web-004 · Update pricingPlans → public site reflects same day",
-  },
-  {
-    id: "BUS-08",
-    text: "Every mutation touching user or operational data must pass through requireAuth (any role) or requireAdmin (admin only).",
-    enforced:
-      "Every mutation exported from convex/mutations.ts + convex/websiteContent.ts calls requireAuth/requireAdmin in its handler.",
-    test: "TC-040 · Unauthenticated call to any admin mutation → throws",
+    icon: Globe,
+    title: "Publishing",
+    rules: [
+      [
+        "BR-10",
+        <>A class page is <b>public</b> only when its <code>published</code> flag is true.</>,
+        "constraint",
+      ],
+      [
+        "BR-11",
+        <>The public timetable is <b>derived</b> from published class pages, ordered by start time.</>,
+        "derivation",
+      ],
+    ],
   },
 ];
 
-type DecisionRow = {
-  slotAvailable: string;
-  instructorAvailable: string;
-  bufferOK: string;
-  result: "Book" | "Warn" | "Reject";
-  note: string;
+const TYPE_LABEL: Record<RuleType, string> = {
+  constraint: "Constraint",
+  derivation: "Derivation",
+  computation: "Computation",
 };
 
-const BOOKING_DECISIONS: DecisionRow[] = [
-  {
-    slotAvailable: "Yes",
-    instructorAvailable: "Yes",
-    bufferOK: "Yes",
-    result: "Book",
-    note: "Happy path — commit to weeklySchedule",
-  },
-  {
-    slotAvailable: "Yes",
-    instructorAvailable: "Yes",
-    bufferOK: "No",
-    result: "Warn",
-    note: "Buffer < 15 min between classes → admin can override with acknowledgement",
-  },
-  {
-    slotAvailable: "Yes",
-    instructorAvailable: "No",
-    bufferOK: "—",
-    result: "Reject",
-    note: "Instructor already booked this slot",
-  },
-  {
-    slotAvailable: "No",
-    instructorAvailable: "—",
-    bufferOK: "—",
-    result: "Reject",
-    note: "Room/slot conflict — another class already scheduled",
-  },
+const DT_COLS = ["Tier eligible?", "Buffer OK?", "Capacity left?", "Needs approval?"];
+
+type Cell = [string, string];
+type Row = [Cell, Cell, Cell, Cell, Cell];
+
+const DT_ROWS: Row[] = [
+  [["n", "No"], ["any", "-"], ["any", "-"], ["any", "-"], ["block", "Reject, not eligible"]],
+  [["y", "Yes"], ["n", "No"], ["any", "-"], ["any", "-"], ["block", "Block, buffer conflict"]],
+  [["y", "Yes"], ["y", "Yes"], ["n", "No"], ["any", "-"], ["block", "Reject, class full"]],
+  [["y", "Yes"], ["y", "Yes"], ["y", "Yes"], ["y", "Yes"], ["allow", "Hold for approval"]],
+  [["y", "Yes"], ["y", "Yes"], ["y", "Yes"], ["n", "No"], ["allow", "Confirm booking"]],
 ];
 
 export default function FiitRulesPage() {
   return (
-    <div className="pf-page">
+    <div className="pf-page fx-wide">
       <div className="pf-shell">
         <FiitSubNav active="rules" />
 
         <section className="pj-hero-head" style={{ marginTop: 28 }}>
           <Badge tone="violet" style={{ marginBottom: 16 }}>
-            Artifact A3 · Business Rules
+            Artifact A3 · Business Rules Model
           </Badge>
-          <h1
-            className="pf-page-title"
-            style={{ fontSize: "clamp(30px,3.2vw,46px)" }}
-          >
-            Eight rules, one decision table. Every one enforced in code and
-            covered by a test case.
+          <h1 className="pf-page-title" style={{ fontSize: "clamp(30px,3.2vw,46px)" }}>
+            The rules the system has to enforce.
           </h1>
-          <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            Business rules aren&rsquo;t documentation — they&rsquo;re
-            promises. Each of the eight below traces to a specific
-            enforcement point in the platform and a specific UAT test case
-            that validates it.
+          <p className="pf-page-intro" style={{ maxWidth: 680 }}>
+            Extracted from the process work and written as testable business
+            rules, constraints, derivations, and computations, then folded into
+            a decision table so the booking logic is unambiguous.
           </p>
         </section>
 
-        {/* Rules list */}
-        <section className="pj-section" style={{ marginTop: 32 }}>
-          <Eyebrow style={{ marginBottom: 8 }}>The 8 rules</Eyebrow>
-          <p className="pj-section-sub">
-            Sourced from BA-03 BRD § Assumptions &amp; Constraints. Each rule
-            is stated once, enforced once, tested once.
-          </p>
-          <div className="pj-rules-list">
-            {RULES.map((r) => (
-              <article className="pj-rules-card" key={r.id}>
-                <header>
-                  <span className="pj-rules-id">{r.id}</span>
-                </header>
-                <p className="pj-rules-text">{r.text}</p>
-                <div className="pj-rules-meta">
-                  <div>
-                    <span className="pj-rules-meta-k">Enforced by</span>
-                    <span className="pj-rules-meta-v">{r.enforced}</span>
-                  </div>
-                  <div>
-                    <span className="pj-rules-meta-k">Test</span>
-                    <span className="pj-rules-meta-v">
-                      <CheckCircle2 size={14} aria-hidden /> {r.test}
-                    </span>
-                  </div>
+        <section className="pj-section" style={{ marginTop: 34 }}>
+          <Eyebrow style={{ marginBottom: 18 }}>Rules catalogue</Eyebrow>
+          {RULE_GROUPS.map((g) => {
+            const Ico = g.icon;
+            return (
+              <div className="fx-rulegroup" key={g.title}>
+                <div className="fx-rg-head">
+                  <Ico size={18} aria-hidden />
+                  <span className="fx-rg-title">{g.title}</span>
+                  <span className="fx-rg-count">{g.rules.length} rules</span>
                 </div>
-              </article>
-            ))}
-          </div>
+                <div className="fx-rules">
+                  {g.rules.map(([id, txt, type]) => (
+                    <div className="fx-rule" key={id}>
+                      <span className="fx-rule-id">{id}</span>
+                      <span className="fx-rule-txt">{txt}</span>
+                      <span className={"fx-rule-type " + type}>{TYPE_LABEL[type]}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </section>
 
-        {/* Booking decision table */}
         <section className="pj-section">
-          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
-            Booking decision table
-          </Eyebrow>
+          <Eyebrow style={{ marginBottom: 8 }}>Decision table · Can this booking proceed?</Eyebrow>
           <p className="pj-section-sub">
-            The conflict-check gateway from process A1 · Booking Flow, as a
-            decision table. Every schedule mutation walks these rows.
+            The scheduling and eligibility rules resolved into one deterministic
+            decision. Conditions are evaluated left to right; the first matching
+            row wins.
           </p>
-          <div className="pj-decision-table-wrap">
-            <table className="pj-decision-table">
-              <thead>
-                <tr>
-                  <th>Slot free?</th>
-                  <th>Instructor free?</th>
-                  <th>Buffer OK?</th>
-                  <th>Result</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                {BOOKING_DECISIONS.map((d, i) => (
-                  <tr key={i} data-result={d.result.toLowerCase()}>
-                    <td>{d.slotAvailable}</td>
-                    <td>{d.instructorAvailable}</td>
-                    <td>{d.bufferOK}</td>
-                    <td>
-                      <span className={`pj-decision-badge ${d.result.toLowerCase()}`}>
-                        {d.result}
-                      </span>
-                    </td>
-                    <td>{d.note}</td>
+          <FigFrame name="decision · booking_allowed" sub="first-hit policy">
+            <div className="fig-scroll">
+              <table className="fx-dtable">
+                <thead>
+                  <tr>
+                    {DT_COLS.map((c) => (
+                      <th key={c} className="cond">
+                        {c}
+                      </th>
+                    ))}
+                    <th className="act">Outcome</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {DT_ROWS.map((row, i) => (
+                    <tr key={i}>
+                      {row.slice(0, 4).map(([k, v], j) => (
+                        <td key={j}>
+                          <span className={"fx-dcell " + k}>{v}</span>
+                        </td>
+                      ))}
+                      <td>
+                        <span className={"fx-dact " + row[4][0]}>{row[4][1]}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FigFrame>
+          <p className="pj-caption" style={{ marginTop: 14 }}>
+            <GitCommitHorizontal size={13} aria-hidden /> Each outcome traces back to the rules above and forward to the scheduling process model.
+          </p>
         </section>
 
         <Link href="/work/fiitco/docs" className="pj-next">
           <div>
             <span className="pj-next-lbl">Next artifact</span>
-            <span className="pj-next-title">Documents (Reading Mode)</span>
+            <span className="pj-next-title">Documents · BRD, PRD, Stories, UAT</span>
           </div>
           <ArrowRight size={20} aria-hidden />
         </Link>
