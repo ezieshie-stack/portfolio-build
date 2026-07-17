@@ -31,7 +31,7 @@ const HOW_ITEMS: [React.ComponentType<{ size?: number; "aria-hidden"?: boolean }
 
 export default function FiitProcessPage() {
   return (
-    <div className="pf-page">
+    <div className="pf-page fx-wide">
       <div className="pf-shell">
         <FiitSubNav active="process" />
 
