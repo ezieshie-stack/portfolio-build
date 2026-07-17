@@ -1,8 +1,9 @@
 import type { DocBlock } from "./DocReader";
 
 /**
- * Lightweight markdown parser for the FIIT docs. Understands the subset
- * the source markdown actually uses:
+ * Lightweight markdown parser for the FIIT docs.
+ *
+ * Regular mode understands the subset the source markdown uses:
  * - YAML-ish front-matter (`--- key: value --- `)
  * - h2 / h3 headings
  * - paragraphs
@@ -11,9 +12,14 @@ import type { DocBlock } from "./DocReader";
  * - horizontal rules (`---` or `***` on their own line, outside front-matter)
  * - GitHub-style pipe tables
  *
- * Inline formatting (bold / italic / code / links / artifact-links) is
- * carried through as raw markdown inside DocBlock `text`/`items`/`rows`,
- * and rendered by DocReader's `parseInline` helper.
+ * `pdftext` mode is the special path for the PDD file. That file is a
+ * pdftotext extract wrapped in a triple-backtick code block. We strip
+ * the fence + extract header lines and translate:
+ *   `1. Title`           -> h2 "Title"
+ *   `2.1 Sub`            -> h3 "Sub"
+ *   `   •  item`         -> list item
+ *   column rows          -> paragraph, columns joined by " — "
+ * so it renders like normal editorial content.
  */
 
 const stripCellFmt = (s: string) => s.replace(/^\s*\*\*\s*|\s*\*\*\s*$/g, "").trim();
@@ -43,7 +49,115 @@ export type ParsedDoc = {
   blocks: DocBlock[];
 };
 
-export function parseMarkdown(md: string, opts?: { title?: string }): ParsedDoc {
+export type ParseOpts = {
+  title?: string;
+  pdftext?: boolean;
+  metaLine?: [string, string][];
+};
+
+// -----------------------------------------------------------------
+// pdftotext helpers
+// -----------------------------------------------------------------
+
+// Split a fixed-width pdftotext row into columns wherever it hits
+// 2+ consecutive spaces. Empty cells drop out.
+function splitPdftextRow(line: string): string[] {
+  return line
+    .split(/\s{2,}/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function parsePdftextBody(body: string): DocBlock[] {
+  const lines = body.split(/\r?\n/);
+  const blocks: DocBlock[] = [];
+  let listBuf: string[] = [];
+  const flushList = () => {
+    if (listBuf.length) {
+      blocks.push({ type: "list", items: [...listBuf] });
+      listBuf = [];
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const t = raw.trim();
+    if (!t) {
+      flushList();
+      continue;
+    }
+
+    // "1. Section" -> h2 (top-level)
+    let m = t.match(/^(\d+)\.\s+(.+)$/);
+    if (m) {
+      flushList();
+      blocks.push({ type: "h2", text: m[2].trim() });
+      continue;
+    }
+
+    // "2.1 Sub" -> h3
+    m = t.match(/^(\d+\.\d+)\s+(.+)$/);
+    if (m) {
+      flushList();
+      blocks.push({ type: "h3", text: m[2].trim() });
+      continue;
+    }
+
+    // Bullet
+    if (t.startsWith("•") || t.startsWith("·")) {
+      listBuf.push(t.replace(/^[•·]\s*/, "").trim());
+      continue;
+    }
+
+    // Fallback: treat as a paragraph, joining column-y rows with " — "
+    flushList();
+    const cols = splitPdftextRow(raw);
+    const text = cols.length > 1 ? cols.join(" — ") : t;
+    blocks.push({ type: "p", text });
+  }
+  flushList();
+  return blocks;
+}
+
+// -----------------------------------------------------------------
+// main parser
+// -----------------------------------------------------------------
+
+export function parseMarkdown(md: string, opts?: ParseOpts): ParsedDoc {
+  // Regular markdown ----------------------------------------------
+  if (!opts?.pdftext) {
+    return parseStandard(md, opts);
+  }
+
+  // pdftext ------------------------------------------------------------
+  // Pull out everything inside the triple-backtick block. Drop the
+  // pdftotext preamble lines (title, subtitle, meta) — they came from
+  // the PDF, we render our own from `opts.metaLine`. Then hand the
+  // remainder to parsePdftextBody.
+  const fence = md.match(/```[a-zA-Z]*\n([\s\S]*?)```/);
+  const body = (fence ? fence[1] : md)
+    .split(/\r?\n/)
+    .filter((line, idx, arr) => {
+      // Trim off the top block that pdftotext puts above section 1.
+      // Everything before the first "1. " line is header noise.
+      if (idx > 0 && /^\s*1\.\s+\S/.test(arr[idx])) return true;
+      // Look ahead: if any earlier index already saw a `1.`, keep this line.
+      for (let j = 0; j < idx; j++) {
+        if (/^\s*1\.\s+\S/.test(arr[j])) return true;
+      }
+      // Otherwise this is preamble — drop it.
+      return false;
+    })
+    .join("\n");
+
+  return {
+    title: opts.title || "Untitled",
+    meta: opts.metaLine ?? [],
+    blocks: parsePdftextBody(body),
+  };
+}
+
+function parseStandard(md: string, opts?: ParseOpts): ParsedDoc {
   const lines = md.split(/\r?\n/);
   let i = 0;
 
@@ -76,7 +190,7 @@ export function parseMarkdown(md: string, opts?: { title?: string }): ParsedDoc 
     buf.length = 0;
   };
 
-  let para: string[] = [];
+  const para: string[] = [];
   while (i < lines.length) {
     const raw = lines[i];
     const line = raw.trimEnd();
@@ -147,7 +261,7 @@ export function parseMarkdown(md: string, opts?: { title?: string }): ParsedDoc 
         .replace(/^\||\|$/g, "")
         .split("|")
         .map((c) => stripCellFmt(c));
-      i += 2; // skip header + separator
+      i += 2;
       const rows: string[][] = [];
       while (i < lines.length && lines[i].startsWith("|")) {
         rows.push(

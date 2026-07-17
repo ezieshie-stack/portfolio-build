@@ -15,6 +15,13 @@ export type DocManifestEntry = {
   icon: string;
   file: string;
   title?: string;
+  /** Set on files that are a pdftotext extract. Tells the parser to
+   * discard the surrounding ASCII code block, strip the extract header,
+   * and reshape numbered sections + column rows into normal blocks. */
+  pdftext?: boolean;
+  /** Meta rows to render at the top of the reader, when the file's
+   * own front-matter is missing (e.g. pdftext files). */
+  metaLine?: [string, string][];
   live: DocLiveLink | null;
 };
 
@@ -74,6 +81,12 @@ export const DOC_MANIFEST: DocManifestEntry[] = [
     icon: "layout-template",
     file: "/docs/FIIT_Co_Product_Design_Document.md",
     title: "Product Design Document",
+    pdftext: true,
+    metaLine: [
+      ["Authors", "David Ezieshi, Lead BA · Emmanuel Ametepe Ofori, UX Analyst"],
+      ["Version", "v1.0 Final · April 25, 2026"],
+      ["Source", "pdftotext extract, formatting approximate"],
+    ],
     live: {
       href: "/work/fiitco/data",
       label: "View Data & Scope Model (A2)",

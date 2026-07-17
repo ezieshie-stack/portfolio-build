@@ -53,7 +53,11 @@ export function DocsReaderClient() {
       })
       .then((md) => {
         if (!alive) return;
-        const parsed = parseMarkdown(md, { title: entry.title });
+        const parsed = parseMarkdown(md, {
+          title: entry.title,
+          pdftext: entry.pdftext,
+          metaLine: entry.metaLine,
+        });
         setState({
           kind: "ready",
           doc: {
