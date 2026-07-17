@@ -9,6 +9,7 @@ import {
   GitBranch,
   GitFork,
   HelpCircle,
+  Info,
   Layers,
   ShieldAlert,
   Table2,
@@ -20,6 +21,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
+import { ScoringSandbox } from "@/components/work/fraud/ScoringSandbox";
 
 export const metadata = {
   title: "Fraud Detection SQL Pipeline | David Ezieshi",
@@ -60,14 +62,28 @@ export default function FraudHubPage() {
         </Link>
 
         <section className="pj-hero-head">
-          <Badge tone="violet" style={{ marginBottom: 18 }}>Fraud &amp; Risk Analytics</Badge>
+          <Badge tone="violet" style={{ marginBottom: 18 }}>
+            Fraud &amp; Risk Analytics · Interactive
+          </Badge>
           <h1 className="pf-page-title" style={{ fontSize: "clamp(34px,3.6vw,52px)" }}>
             Score a transaction for fraud.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            A layered PostgreSQL pipeline that turns raw transaction logs into an auditable
-            risk score. Four weighted rules, three tiers, and every alert carries the exact
-            reasons it fired. No black box.
+            This is the rules engine I wrote in SQL, running live in your
+            browser. Toggle which rules a transaction trips and watch the risk
+            score, tier, and the action a fraud analyst would take. No black
+            box, every point is explainable.
+          </p>
+        </section>
+
+        {/* interactive scoring sandbox — the marquee widget */}
+        <section className="pj-section" style={{ marginTop: 24 }}>
+          <ScoringSandbox />
+          <p className="cs-caption">
+            <Info size={13} aria-hidden />
+            Weights, thresholds, and tiers verbatim from{" "}
+            <code>sql/04_rules_engine.sql</code>. Built on the PaySim dataset
+            in PostgreSQL.
           </p>
         </section>
 

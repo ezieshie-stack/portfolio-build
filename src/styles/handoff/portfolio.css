@@ -1147,6 +1147,31 @@ body { font-family: var(--font-sans); }
   .cs-drow { grid-template-columns: 92px minmax(0, 1fr); }
 }
 
+/* ══ FRAUD — INTERACTIVE SCORING SANDBOX (hub + F3) ══════════════ */
+.fx-scorer { display: flex; flex-direction: column; gap: 18px; padding: 22px; border-radius: var(--radius-xl); border: 1px solid var(--border); background: var(--surface-2); }
+.fx-inputs { display: flex; flex-direction: column; gap: 14px; }
+.fx-scorer-h { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 2px; }
+.fx-field { display: flex; flex-direction: column; gap: 6px; }
+.fx-field-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.fx-field-lbl { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+.fx-field-cond { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0; text-transform: none; color: var(--text-dim); }
+.fx-field-pts { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--accent-text); }
+.fx-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fx-seg-btn { padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text-body); font-family: var(--font-sans); font-size: 13px; font-weight: 500; cursor: pointer; transition: all var(--duration-fast) var(--ease-out); }
+.fx-seg-btn:hover { border-color: var(--border-hover); color: var(--text-heading); }
+.fx-seg-btn.on { background: var(--accent-solid); border-color: transparent; color: var(--text-on-accent); font-weight: 600; }
+.fx-out { margin-top: 8px; padding: 22px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 30px; align-items: center; }
+.fx-gauge { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.fx-risk { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; border: 1px solid; background: color-mix(in srgb, currentColor 10%, transparent); }
+.fx-why { display: flex; flex-direction: column; min-width: 0; }
+.fx-why-h { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+.fx-why-action { margin: 0 0 14px; font-size: 14px; line-height: 1.5; color: var(--text-heading); font-weight: 600; }
+.fx-why-queue { margin: 0 0 14px; font-size: 13px; line-height: 1.5; }
+.fx-why-reasons { display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 12px; color: var(--accent-text); word-break: break-word; }
+@media (max-width: 720px) {
+  .fx-out { grid-template-columns: 1fr; }
+}
+
 /* ══ TELCO CHURN — ARTIFACT SUB-PAGES ═══════════════════════════ */
 /* T1 · SQL explorer */
 .tq-grid { display: flex; flex-direction: column; gap: 18px; }
