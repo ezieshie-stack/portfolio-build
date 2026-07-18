@@ -1003,6 +1003,7 @@ body { font-family: var(--font-sans); }
 .fx-ent-tr { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
 .fx-ent-tr span { font-family: var(--font-mono); font-size: 9px; color: var(--accent-text); border: 1px solid var(--violet-border); background: var(--violet-fill); padding: 2px 7px; border-radius: 999px; }
 .fx-ent-tr span.nfr { color: var(--spark); border-color: color-mix(in srgb, var(--spark) 40%, transparent); background: color-mix(in srgb, var(--spark) 10%, transparent); }
+.fx-ent-tr span.untraced { color: var(--text-dim); border-color: var(--border); background: var(--surface-2); font-style: italic; }
 .fx-ent { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); overflow: hidden; transition: border-color var(--duration-fast) var(--ease-out); }
 .fx-ent:hover { border-color: var(--violet-border); }
 .fx-ent-hd { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: var(--violet-fill); border-bottom: 1px solid var(--violet-border); }

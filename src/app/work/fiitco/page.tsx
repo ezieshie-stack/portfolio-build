@@ -75,8 +75,8 @@ const LIVE_ARTIFACTS: Artifact[] = [
     idx: "A1",
     icon: GitCompare,
     title: "Process Models",
-    desc: "As-is vs to-be, five core workflows.",
-    meta: "5 processes",
+    desc: "As-is vs to-be, eleven core workflows.",
+    meta: "11 processes",
   },
   {
     href: "/work/fiitco/data",
@@ -100,7 +100,7 @@ const LIVE_ARTIFACTS: Artifact[] = [
     icon: FileText,
     title: "Documents",
     desc: "Charter, BRD, PDD and UAT in a reading mode.",
-    meta: "9 documents",
+    meta: "8 documents",
   },
   {
     href: "/work/fiitco/stakeholder",
@@ -132,7 +132,7 @@ const LIVE_ARTIFACTS: Artifact[] = [
     icon: Network,
     title: "Diagrams",
     desc: "Architecture, ERD, data flow, use case and more.",
-    meta: "11 diagrams",
+    meta: "12 diagrams",
   },
 ];
 

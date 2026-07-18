@@ -35,7 +35,7 @@ const PROJECTS: Record<ProjectSlug, Project> = {
     href: "/work/sla-optimization",
     title: "Customer Support SLA Optimizer",
     blurb:
-      "Cost-sensitive Random Forest · 100% breach recall · capacity-aware daily kill-list.",
+      "Cost-sensitive Random Forest · 100% breach recall · capacity-aware daily priority queue.",
     eyebrow: "Predictive analytics",
   },
   fraud: {
@@ -49,7 +49,7 @@ const PROJECTS: Record<ProjectSlug, Project> = {
     href: "/work/movie-profitability",
     title: "Movie Industry Profitability",
     blurb:
-      "5,009 films · 8-stage investment-to-profit funnel · Streamlit dashboard.",
+      "5,009 films · 7-stage investment-to-profit funnel · Streamlit dashboard.",
     eyebrow: "Analytics dashboard",
   },
   fiitco: {

@@ -8,7 +8,7 @@ import { parseMarkdown } from "@/components/work/fiitco/reader/parse-markdown";
  * Client wrapper that fetches the SLA write-up, promotes ### section
  * headings to ## so the scroll-spy TOC picks them up, and attaches the
  * `live` prop that renders the "Prefer the interactive version?" CTA
- * banner linking back to the Sniper Command Center on the hub.
+ * banner linking back to the Triage Command Center on the hub.
  */
 export function SlaDocReaderClient() {
   const [doc, setDoc] = useState<Doc | null>(null);
@@ -42,7 +42,7 @@ export function SlaDocReaderClient() {
           blocks: parsed.blocks,
           live: {
             href: "/work/sla-optimization",
-            label: "Open the Sniper Command Center",
+            label: "Open the Triage Command Center",
             blurb:
               "Prefer the interactive version? The **command center** lets you set capacity and watch the breach cost caught.",
           },

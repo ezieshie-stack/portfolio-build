@@ -1,4 +1,4 @@
-// FIIT Co. diagram registry — 11 diagrams across 6 doc keys.
+// FIIT Co. diagram registry — 12 diagrams across 6 doc keys.
 // Ported verbatim from deploy/portfolio/fiit-diagram-data.jsx.
 
 import { E, N, type DiagramEntry } from "./types";

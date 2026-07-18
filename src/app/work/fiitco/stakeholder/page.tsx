@@ -17,7 +17,7 @@ const STAKEHOLDERS: Stakeholder[] = [
   ["S1", "Arden", "Sponsor, owns operational outcomes and sign-off on every deliverable", "Manage Closely", true],
   ["S2", "Jason Battiste", "Founder & Head Coach, brand voice, training philosophy, final aesthetic call", "Manage Closely", true],
   ["S3", "David Ezieshi", "Business Analyst, requirements, process design, UAT, admin post-handover", "Continuous", true],
-  ["S4", "Claude", "Development & design partner, builds both apps against the BA specs", "Continuous", true],
+  ["S4", "Development & design partner", "Delivery counterpart, builds both apps against the BA specs", "Continuous", true],
   ["S5", "Instructor Team", "~12 trainers, end users of the CMT; team-UAT participants", "Keep Informed", false],
   ["S6", "Members & Community", "End users of the public site, guest-pass, and referral flow", "Monitor", false],
   ["S7", "GBC Co-op Coordinator", "Academic oversight for the placement engagement", "Keep Satisfied", false],
@@ -237,7 +237,7 @@ export default function FiitStakeholderPage() {
             <p>
               <b>Post-handover (Apr 14 2026):</b> the RACI collapses.{" "}
               <b>S3 (David Ezieshi)</b> was retained as sole platform
-              administrator after Claude and the analyst team rolled off;{" "}
+              administrator after the delivery partner and analyst team rolled off;{" "}
               <b>S1 (Arden)</b> remains sponsor and escalation. Change requests
               are filed via S3 and decided by S1.
             </p>

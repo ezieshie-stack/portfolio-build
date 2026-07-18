@@ -46,7 +46,7 @@ const PIPELINE: FlowConfig = {
     { id: "m1", c: 4, r: 2, label: "P4 One-hot encode", tone: "admin" },
     { id: "m2", c: 4, r: 3, label: "P4 80/20 split", tone: "admin", sub: "seed 42" },
     { id: "m3", c: 4, r: 4, label: "P4 Random Forest", tone: "admin", sub: "balanced weights" },
-    { id: "sim", c: 5, r: 1, label: "P5 Sniper simulation", tone: "good", sub: "capacity sweep" },
+    { id: "sim", c: 5, r: 1, label: "P5 Triage simulation", tone: "good", sub: "capacity sweep" },
     { id: "shift", c: 5, r: 3, label: "P6 Shift analysis", tone: "good", sub: "risk by hour" },
     { id: "dash", c: 5, r: 5, label: "P7 Command center", tone: "actor" },
     { id: "rec", c: 6, r: 3, label: "P8 Recommendations", tone: "actor", sub: "3 actions" },

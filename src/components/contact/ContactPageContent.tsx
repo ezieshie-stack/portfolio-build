@@ -1,10 +1,9 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
-import { Send } from "lucide-react";
+import { useMemo } from "react";
+import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Input } from "@/components/ui/Input";
 
 const PROJECT_TITLES: Record<string, string> = {
   telco: "the Telco churn work",
@@ -15,12 +14,10 @@ const PROJECT_TITLES: Record<string, string> = {
   uipath: "the UiPath supplier monitor",
 };
 
-const CHANNELS: Array<{
-  label: string;
-  value: string;
-  href: string | null;
-}> = [
-  { label: "Email", value: "ezieshie@gmail.com", href: "mailto:ezieshie@gmail.com" },
+const EMAIL = "ezieshie@gmail.com";
+
+const CHANNELS: Array<{ label: string; value: string; href: string | null }> = [
+  { label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/david-ezieshi",
@@ -40,17 +37,17 @@ const CHANNELS: Array<{
 ];
 
 export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
-  const [sent, setSent] = useState(false);
   const projectTitle = projectSlug ? PROJECT_TITLES[projectSlug] : undefined;
-  const defaultSubject = useMemo(
-    () => (projectTitle ? `About ${projectTitle}` : ""),
-    [projectTitle],
-  );
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSent(true);
-  }
+  const mailtoHref = useMemo(() => {
+    if (!projectTitle) return `mailto:${EMAIL}`;
+    const subject = encodeURIComponent(`About ${projectTitle}`);
+    return `mailto:${EMAIL}?subject=${subject}`;
+  }, [projectTitle]);
+
+  const ctaLabel = projectTitle
+    ? `Email me about ${projectTitle}`
+    : "Email me directly";
 
   return (
     <div className="pf-page">
@@ -65,91 +62,45 @@ export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
           </h1>
           <p className="pf-page-intro">
             Hiring for a business analyst role, scoping a workflow problem, or
-            thinking through an internal solution? Send me the details. I&rsquo;ll
-            respond within a day.
+            thinking through an internal solution? Email me the details.
+            I&rsquo;ll respond within a day.
           </p>
         </section>
 
-        <div className="pf-contact-grid">
-          <div className="pf-channels">
-            {CHANNELS.map((c) => (
-              <div className="pf-channel" key={c.label}>
-                <p className="lab">{c.label}</p>
-                {c.href ? (
-                  <a
-                    href={c.href}
-                    target={c.href.startsWith("http") ? "_blank" : undefined}
-                    rel={c.href.startsWith("http") ? "noreferrer" : undefined}
-                  >
-                    {c.value}
-                  </a>
-                ) : (
-                  <span className="avail">{c.value}</span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <form className="pf-form" onSubmit={handleSubmit}>
-            <p className="pf-form-title">Send a Message</p>
-            <div className="pf-form-row">
-              <Input
-                id="contact-name"
-                name="name"
-                label="Name"
-                placeholder="Your name"
-                required
-                autoComplete="name"
-              />
-              <Input
-                id="contact-email"
-                name="email"
-                type="email"
-                label="Email"
-                placeholder="you@email.com"
-                required
-                autoComplete="email"
-              />
+        <div className="pf-channels" style={{ maxWidth: 640 }}>
+          {CHANNELS.map((c) => (
+            <div className="pf-channel" key={c.label}>
+              <p className="lab">{c.label}</p>
+              {c.href ? (
+                <a
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href.startsWith("http") ? "noreferrer" : undefined}
+                >
+                  {c.value}
+                </a>
+              ) : (
+                <span className="avail">{c.value}</span>
+              )}
             </div>
-            <Input
-              key={defaultSubject}
-              id="contact-subject"
-              name="subject"
-              label="Subject"
-              placeholder="What's this about?"
-              defaultValue={defaultSubject}
-            />
-            <Input
-              id="contact-message"
-              name="message"
-              label="Message"
-              multiline
-              rows={5}
-              placeholder="Tell me about the workflow or the role…"
-              required
-            />
+          ))}
+        </div>
+
+        <section style={{ marginTop: 40 }}>
+          <div className="pf-btnrow">
             <Button
               variant="primary"
               size="lg"
-              type="submit"
-              iconRight={<Send size={16} aria-hidden />}
+              href={mailtoHref}
+              iconRight={<Mail size={16} aria-hidden />}
             >
-              {sent ? "Message Sent ✓" : "Send Message"}
+              {ctaLabel}
             </Button>
-          </form>
-        </div>
-
-        <section style={{ marginTop: 56 }}>
-          <p className="pf-mono-h">Prefer another channel?</p>
-          <div className="pf-btnrow">
             <Button
               variant="secondary"
               href="https://www.linkedin.com/in/david-ezieshi/"
             >
               View My LinkedIn
-            </Button>
-            <Button variant="secondary" href="mailto:ezieshie@gmail.com">
-              Email Me
             </Button>
           </div>
         </section>

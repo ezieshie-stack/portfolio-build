@@ -28,7 +28,7 @@ import { GenreBudgetExplorer } from "@/components/work/movie/GenreBudgetExplorer
 export const metadata = {
   title: "Movie Industry Profitability | David Ezieshi",
   description:
-    "5,009 films tracked through an 8-stage investment-to-profitability funnel, where the money dies and which levers actually work.",
+    "5,009 films tracked through a 7-stage investment-to-profitability funnel, where the money dies and which levers actually work.",
 };
 
 type Artifact = { href: string; idx: string; icon: LucideIcon; title: string; desc: string; meta: string };
@@ -50,7 +50,7 @@ const TIERS = [
 
 const FINDINGS = [
   { finding: "The biggest capital leak is the 576 films that earned box office revenue but recovered under 50% of their budget. The failure is at the cost line, not the demand line.", recBold: "Break-even analysis before every greenlight.", rec: "Lowering the break-even threshold by 20% converts hundreds of almost-profitable films into profitable ones. Tighter upfront cost modeling is the highest-leverage intervention." },
-  { finding: "Horror and Mystery deliver the highest ROI on the lowest budgets. Weighted toward those genres, a slate's success rate runs 84.6 to 85.7% against the 72.5% industry average.", recBold: "Weight capital toward Horror and Mystery.", rec: "Treat genre as an investment decision, not just a creative one. On a 100-film portfolio the genre tilt is worth 12 fewer losses per cycle." },
+  { finding: "Horror and Mystery deliver the highest ROI on the lowest budgets. Weighted toward those genres, a slate's success rate runs 84.6 to 85.7% against the dataset's overall 72.5% rate.", recBold: "Weight capital toward Horror and Mystery.", rec: "Treat genre as an investment decision, not just a creative one. On a 100-film portfolio the genre tilt is worth 12 fewer losses per cycle." },
   { finding: "Mega-budget films succeed 90.6% of the time but cost $100M+ each, so one failure erases several wins. Mid-budget films are the most consistent at 68.5%. Proven directors beat the average on both revenue and ROI.", recBold: "Anchor the slate on mid-budget, attach proven directors to the big bets.", rec: "Reserve nine-figure budgets for titles hedged by a track-record director. Model director history as a greenlight input." },
 ];
 
@@ -195,7 +195,7 @@ export default function MovieHubPage() {
         <details className="pj-hood">
           <summary><Wrench size={16} aria-hidden /> Under the hood <span className="pj-hood-hint">method &amp; stack</span></summary>
           <div className="pj-hood-body">
-            <p>Two Kaggle sources (TMDB 5000, IMDB metadata) merged into a 42-column master; JSON genre strings parsed, financial metrics derived (Profit, ROI, Is Profitable), and categorical features engineered (budget tier, ROI band, era, runtime). 16 EDA charts, then an 8-stage investment-to-profitability funnel. Packaged as a 5-page Streamlit dashboard.</p>
+            <p>Two Kaggle sources (TMDB 5000, IMDB metadata) merged into a 42-column master; JSON genre strings parsed, financial metrics derived (Profit, ROI, Is Profitable), and categorical features engineered (budget tier, ROI band, era, runtime). 16 EDA charts, then a 7-stage investment-to-profitability funnel. Packaged as a 5-page Streamlit dashboard.</p>
             <div className="pj-chips">{CHIPS.map((t) => <Chip key={t}>{t}</Chip>)}</div>
           </div>
         </details>

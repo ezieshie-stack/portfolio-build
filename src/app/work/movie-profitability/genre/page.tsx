@@ -90,9 +90,9 @@ export default function MovieGenrePage() {
             <p>
               <b>Quantified impact.</b> Had a studio weighted its portfolio toward Horror and
               Mystery titles, its success rate would have run 84.6 to 85.7%, against the
-              industry&rsquo;s 72.5% overall. That is a 12+ point gain in capital efficiency, or
-              12 fewer losses on a 100-film slate. These are the actual success rates from the
-              5,009 films in the dataset, not a projection.
+              dataset&rsquo;s 72.5% overall rate. That is a 12+ point gain in capital efficiency,
+              or 12 fewer losses on a 100-film slate. These are the actual success rates from
+              the 5,009 films in the dataset, not a projection.
             </p>
           </div>
         </section>
