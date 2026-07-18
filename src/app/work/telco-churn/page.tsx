@@ -22,6 +22,7 @@ import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
 import { ChurnScorer } from "@/components/work/telco/ChurnScorer";
+import { ProjectFooter } from "@/components/work/ProjectFooter";
 
 export const metadata = {
   title: "Telco Customer Churn Analysis | David Ezieshi",
@@ -330,6 +331,8 @@ export default function TelcoHubPage() {
             </div>
           </div>
         </details>
+
+        <ProjectFooter current="telco" />
 
         <Link href="/work/telco-churn/sql" className="pj-next">
           <div>

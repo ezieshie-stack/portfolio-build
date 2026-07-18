@@ -18,6 +18,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { ProjectFooter } from "@/components/work/ProjectFooter";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
@@ -183,6 +184,8 @@ export default function FraudHubPage() {
             <div className="pj-chips">{CHIPS.map((t) => <Chip key={t}>{t}</Chip>)}</div>
           </div>
         </details>
+
+        <ProjectFooter current="fraud" />
 
         <Link href="/work/fraud-detection/sql" className="pj-next">
           <div>

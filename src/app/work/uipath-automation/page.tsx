@@ -25,6 +25,7 @@ import { UipathRunHistory } from "@/components/work/uipath/UipathRunHistory";
 import { UipathProofStrip } from "@/components/work/uipath/UipathProofStrip";
 import { UipathProcessFlows } from "@/components/work/uipath/UipathProcessFlows";
 import { UipathDocReaderClient } from "@/components/work/uipath/UipathDocReaderClient";
+import { ProjectFooter } from "@/components/work/ProjectFooter";
 
 export const metadata = {
   title: "UiPath Supplier Price Monitor | David Ezieshi",
@@ -407,6 +408,8 @@ export default function UipathProjectPage() {
           </div>
           <ArrowRight size={20} aria-hidden />
         </a>
+
+        <ProjectFooter current="uipath" />
 
         <Link href="/work" className="pj-next">
           <div>

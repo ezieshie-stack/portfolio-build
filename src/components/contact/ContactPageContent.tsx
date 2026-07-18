@@ -1,10 +1,19 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Input } from "@/components/ui/Input";
+
+const PROJECT_TITLES: Record<string, string> = {
+  telco: "the Telco churn work",
+  sla: "the SLA optimizer",
+  fraud: "the fraud detection pipeline",
+  movie: "the movie profitability analysis",
+  fiitco: "the FIIT Co. platform",
+  uipath: "the UiPath supplier monitor",
+};
 
 const CHANNELS: Array<{
   label: string;
@@ -30,8 +39,13 @@ const CHANNELS: Array<{
   },
 ];
 
-export function ContactPageContent() {
+export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
   const [sent, setSent] = useState(false);
+  const projectTitle = projectSlug ? PROJECT_TITLES[projectSlug] : undefined;
+  const defaultSubject = useMemo(
+    () => (projectTitle ? `About ${projectTitle}` : ""),
+    [projectTitle],
+  );
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -98,10 +112,12 @@ export function ContactPageContent() {
               />
             </div>
             <Input
+              key={defaultSubject}
               id="contact-subject"
               name="subject"
               label="Subject"
               placeholder="What's this about?"
+              defaultValue={defaultSubject}
             />
             <Input
               id="contact-message"

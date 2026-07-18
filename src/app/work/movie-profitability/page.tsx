@@ -18,6 +18,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { ProjectFooter } from "@/components/work/ProjectFooter";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
@@ -198,6 +199,8 @@ export default function MovieHubPage() {
             <div className="pj-chips">{CHIPS.map((t) => <Chip key={t}>{t}</Chip>)}</div>
           </div>
         </details>
+
+        <ProjectFooter current="movie" />
 
         <Link href="/work/movie-profitability/genre" className="pj-next">
           <div>
