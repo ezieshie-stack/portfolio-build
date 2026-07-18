@@ -1,58 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Feather,
-  Quote,
-  X,
-} from "lucide-react";
+import { useEffect, useState, type MouseEvent } from "react";
+import { ArrowLeft, ArrowUpRight, Feather, Quote, X } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Constellation } from "@/components/insights/Constellation";
-import {
-  FEATURED,
-  PULLQUOTES,
-  type Block,
-  type Entry,
-} from "@/data/insights-articles";
-
-function ArticleBody({ blocks }: { blocks: Block[] }) {
-  return (
-    <div className="pf-article-body">
-      {blocks.map((b, i) => {
-        if ("h" in b) return <h2 key={i}>{b.h}</h2>;
-        if ("q" in b)
-          return (
-            <blockquote key={i} className="pf-article-q">
-              {b.q}
-            </blockquote>
-          );
-        if ("img" in b)
-          return (
-            <figure key={i} className="pf-article-fig">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={b.img} alt={b.cap ?? ""} loading="lazy" />
-              {b.cap && <figcaption>{b.cap}</figcaption>}
-            </figure>
-          );
-        if ("ul" in b)
-          return (
-            <ul key={i}>
-              {b.ul.map((li, j) => (
-                <li key={j}>{li}</li>
-              ))}
-            </ul>
-          );
-        return <p key={i}>{b.p}</p>;
-      })}
-    </div>
-  );
-}
+import { ArticleBody } from "@/components/insights/ArticleBody";
+import { FEATURED, PULLQUOTES, type Entry } from "@/data/insights-articles";
 
 function InsightReader({
   entry,
@@ -163,10 +119,28 @@ export function InsightsPageContent() {
                   <span aria-hidden>·</span>
                   <span>{FEATURED.read}</span>
                 </div>
+                {/* href navigates to the real /insights/<slug> page.
+                   onClick intercepts a plain left-click and opens the
+                   overlay in place. Middle-click, cmd/ctrl-click, and
+                   right-click "Open in new tab" all bypass this handler
+                   and follow the href, so the entry is properly
+                   shareable and Google-indexable. */}
                 <Button
                   variant="primary"
                   iconRight={<ArrowUpRight size={16} aria-hidden />}
-                  onClick={() => setOpen(FEATURED)}
+                  href={`/insights/${FEATURED.slug}`}
+                  onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                    if (
+                      e.metaKey ||
+                      e.ctrlKey ||
+                      e.shiftKey ||
+                      e.altKey ||
+                      e.button !== 0
+                    )
+                      return;
+                    e.preventDefault();
+                    setOpen(FEATURED);
+                  }}
                 >
                   {FEATURED.cta}
                 </Button>

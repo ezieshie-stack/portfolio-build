@@ -1,5 +1,9 @@
 import Link from "next/link";
-import type { ReactNode, ComponentPropsWithoutRef } from "react";
+import type {
+  ComponentPropsWithoutRef,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+} from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -17,12 +21,16 @@ type CommonProps = {
 type ButtonAsButton = CommonProps &
   ComponentPropsWithoutRef<"button"> & { href?: undefined };
 
+/** Link variant. Accepts onClick so the caller can intercept a plain
+   left-click (e.g. to open a modal) while modifier + middle clicks
+   still follow the href — makes the button both interactive AND a
+   real, shareable, indexable URL. */
 type ButtonAsLink = CommonProps & {
   href: string;
   type?: never;
-  onClick?: never;
   disabled?: never;
   "aria-label"?: string;
+  onClick?: (e: ReactMouseEvent<HTMLAnchorElement>) => void;
 };
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
@@ -76,7 +84,12 @@ export function Button(props: ButtonProps) {
       );
     }
     return (
-      <Link href={props.href} className={cls} aria-label={props["aria-label"]}>
+      <Link
+        href={props.href}
+        className={cls}
+        aria-label={props["aria-label"]}
+        onClick={props.onClick}
+      >
         {inner}
       </Link>
     );
