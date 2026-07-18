@@ -176,7 +176,7 @@ export function SniperCenter() {
 
       <div className="pj-readout">
         <div className="pj-gauge" aria-label={`${capturePctInt} percent of breach cost caught`}>
-          <svg viewBox="0 0 180 180" width="180" height="180" role="img">
+          <svg viewBox="0 0 180 180" width="100%" height="100%" role="img">
             <circle
               cx="90"
               cy="90"

@@ -321,11 +321,11 @@ body { font-family: var(--font-sans); }
 
 /* readout */
 .pj-readout { display: flex; flex-direction: column; gap: 22px; padding: 22px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface-2); }
-.pj-gauge { position: relative; align-self: center; width: 180px; height: 180px; }
-.pj-gauge-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
-.pj-gauge-pct { font-size: 40px; font-weight: 800; letter-spacing: -0.04em; color: var(--text-heading); line-height: 1; }
-.pj-gauge-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
-.pj-gauge-band { margin-top: 6px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid; }
+.pj-gauge { position: relative; align-self: center; width: 220px; height: 220px; }
+.pj-gauge-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 18px; }
+.pj-gauge-pct { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: var(--text-heading); line-height: 1; }
+.pj-gauge-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); text-align: center; line-height: 1.3; }
+.pj-gauge-band { margin-top: 8px; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid; white-space: nowrap; }
 .pj-why { display: flex; flex-direction: column; gap: 9px; }
 .pj-why-h { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 3px; }
 .pj-why-row { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 12px; }
@@ -1466,7 +1466,7 @@ body { font-family: var(--font-sans); }
   .pj-scorer { grid-template-columns: 1fr; gap: 22px; }
   .pj-inputs-row { grid-template-columns: 1fr; }
   .pj-readout { padding: 18px; }
-  .pj-gauge { width: 160px; height: 160px; }
+  .pj-gauge { width: 200px; height: 200px; }
   .pj-beats { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
   .pj-metrics { grid-template-columns: 1fr 1fr; }
   .pj-cohort { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
@@ -1503,8 +1503,9 @@ body { font-family: var(--font-sans); }
   .pj-metrics { grid-template-columns: 1fr; }
   .pj-scorer .pj-seg { flex-wrap: wrap; }
   .pj-scorer .pj-seg-btn { min-width: 44px; padding: 8px 10px; font-size: 12px; }
-  .pj-gauge { width: 140px; height: 140px; }
-  .pj-gauge-pct { font-size: 32px; }
+  .pj-gauge { width: 180px; height: 180px; }
+  .pj-gauge-pct { font-size: 36px; }
+  .pj-gauge-band { font-size: 9px; padding: 3px 8px; letter-spacing: 0.08em; }
   .fx-scorer { padding: 16px; }
   .fx-seg { grid-template-columns: 1fr 1fr; }
   .cs-card { padding: 16px; }
