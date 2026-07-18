@@ -71,8 +71,12 @@ export function DiagramShell({
     const child = inner.firstElementChild as HTMLElement | null;
     const natW = Math.max(inner.scrollWidth, child?.offsetWidth ?? 0);
     const natH = Math.max(inner.scrollHeight, child?.offsetHeight ?? 0);
+    // Detect phone via the same CSS media query the pill uses, so JS
+    // and CSS can't disagree about "am I on a phone right now".
     const phone =
-      typeof window !== "undefined" && window.innerWidth <= 640;
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(max-width: 640px)").matches;
     const avail =
       Math.min(vp.clientWidth, typeof window !== "undefined" ? window.innerWidth : Infinity) -
       (phone ? 12 : 40);
