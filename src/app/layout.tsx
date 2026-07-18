@@ -12,7 +12,14 @@ import { PortfolioFooter } from "@/components/PortfolioFooter";
 const geist = GeistSans;
 const geistMono = GeistMono;
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "David Ezieshi — Business Analyst",
   description:
     "Business Analyst in Toronto. I take business problems through the full lifecycle, requirements, process and data design, delivery, and live solution support.",
