@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   BarChart3,
+  Bot,
   ClipboardCheck,
   Database,
   FileText,
@@ -66,7 +67,7 @@ const CARDS: WorkCard[] = [
     desc: "A 7-layer PostgreSQL pipeline using window functions to build velocity and risk features, feeding a rule-based scoring engine.",
     tags: ["PostgreSQL", "Window Functions", "Risk Scoring"],
     group: "Data Engineering",
-    href: "/work",
+    href: "/work/fraud-detection",
   },
   {
     icon: GitBranch,
@@ -75,7 +76,7 @@ const CARDS: WorkCard[] = [
     desc: "A cost-sensitive Random Forest predicting SLA breaches and ranking tickets by financial risk in a Streamlit dashboard.",
     tags: ["Machine Learning", "Streamlit", "Python"],
     group: "Analytics",
-    href: "/work",
+    href: "/work/sla-optimization",
   },
   {
     icon: FileText,
@@ -84,7 +85,16 @@ const CARDS: WorkCard[] = [
     desc: "A full BABOK v3 set. BRD, as-is and to-be process design, BPMN swimlane maps, and use-case specifications.",
     tags: ["BABOK v3", "BPMN", "Requirements"],
     group: "Business Analysis",
-    href: "/work",
+    href: "/work/fiitco",
+  },
+  {
+    icon: Bot,
+    category: "RPA · Automation",
+    title: "UiPath Supplier Price Monitor",
+    desc: "A UiPath bot that checks supplier prices on a schedule, flags anything past a ±5% threshold, and drops an Excel alert. Runs the seven-supplier list in under ten minutes vs. 60–90 manual.",
+    tags: ["UiPath", "RPA", "Excel"],
+    group: "Data Engineering",
+    href: "/work/uipath-automation",
   },
 ];
 

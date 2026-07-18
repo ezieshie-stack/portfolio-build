@@ -33,8 +33,11 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    // /work/fiitco + /work/telco-churn now have dedicated routes
+    // (src/app/work/{fiitco,telco-churn}/page.tsx) with artifact hubs + sub-pages.
+    // Marking unpublished so [slug] doesn't also generate.
     slug: "fiitco",
-    published: true,
+    published: false,
     title: "FIIT Co. Operational Ecosystem",
     category: "Operations Platform",
     summary:
@@ -73,8 +76,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // See fiitco note above — dedicated route at /work/telco-churn/.
     slug: "telco-churn",
-    published: true,
+    published: false,
     title: "Telco Customer Churn Analysis",
     category: "Data Analytics",
     summary:
@@ -114,8 +118,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/movie-profitability with hub + 5 sub-pages.
     slug: "movie-profitability",
-    published: true,
+    published: false,
     title: "Movie Industry Profitability Analysis",
     category: "Analytics Dashboard",
     summary:
@@ -155,8 +160,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/fraud-detection with hub + 5 sub-pages.
     slug: "fraud-detection",
-    published: true,
+    published: false,
     title: "Fraud Detection SQL Pipeline",
     category: "Data Engineering",
     summary:
@@ -195,8 +201,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/sla-optimization with hub + 5 sub-pages.
     slug: "sla-optimization",
-    published: true,
+    published: false,
     title: "Customer Support SLA Optimization",
     category: "Predictive Analytics",
     summary:
@@ -235,8 +242,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Dedicated route at /work/ba-process-design with hub + 4 sub-pages.
     slug: "ba-process-design",
-    published: true,
+    published: false,
     title: "Business Analysis & Process Design Portfolio",
     category: "Business Analysis",
     summary:
