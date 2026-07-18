@@ -22,6 +22,7 @@ import { UipathChart } from "@/components/work/uipath/UipathChart";
 import { UipathSelectorStrategy } from "@/components/work/uipath/UipathSelectorStrategy";
 import { UipathRunHistory } from "@/components/work/uipath/UipathRunHistory";
 import { UipathProofStrip } from "@/components/work/uipath/UipathProofStrip";
+import { UipathProcessFlows } from "@/components/work/uipath/UipathProcessFlows";
 import { UipathDocReaderClient } from "@/components/work/uipath/UipathDocReaderClient";
 
 export const metadata = {
@@ -255,6 +256,32 @@ export default function UipathProjectPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* AS-IS vs TO-BE process flows */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            AS-IS vs TO-BE process
+          </Eyebrow>
+          <p className="pj-section-sub">
+            Both flows drawn from the Manual and Automated Process Walkthroughs
+            in the PDD pack. Toggle between the two to see where the 60–90
+            minute manual routine collapses into a bot loop plus a five-minute
+            review.
+          </p>
+          <UipathProcessFlows />
+          <p className="cs-caption">
+            <Info size={13} aria-hidden />
+            High-fidelity swimlanes live on Canva:{" "}
+            <a
+              href="https://www.canva.com/design/DAG4m3zkiyE/sYm2Qo6dXMYLzJOb6gpGSQ/view"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              open the process design
+            </a>
+            .
+          </p>
         </section>
 
         {/* selector strategy */}

@@ -1262,6 +1262,13 @@ body { font-family: var(--font-sans); }
 .up-runs-sw.up-run-retry { background: #f0a744; }
 .up-runs-sw.up-run-skip { background: repeating-linear-gradient(45deg, var(--border) 0 3px, var(--surface-2) 3px 6px); }
 
+/* process flows — AS-IS vs TO-BE toggle */
+.up-proc { display: flex; flex-direction: column; gap: 12px; }
+.up-proc-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; align-self: flex-start; background: var(--surface-2); }
+.up-proc-btn { padding: 9px 16px; border: none; background: transparent; color: var(--text-dim); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; cursor: pointer; transition: all var(--duration-fast) var(--ease-out); }
+.up-proc-btn:hover { color: var(--text-heading); }
+.up-proc-btn.on { background: var(--accent-solid); color: var(--text-on-accent); font-weight: 600; }
+
 /* proof strip — alert sheet + audit log side by side */
 .up-proof { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; align-items: stretch; }
 .up-proof-panel { display: flex; flex-direction: column; min-width: 0; }
