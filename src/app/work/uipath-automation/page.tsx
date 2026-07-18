@@ -1,23 +1,27 @@
 import Link from "next/link";
 import {
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
   Bot,
   Clock,
-  Layers,
+  HelpCircle,
   RefreshCcw,
   Search,
   ShieldAlert,
   Table2,
+  TrendingUp,
   Zap,
 } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
 import { BrandIcon } from "@/components/ui/BrandIcon";
 import { UipathReplay } from "@/components/work/uipath/UipathReplay";
 import { UipathChart } from "@/components/work/uipath/UipathChart";
+import { UipathSelectorStrategy } from "@/components/work/uipath/UipathSelectorStrategy";
+import { UipathRunHistory } from "@/components/work/uipath/UipathRunHistory";
+import { UipathProofStrip } from "@/components/work/uipath/UipathProofStrip";
 
 export const metadata = {
   title: "UiPath Supplier Price Monitor | David Ezieshi",
@@ -52,6 +56,27 @@ const PHASES = [
     icon: RefreshCcw,
     desc: "Appends every check to the audit log, breaches to the Alert Sheet, and refreshes the supplier list with fresh prices and timestamps.",
     script: "Write_Output.xaml",
+  },
+];
+
+const FINDINGS = [
+  {
+    finding:
+      "Manual checks take 60–90 minutes daily and skew toward the top of the supplier list, so late-list suppliers get checked less often and their breaches slip through.",
+    recBold: "Automate the whole list every morning.",
+    rec: "A scheduled UiPath run treats every supplier the same, ships in under 10 minutes, and frees an hour a day of procurement time for actual negotiation.",
+  },
+  {
+    finding:
+      "Site redesigns silently break single-selector scrapers, and the ops team doesn't notice until a downstream stakeholder asks about missing data.",
+    recBold: "Two-tier detection with a visible fallback.",
+    rec: "A primary per-site selector plus an add-to-cart availability heuristic keeps the run useful when a page redesign lands, and the log makes the fallback explicit so the selector can be fixed the same day.",
+  },
+  {
+    finding:
+      "Alert fatigue is the real risk, so every ±1% wiggle can't reach the escalation queue.",
+    recBold: "Per-supplier ±5% threshold, read from the workbook.",
+    rec: "The threshold lives in the Excel row, not the code, so procurement can raise or lower it per supplier without a redeploy. Six of seven suppliers alerted on the last run, one sat inside the band.",
   },
 ];
 
@@ -115,6 +140,155 @@ export default function UipathProjectPage() {
         {/* diverging chart */}
         <section className="pj-section">
           <UipathChart />
+        </section>
+
+        {/* analyst's brief */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            The analyst&rsquo;s brief
+          </Eyebrow>
+          <p className="pj-section-sub">
+            Before the automation, the framing: why the manual routine hurts,
+            the operational question the bot answers, and the payoff.
+          </p>
+          <div className="sla-brief">
+            <div className="sla-brief-card">
+              <span className="sla-brief-k">
+                <AlertCircle size={15} aria-hidden /> Why it matters
+              </span>
+              <p>
+                Procurement can only negotiate the movements it sees. Late
+                catches on price hikes cost margin; missed stock outs cost
+                delivery dates. An hour of daily copy-paste is also a bad use
+                of a buyer&rsquo;s time.
+              </p>
+            </div>
+            <div className="sla-brief-card">
+              <span className="sla-brief-k">
+                <HelpCircle size={15} aria-hidden /> The question
+              </span>
+              <p>
+                Can a bot check every supplier every morning, apply a
+                threshold the buyer controls per-supplier, and land the
+                report on their desk before the first meeting?
+              </p>
+            </div>
+            <div className="sla-brief-card">
+              <span className="sla-brief-k">
+                <TrendingUp size={15} aria-hidden /> Business benefit
+              </span>
+              <p>
+                A ranked alert sheet plus an audit log turns reactive
+                firefighting into a same-day negotiation surface, and the
+                buyer gets an hour back to work upstream deals instead of
+                copy-pasting prices.
+              </p>
+            </div>
+          </div>
+          <div className="sla-approach">
+            <div className="sla-approach-row">
+              <span className="sla-approach-k">Data source</span>
+              <span className="sla-approach-v">
+                Shared Excel workbook (<code>supplier_list_template.xlsx</code>)
+                with one row per supplier: URL, part number, selector, last
+                known price, per-supplier threshold, and last check timestamp.
+              </span>
+            </div>
+            <div className="sla-approach-row">
+              <span className="sla-approach-k">Analysis type</span>
+              <span className="sla-approach-v">
+                Attended automation. UiPath Studio drives Chrome per supplier,
+                extracts price + availability, computes the delta vs. the
+                workbook row, and writes back to two tabs.
+              </span>
+            </div>
+            <div className="sla-approach-row">
+              <span className="sla-approach-k">Scope &amp; caveats</span>
+              <span className="sla-approach-v">
+                Seven suppliers in the demo run; the same workflow scales to
+                dozens with no code change (one row per supplier). Selectors
+                are site-specific; a page redesign triggers the add-to-cart
+                fallback, and the run log makes the fallback explicit.
+              </span>
+            </div>
+            <div className="sla-approach-row">
+              <span className="sla-approach-k">Tooling</span>
+              <span className="sla-approach-v">
+                UiPath Studio + Community, Excel activities, Windows Task
+                Scheduler for the daily run, plain <code>.csv</code> audit log
+                for portability.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* findings + recommendations */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            Findings, and what to do about them
+          </Eyebrow>
+          <p className="pj-section-sub">
+            Each finding is a fact from the operational data; each
+            recommendation is the specific rule the bot enforces to act on it.
+          </p>
+          <div className="sla-frec">
+            {FINDINGS.map((f, i) => (
+              <div className="sla-frec-row" key={i}>
+                <div className="sla-frec-f">
+                  <span className="sla-frec-tag find">Finding</span>
+                  <p>{f.finding}</p>
+                </div>
+                <div className="sla-frec-arrow">
+                  <ArrowRight size={22} aria-hidden />
+                </div>
+                <div className="sla-frec-r">
+                  <span className="sla-frec-tag rec">Recommendation</span>
+                  <p>
+                    <b>{f.recBold}</b> {f.rec}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* selector strategy */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            Selector strategy
+          </Eyebrow>
+          <p className="pj-section-sub">
+            The bot survives site redesigns because it never trusts a single
+            selector. A primary path is fast when the page hasn&rsquo;t
+            moved; a fallback path keeps the run honest when it has.
+          </p>
+          <UipathSelectorStrategy />
+        </section>
+
+        {/* run history */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            Run history
+          </Eyebrow>
+          <p className="pj-section-sub">
+            The bot runs on a Windows Task Scheduler cron at 09:00 every
+            weekday. This strip is the last 14 executions, each a real
+            morning run against the same workbook.
+          </p>
+          <UipathRunHistory />
+        </section>
+
+        {/* proof strip */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            What the workbook looks like after a run
+          </Eyebrow>
+          <p className="pj-section-sub">
+            Two artifacts land after every run: the Alert Sheet (rows the
+            buyer opens) and the audit log CSV (rows for anyone running
+            downstream analytics). The values below match the replay above.
+          </p>
+          <UipathProofStrip />
         </section>
 
         {/* how the bot works */}
