@@ -77,10 +77,12 @@ export function DiagramShell({
       Math.min(vp.clientWidth, typeof window !== "undefined" ? window.innerWidth : Infinity) -
       (phone ? 12 : 40);
     const widthFit = natW > avail ? Math.max(0.16, +(avail / natW).toFixed(3)) : 1;
-    // On phones we render at authored size (scale 1) so nodes stay
-    // readable and the viewport pans in both directions. Desktop keeps
-    // the width-fit behaviour so wide diagrams shrink to viewport width.
-    const s = phone ? 1 : widthFit;
+    // Phone inline: authored size (scale 1) so nodes stay readable and
+    // the viewport pans in both directions.
+    // Phone fullscreen: fit to width so nothing is cut off on the right;
+    // pan vertically to read down.
+    // Desktop: width-fit so wide diagrams shrink to the viewport.
+    const s = phone ? (fs ? widthFit : 1) : widthFit;
     // Snap the pan back to origin so the fitted diagram is actually
     // visible (otherwise a manual zoom-in + pan leaves the viewport
     // scrolled onto empty space after the fit shrinks the content).
@@ -209,6 +211,16 @@ export function DiagramShell({
             {children}
           </div>
         </div>
+        {!fs ? (
+          <button
+            type="button"
+            className="mm-expand"
+            onClick={() => setFs(true)}
+            aria-label="Open fullscreen"
+          >
+            <Expand size={14} aria-hidden /> Tap to enlarge
+          </button>
+        ) : null}
       </div>
       {legend && legend.length ? (
         <div className="fc-legend">

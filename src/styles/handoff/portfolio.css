@@ -1524,13 +1524,14 @@ body { font-family: var(--font-sans); }
 .fig-frame-card, .fig-canvas { max-width: 100%; }
 .dr-twrap, .dr-ascii { max-width: 100%; }
 
-/* DiagramShell — on phones keep the diagram at a readable scale and
-   let the artboard scroll internally. Fitting everything to phone
-   width shrinks the nodes past legibility; instead we render at a
-   floor scale (see DiagramShell.fit) and let the user pan the
-   overflow. The Expand button opens fullscreen for a wider view. */
+/* DiagramShell mobile — matches the design engine.
+   - Phone (≤640): viewport is 340 px, diagram renders at authored size,
+     "Tap to enlarge" pill appears in the viewport bottom-right and opens
+     fullscreen where the diagram fits the whole width and pans vertically.
+   - Small tablet (641–900): tighter toolbar/legend padding, viewport
+     still auto-height so the diagram hugs its content. */
+.mm-expand { display: none; }
 @media (max-width: 900px) {
-  .mm-viewport { height: 380px; overflow: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; }
   .mm-inner { padding: 12px; }
   .mm-figure { margin: 8px 0 18px; }
   .mm-bar { padding: 7px 10px; }
@@ -1538,10 +1539,20 @@ body { font-family: var(--font-sans); }
   .mm-btn { width: 26px; height: 24px; }
   .fc-legend { padding: 8px 10px; gap: 10px; }
   .fc-leg { font-size: 10.5px; }
-  .mm-scroll-hint { display: flex; }
+}
+@media (max-width: 640px) {
+  .mm-viewport { height: 340px; overflow: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; }
+  .mm-expand {
+    display: inline-flex; align-items: center; gap: 6px;
+    position: absolute; right: 10px; bottom: 10px;
+    padding: 8px 13px; border-radius: 999px; border: none;
+    background: var(--accent-solid); color: var(--text-on-accent);
+    font-family: var(--font-sans); font-size: 12.5px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.28); cursor: pointer; z-index: 4;
+  }
+  .mm-figure.mm-fs .mm-viewport { height: auto; }
+  .mm-figure.mm-fs .mm-expand { display: none; }
 }
 @media (max-width: 480px) {
-  .mm-viewport { height: 340px; }
   .mm-inner { padding: 8px; }
 }
-.mm-scroll-hint { display: none; align-items: center; gap: 6px; padding: 6px 12px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); background: var(--surface-2); border-bottom: 1px solid var(--border); }
