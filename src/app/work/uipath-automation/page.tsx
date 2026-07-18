@@ -6,6 +6,7 @@ import {
   Bot,
   Clock,
   HelpCircle,
+  Info,
   RefreshCcw,
   Search,
   ShieldAlert,
