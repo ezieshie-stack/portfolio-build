@@ -4755,6 +4755,33 @@ button:focus-visible {
   height: 100%;
   border: 0;
   background: #1a1a24;
+  display: block;
+}
+
+.resume-preview-fallback {
+  width: 100%;
+  height: 100%;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+  background: linear-gradient(160deg, rgba(139, 92, 246, 0.08), rgba(5, 5, 10, 0.85));
+  color: var(--text-body, #e5e5f0);
+}
+.resume-preview-fallback-eyebrow {
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text, #b39ff9);
+}
+.resume-preview-fallback p {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 40ch;
 }
 
 .resume-modal-backdrop {

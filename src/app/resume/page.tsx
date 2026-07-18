@@ -28,11 +28,30 @@ export default async function ResumePage() {
         <Reveal>
           {pdfUrl ? (
             <div className="resume-preview-card">
-              <iframe
-                src={`${pdfUrl}#toolbar=0&navpanes=0`}
+              <object
+                data={`${pdfUrl}#toolbar=0&navpanes=0`}
+                type="application/pdf"
                 className="resume-preview-frame"
-                title="Resume preview"
-              />
+                aria-label="Resume preview"
+              >
+                <div className="resume-preview-fallback">
+                  <span className="resume-preview-fallback-eyebrow">
+                    Inline preview not supported
+                  </span>
+                  <p>
+                    Your browser can&rsquo;t render PDFs inline. Use the buttons
+                    below to download the resume or open it in a new tab.
+                  </p>
+                  <a
+                    href={pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-pill btn-primary"
+                  >
+                    Open PDF in a new tab
+                  </a>
+                </div>
+              </object>
             </div>
           ) : (
             <div className="glass-card aspect-[3/4] flex items-center justify-center text-[color:var(--text-dim)] text-xs tracking-[0.2em] uppercase">
