@@ -31,7 +31,7 @@ export function FlowCanvas({ config }: { config: FlowConfig }) {
       w = d;
       h = d;
     }
-    if (n.shape === "entity") h = 30 + (n.rows ? n.rows.length : 0) * 20;
+    if (n.shape === "entity") h = 34 + (n.rows ? n.rows.length : 0) * 22;
     return { x, y, w, h, cx: x + w / 2, cy: y + h / 2 };
   };
 
