@@ -2,10 +2,10 @@
 id: BA-03
 title: Business Requirements Document
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
@@ -29,12 +29,12 @@ The engagement's five business objectives, copied from the Project Charter for c
 
 ## BUSINESS REQUIREMENTS
 
-Business requirements express what the business needs the solution to achieve in plain operational language — without prescribing how. Each requirement is traced from a business objective.
+Business requirements express what the business needs the solution to achieve in plain operational language, without prescribing how. Each requirement is traced from a business objective.
 
 | **ID** | **Requirement** | **Traces To** |
 |---|---|---|
 | BR-01 | The studio needs a single source of truth for class schedules, lesson plans, exercises, equipment, and delivery records. | BO-02 |
-| BR-02 | The tool must support at least two distinct user roles — administrator (Arden) and instructor — with different permissions. | BO-02 |
+| BR-02 | The tool must support at least two distinct user roles, administrator (Arden) and instructor, with different permissions. | BO-02 |
 | BR-03 | The tool must be usable on desktop and mobile so trainers can access it from the studio floor. | BO-02 |
 | BR-04 | The studio needs defect evidence for the existing website to prioritise fixes or replacement. | BO-01 |
 | BR-05 | The new customer-facing website must reflect the FIIT Co. brand direction (three pillars, Leslieville identity, inclusive welcome). | BO-04 |
@@ -75,17 +75,17 @@ Functional requirements describe what the Class Management Tool must do. Each re
 
 ## NON-FUNCTIONAL REQUIREMENTS
 
-Non-functional requirements describe how the solution must perform — not what it does. They apply to both the Class Management Tool and the customer-facing website unless noted otherwise.
+Non-functional requirements describe how the solution must perform, not what it does. They apply to both the Class Management Tool and the customer-facing website unless noted otherwise.
 
 | **ID** | **Category** | **Requirement** | **Target** |
 |---|---|---|---|
-| NFR-01 | Performance | Customer website — homepage largest contentful paint on a 4G connection. | < 2.5 seconds |
-| NFR-02 | Performance | Class Management Tool — screen transition time for authenticated pages. | < 500 ms after cache warm |
-| NFR-03 | Availability | Both systems — uptime during the team UAT window. | ≥ 99.5% |
+| NFR-01 | Performance | Customer website, homepage largest contentful paint on a 4G connection. | < 2.5 seconds |
+| NFR-02 | Performance | Class Management Tool, screen transition time for authenticated pages. | < 500 ms after cache warm |
+| NFR-03 | Availability | Both systems, uptime during the team UAT window. | ≥ 99.5% |
 | NFR-04 | Security | Passwords stored as salted hashes; no plain-text secrets in the repository. | No secrets in source |
 | NFR-05 | Security | Role-based access enforced at both the API and UI layers. | RBAC validated in UAT |
-| NFR-06 | Accessibility | Customer website — WCAG 2.1 AA compliance on all shipping pages. | Audit passes before go-live |
-| NFR-07 | Responsiveness | Both systems — usable across viewports from 360px to 1920px. | No horizontal scrolling |
+| NFR-06 | Accessibility | Customer website, WCAG 2.1 AA compliance on all shipping pages. | Audit passes before go-live |
+| NFR-07 | Responsiveness | Both systems, usable across viewports from 360px to 1920px. | No horizontal scrolling |
 | NFR-08 | Maintainability | All source code under version control with clear commit history. | Single GitHub repository per product |
 | NFR-09 | Observability | Deployment runbook documents how to redeploy, reseed, and inspect logs. | Runbook delivered at handover |
 | NFR-10 | Portability | Customer website content should be editable without a developer where practical. | Shared data files for posts and team |

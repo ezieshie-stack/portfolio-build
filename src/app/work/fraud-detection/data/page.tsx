@@ -69,7 +69,7 @@ export default function FraudDataPage() {
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
             The PaySim schema: what each column means and how it is used. The four balance
-            columns do the quiet work — they let a reconciliation check catch tampering that
+            columns do the quiet work, they let a reconciliation check catch tampering that
             the amount alone would never reveal.
           </p>
         </section>

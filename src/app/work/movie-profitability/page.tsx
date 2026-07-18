@@ -26,7 +26,7 @@ import { FunnelExplorer } from "@/components/work/movie/FunnelExplorer";
 export const metadata = {
   title: "Movie Industry Profitability | David Ezieshi",
   description:
-    "5,009 films tracked through an 8-stage investment-to-profitability funnel — where the money dies and which levers actually work.",
+    "5,009 films tracked through an 8-stage investment-to-profitability funnel, where the money dies and which levers actually work.",
 };
 
 type Artifact = { href: string; idx: string; icon: LucideIcon; title: string; desc: string; meta: string };
@@ -75,7 +75,7 @@ export default function MovieHubPage() {
           </p>
         </section>
 
-        {/* interactive 7-stage funnel — the signature widget */}
+        {/* interactive 7-stage funnel, the signature widget */}
         <section className="pj-section" style={{ marginTop: 24 }}>
           <FunnelExplorer />
           <p className="cs-caption">
@@ -101,7 +101,7 @@ export default function MovieHubPage() {
             </div>
             <div className="sla-brief-card">
               <span className="sla-brief-k"><HelpCircle size={15} aria-hidden /> The question</span>
-              <p>Where in the investment-to-profit pipeline does money get lost, and which levers — budget tier, genre, talent — actually reduce that risk rather than just raising the stakes?</p>
+              <p>Where in the investment-to-profit pipeline does money get lost, and which levers, budget tier, genre, talent, actually reduce that risk rather than just raising the stakes?</p>
             </div>
             <div className="sla-brief-card">
               <span className="sla-brief-k"><TrendingUp size={15} aria-hidden /> Business benefit</span>
@@ -119,8 +119,8 @@ export default function MovieHubPage() {
         <section className="pj-section">
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>Bigger budgets are not safer returns</Eyebrow>
           <p className="pj-section-sub">
-            Success rate by budget tier. Budget correlates with revenue at 0.73, yet the mid tier — not the
-            mega tier — is the best risk-adjusted bet once you weigh the cost of a single failure.
+            Success rate by budget tier. Budget correlates with revenue at 0.73, yet the mid tier, not the
+            mega tier, is the best risk-adjusted bet once you weigh the cost of a single failure.
           </p>
           <div className="mv-tiers">
             {TIERS.map((t) => (

@@ -74,7 +74,7 @@ export default async function ProjectDetailPage({
           )}
         </section>
 
-        {/* Meta strip — auto-fit on desktop, collapses to 1 col ≤760px */}
+        {/* Meta strip, auto-fit on desktop, collapses to 1 col ≤760px */}
         <section className="pf-meta-strip" style={{ marginBottom: 64 }}>
           {meta.map((m) => (
             <Card key={m.label} padding="22px">
@@ -98,7 +98,7 @@ export default async function ProjectDetailPage({
           ))}
         </section>
 
-        {/* Body — Challenge + Approach (2-col, collapses ≤980px) */}
+        {/* Body, Challenge + Approach (2-col, collapses ≤980px) */}
         <section className="pf-case-body" style={{ marginBottom: 56 }}>
           <div>
             <Eyebrow className="mb-[14px]">The Challenge</Eyebrow>
@@ -123,7 +123,7 @@ export default async function ProjectDetailPage({
           </div>
         </section>
 
-        {/* Outcomes — MetricStat grid */}
+        {/* Outcomes, MetricStat grid */}
         {project.metrics.length > 0 && (
           <section style={{ marginBottom: 56 }}>
             <Eyebrow className="mb-[22px]">The Impact</Eyebrow>

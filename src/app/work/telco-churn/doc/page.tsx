@@ -7,7 +7,7 @@ import { TelcoDocReaderClient } from "@/components/work/telco/TelcoDocReaderClie
 export const metadata = {
   title: "Telco · Write-up (T5) | David Ezieshi",
   description:
-    "The long-form case study behind the interactive Telco churn dashboard — problem, method, findings, recommendations.",
+    "The long-form case study behind the interactive Telco churn dashboard, problem, method, findings, recommendations.",
 };
 
 export default function TelcoDocPage() {

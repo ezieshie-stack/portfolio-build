@@ -7,7 +7,7 @@ import { DiagramsPageClient } from "@/components/work/fiitco/diagrams/DiagramsPa
 export const metadata = {
   title: "FIIT Co. · Diagrams (A8) | David Ezieshi",
   description:
-    "Interactive architecture, data-flow, ERD, functional-decomposition, use-case, and Ishikawa root-cause diagrams — each with its source narrative and talking points.",
+    "Interactive architecture, data-flow, ERD, functional-decomposition, use-case, and Ishikawa root-cause diagrams, each with its source narrative and talking points.",
 };
 
 export default function FiitDiagramsPage() {

@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 
 export const metadata = {
   title: "Fraud · SQL Explorer (F1) | David Ezieshi",
-  description: "The 7 fraud-detection analysis queries — velocity, balance anomalies, structuring, precision analysis.",
+  description: "The 7 fraud-detection analysis queries, velocity, balance anomalies, structuring, precision analysis.",
 };
 
 type Query = { id: string; title: string; phase: string; q: string; sql: string; read: ReactNode };

@@ -11,7 +11,7 @@
 
 > **On a mid-week schedule update, `fiitco.ca` served the previous week's schedule to members for ~24 hours before the stale edge cache was invalidated. Members arrived expecting classes that had been moved or cancelled.**
 
-One incident, one problem statement, one fishbone. This is the correct scope for Ishikawa — a single defect, not a survey of every possible failure.
+One incident, one problem statement, one fishbone. This is the correct scope for Ishikawa, a single defect, not a survey of every possible failure.
 
 ---
 
@@ -23,8 +23,8 @@ One incident, one problem statement, one fishbone. This is the correct scope for
 **How to read it:**
 - The **problem statement** sits at the head of the spine on the right.
 - The **six branches** (People / Machine / Method / Material / Measurement / Environment) each collect the contributing causes from that category.
-- **Twigs on each branch** are the specific contributing factors — every twig on this diagram was demonstrably present in the incident, not hypothetical.
-- **Root cause** — the branch with the most contributory twigs, drilled into with 5-Whys, gets its own section below the diagram.
+- **Twigs on each branch** are the specific contributing factors, every twig on this diagram was demonstrably present in the incident, not hypothetical.
+- **Root cause**, the branch with the most contributory twigs, drilled into with 5-Whys, gets its own section below the diagram.
 
 ---
 
@@ -51,7 +51,7 @@ One incident, one problem statement, one fishbone. This is the correct scope for
 - Incident detected by member complaint, not automation
 
 **🌍 Environment**
-- Mid-week schedule change was rare — the recipe was not rehearsed
+- Mid-week schedule change was rare, the recipe was not rehearsed
 - Single-admin operation = no peer challenge on the workflow gap
 
 ---
@@ -65,10 +65,10 @@ Fishbone gets criticised for stopping at the branches. The BA move is to run **5
 | 1 | Why did the site serve stale content? | The Vercel edge cache held the old response. |
 | 2 | Why wasn't the cache invalidated? | The CMS publish action had no revalidation hook. |
 | 3 | Why did no one add one? | The publish workflow was documented as "click Save, done." |
-| 4 | Why was the workflow documented that way? | Because during the build, dev + prod behaved similarly — cache invalidation wasn't a visible concern. |
+| 4 | Why was the workflow documented that way? | Because during the build, dev + prod behaved similarly, cache invalidation wasn't a visible concern. |
 | 5 | Why was it not caught in UAT? | **UAT tested content correctness; it did not test cache freshness on a delayed second view.** |
 
-**Root cause:** UAT coverage gap — the acceptance criteria treated "content saved" as equivalent to "content visible to a returning visitor." That equivalence held in dev (no edge cache) but not in prod.
+**Root cause:** UAT coverage gap, the acceptance criteria treated "content saved" as equivalent to "content visible to a returning visitor." That equivalence held in dev (no edge cache) but not in prod.
 
 ---
 

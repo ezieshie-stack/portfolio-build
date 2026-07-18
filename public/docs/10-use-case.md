@@ -1,7 +1,7 @@
 # FIIT Co. — Use Case Diagram
 
 **Artifact ID:** BA-10b · Use Case Diagram (UML)
-**Purpose:** Show every actor, every use case, and the relationships between them — including where an authenticated flow *includes* the auth check as a shared use case. This is the sponsor-readable version of BA-10 User Story Backlog.
+**Purpose:** Show every actor, every use case, and the relationships between them, including where an authenticated flow *includes* the auth check as a shared use case. This is the sponsor-readable version of BA-10 User Story Backlog.
 **Source:** BA-02 Stakeholder Register · BA-09 RBAC Matrix · BA-10 User Story Backlog · Technical Architecture Handoff
 
 ---
@@ -12,10 +12,10 @@
 - **Is not:** a workflow, a sequence, a data model, or a screen inventory.
 
 Relationship notation used below:
-- **Association** (solid line) — this actor can invoke this use case.
-- **«include»** (dotted arrow) — this use case *always* invokes another. Use case A includes B means "B runs every time A runs."
-- **«extend»** (dotted arrow) — this use case *sometimes* invokes another (a conditional or optional path).
-- **Generalisation** (hollow arrow) — inheritance between actors or use cases.
+- **Association** (solid line), this actor can invoke this use case.
+- **«include»** (dotted arrow), this use case *always* invokes another. Use case A includes B means "B runs every time A runs."
+- **«extend»** (dotted arrow), this use case *sometimes* invokes another (a conditional or optional path).
+- **Generalisation** (hollow arrow), inheritance between actors or use cases.
 
 ---
 
@@ -25,7 +25,7 @@ Relationship notation used below:
 > **Aimed at:** Sponsor · BA peer · security reviewer · new joiner scanning "what's in scope for this actor?"
 
 **Reading key:**
-- 🟩 Green use cases are **anonymous** — no session required.
+- 🟩 Green use cases are **anonymous**, no session required.
 - 🟨 Amber is the **shared authentication** use case, `«include»`d by every authenticated flow.
 - 🟥 Red are **Admin-only**.
 - 🟦 Blue are **Instructor-only**.
@@ -57,7 +57,7 @@ Relationship notation used below:
 | Sign In | M · A · I | Public entry, sets tier | BR-02 · US-001 |
 | Reset Password | M | Public | BR-02 |
 | Crawl + Index Public Pages | G | Public | (SEO scope, no BR) |
-| Authenticate Session | *(included)* | — | BR-02 · US-001/002/003 |
+| Authenticate Session | *(included)* |, | BR-02 · US-001/002/003 |
 | Manage Weekly Schedule | A | Admin | BR-01 · US-010/011/012 |
 | Manage Class Catalogue | A | Admin | BR-01 |
 | Manage Instructors | A | Admin | BR-01 · BR-02 |
@@ -76,7 +76,7 @@ Relationship notation used below:
 
 ## The «include» pattern — why it matters here
 
-Every authenticated use case **includes** the shared `Authenticate Session` use case. That's not stylistic — it's the modelling equivalent of the `requireAuth` gate in the actual Convex code.
+Every authenticated use case **includes** the shared `Authenticate Session` use case. That's not stylistic, it's the modelling equivalent of the `requireAuth` gate in the actual Convex code.
 
 **Consequence:** if Sign In breaks, every included use case breaks. On the diagram, that's a single failure point; in the code, it's the single `requireAuth` helper in `authHelpers.ts`. **Model reflects code.**
 
@@ -84,11 +84,11 @@ Every authenticated use case **includes** the shared `Authenticate Session` use 
 
 ## Notable diagram decisions
 
-1. **MindBody is an actor, not a use case.** It's an external system that exchanges data with the platform — but only via manual reconciliation, not an API. Drawing it as an actor makes the "no API integration" boundary visible.
+1. **MindBody is an actor, not a use case.** It's an external system that exchanges data with the platform, but only via manual reconciliation, not an API. Drawing it as an actor makes the "no API integration" boundary visible.
 2. **Sign In is anonymous, not authenticated.** It's the *entry* to the authenticated zone. It sets the session; it doesn't require one.
-3. **Reset Password is «extend»ed from Sign In.** The "Forgot?" link on the login screen is the trigger — always conditional on the user reaching Sign In first.
+3. **Reset Password is «extend»ed from Sign In.** The "Forgot?" link on the login screen is the trigger, always conditional on the user reaching Sign In first.
 4. **Referral has a bi-actor lifecycle.** Member submits (anonymous), Admin manages afterwards (authenticated). Both associations are on the diagram, connected by an «extend» arrow.
-5. **`Manage Users` is Admin-only, not a general capability.** Instructors have no user-administration authority — enforced by `requireAdmin`, mirrored on the diagram.
+5. **`Manage Users` is Admin-only, not a general capability.** Instructors have no user-administration authority, enforced by `requireAdmin`, mirrored on the diagram.
 
 ---
 
@@ -99,7 +99,7 @@ Every authenticated use case **includes** the shared `Authenticate Session` use 
 | Use cases in this diagram | 22 |
 | Business Requirements referenced | BR-01 · BR-02 · BR-03 · BR-04 · BR-05 · BR-06 · BR-07 · BR-08 = **all 8** |
 | BRs missing coverage | **0** |
-| Use cases with no BR trace | 3 (`Crawl+Index`, `Approve Pending Change`, `Export/Restore`) — all correctly declared out-of-BR-scope in the Charter |
+| Use cases with no BR trace | 3 (`Crawl+Index`, `Approve Pending Change`, `Export/Restore`), all correctly declared out-of-BR-scope in the Charter |
 
 **Acceptance:** every Business Requirement has at least one use case that delivers it, and every use case with no BR trace is explicitly explained by a Charter-level scope note. That's the definition of full coverage.
 

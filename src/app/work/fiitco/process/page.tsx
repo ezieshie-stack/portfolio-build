@@ -8,7 +8,7 @@ import { ProcessClient } from "@/components/work/fiitco/process/ProcessClient";
 export const metadata = {
   title: "FIIT Co. · Process Models (A1) | David Ezieshi",
   description:
-    "Eleven FIIT Co. workflows as BPMN 2.0 swimlanes — each toggleable between the current (as-is) and redesigned (to-be) state.",
+    "Eleven FIIT Co. workflows as BPMN 2.0 swimlanes, each toggleable between the current (as-is) and redesigned (to-be) state.",
 };
 
 const HOW_ITEMS: [React.ComponentType<{ size?: number; "aria-hidden"?: boolean }>, string, string][] = [

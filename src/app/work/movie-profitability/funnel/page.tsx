@@ -47,7 +47,7 @@ export default function MovieFunnelPage() {
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
             Borrowing the method from sales-pipeline analysis, each film is tracked from investment
             through to profit. The framework is the deliverable: it does not just say 54.5% are
-            profitable — it shows exactly where the other 45.5% fall out.
+            profitable, it shows exactly where the other 45.5% fall out.
           </p>
         </section>
 
@@ -114,7 +114,7 @@ export default function MovieFunnelPage() {
             <p>
               <b>The #1 bottleneck.</b> 576 films sit in &ldquo;major loss&rdquo;: they earned box
               office revenue but recovered under half their budget. This is where the most capital
-              is destroyed industry-wide. The highest-leverage fix is not making better films — it
+              is destroyed industry-wide. The highest-leverage fix is not making better films, it
               is tighter cost control before greenlight. Lower the break-even threshold 20% and
               hundreds of almost-profitable titles tip into profit.
             </p>

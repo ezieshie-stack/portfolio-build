@@ -16,7 +16,7 @@ import { RtmClient } from "@/components/work/fiitco/RtmClient";
 export const metadata = {
   title: "FIIT Co. · Requirements Traceability (A6) | David Ezieshi",
   description:
-    "BA-12 sponsor slice — Charter Objective → Stakeholder → Business Requirement → closure signal.",
+    "BA-12 sponsor slice, Charter Objective → Stakeholder → Business Requirement → closure signal.",
 };
 
 const DIAGNOSTIC: [string, string, string, string][] = [

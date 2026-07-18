@@ -7,7 +7,7 @@ import { SlaDocReaderClient } from "@/components/work/sla/SlaDocReaderClient";
 export const metadata = {
   title: "SLA · Write-up (S5) | David Ezieshi",
   description:
-    "The long-form case study behind the interactive Sniper Command Center — problem, method, findings, recommendations.",
+    "The long-form case study behind the interactive Sniper Command Center, problem, method, findings, recommendations.",
 };
 
 export default function SlaDocPage() {

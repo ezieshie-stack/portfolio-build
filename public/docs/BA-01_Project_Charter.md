@@ -2,10 +2,10 @@
 id: BA-01
 title: Project Charter
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
@@ -36,7 +36,7 @@ Four drivers are pushing FIIT Co. toward an operational and digital reset at thi
 
 - Rapid growth in trainer headcount (from one or two primary leads to approximately twelve active trainers) has made informal coordination unsustainable and is creating an inconsistency risk in class delivery.
 - A new flagship studio space is scheduled to open at the end of 2026, with a second Toronto location targeted within eighteen months. Systems selected now must survive scaling to multiple locations.
-- Arden, the gym manager, has asked for a single source of truth for the studio's operational records — a 'master record' that can outlive individual trainers and survive staffing changes.
+- Arden, the gym manager, has asked for a single source of truth for the studio's operational records, a 'master record' that can outlive individual trainers and survive staffing changes.
 - The current customer-facing website is visibly behind the quality of the studio itself, which is creating a drop-off between first-touch marketing and in-studio experience and is suppressing organic lead conversion.
 
 ### 2.3 Opportunity
@@ -49,7 +49,7 @@ A coordinated upgrade of the operational toolset and the public digital presence
 
 ### 3.1 Strategic Alignment
 
-The engagement is intentionally aligned to FIIT Co.'s stated three- pillar brand position — Boxing First, Every Discipline, Serious Recovery — and to the gym's stated growth plan (new space end of 2026, second location within eighteen months). Every deliverable is evaluated against whether it strengthens one of those pillars or de-risks the scale plan.
+The engagement is intentionally aligned to FIIT Co.'s stated three- pillar brand position, Boxing First, Every Discipline, Serious Recovery, and to the gym's stated growth plan (new space end of 2026, second location within eighteen months). Every deliverable is evaluated against whether it strengthens one of those pillars or de-risks the scale plan.
 
 ## OBJECTIVES & SUCCESS CRITERIA
 
@@ -71,10 +71,10 @@ The engagement is structured as four workstreams operating under a single progra
 
 | **Workstream** | **In Scope** |
 |---|---|
-| Scope 1 — UAT of the existing website | Navigation testing, defect logging, severity classification, remediation recommendations, and a published UAT report. |
-| Scope 2 — Class Management Tool | Requirements, data model, UX design, build, deployment to Vercel with Convex backend, RBAC (admin + instructor), team UAT, training, and handover. Includes scheduling, lesson plans, exercise library, equipment inventory, delivery log, instructor management, and settings. |
-| Scope 3 — Client Tracking Platform Selection | Vendor discovery, comparison matrix, cost-benefit analysis, integration review, and written recommendation. Top candidate at time of charter: Trainerize at approximately $250 per month. |
-| Scope 4 — Customer-Facing Website | Information architecture, brand-aligned visual design, responsive build, MindBody deep-link integration, referral system design, guest-pass system design, blog, team and testimonials sections, and deployment to a staging URL for review. |
+| Scope 1, UAT of the existing website | Navigation testing, defect logging, severity classification, remediation recommendations, and a published UAT report. |
+| Scope 2, Class Management Tool | Requirements, data model, UX design, build, deployment to Vercel with Convex backend, RBAC (admin + instructor), team UAT, training, and handover. Includes scheduling, lesson plans, exercise library, equipment inventory, delivery log, instructor management, and settings. |
+| Scope 3, Client Tracking Platform Selection | Vendor discovery, comparison matrix, cost-benefit analysis, integration review, and written recommendation. Top candidate at time of charter: Trainerize at approximately $250 per month. |
+| Scope 4, Customer-Facing Website | Information architecture, brand-aligned visual design, responsive build, MindBody deep-link integration, referral system design, guest-pass system design, blog, team and testimonials sections, and deployment to a staging URL for review. |
 | Cross-cutting | Business Analysis documentation set, meeting minutes, weekly status reports, RAID log, requirements traceability, and a closure report. |
 
 ### 5.2 Out of Scope
@@ -95,7 +95,7 @@ To protect the timeline and keep acceptance unambiguous, the following items are
 - FIIT Co. will provide timely access to trainer bios, class formats, brand assets, testimonials, and membership pricing as inputs to the website and Class Management Tool.
 - The Class Management Tool will be accepted in a 'ready for team use' state at the end of a one-week team UAT window, not in a production-hardened state with full audit logging.
 - MindBody will remain the authoritative booking and payment system through and beyond this engagement.
-- Trainerize (or an equivalent) will be reviewed and either purchased directly by FIIT Co. after recommendation, or deferred based on budget — procurement is not inside this engagement.
+- Trainerize (or an equivalent) will be reviewed and either purchased directly by FIIT Co. after recommendation, or deferred based on budget, procurement is not inside this engagement.
 
 ### 5.4 Constraints
 
@@ -111,13 +111,13 @@ The core stakeholder group is intentionally small so decisions can be made quick
 
 | **Role** | **Name** | **Primary Responsibility** |
 |---|---|---|
-| Project Sponsor | Arden — Gym Manager, FIIT Co. | Owns the business outcome, holds decision authority, provides access to staff and data, signs off on major milestones. |
-| Executive Owner | Jason Battiste — Founder & Head Coach | Final authority on brand voice, training philosophy, and any decision that touches the member experience. |
-| Business Analyst | David Ezieshi — BA Lead, Team #4 | Owns discovery, requirements, documentation, vendor analysis, UAT governance, and stakeholder communication across all four workstreams. |
-| Development & Design Partner | Claude — Full-Stack Developer & Web Designer | Delivers the Class Management Tool build, the customer-facing website build, and all UI/UX design across both, working from the BA's requirements and reviews. |
-| End Users — Instructors | FIIT Co. trainer roster (approx. 12 active) | Primary users of the Class Management Tool; secondary contributors to exercise library and lesson planning content. |
-| End Users — Members & Prospects | FIIT Co. members and the Leslieville community | Primary audience for the customer-facing website and the referral, guest-pass, and booking flows. |
-| Academic Oversight | George Brown College — BA Co-op Coordinator | Reviews engagement artefacts for academic credit and confirms the project meets co-op learning outcomes. |
+| Project Sponsor | Arden, Gym Manager, FIIT Co. | Owns the business outcome, holds decision authority, provides access to staff and data, signs off on major milestones. |
+| Executive Owner | Jason Battiste, Founder & Head Coach | Final authority on brand voice, training philosophy, and any decision that touches the member experience. |
+| Business Analyst | David Ezieshi, BA Lead, Team #4 | Owns discovery, requirements, documentation, vendor analysis, UAT governance, and stakeholder communication across all four workstreams. |
+| Development & Design Partner | Claude, Full-Stack Developer & Web Designer | Delivers the Class Management Tool build, the customer-facing website build, and all UI/UX design across both, working from the BA's requirements and reviews. |
+| End Users, Instructors | FIIT Co. trainer roster (approx. 12 active) | Primary users of the Class Management Tool; secondary contributors to exercise library and lesson planning content. |
+| End Users, Members & Prospects | FIIT Co. members and the Leslieville community | Primary audience for the customer-facing website and the referral, guest-pass, and booking flows. |
+| Academic Oversight | George Brown College, BA Co-op Coordinator | Reviews engagement artefacts for academic credit and confirms the project meets co-op learning outcomes. |
 
 ## HIGH-LEVEL DELIVERABLES
 
@@ -125,7 +125,7 @@ The core stakeholder group is intentionally small so decisions can be made quick
 |---|---|---|
 | Scope 1 | UAT Report (defect inventory, navigation health, recommendations) | Excel + Markdown + PowerPoint |
 | Scope 2 | Class Management Tool (deployed web application) | Next.js + Convex application on Vercel |
-| Scope 2 | BA Report v2.0 — Class Management Tool | Word document (13 sections) |
+| Scope 2 | BA Report v2.0, Class Management Tool | Word document (13 sections) |
 | Scope 3 | Client Tracking Platform Recommendation | Word + Excel comparison matrix |
 | Scope 4 | FIIT Co. Marketing Website | Next.js application on Vercel (staging + production) |
 | Scope 4 | Referral System Specification | Markdown + Word |
@@ -137,16 +137,16 @@ The core stakeholder group is intentionally small so decisions can be made quick
 | **Milestone** | **Target** | **Status** |
 |---|---|---|
 | Engagement kickoff & discovery complete | Early March 2026 | Complete |
-| Scope 1 — UAT report delivered | Mid March 2026 | Complete |
-| Scope 2 — Class Management Tool prototype (Excel) | Late March 2026 | Complete |
-| Stakeholder working session — Arden | March 26, 2026 | Complete |
-| Scope 2 — Class Management Tool deployed to production | April 9, 2026 | Complete |
+| Scope 1, UAT report delivered | Mid March 2026 | Complete |
+| Scope 2, Class Management Tool prototype (Excel) | Late March 2026 | Complete |
+| Stakeholder working session, Arden | March 26, 2026 | Complete |
+| Scope 2, Class Management Tool deployed to production | April 9, 2026 | Complete |
 | Follow-up sponsor session | April 9, 2026 | Complete |
 | Customer-facing website foundations built | April 14, 2026 | Complete |
-| Scope 2 — One-week team UAT period | April 9 – April 16, 2026 | In progress |
-| Scope 2 — Team UAT sign-off | April 16, 2026 | Planned |
+| Scope 2, One-week team UAT period | April 9 – April 16, 2026 | In progress |
+| Scope 2, Team UAT sign-off | April 16, 2026 | Planned |
 | Customer website staging review | Late April 2026 | Planned |
-| Scope 3 — Client tracking recommendation accepted | Late April 2026 | Pending budget confirmation |
+| Scope 3, Client tracking recommendation accepted | Late April 2026 | Pending budget confirmation |
 | Engagement closure & portfolio handover | End of co-op term | Planned |
 
 ## HIGH-LEVEL RISKS
@@ -155,10 +155,10 @@ A full risk register with scoring, owners, and mitigation actions is maintained 
 
 | **Risk** | **Impact** | **Initial Mitigation** |
 |---|---|---|
-| Limited sponsor availability — Arden's working sessions are short and infrequent. | Requirements gaps, rework, late-cycle scope changes. | Prepare structured agendas; batch decisions; confirm in writing within 24 hours of every session. |
-| Content dependency — trainer photos, bios, video testimonials, and blog copy are held by the sponsor. | Website ships with placeholder content and degrades its visual impact. | Ship responsive placeholders; track content items in a separate inventory; send a single consolidated content request. |
-| Scope 2 acceptance fatigue — the team UAT window is one week and relies on active participation from busy trainers. | Acceptance is delayed or signed off without real testing. | Seed the tool with realistic data; publish a short UAT script; collect feedback through a single channel. |
-| Scope 3 budget uncertainty — Trainerize at $250/month has not been formally budgeted. | Recommendation accepted but rollout deferred indefinitely. | Deliver the recommendation early; offer a staged rollout option; record as a decision log item. |
+| Limited sponsor availability, Arden's working sessions are short and infrequent. | Requirements gaps, rework, late-cycle scope changes. | Prepare structured agendas; batch decisions; confirm in writing within 24 hours of every session. |
+| Content dependency, trainer photos, bios, video testimonials, and blog copy are held by the sponsor. | Website ships with placeholder content and degrades its visual impact. | Ship responsive placeholders; track content items in a separate inventory; send a single consolidated content request. |
+| Scope 2 acceptance fatigue, the team UAT window is one week and relies on active participation from busy trainers. | Acceptance is delayed or signed off without real testing. | Seed the tool with realistic data; publish a short UAT script; collect feedback through a single channel. |
+| Scope 3 budget uncertainty, Trainerize at $250/month has not been formally budgeted. | Recommendation accepted but rollout deferred indefinitely. | Deliver the recommendation early; offer a staged rollout option; record as a decision log item. |
 
 ## GOVERNANCE & CADENCE
 
@@ -174,9 +174,9 @@ This charter is accepted when signed below by the project sponsor and the busine
 
 | **Role** | **Name** | **Signature / Date** |
 |---|---|---|
-| Project Sponsor | Arden — Gym Manager, FIIT Co. |  |
-| Executive Owner | Jason Battiste — Founder & Head Coach |  |
-| Business Analyst | David Ezieshi — BA Lead, Team #4 |  |
-| Academic Oversight | George Brown College — BA Co-op Coordinator |  |
+| Project Sponsor | Arden, Gym Manager, FIIT Co. |  |
+| Executive Owner | Jason Battiste, Founder & Head Coach |  |
+| Business Analyst | David Ezieshi, BA Lead, Team #4 |  |
+| Academic Oversight | George Brown College, BA Co-op Coordinator |  |
 
 *Document control: this charter is versioned in the BA Portfolio document set. Updates are recorded as a new version number and noted in the change log maintained alongside the RAID and decision logs.*

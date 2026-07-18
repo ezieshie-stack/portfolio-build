@@ -1,6 +1,6 @@
 # FIIT Co Product Design Document
 
-*Source: `Documentations-/FIIT_Co_Product_Design_Document.pdf` — extracted via `pdftotext -layout`. Raw text preserved below; table formatting is approximate.*
+*Source: `Documentations-/FIIT_Co_Product_Design_Document.pdf`, extracted via `pdftotext -layout`. Raw text preserved below; table formatting is approximate.*
 
 ---
 

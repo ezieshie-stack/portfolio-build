@@ -1,20 +1,20 @@
 # FIIT Co. — Functional Decomposition Diagram
 
 **Artifact ID:** BA-11b · Functional Decomposition
-**Purpose:** Show what the platform *does* — every user-facing capability, decomposed from the whole system down to atomic functions. This is the "system as a tree of capabilities" view, aimed at scope analysis, effort estimation, and gap analysis against the RTM.
+**Purpose:** Show what the platform *does*, every user-facing capability, decomposed from the whole system down to atomic functions. This is the "system as a tree of capabilities" view, aimed at scope analysis, effort estimation, and gap analysis against the RTM.
 **Source:** BA-03 BRD · BA-10 User Story Backlog · Technical Architecture Handoff (function inventory) · BA-12 RTM
 
 ---
 
 ## Why this diagram exists
 
-A functional-decomposition diagram (FDD) is **not** a process diagram — there are no flows, no arrows, no time axis. It is a **static inventory** of everything the system does, arranged as a hierarchy.
+A functional-decomposition diagram (FDD) is **not** a process diagram, there are no flows, no arrows, no time axis. It is a **static inventory** of everything the system does, arranged as a hierarchy.
 
 Useful for four specific BA jobs:
-1. **Scope negotiation** — point at a leaf and ask "in or out?"
-2. **Effort estimation** — count the leaves, size each, sum.
-3. **Gap analysis** — does every leaf trace to a Business Requirement in the RTM? If not, it's over-scope or under-documented.
-4. **RACI mapping** — assign an accountable owner to every branch, not to the whole system.
+1. **Scope negotiation**, point at a leaf and ask "in or out?"
+2. **Effort estimation**, count the leaves, size each, sum.
+3. **Gap analysis**, does every leaf trace to a Business Requirement in the RTM? If not, it's over-scope or under-documented.
+4. **RACI mapping**, assign an accountable owner to every branch, not to the whole system.
 
 ---
 
@@ -25,15 +25,15 @@ Useful for four specific BA jobs:
 
 **How to read it:**
 - **L0** at the top = the whole platform, one node.
-- **L1** = the six top-level branches — each is a capability the business owns end-to-end.
+- **L1** = the six top-level branches, each is a capability the business owns end-to-end.
 - **L2** = the twenty-three sub-capabilities that make up those branches.
-- **L3** (the atomic leaves) is a long list — rendered as tables below, one per branch, so the diagram itself stays legible.
+- **L3** (the atomic leaves) is a long list, rendered as tables below, one per branch, so the diagram itself stays legible.
 
 ---
 
 ## Level 3 — atomic functions (the leaves)
 
-Because the L3 layer has 59 leaves, they're listed below as tables — one per Level-1 branch. Each leaf traces to a **BR** and typically a **User Story**.
+Because the L3 layer has 59 leaves, they're listed below as tables, one per Level-1 branch. Each leaf traces to a **BR** and typically a **User Story**.
 
 ### Branch 1 · Manage Studio Operations
 
@@ -138,7 +138,7 @@ Because the L3 layer has 59 leaves, they're listed below as tables — one per L
 | 6. Administer Platform | 9 | BR-02 · BR-06 (+ operational governance) |
 | **Total leaves** | **59** | Every BR (BR-01 → BR-08) is served by at least one branch |
 
-**No orphan functions** — every leaf traces to at least one BR (or, in the case of platform-admin operations, to the governance layer explicitly documented in the Charter as O5 documentation scope).
+**No orphan functions**, every leaf traces to at least one BR (or, in the case of platform-admin operations, to the governance layer explicitly documented in the Charter as O5 documentation scope).
 
 ---
 
@@ -146,7 +146,7 @@ Because the L3 layer has 59 leaves, they're listed below as tables — one per L
 
 | Use case | How |
 |---|---|
-| **Scope negotiation** | Point at a Level-2 or Level-3 node, ask "in this wave or next?" — decompose further if the answer is "part of it" |
+| **Scope negotiation** | Point at a Level-2 or Level-3 node, ask "in this wave or next?", decompose further if the answer is "part of it" |
 | **Effort sizing** | Assign story points to each Level-3 leaf, sum by branch |
 | **RACI mapping** | Every Level-1 branch gets an accountable owner from BA-02 |
 | **Test coverage audit** | Cross-reference every Level-3 leaf with the RTM's test-case column; missing test = uncovered function |

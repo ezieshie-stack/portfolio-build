@@ -27,7 +27,7 @@ import { BreachFlatness } from "@/components/work/sla/BreachFlatness";
 export const metadata = {
   title: "Customer Support SLA Optimization | David Ezieshi",
   description:
-    "A cost-sensitive Random Forest predicting SLA breaches on 8,469 tickets — 0.83 ROC-AUC, 100% breach recall, wrapped in a capacity-aware Sniper Command Center.",
+    "A cost-sensitive Random Forest predicting SLA breaches on 8,469 tickets, 0.83 ROC-AUC, 100% breach recall, wrapped in a capacity-aware Sniper Command Center.",
 };
 
 type Artifact = { href: string; idx: string; icon: LucideIcon; title: string; desc: string; meta: string };
@@ -43,7 +43,7 @@ const ARTIFACTS: Artifact[] = [
 const FINDINGS = [
   { finding: "Breach rates are flat across ticket types (7.7% to 8.3%) and channels, yet average handling sits near 8h against a 4h Critical target. A chi-square test confirms priority, not team, drives breaches.", rec: "Reset the Critical SLA target to match real handling capacity, and stand up a dedicated response lane for the highest-scored tickets. Stop coaching teams for a structural problem." },
   { finding: "Financial exposure is concentrated: Critical breaches cost $500, High $200, and roughly 80% of breach cost sits in the top 20% of tickets by predicted risk.", rec: "Deploy the model to score every ticket at creation so the queue self-sorts by risk. Escalate a fixed daily kill-list rather than reviewing the whole queue." },
-  { finding: "Ticket volume peaks at 21:00 but breach risk peaks at 22:00 — at the evening-to-night shift handover, not at peak volume.", rec: "Staff to the risk, not the volume: overlap the evening and night shifts from 21:00 to 23:00 to close the handover gap that volume-based rostering misses." },
+  { finding: "Ticket volume peaks at 21:00 but breach risk peaks at 22:00, at the evening-to-night shift handover, not at peak volume.", rec: "Staff to the risk, not the volume: overlap the evening and night shifts from 21:00 to 23:00 to close the handover gap that volume-based rostering misses." },
   { finding: "A cost-sensitive Random Forest reaches 0.83 ROC-AUC and, at the deployed threshold, catches 100% of test-set breaches at 16% precision.", rec: "Accept the low precision deliberately: a false alarm costs minutes, a missed Critical costs $500. Wrap the score in a capacity-aware tool the escalation lead opens each morning." },
 ];
 
@@ -72,7 +72,7 @@ export default function SlaHubPage() {
           </p>
         </section>
 
-        {/* interactive Sniper Command Center — the marquee widget */}
+        {/* interactive Sniper Command Center, the marquee widget */}
         <section className="pj-section" style={{ marginTop: 24 }}>
           <SniperCenter />
           <p className="cs-caption">
@@ -132,7 +132,7 @@ export default function SlaHubPage() {
           </div>
         </section>
 
-        {/* diagnostic bars — the flatness IS the finding */}
+        {/* diagnostic bars, the flatness IS the finding */}
         <section className="pj-section">
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>Breach rate by ticket type</Eyebrow>
           <p className="pj-section-sub">
@@ -176,7 +176,7 @@ export default function SlaHubPage() {
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>Findings, and what to do about them</Eyebrow>
           <p className="pj-section-sub">
             A finding is only half the job. Each objective result below is
-            paired with the specific, data-backed action it justifies — the
+            paired with the specific, data-backed action it justifies, the
             &ldquo;what&rdquo; and the &ldquo;so what&rdquo;.
           </p>
           <div className="sla-frec">

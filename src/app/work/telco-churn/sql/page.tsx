@@ -78,7 +78,7 @@ ORDER BY churn_rate DESC;`,
   {
     id: "Q3",
     title: "Contract × Payment cross-tab",
-    q: "Stack the two risk signals — what is the worst-case segment?",
+    q: "Stack the two risk signals, what is the worst-case segment?",
     sql: `SELECT
   contract, paymentmethod,
   COUNT(*) AS customers,
@@ -99,7 +99,7 @@ ORDER BY churn_rate DESC;`,
     ],
     read: (
       <>
-        Month-to-month + Electronic check = <b>53.7% churn</b> — a coin flip.
+        Month-to-month + Electronic check = <b>53.7% churn</b>, a coin flip.
         1,850 customers (26% of the base) sit in this one cell.
       </>
     ),
@@ -221,7 +221,7 @@ ORDER BY MIN(monthlycharges);`,
     read: (
       <>
         Churn triples from cheapest to mid band, then <b>plateaus</b>. Above
-        $60/mo, higher price does not push churn further — so it is not the
+        $60/mo, higher price does not push churn further, so it is not the
         price. It is the value gap at those price points.
       </>
     ),
@@ -248,11 +248,11 @@ GROUP BY contract, churn;
       ["chi-square", "1,184.60"],
       ["p-value", "5.86 × 10⁻²⁵⁸"],
       ["threshold", "0.05"],
-      ["verdict", "Reject H₀ — dependent"],
+      ["verdict", "Reject H₀, dependent"],
     ],
     read: (
       <>
-        A p-value of <b>5.86 × 10⁻²⁵⁸</b> is not merely significant — it means
+        A p-value of <b>5.86 × 10⁻²⁵⁸</b> is not merely significant, it means
         there is no realistic universe in which contract type and churn are
         independent. The relationship is structural.
       </>

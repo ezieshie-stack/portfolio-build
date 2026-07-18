@@ -1,14 +1,14 @@
 # FIIT Co. — System Architecture (Diagram Set)
 
 **Artifact ID:** BA-08b · System Architecture (BA-authored, sourced from `FIIT_Co_Technical_Architecture_Handoff.pdf`)
-**Purpose:** Explain how the FIIT Co. platform is put together, in **five layered diagrams**, each aimed at a specific stakeholder question. Written so a business analyst — not a solutions architect — can walk anyone through the system.
+**Purpose:** Explain how the FIIT Co. platform is put together, in **five layered diagrams**, each aimed at a specific stakeholder question. Written so a business analyst, not a solutions architect, can walk anyone through the system.
 **Snapshot:** April 30, 2026 · handover version 1.0
 
 ---
 
 ## Why five diagrams, not one
 
-One architecture diagram trying to answer every question ends up unreadable. The BA discipline solution is the [C4 model](https://c4model.com/) — draw the system at multiple **levels of zoom**, each aimed at one audience. This artifact follows that pattern.
+One architecture diagram trying to answer every question ends up unreadable. The BA discipline solution is the [C4 model](https://c4model.com/), draw the system at multiple **levels of zoom**, each aimed at one audience. This artifact follows that pattern.
 
 | # | Diagram | Question it answers | Best audience |
 |---|---|---|---|
@@ -24,7 +24,7 @@ Read them in order or jump to the one that matches the conversation you're in.
 
 ## The platform in five sentences (read before any diagram)
 
-FIIT Co.'s digital platform is **two websites that share one database**. The **customer site** at `fiitco.ca` is what a prospective member sees; the **staff portal** at `staff.fiitco.ca` is what Arden and her instructors use to run the studio. Both websites talk to a **single Convex backend** that holds all the data — schedule, trainer bios, blog posts, guest passes, everything. The customer site is only allowed to *read* the public content and *submit* a few forms; the staff portal is authenticated and can do everything. Nothing is stored in the customer's browser except a login token, and no data is duplicated between the two sites — they just look at the same tables through different permissions.
+FIIT Co.'s digital platform is **two websites that share one database**. The **customer site** at `fiitco.ca` is what a prospective member sees; the **staff portal** at `staff.fiitco.ca` is what Arden and her instructors use to run the studio. Both websites talk to a **single Convex backend** that holds all the data, schedule, trainer bios, blog posts, guest passes, everything. The customer site is only allowed to *read* the public content and *submit* a few forms; the staff portal is authenticated and can do everything. Nothing is stored in the customer's browser except a login token, and no data is duplicated between the two sites, they just look at the same tables through different permissions.
 
 ---
 
@@ -35,7 +35,7 @@ FIIT Co.'s digital platform is **two websites that share one database**. The **c
 
 **Talking points for this diagram:**
 - Four kinds of humans interact with the platform, plus Google's crawler.
-- Five third-party services keep it running. MindBody is the notable *non-*integration — it's how members actually book, but this platform never talks to it directly.
+- Five third-party services keep it running. MindBody is the notable *non-*integration, it's how members actually book, but this platform never talks to it directly.
 - Everything else you'll see in Diagrams 2–5 lives inside the FIIT Co. box in the middle.
 
 ---
@@ -50,7 +50,7 @@ FIIT Co.'s digital platform is **two websites that share one database**. The **c
 - Thin dotted arrows = supporting or out-of-band flow (email delivery, DNS, indexing).
 
 **The critical thing this diagram shows:**
-The customer site can only reach 🟢 **Public** functions. That single boundary is what safely lets one Convex backend serve both a public site and an operational tool. Every mutation that touches user data has a `requireAuth` or `requireAdmin` gate in the function itself — permission lives at the function level, not the database level.
+The customer site can only reach 🟢 **Public** functions. That single boundary is what safely lets one Convex backend serve both a public site and an operational tool. Every mutation that touches user data has a `requireAuth` or `requireAdmin` gate in the function itself, permission lives at the function level, not the database level.
 
 ---
 
@@ -67,7 +67,7 @@ There are **two schedule tables** and it is intentional.
 | `weeklySchedule` | Operational | The **real** ops schedule with dates, capacity, buffer-conflict flags. Staff-only. |
 | `websiteSchedule` | Website content | A **curated recurring template** for what the public sees. Arden edits it separately so a mid-week ops change doesn't leak. |
 
-This is a BA design decision that looks like duplication until you read it — worth pointing at during any walkthrough.
+This is a BA design decision that looks like duplication until you read it, worth pointing at during any walkthrough.
 
 **Data governance summary:**
 - **The public can never read operational data**, with one exception: `websiteSchedule` (which is curated on purpose).
@@ -82,10 +82,10 @@ This is a BA design decision that looks like duplication until you read it — w
 > **Aimed at:** Security reviewer, auditor, new developer.
 
 **Talking points:**
-- Passwords are hashed with **PBKDF2-SHA256, 600,000 iterations** — the algorithm-and-cost that offline-cracks a stolen hash in years, not seconds.
+- Passwords are hashed with **PBKDF2-SHA256, 600,000 iterations**, the algorithm-and-cost that offline-cracks a stolen hash in years, not seconds.
 - Session tokens live only in **localStorage + the sessions table.** No JWTs, no cookies. Same-origin only.
-- **Sliding 14-day TTL** — every authenticated call bumps `lastSeenAt`, so an active user never gets logged out mid-session.
-- **Rate-limited at three points:** login, security-answer verify, and reset-request — 5 attempts per 15-minute window per key. Same scheme, three call sites.
+- **Sliding 14-day TTL**, every authenticated call bumps `lastSeenAt`, so an active user never gets logged out mid-session.
+- **Rate-limited at three points:** login, security-answer verify, and reset-request, 5 attempts per 15-minute window per key. Same scheme, three call sites.
 - **Legacy password compatibility:** old `btoa()` passwords are silently re-hashed to PBKDF2 on first successful login. Users don't notice.
 
 ---
@@ -96,9 +96,9 @@ This is a BA design decision that looks like duplication until you read it — w
 > **Aimed at:** Ops-focused reviewer, incident responder.
 
 **Talking points:**
-- **Two Convex deployments — Production (`dutiful-ferret-681`) and Development (`fabulous-goldfish-633`).** Same schema, seed data on dev. Local development **must** point at dev so prod data is never accidentally overwritten.
+- **Two Convex deployments, Production (`dutiful-ferret-681`) and Development (`fabulous-goldfish-633`).** Same schema, seed data on dev. Local development **must** point at dev so prod data is never accidentally overwritten.
 - **Manual deploys, no auto-CI.** Every production release is a deliberate `vercel --prod --yes` from the terminal. This is intentional at current scale.
-- **The customer site has a deploy quirk:** `NEXT_PUBLIC_CONVEX_URL` is **not persisted** on its Vercel project. The deploy command must pass `--build-env` and `--env` explicitly, or the customer site hydrates with a runtime error. This is a **known operational trap** — RAID item and runbook page 8.1 of the source doc.
+- **The customer site has a deploy quirk:** `NEXT_PUBLIC_CONVEX_URL` is **not persisted** on its Vercel project. The deploy command must pass `--build-env` and `--env` explicitly, or the customer site hydrates with a runtime error. This is a **known operational trap**, RAID item and runbook page 8.1 of the source doc.
 - **Cloudflare is the entry point for both websites.** The `www.fiitco.ca → fiitco.ca` 308 redirect happens at DNS, not at the app layer.
 
 ---
@@ -107,10 +107,10 @@ This is a BA design decision that looks like duplication until you read it — w
 
 | Decision | Reason |
 |---|---|
-| **Two front-ends, one backend** | Marketing edits and operational releases decoupled. Different SEO postures (indexed vs. de-indexed). Single source of truth for content — Arden edits trainer bios once, both surfaces see the update. |
-| **No live MindBody integration** | Explicit scope choice — bookings + payments stay in MindBody. This platform is built *around* MindBody, not on top of it. Deferral logged as a Wave 3+ item. |
+| **Two front-ends, one backend** | Marketing edits and operational releases decoupled. Different SEO postures (indexed vs. de-indexed). Single source of truth for content, Arden edits trainer bios once, both surfaces see the update. |
+| **No live MindBody integration** | Explicit scope choice, bookings + payments stay in MindBody. This platform is built *around* MindBody, not on top of it. Deferral logged as a Wave 3+ item. |
 | **Function-level trust tiers (public / authed / admin)** | One backend safely serves both a public site and a staff tool. `requireAuth` / `requireAdmin` at every mutation that touches user data. |
-| **Session tokens in localStorage** | Same-origin app — no cross-domain complexity, no CSRF surface, no cookie-consent overhead. 14-day sliding TTL keeps active users signed in. |
+| **Session tokens in localStorage** | Same-origin app, no cross-domain complexity, no CSRF surface, no cookie-consent overhead. 14-day sliding TTL keeps active users signed in. |
 | **Soft-delete everywhere on website content** | Every content table has `active: false` rather than row deletion. Accidental removals from the CMS are reversible. |
 | **Manual deploys, no auto-CI** | At this scale, a wrong push cannot reach production without an explicit terminal command. Auto-CI is on the "add when a second developer joins" list. |
 
@@ -122,7 +122,7 @@ This is a BA design decision that looks like duplication until you read it — w
 |---|---|---|
 | Convex production offline | Customer site: live schedule + forms. Staff portal: everything. Static marketing pages still serve. | Convex dashboard logs |
 | Vercel edge cache serves stale content | Public site shows old schedule / bios. **Real incident logged in RAID (I-02).** | Browser DevTools + Vercel Deploys |
-| Public function re-tiered to authed | Customer site breaks silently (200 SSR, hydration error). **Real incident — April 27 `getWeeklySchedule` + `getWebsiteImageBySlot`.** | Convex logs + customer report |
+| Public function re-tiered to authed | Customer site breaks silently (200 SSR, hydration error). **Real incident, April 27 `getWeeklySchedule` + `getWebsiteImageBySlot`.** | Convex logs + customer report |
 | Resend API key expired | Password-reset emails fail silently. Users cannot self-serve reset. | Convex logs: `sendResetEmail` throws |
 | DNS access lost | Cannot change subdomains. Existing records keep serving until TTL. | Cloudflare status |
 | Sessions table cleared | Every signed-in user is signed out. Non-destructive. | Zero |

@@ -7,7 +7,7 @@ import { BaSubNav } from "@/components/work/ba/BaSubNav";
 export const metadata = {
   title: "BA · BPMN Swimlane Diagrams (B3) | David Ezieshi",
   description:
-    "Formal BPMN 2.0 process notation for the approval workflow — swimlanes, gateways, and message flows.",
+    "Formal BPMN 2.0 process notation for the approval workflow, swimlanes, gateways, and message flows.",
 };
 
 const ELEMENTS = [
@@ -63,7 +63,7 @@ const LANES = [
 
 const FLOW_EDGES = [
   { from: "Requester → Submit", to: "System → Validate", note: "Message flow across swimlane" },
-  { from: "System → Send email", to: "Approver → Receive notification", note: "Message flow — email channel" },
+  { from: "System → Send email", to: "Approver → Receive notification", note: "Message flow, email channel" },
   { from: "Approver → Decision (approve)", to: "System → Record state change", note: "Sequence flow within decision" },
   { from: "Approver → Decision (reject/revise)", to: "System → Send notification back to requester", note: "Alternate path from gateway" },
   { from: "System → Weekly aggregation", to: "Ops Lead → Weekly report trigger", note: "Timer-based sequence" },
@@ -86,7 +86,7 @@ export default function BpmnPage() {
             The process as a formal diagram.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            Four swimlanes — Requester, System, Approver, Operations Lead —
+            Four swimlanes, Requester, System, Approver, Operations Lead —
             covering the full approval workflow. Every task carries an actor,
             every decision carries a gateway, every cross-lane hand-off carries
             a message flow. This is what a developer or operator reads to build
@@ -98,7 +98,7 @@ export default function BpmnPage() {
         <section className="pj-section" style={{ marginTop: 32 }}>
           <Eyebrow style={{ marginBottom: 8 }}>BPMN 2.0 element legend</Eyebrow>
           <p className="pj-section-sub">
-            The notation is standardised — anyone who reads BPMN reads it the
+            The notation is standardised, anyone who reads BPMN reads it the
             same way.
           </p>
           <div className="ff-artifacts">
@@ -159,7 +159,7 @@ export default function BpmnPage() {
                 </span>
                 <span className="pj-data-rel-kind">→</span>
                 <span className="pj-data-rel-note">
-                  <code>{f.to}</code> — {f.note}
+                  <code>{f.to}</code>, {f.note}
                 </span>
               </div>
             ))}

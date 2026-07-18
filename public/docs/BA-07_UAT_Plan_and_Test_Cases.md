@@ -2,10 +2,10 @@
 id: BA-07
 title: UAT Plan & Test Cases
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
@@ -19,11 +19,11 @@ The Business Analyst owns the plan end-to-end: test case authorship, participant
 
 UAT is scoped to validate that the delivered solution meets the documented business and functional requirements under realistic conditions. It is not a replacement for unit, integration, or regression testing performed during build; those are the developer's responsibility. UAT confirms that the tool is usable, correct, and aligned with the sponsor's operational reality.
 
-| **Dimension** | **Scope 1 — Website Sweep** | **Scope 2 — Class Management Tool** |
+| **Dimension** | **Scope 1, Website Sweep** | **Scope 2, Class Management Tool** |
 |---|---|---|
 | Test Type | Navigation health, content accuracy, link integrity, responsiveness. | Role-based functional UAT against FR catalogue, plus exploratory usability testing. |
 | Participants | BA solo walkthrough with sponsor review. | Sponsor (Admin), three instructor champions (Instructor), BA (facilitator). |
-| Environment | Live fiitco.squarespace.com production site. | fiit-ops-kappa.vercel.app — isolated UAT database seeded with non-identifying sample data. |
+| Environment | Live fiitco.squarespace.com production site. | fiit-ops-kappa.vercel.app, isolated UAT database seeded with non-identifying sample data. |
 | Duration | Two-day focused sweep in early April. | One-week rolling window starting April 14. |
 | Sign-off | BA memo plus thirteen recommendations accepted by sponsor. | Sponsor sign-off memo plus defect closure list. |
 
@@ -55,10 +55,10 @@ UAT is scoped to validate that the delivered solution meets the documented busin
 
 | **Severity** | **Definition** | **Target Resolution** |
 |---|---|---|
-| S1 — Critical | Blocks core flow; no workaround. Tool is unusable for the role. | Same day. |
-| S2 — High | Impairs a core flow with an awkward workaround. | Within 48 hours. |
-| S3 — Medium | Non-core flow broken or significant cosmetic issue on a core screen. | Before sign-off. |
-| S4 — Low | Cosmetic, typo, or minor annoyance with no functional impact. | Logged for Wave 3. |
+| S1, Critical | Blocks core flow; no workaround. Tool is unusable for the role. | Same day. |
+| S2, High | Impairs a core flow with an awkward workaround. | Within 48 hours. |
+| S3, Medium | Non-core flow broken or significant cosmetic issue on a core screen. | Before sign-off. |
+| S4, Low | Cosmetic, typo, or minor annoyance with no functional impact. | Logged for Wave 3. |
 
 ## SCOPE 1 — WEBSITE SWEEP RESULTS
 

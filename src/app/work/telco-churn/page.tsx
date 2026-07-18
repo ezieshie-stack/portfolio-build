@@ -60,17 +60,17 @@ const COHORTS: Cohort[] = [
 
 const FINDINGS = [
   {
-    finding: "Month-to-month contracts churn at 42.7%, roughly 15× the two-year rate (2.8%). Stack in electronic-check payment and it hits 53.7% — a coin flip — covering 1,850 customers (26% of the base).",
+    finding: "Month-to-month contracts churn at 42.7%, roughly 15× the two-year rate (2.8%). Stack in electronic-check payment and it hits 53.7%, a coin flip, covering 1,850 customers (26% of the base).",
     recBold: "“Lock & Shield” contract migration.",
     rec: "Target month-to-month customers in their first 6 months with a ~15% discounted 1-year contract plus an onboarding concierge call. A 20% conversion protects an estimated $340K a year.",
   },
   {
-    finding: "Fiber-optic customers without Tech Support churn at ~49.4%, the highest of any segment. Adding support more than halves it — to 22.6%. The premium product without premium support is the problem.",
+    finding: "Fiber-optic customers without Tech Support churn at ~49.4%, the highest of any segment. Adding support more than halves it, to 22.6%. The premium product without premium support is the problem.",
     recBold: "“Support Bundle” for Fiber.",
     rec: "Auto-bundle Tech Support into Fiber plans at a marginal $5/mo discount. Closing that service gap by even 15 points saves an estimated $180K a year.",
   },
   {
-    finding: "The first 6 months are catastrophic: 52.9% attrition, falling to 14% past 25 months. The cliff is a month-to-month story — long-contract customers who clear year one flatten at 3 to 12%.",
+    finding: "The first 6 months are catastrophic: 52.9% attrition, falling to 14% past 25 months. The cliff is a month-to-month story, long-contract customers who clear year one flatten at 3 to 12%.",
     recBold: "“First 90 Days” onboarding program.",
     rec: "Automated check-ins at Day 7, 30, and 60 plus proactive success calls for high-value accounts. Structured onboarding typically cuts early churn 10 to 25%.",
   },
@@ -104,7 +104,7 @@ export default function TelcoHubPage() {
           </p>
         </section>
 
-        {/* interactive scorer — client-side reconstruction of T3 */}
+        {/* interactive scorer, client-side reconstruction of T3 */}
         <section className="pj-section" style={{ marginTop: 28 }}>
           <ChurnScorer />
           <p className="cs-caption">
@@ -131,7 +131,7 @@ export default function TelcoHubPage() {
               <p>
                 Acquiring a new subscriber costs 5 to 7× more than keeping one.
                 Across 7,043 accounts, every churn is lost monthly revenue plus
-                wasted acquisition spend — but the business cannot see who is
+                wasted acquisition spend, but the business cannot see who is
                 about to leave or why until they are already gone.
               </p>
             </div>

@@ -2,10 +2,10 @@
 id: BA-05
 title: Executive Summary
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
@@ -15,23 +15,23 @@ FIIT Co. is a boutique boxing and fitness studio in Leslieville, Toronto, growin
 
 ## KEY METRICS
 
-**4 — WORKSTREAMS**
+**4, WORKSTREAMS**
 
-**15 — TOOL PAGES SHIPPED**
+**15, TOOL PAGES SHIPPED**
 
-**16 — DATA ENTITIES**
+**16, DATA ENTITIES**
 
-**82% — UAT NAV HEALTH**
+**82%, UAT NAV HEALTH**
 
-**8 — STAKEHOLDER GROUPS**
+**8, STAKEHOLDER GROUPS**
 
 ## SCOPE IN ONE GLANCE
 
 **IN SCOPE**
-- UAT of the current Squarespace site (Scope 1 — complete).
-- Class Management Tool: 15 pages, role-based access, real-time database (Scope 2 — deployed for team testing).
-- Customer-facing website with trainer bios, class catalogue, referral and guest-pass flows (Scope 2b — in build).
-- Client-tracking vendor evaluation and selection (Scope 3 — recommendation staged).
+- UAT of the current Squarespace site (Scope 1, complete).
+- Class Management Tool: 15 pages, role-based access, real-time database (Scope 2, deployed for team testing).
+- Customer-facing website with trainer bios, class catalogue, referral and guest-pass flows (Scope 2b, in build).
+- Client-tracking vendor evaluation and selection (Scope 3, recommendation staged).
 
 **OUT OF SCOPE**
 - Migration of historic MindBody financial records.

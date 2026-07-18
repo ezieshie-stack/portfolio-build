@@ -30,7 +30,7 @@ const CLUSTERS: Cluster[] = [
     { name: "gross", type: "REAL", meaning: "IMDB domestic gross, used to backfill Revenue where TMDB revenue is absent.", role: "src" },
   ]},
   { icon: Calculator, title: "Financial · derived", n: "3", cols: [
-    { name: "Profit", type: "REAL", meaning: "Revenue minus Budget. An outcome — defines success rather than predicting it.", role: "deriv" },
+    { name: "Profit", type: "REAL", meaning: "Revenue minus Budget. An outcome, defines success rather than predicting it.", role: "deriv" },
     { name: "ROI", type: "REAL", meaning: "(Profit / Budget) × 100. Drives every funnel threshold (>100%, >300%, >1000%).", role: "deriv" },
     { name: "Is Profitable", type: "INT", meaning: "Binary flag, 1 when Revenue > Budget. The break-even line of the funnel.", role: "deriv" },
   ]},
@@ -63,7 +63,7 @@ const CLUSTERS: Cluster[] = [
 
 const REASONS = [
   { code: "gap", label: "Source gap", note: "A source column with material missingness (Budget ~10%, Revenue ~13%). Handled in ETL; films missing these drop out at the funnel's first two stages, which is itself a finding." },
-  { code: "deriv", label: "Derived outcome", note: "Computed from Budget and Revenue (Profit, ROI, Is Profitable). These define success and drive the funnel thresholds — outputs, never treated as independent inputs." },
+  { code: "deriv", label: "Derived outcome", note: "Computed from Budget and Revenue (Profit, ROI, Is Profitable). These define success and drive the funnel thresholds, outputs, never treated as independent inputs." },
   { code: "id", label: "Identifier", note: "Unique per film (id, Title). Used to join sources and label rows; no generalisable analytical signal on their own." },
 ];
 
@@ -139,7 +139,7 @@ export default function MovieDataPage() {
               <b>Data quality, honestly.</b> Genres arrived as raw JSON strings needing custom
               parsing. Budget was missing for 10% of films, revenue for 13%, and social metrics
               had nulls that were logically imputed. Every gap is documented rather than silently
-              filled, because the missing-budget films are not noise — they are the funnel&rsquo;s
+              filled, because the missing-budget films are not noise, they are the funnel&rsquo;s
               first and largest drop-off.
             </p>
           </div>

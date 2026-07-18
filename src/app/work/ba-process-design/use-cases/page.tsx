@@ -113,7 +113,7 @@ const USE_CASES: UseCase[] = [
       "Operations Lead shares the report link with the sponsor.",
     ],
     alt: [
-      { trigger: "3a. A team has zero events this week", step: "System still renders the row with zeros — absence is data." },
+      { trigger: "3a. A team has zero events this week", step: "System still renders the row with zeros, absence is data." },
       { trigger: "4a. Report generation exceeds 2.5s", step: "System renders progressively (per-team rows stream in) and logs the slow query for follow-up." },
     ],
   },
@@ -137,7 +137,7 @@ export default function UseCasesPage() {
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
             Where the BPMN diagram shows the process shape, use cases show the
-            actor-system interaction step by step — with pre-conditions, main
+            actor-system interaction step by step, with pre-conditions, main
             flow, alternate paths, and post-conditions. This is what feeds a
             developer&rsquo;s user-story backlog.
           </p>

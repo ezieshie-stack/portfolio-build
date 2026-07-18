@@ -42,7 +42,7 @@ const ARTIFACTS: Artifact[] = [
     idx: "B1",
     icon: ClipboardList,
     title: "Business Requirements Document",
-    desc: "Scope, stakeholder register, functional and non-functional requirements — the sponsor-signable spec.",
+    desc: "Scope, stakeholder register, functional and non-functional requirements, the sponsor-signable spec.",
     meta: "BRD",
   },
   {
@@ -86,7 +86,7 @@ const FINDINGS = [
   },
   {
     finding:
-      "Use-case specs and BPMN diagrams look redundant to non-BAs — they answer different questions. BPMN shows what the process does; use cases show what the actor does inside it.",
+      "Use-case specs and BPMN diagrams look redundant to non-BAs, they answer different questions. BPMN shows what the process does; use cases show what the actor does inside it.",
     recBold: "Ship both. They&rsquo;re not duplicates.",
     rec: "Use cases feed the developer&rsquo;s user stories. BPMN feeds the operator&rsquo;s runbook. Different audience, same underlying design.",
   },
@@ -113,9 +113,9 @@ export default function BaProjectHubPage() {
             The BA toolkit, end to end.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            A representative BABOK v3 artifact set — Business Requirements
+            A representative BABOK v3 artifact set, Business Requirements
             Document, as-is / to-be process design, BPMN swimlane diagrams, and
-            use-case specifications — demonstrating the methodology a business
+            use-case specifications, demonstrating the methodology a business
             analyst runs on an operational-optimisation engagement.
           </p>
         </section>
@@ -167,7 +167,7 @@ export default function BaProjectHubPage() {
             <div className="sla-approach-row">
               <span className="sla-approach-k">Practice framework</span>
               <span className="sla-approach-v">
-                BABOK v3 knowledge areas — Business Analysis Planning,
+                BABOK v3 knowledge areas, Business Analysis Planning,
                 Elicitation, Requirements Life Cycle Management, Strategy
                 Analysis, and Solution Evaluation.
               </span>

@@ -7,7 +7,7 @@ import { MovieDocReaderClient } from "@/components/work/movie/MovieDocReaderClie
 export const metadata = {
   title: "Movie · Write-up (M5) | David Ezieshi",
   description:
-    "The long-form case study behind the interactive movie profitability funnel — problem, method, findings, recommendations.",
+    "The long-form case study behind the interactive movie profitability funnel, problem, method, findings, recommendations.",
 };
 
 export default function MovieDocPage() {

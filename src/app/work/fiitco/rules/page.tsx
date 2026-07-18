@@ -17,7 +17,7 @@ import { FigFrame } from "@/components/work/fiitco/FigFrame";
 export const metadata = {
   title: "FIIT Co. · Business Rules Model (A3) | David Ezieshi",
   description:
-    "Business rules catalogue — constraints, derivations, and computations — plus the decision table governing booking flow.",
+    "Business rules catalogue, constraints, derivations, and computations, plus the decision table governing booking flow.",
 };
 
 type RuleType = "constraint" | "derivation" | "computation";

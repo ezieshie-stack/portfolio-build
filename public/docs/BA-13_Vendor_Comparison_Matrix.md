@@ -2,22 +2,22 @@
 id: BA-13
 title: Vendor Comparison Matrix
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
 ## PURPOSE
 
-FIIT Co. needs a client-tracking tool for personal training follow-up — check-ins, workout history, member engagement between sessions. MindBody handles booking and memberships but is not built for the coaching-relationship layer. This document evaluates three credible candidates against a weighted rubric and recommends the best-fit tool for the sponsor's budget and operational reality.
+FIIT Co. needs a client-tracking tool for personal training follow-up, check-ins, workout history, member engagement between sessions. MindBody handles booking and memberships but is not built for the coaching-relationship layer. This document evaluates three credible candidates against a weighted rubric and recommends the best-fit tool for the sponsor's budget and operational reality.
 
 The recommendation is the Scope 3 deliverable. The BA is responsible for the evaluation; the sponsor is responsible for the final buy decision and contract. No vendor has been paid or committed to at the time of this document.
 
 ## EVALUATION CRITERIA
 
-Criteria and weights were drafted by the BA and confirmed in the fortnightly working session with the sponsor. Weights reflect FIIT Co.'s current priorities — low operational overhead, member-friendly UX, and responsible cost — not what a larger studio chain might value.
+Criteria and weights were drafted by the BA and confirmed in the fortnightly working session with the sponsor. Weights reflect FIIT Co.'s current priorities, low operational overhead, member-friendly UX, and responsible cost, not what a larger studio chain might value.
 
 | **#** | **Criterion** | **Weight** | **Rationale** |
 |---|---|---|---|
@@ -39,7 +39,7 @@ Criteria and weights were drafted by the BA and confirmed in the fortnightly wor
 | TrueCoach | Coaching platform | Highly regarded by one-on-one coaches; clean UI; strong video library and form-check workflow. |
 | My PT Hub | Coaching platform | Popular European option; broad feature set; aggressive pricing for small teams. |
 
-Two further candidates — MindBody's own 'Client Portal' add-on and a bespoke Notion-plus-Airtable workflow — were considered and eliminated early: the former lacks programming and engagement features, and the latter fails the adoption test with non-technical trainers.
+Two further candidates, MindBody's own 'Client Portal' add-on and a bespoke Notion-plus-Airtable workflow, were considered and eliminated early: the former lacks programming and engagement features, and the latter fails the adoption test with non-technical trainers.
 
 ## SCORING MATRIX
 
@@ -63,7 +63,7 @@ Each candidate is scored from 1 (poor fit) to 5 (strong fit) against each criter
 | **Vendor** | **Plan** | **Monthly** | **Annual** | **Notes** |
 |---|---|---|---|---|
 | Trainerize | Studio (up to 15 clients/trainer) | $250 CAD | $3,000 CAD | Includes branded member app and in-app messaging. Preferred tier for FIIT Co. |
-| TrueCoach | Team | $260 USD | $3,120 USD | Per-coach seat pricing — climbs quickly as team grows. |
+| TrueCoach | Team | $260 USD | $3,120 USD | Per-coach seat pricing, climbs quickly as team grows. |
 | My PT Hub | Unlimited Clients | $140 CAD | $1,680 CAD | Cheapest; most feature-complete at low price; less polished UX. |
 
 All figures are indicative list prices as of the evaluation date. Final commercial terms require direct vendor outreach and are the sponsor's responsibility.
@@ -78,7 +78,7 @@ All figures are indicative list prices as of the evaluation date. Final commerci
 
 ## RECOMMENDATION
 
-Trainerize is the recommended vendor. It takes the top weighted score (4.55 / 5.00) by leading on coaching UX, programming depth, and engagement tools — the three criteria that represent half of the weighted total. It is not the cheapest option, but it is the option most likely to be adopted by the trainer team and therefore to return value on every dollar spent.
+Trainerize is the recommended vendor. It takes the top weighted score (4.55 / 5.00) by leading on coaching UX, programming depth, and engagement tools, the three criteria that represent half of the weighted total. It is not the cheapest option, but it is the option most likely to be adopted by the trainer team and therefore to return value on every dollar spent.
 
 The recommended commercial path is a one-month paid pilot at the Studio tier with three trainers and ten opt-in members, followed by a full rollout if pilot adoption clears an agreed threshold (daily active use by at least two of the three pilot trainers and at least six of the ten pilot members). If the pilot fails the threshold, TrueCoach is the fallback and the evaluation is re-opened.
 

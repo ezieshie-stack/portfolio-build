@@ -7,7 +7,7 @@ import { RaidClient } from "@/components/work/fiitco/RaidClient";
 export const metadata = {
   title: "FIIT Co. · RAID Log (A7) | David Ezieshi",
   description:
-    "BA-15 RAID log — Risks (P×I scored), Assumptions, Issues, Dependencies, and the formal change register.",
+    "BA-15 RAID log, Risks (P×I scored), Assumptions, Issues, Dependencies, and the formal change register.",
 };
 
 export default function FiitRaidPage() {

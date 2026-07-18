@@ -66,7 +66,7 @@ export default function FraudRulesPage() {
             <Sigma size={18} aria-hidden />
             <p>
               <b>Maximum score is 110.</b> To clear the queue cutoff of 80, a transaction needs
-              high velocity (40) and high spend (30) plus at least one more rule — so the queue that
+              high velocity (40) and high spend (30) plus at least one more rule, so the queue that
               reaches a human always represents a rapid, high-value burst, never a single weak signal.
             </p>
           </div>

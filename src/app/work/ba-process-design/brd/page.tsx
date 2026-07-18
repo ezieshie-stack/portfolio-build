@@ -73,8 +73,8 @@ export default function BrdPage() {
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
             The BRD is the single source of truth for scope, stakeholders, and
-            requirements. Every downstream artifact — process design, BPMN,
-            use cases — references the requirement IDs below, so traceability
+            requirements. Every downstream artifact, process design, BPMN,
+            use cases, references the requirement IDs below, so traceability
             is preserved end to end.
           </p>
         </section>
@@ -199,7 +199,7 @@ export default function BrdPage() {
             <b>Traceability rule.</b> Every FR and NFR ID above is referenced
             by at least one process step (B2 / B3) and at least one use case
             (B4). If a requirement has no downstream reference, it is either
-            un-implemented or over-scoped — both cases trigger a review with
+            un-implemented or over-scoped, both cases trigger a review with
             the sponsor.
           </p>
         </div>

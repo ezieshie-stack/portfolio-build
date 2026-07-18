@@ -16,7 +16,7 @@ const CARDS: Card[] = [
     read: <>The bars barely move: <b>7.7% to 8.3%</b> across every type. That flatness is the headline. No single ticket category is the culprit, so the failure is structural, not a training or staffing gap on one desk.</> },
   { id: "D2", title: "SLA target vs. the ~7.7h average", q: "Which priority tier is set up to fail?",
     cols: ["Priority", "SLA target", "Verdict"], noBars: true,
-    rows: [["Critical", "4 h", "Below avg — breaches"], ["High", "8 h", "Right at the line"], ["Normal", "24 h", "Comfortable"], ["Low", "72 h", "Comfortable"]],
+    rows: [["Critical", "4 h", "Below avg, breaches"], ["High", "8 h", "Right at the line"], ["Normal", "24 h", "Comfortable"], ["Low", "72 h", "Comfortable"]],
     read: <>Average handling across all tickets is <b>about 7.7 hours</b>. Critical tickets are held to a <b>4-hour</b> target, well under that average, so they breach structurally; High sits right at its 8-hour line.</> },
   { id: "D3", title: "Cost of a breach by priority", q: "What does a missed deadline actually cost?",
     cols: ["Priority", "Breach cost", "Carries cost"], noBars: true,

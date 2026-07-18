@@ -7,7 +7,7 @@ import { DocsReaderClient } from "@/components/work/fiitco/reader/DocsReaderClie
 export const metadata = {
   title: "FIIT Co. · Documents (A4) | David Ezieshi",
   description:
-    "Reading-mode library — Charter, BRD, Executive Summary, and Closure Report — with a scroll-spy table of contents.",
+    "Reading-mode library, Charter, BRD, Executive Summary, and Closure Report, with a scroll-spy table of contents.",
 };
 
 export default function FiitDocsPage() {
@@ -27,8 +27,8 @@ export default function FiitDocsPage() {
             Read the documents. Jump to the live artifact.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            The written BA deliverables — Charter, BRD, Executive Summary,
-            Closure Report — in a proper reading mode: a scroll-spy table of
+            The written BA deliverables, Charter, BRD, Executive Summary,
+            Closure Report, in a proper reading mode: a scroll-spy table of
             contents, faithful tables and lists, and inline links that take you
             straight to the interactive artifact each document powers.
           </p>

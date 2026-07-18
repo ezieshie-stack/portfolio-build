@@ -2,10 +2,10 @@
 id: BA-04
 title: User Personas & Journey Maps
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
@@ -19,7 +19,7 @@ Five personas and four journey maps are included. Personas are composites drawn 
 
 ### 2.1 Arden — The Owner-Operator
 
-| **ARDEN — THE OWNER-OPERATOR**<br>*Runs the studio day-to-day; needs a master record she can trust.* |  |
+| **ARDEN, THE OWNER-OPERATOR**<br>*Runs the studio day-to-day; needs a master record she can trust.* |  |
 |---|---|
 | **ROLE** | Gym Manager and Project Sponsor. Primary operational owner for everything inside the four walls of FIIT Co. |
 | **CONTEXT** | Manages a twelve-trainer roster, oversees member communications, coordinates the class schedule, and handles the studio's day-to-day operations in-between member-facing work. |
@@ -30,7 +30,7 @@ Five personas and four journey maps are included. Personas are composites drawn 
 
 ### 2.2 Jason — The Head Coach & Founder
 
-| **JASON — THE HEAD COACH & FOUNDER**<br>*Owns the brand voice and the training philosophy.* |  |
+| **JASON, THE HEAD COACH & FOUNDER**<br>*Owns the brand voice and the training philosophy.* |  |
 |---|---|
 | **ROLE** | Founder of FIIT Co. and Executive Owner. Former Canadian Super Middleweight Kickboxing Champion with 37+ years of combat training. |
 | **CONTEXT** | Teaches classes on the floor, represents the FIIT brand, and sets the cultural tone of the studio. Decision authority on any member-facing change. |
@@ -41,7 +41,7 @@ Five personas and four journey maps are included. Personas are composites drawn 
 
 ### 2.3 Maya — The Instructor
 
-| **MAYA — THE INSTRUCTOR**<br>*Teaches four to eight classes a week and builds her own plans.* |  |
+| **MAYA, THE INSTRUCTOR**<br>*Teaches four to eight classes a week and builds her own plans.* |  |
 |---|---|
 | **ROLE** | Instructor on the FIIT Co. roster. Teaches a mix of boxing, kickboxing, HIIT, and conditioning classes. |
 | **CONTEXT** | Arrives fifteen minutes before class, checks her lesson plan on her phone from the studio floor, pulls equipment, greets members, and runs the session. |
@@ -52,7 +52,7 @@ Five personas and four journey maps are included. Personas are composites drawn 
 
 ### 2.4 Heather — The Returning Member
 
-| **HEATHER — THE RETURNING MEMBER**<br>*Three-days-a-week member; considers FIIT her second home.* |  |
+| **HEATHER, THE RETURNING MEMBER**<br>*Three-days-a-week member; considers FIIT her second home.* |  |
 |---|---|
 | **ROLE** | Long-term member of the studio. Books classes in advance, attends regularly, and brings friends. |
 | **CONTEXT** | Works full-time; fits training into her week around work and family obligations. Expects booking, schedule, and trainer information to be accurate and up to date. |
@@ -63,7 +63,7 @@ Five personas and four journey maps are included. Personas are composites drawn 
 
 ### 2.5 Sam — The Prospective Member
 
-| **SAM — THE PROSPECTIVE MEMBER**<br>*First-timer considering FIIT after a friend's recommendation.* |  |
+| **SAM, THE PROSPECTIVE MEMBER**<br>*First-timer considering FIIT after a friend's recommendation.* |  |
 |---|---|
 | **ROLE** | Prospective member. No combat sports or fitness history. |
 | **CONTEXT** | Heard about FIIT from a friend; lands on the website looking for reassurance before booking a trial class. Sensitive to gym culture signals and intimidated by 'real fighter' branding. |
@@ -119,7 +119,7 @@ Each journey walks the persona through the sequence of moments they experience w
 ## HOW THESE PERSONAS SHAPE THE ENGAGEMENT
 
 - The Class Management Tool prioritises mobile usability because Maya's journey happens on the studio floor, not at a desk.
-- The Tool's role-based access control model comes directly from the contrast between Arden's needs and Maya's needs — different people on the same screens.
+- The Tool's role-based access control model comes directly from the contrast between Arden's needs and Maya's needs, different people on the same screens.
 - The customer website's homepage is written for Sam first and Heather second; members can navigate quickly, but prospects need inclusive, beginner-friendly framing above the fold.
 - The referral and guest pass flows exist because Heather's journey explicitly includes bringing friends, and the current site gives her nothing to hand them.
 - The Class Management Tool's delivery log page is designed for one-handed mobile entry because Maya logs between rounds.

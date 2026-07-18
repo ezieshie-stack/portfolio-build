@@ -76,7 +76,7 @@ export default function FraudHubPage() {
           </p>
         </section>
 
-        {/* interactive scoring sandbox — the marquee widget */}
+        {/* interactive scoring sandbox, the marquee widget */}
         <section className="pj-section" style={{ marginTop: 24 }}>
           <ScoringSandbox />
           <p className="cs-caption">
@@ -90,7 +90,7 @@ export default function FraudHubPage() {
         <section className="pj-section" style={{ marginTop: 36 }}>
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>The analyst&rsquo;s brief</Eyebrow>
           <p className="pj-section-sub">
-            Fraud systems rarely fail by missing fraud — they fail by over-alerting. Precision, not just
+            Fraud systems rarely fail by missing fraud, they fail by over-alerting. Precision, not just
             recall, is the business constraint.
           </p>
           <div className="sla-brief">
@@ -109,7 +109,7 @@ export default function FraudHubPage() {
           </div>
           <div className="sla-approach">
             <div className="sla-approach-row"><span className="sla-approach-k">Data source</span><span className="sla-approach-v">PaySim synthetic financial transactions (Kaggle), loaded into PostgreSQL. 11 columns including balances before and after for both parties, plus an isFraud label. Time is an integer step, treated as 1 hour.</span></div>
-            <div className="sla-approach-row"><span className="sla-approach-k">Analysis type</span><span className="sla-approach-v">Diagnostic and rule-based. Window functions build velocity and destination-history features; a weighted SQL scoring engine turns them into an interpretable risk score — no ML.</span></div>
+            <div className="sla-approach-row"><span className="sla-approach-k">Analysis type</span><span className="sla-approach-v">Diagnostic and rule-based. Window functions build velocity and destination-history features; a weighted SQL scoring engine turns them into an interpretable risk score, no ML.</span></div>
             <div className="sla-approach-row"><span className="sla-approach-k">Scope &amp; caveats</span><span className="sla-approach-v">PaySim is synthetic, so absolute fraud rates are illustrative. Merchants are inferred from nameDest since PaySim does not flag them explicitly. 30-day history approximated as 720 steps.</span></div>
             <div className="sla-approach-row"><span className="sla-approach-k">Tooling</span><span className="sla-approach-v">PostgreSQL only: window functions (COUNT/SUM OVER with RANGE frames), views for each pipeline layer, and QA assertions. Portable to DuckDB.</span></div>
           </div>

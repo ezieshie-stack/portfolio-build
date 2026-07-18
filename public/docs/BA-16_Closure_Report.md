@@ -2,10 +2,10 @@
 id: BA-16
 title: Project Closure Report
 project: FIIT Co. Operational Transformation Initiative
-client: FIIT Co. Boxing & Fitness Studio — Leslieville, Toronto
-sponsor: Arden — Gym Manager, FIIT Co.
-prepared_by: David Ezieshi — Business Analyst
-development_partner: Claude — Full-Stack Developer & Web Designer
+client: FIIT Co. Boxing & Fitness Studio, Leslieville, Toronto
+sponsor: Arden, Gym Manager, FIIT Co.
+prepared_by: David Ezieshi, Business Analyst
+development_partner: Claude, Full-Stack Developer & Web Designer
 version_date: v1.0 · April 14, 2026
 ---
 
@@ -31,10 +31,10 @@ The engagement delivered all work in scope and the small set of explicitly desco
 
 | **Workstream** | **Delivered** | **Descoped / Deferred** |
 |---|---|---|
-| Scope 1 — Website UAT | Navigation sweep, eight defects, thirteen recommendations. | None. |
-| Scope 2 — Class Management Tool | Fifteen pages, sixteen entities, role-based access, team UAT. | MindBody two-way sync deferred to Wave 3+ follow-on. |
-| Scope 2b — Customer Website | Home, class schedule, trainer bios, contact, referral, guest pass. | Accessibility audit and retention policy deferred to a Wave 3+ follow-on. |
-| Scope 3 — Client Tracking | Vendor recommendation with weighted scoring and a pilot plan. | Vendor contract signing is the sponsor's responsibility. |
+| Scope 1, Website UAT | Navigation sweep, eight defects, thirteen recommendations. | None. |
+| Scope 2, Class Management Tool | Fifteen pages, sixteen entities, role-based access, team UAT. | MindBody two-way sync deferred to Wave 3+ follow-on. |
+| Scope 2b, Customer Website | Home, class schedule, trainer bios, contact, referral, guest pass. | Accessibility audit and retention policy deferred to a Wave 3+ follow-on. |
+| Scope 3, Client Tracking | Vendor recommendation with weighted scoring and a pilot plan. | Vendor contract signing is the sponsor's responsibility. |
 
 ## DELIVERABLES INVENTORY
 
@@ -84,7 +84,7 @@ The following risks remain open at closure and transfer to the sponsor's operati
 
 ## FINANCIAL SUMMARY
 
-The engagement was delivered as part of the George Brown College BA Co-op Program. No direct fees were charged to FIIT Co. Tooling costs incurred during the engagement — Vercel, Convex, and ancillary services — remained inside the no-cost tiers; any go-forward costs will be the sponsor's responsibility.
+The engagement was delivered as part of the George Brown College BA Co-op Program. No direct fees were charged to FIIT Co. Tooling costs incurred during the engagement, Vercel, Convex, and ancillary services, remained inside the no-cost tiers; any go-forward costs will be the sponsor's responsibility.
 
 ## SPONSOR ACKNOWLEDGEMENT
 
@@ -92,8 +92,8 @@ The sponsor confirms the deliverables listed in Section 4 have been received, th
 
 | **Role** | **Name** | **Signature** | **Date** |
 |---|---|---|---|
-| Sponsor | Arden — Gym Manager, FIIT Co. |  |  |
-| Executive Owner | Jason Battiste — Founder & Head Coach |  |  |
+| Sponsor | Arden, Gym Manager, FIIT Co. |  |  |
+| Executive Owner | Jason Battiste, Founder & Head Coach |  |  |
 | Business Analyst | David Ezieshi |  |  |
 | Academic Coordinator | George Brown College BA Co-op |  |  |
 

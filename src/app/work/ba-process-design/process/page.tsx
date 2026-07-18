@@ -55,7 +55,7 @@ const PAIRS: PairSection[] = [
       "Approver reads the email",
       "Replies with approve, reject, or ambiguous questions",
       "Requester (and everyone CCed) parses the reply",
-      "❌ &ldquo;Returned for revision&rdquo; state doesn&rsquo;t exist — it&rsquo;s a natural-language response",
+      "❌ &ldquo;Returned for revision&rdquo; state doesn&rsquo;t exist, it&rsquo;s a natural-language response",
       "❌ No timestamp on the decision moment",
     ],
     tobe: [
@@ -80,7 +80,7 @@ const PAIRS: PairSection[] = [
       "Types results into a spreadsheet",
       "Emails spreadsheet to sponsor",
       "❌ Prone to counting errors",
-      "❌ No historical record — spreadsheets get overwritten",
+      "❌ No historical record, spreadsheets get overwritten",
     ],
     tobe: [
       "System aggregates state-change events from the audit log",
@@ -95,7 +95,7 @@ const EXCEPTIONS = [
   {
     trigger: "Approver is unavailable (leave, illness, travel)",
     handling:
-      "System supports fixed-date delegation (FR-08 — Could). Absent that, request routes to the approver&rsquo;s manager after a documented timeout.",
+      "System supports fixed-date delegation (FR-08, Could). Absent that, request routes to the approver&rsquo;s manager after a documented timeout.",
   },
   {
     trigger: "Requester submits with missing required fields",
@@ -105,7 +105,7 @@ const EXCEPTIONS = [
   {
     trigger: "Approver rejects but requester disagrees",
     handling:
-      "Requester can re-submit as a new request with a reference to the rejected one. Escalation to the sponsor is out of scope for v1 — flagged in the RAID log.",
+      "Requester can re-submit as a new request with a reference to the rejected one. Escalation to the sponsor is out of scope for v1, flagged in the RAID log.",
   },
   {
     trigger: "System is unavailable during operational hours",
@@ -131,7 +131,7 @@ export default function ProcessPage() {
             Every to-be step answers a specific as-is pain.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
-            Three process pairs — submission, approval, reporting — with the
+            Three process pairs, submission, approval, reporting, with the
             documented pain in the as-is, the specific redesign in the to-be,
             and the requirement IDs each step traces back to.
           </p>
@@ -194,7 +194,7 @@ export default function ProcessPage() {
               <div className="rd-row" key={i}>
                 <span className="rd-row-id">EX-{String(i + 1).padStart(2, "0")}</span>
                 <span className="rd-row-t">
-                  <b>{e.trigger}</b> — <span dangerouslySetInnerHTML={{ __html: e.handling }} />
+                  <b>{e.trigger}</b>, <span dangerouslySetInnerHTML={{ __html: e.handling }} />
                 </span>
                 <span className="rd-status">documented</span>
               </div>
@@ -208,7 +208,7 @@ export default function ProcessPage() {
             <b>Gap analysis output.</b> Every to-be step above answers a
             specific as-is pain and closes at least one requirement in the
             BRD. Steps that don&rsquo;t serve either an as-is pain or a
-            requirement are cut — no nice-to-haves survive the gap analysis.
+            requirement are cut, no nice-to-haves survive the gap analysis.
           </p>
         </div>
 

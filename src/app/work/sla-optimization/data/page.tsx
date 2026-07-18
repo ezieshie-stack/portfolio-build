@@ -32,11 +32,11 @@ const CLUSTERS: Cluster[] = [
     { name: "Customer Email", type: "TEXT", meaning: "Contact email (8,320 unique). An identifier.", used: "id" },
     { name: "Customer Age", type: "INT", meaning: "Age 18 to 70 (mean 44). The one numeric model feature.", used: "y" },
     { name: "Customer Gender", type: "TEXT", meaning: "Male / Female / Other. Held out to avoid demographic bias; low predictive signal.", used: "held" },
-    { name: "Product Purchased", type: "TEXT", meaning: "42 products. Usable, but needs target or frequency encoding first — deferred.", used: "def" },
+    { name: "Product Purchased", type: "TEXT", meaning: "42 products. Usable, but needs target or frequency encoding first, deferred.", used: "def" },
   ]},
   { icon: Ticket, title: "Ticket attributes", n: "5", cols: [
     { name: "Ticket Type", type: "TEXT", meaning: "Billing / Cancellation / Product / Refund / Technical. Model feature.", used: "y" },
-    { name: "Ticket Subject", type: "TEXT", meaning: "Only 16 subject lines. Low-cardinality and one-hot ready — a usable feature left for the next iteration.", used: "def" },
+    { name: "Ticket Subject", type: "TEXT", meaning: "Only 16 subject lines. Low-cardinality and one-hot ready, a usable feature left for the next iteration.", used: "def" },
     { name: "Ticket Description", type: "TEXT", meaning: "Free-text body (8,077 unique). Reserved for NLP features (sentiment, length).", used: "def" },
     { name: "Ticket Priority", type: "TEXT", meaning: "Critical / High / Medium / Low. Sets the SLA target and drives risk.", used: "y" },
     { name: "Ticket Channel", type: "TEXT", meaning: "Email / Chat / Phone / Social media. Model feature.", used: "y" },
@@ -45,7 +45,7 @@ const CLUSTERS: Cluster[] = [
     { name: "Date of Purchase", type: "DATETIME", meaning: "When the product was bought (2020–2021). Could derive customer tenure or recency.", used: "def" },
     { name: "First Response Time", type: "DATETIME", meaning: "First agent reply. Populated for 5,650 of 8,469. Proxy start for SLA math.", used: "e" },
     { name: "Time to Resolution", type: "DATETIME", meaning: "When the ticket closed. Populated for only 2,769 of 8,469. Drives resolution hours.", used: "e" },
-    { name: "Ticket Status", type: "TEXT", meaning: "Open / Pending / Closed. Known only at or after resolution — using it would leak the outcome.", used: "leak" },
+    { name: "Ticket Status", type: "TEXT", meaning: "Open / Pending / Closed. Known only at or after resolution, using it would leak the outcome.", used: "leak" },
   ]},
   { icon: Star, title: "Outcome", n: "2", cols: [
     { name: "Resolution", type: "TEXT", meaning: "Free-text resolution note (2,770 unique). Not a predictor.", used: "id" },

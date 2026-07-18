@@ -18,7 +18,7 @@ import { TelcoSubNav } from "@/components/work/telco/TelcoSubNav";
 export const metadata = {
   title: "Telco · Data Dictionary (T2) | David Ezieshi",
   description:
-    "The 21 columns of the customers table with type, business meaning, and model role — including two dropped-column decisions.",
+    "The 21 columns of the customers table with type, business meaning, and model role, including two dropped-column decisions.",
 };
 
 type Col = { name: string; type: string; meaning: string; used: "y" | "id" | "leak" };
@@ -39,7 +39,7 @@ const CLUSTERS: Cluster[] = [
     title: "Demographics",
     n: "4",
     cols: [
-      { name: "gender", type: "TEXT", meaning: "Male / Female. Kept, but near-zero coefficient — no material signal.", used: "y" },
+      { name: "gender", type: "TEXT", meaning: "Male / Female. Kept, but near-zero coefficient, no material signal.", used: "y" },
       { name: "seniorcitizen", type: "INT", meaning: "Whether the subscriber is 65+. A positive churn signal.", used: "y" },
       { name: "partner", type: "TEXT", meaning: "Has a spouse or partner.", used: "y" },
       { name: "dependents", type: "TEXT", meaning: "Has dependents.", used: "y" },
@@ -55,7 +55,7 @@ const CLUSTERS: Cluster[] = [
       { name: "paperlessbilling", type: "TEXT", meaning: "Paperless billing on/off. Positive churn signal.", used: "y" },
       { name: "paymentmethod", type: "TEXT", meaning: "How they pay. Electronic check is the risk signal.", used: "y" },
       { name: "monthlycharges", type: "REAL", meaning: "Current monthly bill in USD (18.25–118.75). Numeric feature.", used: "y" },
-      { name: "totalcharges", type: "REAL", meaning: "Cumulative billed amount. Equals monthly × tenure — embeds the churn signal. Dropped to prevent target leakage.", used: "leak" },
+      { name: "totalcharges", type: "REAL", meaning: "Cumulative billed amount. Equals monthly × tenure, embeds the churn signal. Dropped to prevent target leakage.", used: "leak" },
     ],
   },
   {
@@ -112,7 +112,7 @@ export default function TelcoDataPage() {
           <p className="pf-page-intro" style={{ maxWidth: 700 }}>
             Every column in the customers table: its type, what it means, and
             how it is used. The story is the two columns that don&rsquo;t feed
-            the model, and why their reasons differ — one is an identifier, the
+            the model, and why their reasons differ, one is an identifier, the
             other is target leakage.
           </p>
         </section>
