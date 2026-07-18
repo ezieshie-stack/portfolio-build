@@ -1,10 +1,10 @@
 /**
  * BPMN 2.0 swimlane data for the Supplier Price & Availability Monitor.
- * Detailed AS-IS and TO-BE process flows, node-for-node and
- * decision-for-decision from the Canva source. Every gateway routes
- * to the exact next step drawn on the Canva flow, including the
- * retry-counter loop, the pop-up cascade, and the add-to-cart
- * fallback.
+ * Detailed AS-IS and TO-BE process flows. Every node lives at a
+ * unique (col, lane) coordinate so BpmnPool can place them cleanly;
+ * every gateway routes to the exact node it points at on the Canva
+ * source, including the retry-counter loop, the pop-up cascade, and
+ * the add-to-cart fallback.
  *
  * Notation:
  *   • `event` with kind:"start"|"end" — thin-stroked circle
@@ -25,13 +25,14 @@ export type UipathBpmnModel = {
 };
 
 /* ── AS-IS · Current State ─────────────────────────────────────
-   Four lanes, every step Rachel touches by hand. Retry-counter
-   loop, pop-up cascade, add-to-cart fallback and summary-email
-   sequence all drawn to match the Canva.
+   Rachel drives every task by hand. Retry counter + reload loop,
+   pop-up cascade, availability + add-to-cart fallback, threshold
+   branch, supplier loop, and the four-step summary email are all
+   drawn out.
 */
 export const AS_IS: UipathBpmnModel = {
   caption:
-    "Rachel drives every task by hand across her attention, the workbook, the browser, and Outlook. Retries mean literally reloading the page; pop-ups mean literally dismissing them; the summary email is composed and sent step by step. 60–90 minutes end to end for 15–50 items.",
+    "60–90 minutes end to end for 15–50 items. Retries mean literally reloading the page; pop-ups mean literally dismissing them; the summary email is composed step by step in Outlook. Every red task is a bottleneck the automation replaces.",
   lanes: [
     "Procurement Analyst",
     "Excel System",
@@ -49,40 +50,40 @@ export const AS_IS: UipathBpmnModel = {
     { id: "w3", type: "task", col: 7, lane: 2, label: "Increment retry counter", tone: "pain" },
     { id: "g2", type: "gateway", col: 8, lane: 2, label: "Retry < 3?" },
     { id: "w4", type: "task", col: 9, lane: 2, label: "Reload / refresh page", tone: "pain" },
-    { id: "w5", type: "task", col: 9, lane: 0, label: "Skip supplier · move on", tone: "pain" },
-    { id: "g3", type: "gateway", col: 10, lane: 2, label: "Region pop-up visible?" },
-    { id: "w6", type: "task", col: 11, lane: 2, label: "Close region pop-up", tone: "pain" },
-    { id: "g4", type: "gateway", col: 12, lane: 2, label: "Cookie pop-up visible?" },
-    { id: "w7", type: "task", col: 13, lane: 2, label: "Accept cookies", tone: "pain" },
-    { id: "w8", type: "task", col: 14, lane: 2, label: "Locate product name", tone: "pain" },
-    { id: "a3", type: "task", col: 15, lane: 0, label: "Copy product name", tone: "pain" },
-    { id: "e2", type: "task", col: 16, lane: 1, label: "Open Log Sheet · record name (D3)", tone: "pain" },
-    { id: "e3", type: "task", col: 17, lane: 1, label: "Copy supplier fields (B3, C3, F3, G3)", tone: "pain" },
-    { id: "a4", type: "task", col: 18, lane: 0, label: "Return to product page", tone: "pain" },
-    { id: "w9", type: "task", col: 19, lane: 2, label: "Highlight + copy price", tone: "pain" },
-    { id: "e4", type: "task", col: 20, lane: 1, label: "Record new price (H3)", tone: "pain" },
-    { id: "e5", type: "task", col: 21, lane: 1, label: "Enter formula (H3-F3)/F3", tone: "pain" },
-    { id: "g5", type: "gateway", col: 22, lane: 1, label: "|Δ| ≥ 5%?" },
-    { id: "e6", type: "task", col: 23, lane: 1, label: "Highlight row red", tone: "pain" },
-    { id: "w10", type: "task", col: 24, lane: 2, label: "Browse for availability text", tone: "pain" },
-    { id: "g6", type: "gateway", col: 25, lane: 2, label: "Availability text found?" },
-    { id: "w11", type: "task", col: 26, lane: 2, label: "Copy availability text", tone: "pain" },
-    { id: "w12", type: "task", col: 26, lane: 2, label: "Click Add to Cart", tone: "pain" },
-    { id: "g7", type: "gateway", col: 27, lane: 2, label: "Cart accepted?" },
+    { id: "w5", type: "task", col: 10, lane: 0, label: "Skip supplier", tone: "pain" },
+    { id: "g3", type: "gateway", col: 11, lane: 2, label: "Region pop-up visible?" },
+    { id: "w6", type: "task", col: 12, lane: 2, label: "Close region pop-up", tone: "pain" },
+    { id: "g4", type: "gateway", col: 13, lane: 2, label: "Cookie pop-up visible?" },
+    { id: "w7", type: "task", col: 14, lane: 2, label: "Accept cookies", tone: "pain" },
+    { id: "w8", type: "task", col: 15, lane: 2, label: "Locate product name", tone: "pain" },
+    { id: "a3", type: "task", col: 16, lane: 0, label: "Copy product name", tone: "pain" },
+    { id: "e2", type: "task", col: 17, lane: 1, label: "Record name (D3)", tone: "pain" },
+    { id: "e3", type: "task", col: 18, lane: 1, label: "Copy supplier fields (B3, C3, F3, G3)", tone: "pain" },
+    { id: "a4", type: "task", col: 19, lane: 0, label: "Return to product page", tone: "pain" },
+    { id: "w9", type: "task", col: 20, lane: 2, label: "Highlight + copy price", tone: "pain" },
+    { id: "e4", type: "task", col: 21, lane: 1, label: "Record new price (H3)", tone: "pain" },
+    { id: "e5", type: "task", col: 22, lane: 1, label: "Enter formula (H3-F3)/F3", tone: "pain" },
+    { id: "g5", type: "gateway", col: 23, lane: 1, label: "|Δ| ≥ 5%?" },
+    { id: "e6", type: "task", col: 24, lane: 1, label: "Highlight row red", tone: "pain" },
+    { id: "w10", type: "task", col: 25, lane: 2, label: "Browse for availability text", tone: "pain" },
+    { id: "g6", type: "gateway", col: 26, lane: 2, label: "Availability text found?" },
+    { id: "w11", type: "task", col: 27, lane: 2, label: "Copy availability text", tone: "pain" },
     { id: "e7", type: "task", col: 28, lane: 1, label: "Record availability", tone: "pain" },
-    { id: "e8", type: "task", col: 28, lane: 1, label: "Record In Stock", tone: "pain" },
-    { id: "e9", type: "task", col: 28, lane: 1, label: "Record Out of Stock", tone: "pain" },
-    { id: "a5", type: "task", col: 29, lane: 0, label: "Note current time / date", tone: "pain" },
-    { id: "e10", type: "task", col: 30, lane: 1, label: "Record timestamp (A3)", tone: "pain" },
-    { id: "g8", type: "gateway", col: 31, lane: 0, label: "More suppliers?" },
-    { id: "e11", type: "task", col: 32, lane: 1, label: "Filter workbook · red rows", tone: "pain" },
-    { id: "e12", type: "task", col: 33, lane: 1, label: "Create Alert Sheet · paste rows", tone: "pain" },
-    { id: "a6", type: "task", col: 34, lane: 0, label: "Write summary report", tone: "pain" },
-    { id: "e13", type: "task", col: 35, lane: 1, label: "Save workbook", tone: "pain" },
-    { id: "m1", type: "task", col: 36, lane: 3, label: "Open Outlook", tone: "pain" },
-    { id: "m2", type: "task", col: 37, lane: 3, label: "Paste summary · attach workbook", tone: "pain" },
-    { id: "m3", type: "task", col: 38, lane: 3, label: "Send to Procurement Manager", tone: "pain" },
-    { id: "e", type: "event", kind: "end", col: 39, lane: 0, label: "~09:30" },
+    { id: "w12", type: "task", col: 28, lane: 2, label: "Click Add to Cart", tone: "pain" },
+    { id: "g7", type: "gateway", col: 29, lane: 2, label: "Cart accepted?" },
+    { id: "e8", type: "task", col: 30, lane: 1, label: "Record In Stock", tone: "pain" },
+    { id: "e9", type: "task", col: 31, lane: 1, label: "Record Out of Stock", tone: "pain" },
+    { id: "a5", type: "task", col: 32, lane: 0, label: "Note current time / date", tone: "pain" },
+    { id: "e10", type: "task", col: 33, lane: 1, label: "Record timestamp (A3)", tone: "pain" },
+    { id: "g8", type: "gateway", col: 34, lane: 0, label: "More suppliers?" },
+    { id: "e11", type: "task", col: 35, lane: 1, label: "Filter workbook · red rows", tone: "pain" },
+    { id: "e12", type: "task", col: 36, lane: 1, label: "Create Alert Sheet · paste rows", tone: "pain" },
+    { id: "a6", type: "task", col: 37, lane: 0, label: "Write summary report", tone: "pain" },
+    { id: "e13", type: "task", col: 38, lane: 1, label: "Save workbook", tone: "pain" },
+    { id: "m1", type: "task", col: 39, lane: 3, label: "Open Outlook", tone: "pain" },
+    { id: "m2", type: "task", col: 40, lane: 3, label: "Paste summary · attach workbook", tone: "pain" },
+    { id: "m3", type: "task", col: 41, lane: 3, label: "Send to Procurement Manager", tone: "pain" },
+    { id: "end", type: "event", kind: "end", col: 42, lane: 0, label: "~09:30" },
   ],
   flows: [
     { from: "s", to: "e1" },
@@ -91,12 +92,14 @@ export const AS_IS: UipathBpmnModel = {
     { from: "w1", to: "a2" },
     { from: "a2", to: "w2" },
     { from: "w2", to: "g1" },
+    // retry sub-flow
     { from: "g1", to: "w3", label: "no" },
     { from: "w3", to: "g2" },
     { from: "g2", to: "w4", label: "yes" },
     { from: "w4", to: "w2" },
     { from: "g2", to: "w5", label: "no" },
     { from: "w5", to: "g8" },
+    // happy path continues
     { from: "g1", to: "g3", label: "yes" },
     { from: "g3", to: "w6", label: "yes" },
     { from: "w6", to: "g4" },
@@ -116,15 +119,18 @@ export const AS_IS: UipathBpmnModel = {
     { from: "e6", to: "w10" },
     { from: "g5", to: "w10", label: "no" },
     { from: "w10", to: "g6" },
+    // availability yes-branch
     { from: "g6", to: "w11", label: "yes" },
     { from: "w11", to: "e7" },
     { from: "e7", to: "a5" },
+    // availability no-branch (add-to-cart)
     { from: "g6", to: "w12", label: "no" },
     { from: "w12", to: "g7" },
     { from: "g7", to: "e8", label: "yes" },
     { from: "e8", to: "a5" },
     { from: "g7", to: "e9", label: "no" },
     { from: "e9", to: "a5" },
+    // continue main flow
     { from: "a5", to: "e10" },
     { from: "e10", to: "g8" },
     { from: "g8", to: "a1", label: "yes · next" },
@@ -135,20 +141,19 @@ export const AS_IS: UipathBpmnModel = {
     { from: "e13", to: "m1" },
     { from: "m1", to: "m2" },
     { from: "m2", to: "m3" },
-    { from: "m3", to: "e" },
+    { from: "m3", to: "end" },
   ],
 };
 
 /* ── TO-BE · Future State ─────────────────────────────────────
-   Same lane count and same decision structure — the retry loop,
-   the pop-up cascade, and the add-to-cart fallback are still
-   present, but every step Rachel used to do sits in the bot's
-   lane now. She enters at "Review Alerts tab" and hands the
-   ranked list to procurement.
+   Bot owns every browser + Excel task. Retry-counter loop, pop-up
+   cascade, availability + add-to-cart fallback and threshold gate
+   all keep their gateways; every task Rachel used to touch sits
+   in the bot lane, and she enters at Review Alerts tab.
 */
 export const TO_BE: UipathBpmnModel = {
   caption:
-    "The bot owns the browser + Excel work; every gateway from the AS-IS still fires — page-load retries, the pop-up cascade, availability + add-to-cart fallback, threshold check, supplier loop — but as bot decisions, not manual ones. Rachel enters at 08:15 with a ranked Alerts tab already prepared.",
+    "Task Scheduler triggers the bot at 08:00. Same gateway structure as AS-IS — retry counter, pop-up cascade, add-to-cart fallback, threshold check, supplier loop — but every step is a bot action. Rachel enters at 08:15 to review a ranked Alerts tab; procurement acts by 09:00.",
   lanes: [
     "Procurement Analyst",
     "Excel System",
@@ -170,39 +175,39 @@ export const TO_BE: UipathBpmnModel = {
     { id: "b8", type: "task", col: 11, lane: 2, label: "Increment retry count", tone: "auto" },
     { id: "g2", type: "gateway", col: 12, lane: 2, label: "Retry < 3?" },
     { id: "b9", type: "task", col: 13, lane: 2, label: "Reload page", tone: "auto" },
-    { id: "b10", type: "task", col: 13, lane: 2, label: "Log \"Page Load Fail\"", tone: "auto" },
-    { id: "g3", type: "gateway", col: 14, lane: 2, label: "Region pop-up visible?" },
-    { id: "b11", type: "task", col: 15, lane: 2, label: "Close region pop-up", tone: "auto" },
-    { id: "g4", type: "gateway", col: 16, lane: 2, label: "Cookie pop-up visible?" },
-    { id: "b12", type: "task", col: 17, lane: 2, label: "Accept cookies", tone: "auto" },
-    { id: "b13", type: "task", col: 18, lane: 2, label: "Locate + extract product name", tone: "auto" },
-    { id: "e3", type: "task", col: 19, lane: 1, label: "Open Log sheet · record name", tone: "auto" },
-    { id: "e4", type: "task", col: 20, lane: 1, label: "Record supplier fields", tone: "auto" },
-    { id: "b14", type: "task", col: 21, lane: 2, label: "Locate + extract price", tone: "auto" },
-    { id: "b15", type: "task", col: 22, lane: 2, label: "Convert price to numeric", tone: "auto" },
-    { id: "e5", type: "task", col: 23, lane: 1, label: "Record new price", tone: "auto" },
-    { id: "e6", type: "task", col: 24, lane: 1, label: "Compute + record ΔPct", tone: "auto" },
-    { id: "g5", type: "gateway", col: 25, lane: 1, label: "|Δ| ≥ 5%?" },
-    { id: "e7", type: "task", col: 26, lane: 1, label: "Highlight row (conditional format)", tone: "good" },
-    { id: "b16", type: "task", col: 27, lane: 2, label: "Locate availability text", tone: "auto" },
-    { id: "g6", type: "gateway", col: 28, lane: 2, label: "Availability text found?" },
-    { id: "b17", type: "task", col: 29, lane: 2, label: "Extract availability", tone: "auto" },
-    { id: "b18", type: "task", col: 29, lane: 2, label: "Click Add to Cart", tone: "auto" },
-    { id: "g7", type: "gateway", col: 30, lane: 2, label: "Cart accepted?" },
+    { id: "b10", type: "task", col: 14, lane: 2, label: "Log \"Page Load Fail\"", tone: "auto" },
+    { id: "g3", type: "gateway", col: 15, lane: 2, label: "Region pop-up visible?" },
+    { id: "b11", type: "task", col: 16, lane: 2, label: "Close region pop-up", tone: "auto" },
+    { id: "g4", type: "gateway", col: 17, lane: 2, label: "Cookie pop-up visible?" },
+    { id: "b12", type: "task", col: 18, lane: 2, label: "Accept cookies", tone: "auto" },
+    { id: "b13", type: "task", col: 19, lane: 2, label: "Locate + extract product name", tone: "auto" },
+    { id: "e3", type: "task", col: 20, lane: 1, label: "Open Log sheet · record name", tone: "auto" },
+    { id: "e4", type: "task", col: 21, lane: 1, label: "Record supplier fields", tone: "auto" },
+    { id: "b14", type: "task", col: 22, lane: 2, label: "Locate + extract price", tone: "auto" },
+    { id: "b15", type: "task", col: 23, lane: 2, label: "Convert price to numeric", tone: "auto" },
+    { id: "e5", type: "task", col: 24, lane: 1, label: "Record new price", tone: "auto" },
+    { id: "e6", type: "task", col: 25, lane: 1, label: "Compute + record ΔPct", tone: "auto" },
+    { id: "g5", type: "gateway", col: 26, lane: 1, label: "|Δ| ≥ 5%?" },
+    { id: "e7", type: "task", col: 27, lane: 1, label: "Highlight row (conditional format)", tone: "good" },
+    { id: "b16", type: "task", col: 28, lane: 2, label: "Locate availability text", tone: "auto" },
+    { id: "g6", type: "gateway", col: 29, lane: 2, label: "Availability text found?" },
+    { id: "b17", type: "task", col: 30, lane: 2, label: "Extract availability", tone: "auto" },
     { id: "e8", type: "task", col: 31, lane: 1, label: "Record availability", tone: "auto" },
-    { id: "e9", type: "task", col: 31, lane: 1, label: "Record In Stock", tone: "auto" },
-    { id: "e10", type: "task", col: 31, lane: 1, label: "Record Unavailable", tone: "auto" },
-    { id: "b19", type: "task", col: 32, lane: 2, label: "Get + record timestamp", tone: "auto" },
-    { id: "g8", type: "gateway", col: 33, lane: 2, label: "More suppliers?" },
-    { id: "e11", type: "task", col: 34, lane: 1, label: "Filter red rows · copy", tone: "good" },
-    { id: "e12", type: "task", col: 35, lane: 1, label: "Paste into Alert Sheet", tone: "good" },
-    { id: "e13", type: "task", col: 36, lane: 1, label: "Write summary · save + close", tone: "good" },
-    { id: "b20", type: "task", col: 37, lane: 2, label: "Close browser", tone: "auto" },
-    { id: "m1", type: "task", col: 38, lane: 3, label: "Open email · paste summary", tone: "good" },
-    { id: "m2", type: "task", col: 39, lane: 3, label: "Attach workbook · send email", tone: "good" },
-    { id: "u1", type: "task", col: 40, lane: 0, label: "Review Alerts tab (~08:15)", tone: "good" },
-    { id: "u2", type: "task", col: 41, lane: 0, label: "Procurement acts same-day", tone: "good" },
-    { id: "e", type: "event", kind: "end", col: 42, lane: 0, label: "~09:00" },
+    { id: "b18", type: "task", col: 31, lane: 2, label: "Click Add to Cart", tone: "auto" },
+    { id: "g7", type: "gateway", col: 32, lane: 2, label: "Cart accepted?" },
+    { id: "e9", type: "task", col: 33, lane: 1, label: "Record In Stock", tone: "auto" },
+    { id: "e10", type: "task", col: 34, lane: 1, label: "Record Unavailable", tone: "auto" },
+    { id: "b19", type: "task", col: 35, lane: 2, label: "Get + record timestamp", tone: "auto" },
+    { id: "g8", type: "gateway", col: 36, lane: 2, label: "More suppliers?" },
+    { id: "e11", type: "task", col: 37, lane: 1, label: "Filter red rows · copy", tone: "good" },
+    { id: "e12", type: "task", col: 38, lane: 1, label: "Paste into Alert Sheet", tone: "good" },
+    { id: "e13", type: "task", col: 39, lane: 1, label: "Write summary · save + close", tone: "good" },
+    { id: "b20", type: "task", col: 40, lane: 2, label: "Close browser", tone: "auto" },
+    { id: "m1", type: "task", col: 41, lane: 3, label: "Open email · paste summary", tone: "good" },
+    { id: "m2", type: "task", col: 42, lane: 3, label: "Attach workbook · send", tone: "good" },
+    { id: "u1", type: "task", col: 43, lane: 0, label: "Review Alerts tab (~08:15)", tone: "good" },
+    { id: "u2", type: "task", col: 44, lane: 0, label: "Procurement acts same-day", tone: "good" },
+    { id: "end", type: "event", kind: "end", col: 45, lane: 0, label: "~09:00" },
   ],
   flows: [
     { from: "s", to: "b1" },
@@ -215,12 +220,14 @@ export const TO_BE: UipathBpmnModel = {
     { from: "b5", to: "b6" },
     { from: "b6", to: "b7" },
     { from: "b7", to: "g1" },
+    // retry sub-flow
     { from: "g1", to: "b8", label: "no" },
     { from: "b8", to: "g2" },
     { from: "g2", to: "b9", label: "yes" },
     { from: "b9", to: "b7" },
     { from: "g2", to: "b10", label: "no" },
     { from: "b10", to: "g8" },
+    // happy path continues
     { from: "g1", to: "g3", label: "yes" },
     { from: "g3", to: "b11", label: "yes" },
     { from: "b11", to: "g4" },
@@ -239,15 +246,18 @@ export const TO_BE: UipathBpmnModel = {
     { from: "e7", to: "b16" },
     { from: "g5", to: "b16", label: "no" },
     { from: "b16", to: "g6" },
+    // availability yes-branch
     { from: "g6", to: "b17", label: "yes" },
     { from: "b17", to: "e8" },
     { from: "e8", to: "b19" },
+    // availability no-branch (add-to-cart)
     { from: "g6", to: "b18", label: "no" },
     { from: "b18", to: "g7" },
     { from: "g7", to: "e9", label: "yes" },
     { from: "e9", to: "b19" },
     { from: "g7", to: "e10", label: "no" },
     { from: "e10", to: "b19" },
+    // continue main flow
     { from: "b19", to: "g8" },
     { from: "g8", to: "b3", label: "yes · next" },
     { from: "g8", to: "e11", label: "no · done" },
@@ -258,6 +268,6 @@ export const TO_BE: UipathBpmnModel = {
     { from: "m1", to: "m2" },
     { from: "m2", to: "u1" },
     { from: "u1", to: "u2" },
-    { from: "u2", to: "e" },
+    { from: "u2", to: "end" },
   ],
 };
