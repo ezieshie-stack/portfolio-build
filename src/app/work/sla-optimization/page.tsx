@@ -22,13 +22,13 @@ import { ProjectFooter } from "@/components/work/ProjectFooter";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
-import { SniperCenter } from "@/components/work/sla/SniperCenter";
+import { TriageCenter } from "@/components/work/sla/TriageCenter";
 import { BreachFlatness } from "@/components/work/sla/BreachFlatness";
 
 export const metadata = {
   title: "Customer Support SLA Optimization | David Ezieshi",
   description:
-    "A cost-sensitive Random Forest predicting SLA breaches on 8,469 tickets, 0.83 ROC-AUC, 100% breach recall, wrapped in a capacity-aware Sniper Command Center.",
+    "A cost-sensitive Random Forest predicting SLA breaches on 8,469 tickets, 0.83 ROC-AUC, 100% breach recall, wrapped in a capacity-aware Triage Command Center.",
 };
 
 type Artifact = { href: string; idx: string; icon: LucideIcon; title: string; desc: string; meta: string };
@@ -37,14 +37,14 @@ const ARTIFACTS: Artifact[] = [
   { href: "/work/sla-optimization/diagnostics", idx: "S1", icon: Activity, title: "Diagnostics", desc: "Where the money leaks, and the test that proved it is systemic.", meta: "8,469 tickets" },
   { href: "/work/sla-optimization/data", idx: "S2", icon: Table2, title: "Data Dictionary", desc: "Every column, and the ones engineered for the model.", meta: "17 + 6 fields" },
   { href: "/work/sla-optimization/model", idx: "S3", icon: Target, title: "Model Card", desc: "The cost-sensitive Random Forest and a live threshold.", meta: "0.83 ROC-AUC" },
-  { href: "/work/sla-optimization/method", idx: "S4", icon: GitFork, title: "Methodology", desc: "The eight-phase pipeline as an interactive diagram.", meta: "Phase 0 → 8" },
+  { href: "/work/sla-optimization/method", idx: "S4", icon: GitFork, title: "Methodology", desc: "The pipeline as an interactive diagram, Phase 0 through 8.", meta: "Phase 0 → 8" },
   { href: "/work/sla-optimization/doc", idx: "S5", icon: FileText, title: "Write-up", desc: "The full case study in reading mode.", meta: "6 min read" },
 ];
 
 const FINDINGS = [
   { finding: "Breach rates are flat across ticket types (7.7% to 8.3%) and channels, yet average handling sits near 8h against a 4h Critical target. A chi-square test confirms priority, not team, drives breaches.", rec: "Reset the Critical SLA target to match real handling capacity, and stand up a dedicated response lane for the highest-scored tickets. Stop coaching teams for a structural problem." },
-  { finding: "Financial exposure is concentrated: Critical breaches cost $500, High $200, and roughly 80% of breach cost sits in the top 20% of tickets by predicted risk.", rec: "Deploy the model to score every ticket at creation so the queue self-sorts by risk. Escalate a fixed daily kill-list rather than reviewing the whole queue." },
-  { finding: "Ticket volume peaks at 21:00 but breach risk peaks at 22:00, at the evening-to-night shift handover, not at peak volume.", rec: "Staff to the risk, not the volume: overlap the evening and night shifts from 21:00 to 23:00 to close the handover gap that volume-based rostering misses." },
+  { finding: "Financial exposure is concentrated: Critical breaches cost $500, High $200, and roughly 80% of breach cost sits in the top 20% of tickets by predicted risk.", rec: "Deploy the model to score every ticket at creation so the queue self-sorts by risk. Escalate a fixed daily priority queue rather than reviewing the whole queue." },
+  { finding: "Ticket volume peaks at 21:00 but modeled breach risk peaks at 22:00, at the evening-to-night shift handover, not at peak volume.", rec: "Staff to the risk, not the volume: overlap the evening and night shifts from 21:00 to 23:00 to close the handover gap that volume-based rostering misses. The per-hour risk pattern is modeled from the observed shift structure, not measured directly." },
   { finding: "A cost-sensitive Random Forest reaches 0.83 ROC-AUC and, at the deployed threshold, catches 100% of test-set breaches at 16% precision.", rec: "Accept the low precision deliberately: a false alarm costs minutes, a missed Critical costs $500. Wrap the score in a capacity-aware tool the escalation lead opens each morning." },
 ];
 
@@ -66,16 +66,16 @@ export default function SlaHubPage() {
             Escalate the right tickets.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 680 }}>
-            This is the Sniper Command Center I built to intercept SLA breaches
+            This is the Triage Command Center I built to intercept SLA breaches
             before they happen, running live in your browser. Set the team&rsquo;s
             daily review capacity and watch how much breach cost the model
             catches. No slides, the thing itself.
           </p>
         </section>
 
-        {/* interactive Sniper Command Center, the marquee widget */}
+        {/* interactive Triage Command Center, the marquee widget */}
         <section className="pj-section" style={{ marginTop: 24 }}>
-          <SniperCenter />
+          <TriageCenter />
           <p className="cs-caption">
             <Info size={13} aria-hidden />
             Interactive reconstruction of the capacity simulation. A seeded
@@ -104,7 +104,7 @@ export default function SlaHubPage() {
             </div>
             <div className="sla-brief-card">
               <span className="sla-brief-k"><TrendingUp size={15} aria-hidden /> Business benefit</span>
-              <p>A ranked daily kill-list turns reactive firefighting into targeted prevention. Reviewing the top 50 highest-risk tickets recovers the majority of preventable breach cost at a fraction of the effort of reviewing everything.</p>
+              <p>A ranked daily priority queue turns reactive firefighting into targeted prevention. Reviewing the top 50 highest-risk tickets recovers the majority of preventable breach cost at a fraction of the effort of reviewing everything.</p>
             </div>
           </div>
           <div className="sla-approach">
@@ -219,7 +219,7 @@ export default function SlaHubPage() {
               Normal 24h, Low 72h); patterns validated with SciPy chi-square;
               a Random Forest with balanced class weights trained in
               scikit-learn and evaluated on a held-out split (ROC-AUC 0.83).
-              The Sniper simulation reruns the escalation logic client-side,
+              The Triage simulation reruns the escalation logic client-side,
               matching the Streamlit command center in the repo.
             </p>
             <div className="pj-chips">

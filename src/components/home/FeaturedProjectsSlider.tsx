@@ -46,12 +46,12 @@ const PROJECTS: Project[] = [
     category: "Operations Platform",
     title: "FIIT Co. Operations Platform",
     description:
-      "A two-application operations platform for a fitness business, built on Next.js and Convex. I owned it through the full lifecycle, from requirements through delivery and into live administration. The platform spans 27 modules and a 32-table data model across class programming, instructor scheduling, and a self-service CMS.",
+      "A two-application operations platform for a fitness business, built on Next.js and Convex. I led it through the full lifecycle, from requirements through delivery and into live administration. The platform spans 27 modules and a 32-table data model across class programming, instructor scheduling, and a self-service CMS.",
     meta: ["Full lifecycle", "Live in production"],
     metrics: [
       { value: "27", label: "Modules", icon: <LayoutGrid size={22} /> },
       { value: "32", label: "Data Tables", icon: <Database size={22} /> },
-      { value: "9", label: "Backend Services", icon: <Server size={22} /> },
+      { value: "11", label: "BPMN Processes", icon: <Server size={22} /> },
       { value: "Live", label: "In Production", icon: <Rocket size={22} />, spark: true },
     ],
     highlights: [
@@ -105,7 +105,7 @@ const PROJECTS: Project[] = [
     highlights: [
       "Merged TMDB (4,803) and IMDB (5,043) into one ~5,000-film dataset with 42 features",
       "9-stage Python pipeline outputting 6 analysis-ready datasets",
-      "8-stage profitability model tracing films from budget to return",
+      "7-stage profitability funnel tracing films from budget to return",
       "5-page Streamlit dashboard with a filterable browser",
     ],
     builtWith: ["Python", "pandas", "Streamlit", "Tableau"],

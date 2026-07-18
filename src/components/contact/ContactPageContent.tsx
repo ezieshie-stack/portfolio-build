@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
+import { useActionState, useMemo } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Input } from "@/components/ui/Input";
+import { submitContact, type ContactState } from "@/app/contact/actions";
 
 const PROJECT_TITLES: Record<string, string> = {
   telco: "the Telco churn work",
@@ -15,11 +16,7 @@ const PROJECT_TITLES: Record<string, string> = {
   uipath: "the UiPath supplier monitor",
 };
 
-const CHANNELS: Array<{
-  label: string;
-  value: string;
-  href: string | null;
-}> = [
+const CHANNELS: Array<{ label: string; value: string; href: string | null }> = [
   { label: "Email", value: "ezieshie@gmail.com", href: "mailto:ezieshie@gmail.com" },
   {
     label: "LinkedIn",
@@ -39,18 +36,19 @@ const CHANNELS: Array<{
   },
 ];
 
+const INITIAL: ContactState = { status: "idle" };
+
 export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
-  const [sent, setSent] = useState(false);
   const projectTitle = projectSlug ? PROJECT_TITLES[projectSlug] : undefined;
   const defaultSubject = useMemo(
     () => (projectTitle ? `About ${projectTitle}` : ""),
     [projectTitle],
   );
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSent(true);
-  }
+  const [state, formAction, pending] = useActionState(submitContact, INITIAL);
+
+  const fieldErrors =
+    state.status === "error" ? state.fieldErrors ?? {} : {};
 
   return (
     <div className="pf-page">
@@ -65,8 +63,8 @@ export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
           </h1>
           <p className="pf-page-intro">
             Hiring for a business analyst role, scoping a workflow problem, or
-            thinking through an internal solution? Send me the details. I&rsquo;ll
-            respond within a day.
+            thinking through an internal solution? Send me the details.
+            I&rsquo;ll respond within a day.
           </p>
         </section>
 
@@ -90,7 +88,7 @@ export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
             ))}
           </div>
 
-          <form className="pf-form" onSubmit={handleSubmit}>
+          <form className="pf-form" action={formAction} noValidate>
             <p className="pf-form-title">Send a Message</p>
             <div className="pf-form-row">
               <Input
@@ -128,13 +126,39 @@ export function ContactPageContent({ projectSlug }: { projectSlug?: string }) {
               placeholder="Tell me about the workflow or the role…"
               required
             />
+
+            {state.status === "error" && (
+              <div className="pf-form-msg err" role="alert">
+                {state.message}
+                {Object.keys(fieldErrors).length > 0 && (
+                  <ul>
+                    {Object.entries(fieldErrors).map(([field, msg]) => (
+                      <li key={field}>
+                        <b>{field}:</b> {msg}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            {state.status === "ok" && (
+              <div className="pf-form-msg ok" role="status">
+                Message sent. I&rsquo;ll get back to you within a day.
+              </div>
+            )}
+
             <Button
               variant="primary"
               size="lg"
               type="submit"
+              disabled={pending}
               iconRight={<Send size={16} aria-hidden />}
             >
-              {sent ? "Message Sent ✓" : "Send Message"}
+              {pending
+                ? "Sending…"
+                : state.status === "ok"
+                  ? "Send another"
+                  : "Send Message"}
             </Button>
           </form>
         </div>

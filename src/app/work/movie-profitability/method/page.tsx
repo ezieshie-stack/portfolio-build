@@ -46,7 +46,7 @@ const PIPELINE: FlowConfig = {
     { id: "corr", c: 2, r: 2, label: "01 correlations", tone: "good", sub: "0.73 / 0.78" },
     { id: "genre", c: 2, r: 4, label: "01 genre & people", tone: "good" },
     { id: "feat", c: 3, r: 2, label: "02 engineer features", tone: "form", sub: "tiers, ROI, era" },
-    { id: "f1", c: 4, r: 1, label: "03 define 8 stages", tone: "admin" },
+    { id: "f1", c: 4, r: 1, label: "03 define 7 stages", tone: "admin" },
     { id: "f2", c: 4, r: 3, label: "03 segment funnel", tone: "admin", sub: "genre · tier · era" },
     { id: "dash", c: 5, r: 1, label: "Streamlit dashboard", tone: "actor", sub: "5 pages" },
     { id: "rec", c: 5, r: 3, label: "Recommendations", tone: "actor", sub: "5 levers" },
@@ -86,7 +86,7 @@ const PHASES = [
   {
     icon: Filter,
     n: "3 · Funnel analysis",
-    desc: "Model the lifecycle as an 8-stage investment-to-profit funnel, broken down by genre, budget tier, and era to find the leak.",
+    desc: "Model the lifecycle as a 7-stage investment-to-profit funnel, broken down by genre, budget tier, and era to find the leak.",
     script: "03_funnel_analysis.py",
   },
 ];

@@ -23,7 +23,7 @@ export default function FraudDocPage() {
             className="pf-page-title"
             style={{ fontSize: "clamp(30px,3.2vw,46px)" }}
           >
-            The analysis, in prose.
+            What a GROUP BY can&rsquo;t see.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 680 }}>
             The full case study behind the scoring sandbox, for readers who

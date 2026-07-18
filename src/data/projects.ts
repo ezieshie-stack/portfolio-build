@@ -142,12 +142,12 @@ export const projects: Project[] = [
     approach: [
       "Merged TMDB (4,803) and IMDB (5,043) into a roughly 5,000-film master dataset with 42 features.",
       "Built a 9-stage Python ETL pipeline (JSON parsing, financial cleaning, feature engineering) outputting 6 analysis-ready datasets.",
-      "Modeled an 8-stage investment-to-profitability funnel to locate the biggest value drop-offs.",
+      "Modeled a 7-stage investment-to-profitability funnel to locate the biggest value drop-offs.",
       "Shipped a 5-page interactive Streamlit dashboard with a filterable movie browser.",
     ],
     deliverables: [
       "9-stage ETL pipeline and 6 clean datasets",
-      "8-stage profitability funnel model",
+      "7-stage profitability funnel model",
       "5-page Streamlit dashboard (live)",
       "Documented data limitations (2017 cutoff, marketing excluded)",
     ],

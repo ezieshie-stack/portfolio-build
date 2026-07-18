@@ -157,7 +157,7 @@ export function WorkPageContent() {
             </p>
             <p className="pf-feat-desc">
               A two-application operations platform for a fitness business,
-              owned through the full lifecycle on Next.js and Convex. It runs
+              led through the full lifecycle on Next.js and Convex. It runs
               as an internal class-management system across 27 modules, paired
               with a public site and a self-service CMS. I led the analyst team
               that built it. After the team rolled off, I was retained to

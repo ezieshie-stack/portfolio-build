@@ -65,15 +65,30 @@ export function ScoringSandbox() {
   const toggle = (k: RuleKey) => setOn((p) => ({ ...p, [k]: !p[k] }));
 
   const score = RULES.reduce((s, r) => s + (on[r.key] ? r.pts : 0), 0);
-  const tier = score >= 60 ? "High" : score >= 30 ? "Medium" : "Low";
+  const tier =
+    score >= 80
+      ? "Queue"
+      : score >= 60
+        ? "High"
+        : score >= 30
+          ? "Medium"
+          : "Low";
   const tierColor =
-    score >= 60 ? "#f2547d" : score >= 30 ? "#f5a623" : "#3ec28f";
+    score >= 80
+      ? "#ef4444"
+      : score >= 60
+        ? "#f2547d"
+        : score >= 30
+          ? "#f5a623"
+          : "#3ec28f";
   const action =
-    score >= 60
-      ? "Freeze account + investigator review"
-      : score >= 30
-        ? "Step-up auth (OTP) + monitor"
-        : "No action";
+    score >= 80
+      ? "Reaches the daily investigation queue"
+      : score >= 60
+        ? "Freeze account + investigator review"
+        : score >= 30
+          ? "Step-up auth (OTP) + monitor"
+          : "No action";
   const inQueue = score >= 80;
   const reasons =
     RULES.filter((r) => on[r.key]).map((r) => r.reason).join("; ") || "none";

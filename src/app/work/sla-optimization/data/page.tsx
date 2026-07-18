@@ -174,7 +174,7 @@ export default function SlaDataPage() {
           <div className="ff-artifacts">
             <div className="ff-artifact">
               <span className="ff-artifact-ic"><Database size={20} aria-hidden /></span>
-              <div><strong>Timestamps are the least complete fields</strong><span>First Response Time is present on 5,650 of 8,469 rows and Time to Resolution on only 2,769. Rows missing either are dropped, so SLA analysis runs on the resolved subset. Volume and CSAT stats still use all 8,469.</span></div>
+              <div><strong>Timestamps are the least complete fields</strong><span>First Response Time is present on 5,650 of 8,469 rows and Time to Resolution on only 2,769. Rate calculations (average handling hours, breach percentages by type) use the 2,769-row resolved subset; volume and CSAT stats use all 8,469. The breach-prediction classifier is trained on all 8,469 rows with the breach label derived from priority target vs. resolution time where present, held-out test set = 1,694 rows (20% of the full sample).</span></div>
             </div>
             <div className="ff-artifact">
               <span className="ff-artifact-ic"><AlertTriangle size={20} aria-hidden /></span>

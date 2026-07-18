@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 
 /**
- * SniperCenter — the marquee widget on the SLA hub. A seeded day of
+ * TriageCenter — the marquee widget on the SLA hub. A seeded day of
  * tickets (calibrated to the documented 8.03% breach rate, Critical
  * breach $500, High breach $200) is scored and sorted by predicted
  * probability; the capacity picker + review-cost slider re-run the
@@ -65,7 +65,7 @@ function buildDay(seed: number): Ticket[] {
   return out.sort((a, b) => b.p - a.p);
 }
 
-export function SniperCenter() {
+export function TriageCenter() {
   const [cap, setCap] = useState<number | "All">(50);
   const [icost, setIcost] = useState(2);
 
@@ -137,7 +137,7 @@ export function SniperCenter() {
 
         <div className="pj-why" style={{ marginTop: 4 }}>
           <span className="pj-why-h">
-            Today&rsquo;s kill list · top {reviews} of {day.length}
+            Today&rsquo;s priority queue · top {reviews} of {day.length}
           </span>
           {flagged.slice(0, 6).map((t, i) => (
             <div className="pj-why-row" key={i}>

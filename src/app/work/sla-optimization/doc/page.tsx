@@ -7,7 +7,7 @@ import { SlaDocReaderClient } from "@/components/work/sla/SlaDocReaderClient";
 export const metadata = {
   title: "SLA · Write-up (S5) | David Ezieshi",
   description:
-    "The long-form case study behind the interactive Sniper Command Center, problem, method, findings, recommendations.",
+    "The long-form case study behind the interactive Triage Command Center, problem, method, findings, recommendations.",
 };
 
 export default function SlaDocPage() {
@@ -23,7 +23,7 @@ export default function SlaDocPage() {
             className="pf-page-title"
             style={{ fontSize: "clamp(30px,3.2vw,46px)" }}
           >
-            The analysis, in prose.
+            Tuned for dollars, not accuracy.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 680 }}>
             The long-form case study behind the interactive command center,

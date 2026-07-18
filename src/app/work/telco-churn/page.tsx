@@ -63,12 +63,12 @@ const FINDINGS = [
   {
     finding: "Month-to-month contracts churn at 42.7%, roughly 15× the two-year rate (2.8%). Stack in electronic-check payment and it hits 53.7%, a coin flip, covering 1,850 customers (26% of the base).",
     recBold: "“Lock & Shield” contract migration.",
-    rec: "Target month-to-month customers in their first 6 months with a ~15% discounted 1-year contract plus an onboarding concierge call. A 20% conversion protects an estimated $340K a year.",
+    rec: "Target month-to-month customers in their first 6 months with a ~15% discounted 1-year contract plus an onboarding concierge call. A 20% conversion protects an estimated $340K a year (1,850 at-risk × 20% × ~$76/mo ARPU × 12).",
   },
   {
     finding: "Fiber-optic customers without Tech Support churn at ~49.4%, the highest of any segment. Adding support more than halves it, to 22.6%. The premium product without premium support is the problem.",
     recBold: "“Support Bundle” for Fiber.",
-    rec: "Auto-bundle Tech Support into Fiber plans at a marginal $5/mo discount. Closing that service gap by even 15 points saves an estimated $180K a year.",
+    rec: "Auto-bundle Tech Support into Fiber plans at a marginal $5/mo discount. Closing that service gap by even 15 points saves an estimated $180K a year (Fiber-without-Support segment × 15pt churn reduction × ~$83/mo Fiber ARPU × 12).",
   },
   {
     finding: "The first 6 months are catastrophic: 52.9% attrition, falling to 14% past 25 months. The cliff is a month-to-month story, long-contract customers who clear year one flatten at 3 to 12%.",
@@ -153,8 +153,9 @@ export default function TelcoHubPage() {
               <p>
                 A per-customer churn score plus a segment diagnosis turns
                 blanket retention spend into three targeted programs. Together
-                they defend an estimated $520K in annual revenue at a fraction
-                of that in cost.
+                they defend an estimated $520K in annual revenue (~$340K from
+                the contract-migration play plus ~$180K from the Fiber support
+                bundle) at a fraction of that in cost.
               </p>
             </div>
           </div>

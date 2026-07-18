@@ -10,6 +10,6 @@ export default async function Image() {
     eyebrow: "Predictive Analytics",
     title: "Customer Support SLA Optimizer",
     tagline:
-      "8,469 tickets · cost-sensitive Random Forest at 0.83 ROC-AUC · 100% breach recall · capacity-aware daily kill-list.",
+      "8,469 tickets · cost-sensitive Random Forest at 0.83 ROC-AUC · 100% breach recall · capacity-aware daily priority queue.",
   });
 }

@@ -43,7 +43,8 @@ const ARTIFACTS: Artifact[] = [
 const THRESHOLDS = [
   { t: "≥ 80", tier: "Queue", need: "Velocity + spend must both fire (plus one more). Highest confidence, smallest queue." },
   { t: "≥ 60", tier: "High", need: "Any combination reaching 60. Freeze-worthy. Wider net, more analyst load." },
-  { t: "≥ 40", tier: "Watch", need: "A single strong signal (velocity alone). Broadest coverage, highest noise." },
+  { t: "30 – 59", tier: "Medium", need: "A single strong signal (velocity alone) or two mid-weight signals. Step-up authentication instead of a hold." },
+  { t: "< 30", tier: "Low", need: "No action; the score is logged for pattern review." },
 ];
 
 const FINDINGS = [

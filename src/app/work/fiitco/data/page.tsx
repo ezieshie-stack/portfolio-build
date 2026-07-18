@@ -23,32 +23,36 @@ export const metadata = {
     "The scope boundary agreed at kickoff plus the BA-authored 24-entity logical data model, and how it maps to the ~32-table Convex schema.",
 };
 
-// verbatim from ui_kits/portfolio/project-fiitco-data.jsx
+// Entity → rule trace, reconciled against the 11 BRs in the Business
+// Rules Model (A3). Nine entities carry no BR trace: they are shipped
+// scaffolding whose behavioural rules land in a later iteration (curated
+// content library, referrals, guest-pass programme, inbound form).
+// Honest coverage over a fake 24/24 trace.
 const ENTITIES: [string, string, string[]][] = [
-  ["User", "Person with any relationship to the platform", ["BR-02"]],
-  ["Role", "Admin / Instructor / Member permission bundle", ["BR-02"]],
-  ["RoleAssignment", "Join, user ↔ role, scoped + time-bounded", ["BR-02"]],
-  ["Session", "Auth session for a signed-in user", ["BR-02"]],
-  ["Instructor", "User subtype with credentials + assignments", ["BR-01", "BR-03", "BR-04"]],
+  ["User", "Person with any relationship to the platform", ["BR-08"]],
+  ["Role", "Admin / Instructor / Member permission bundle", ["BR-08"]],
+  ["RoleAssignment", "Join, user ↔ role, scoped + time-bounded", ["BR-08", "BR-09"]],
+  ["Session", "Auth session for a signed-in user", ["BR-09"]],
+  ["Instructor", "User subtype with credentials + assignments", ["BR-01", "BR-02"]],
   ["InstructorAvailability", "Weekly blocks an instructor can be booked into", ["BR-01"]],
-  ["Member", "User subtype with membership + billing status", ["BR-06", "BR-07", "BR-08"]],
-  ["Class", "Reusable offering template (e.g. ‘HIIT 45’)", ["BR-01"]],
-  ["ClassSession", "An instance of a Class at a time, place, instructor", ["BR-01", "BR-03"]],
-  ["Location", "Studio / room the session is held in", ["BR-01"]],
-  ["AttendanceRecord", "Member checked in / marked at a session", ["BR-03", "BR-05"]],
-  ["Exercise", "Item in the curated training library", ["BR-04"]],
-  ["LessonPlan", "Ordered set of Exercises for a session", ["BR-04"]],
-  ["LessonPlanItem", "Join, plan ↔ exercise with sets/reps", ["BR-04"]],
-  ["TrainerProfile", "Public-site bio + certifications", ["BR-06"]],
-  ["WebsitePage", "CMS-editable public page", ["BR-06"]],
-  ["WebsiteBlock", "Modular content block within a page", ["BR-06"]],
-  ["BlogPost", "TipTap-authored article on the public site", ["BR-06"]],
-  ["ContactSubmission", "Inbound form submission from the site", ["BR-06"]],
-  ["Referral", "Trackable link + referrer/referee pair", ["BR-07"]],
-  ["Reward", "Payout / credit on a successful referral", ["BR-07"]],
-  ["GuestPass", "Monthly pass issued with a quota", ["BR-08"]],
-  ["Redemption", "Front-desk verification closing a GuestPass", ["BR-08"]],
-  ["AuditLog", "Append-only record of every mutation", ["NFR-03"]],
+  ["Member", "User subtype with membership + billing status", ["BR-04", "BR-05"]],
+  ["Class", "Reusable offering template (e.g. ‘HIIT 45’)", ["BR-02", "BR-03", "BR-04", "BR-05"]],
+  ["ClassSession", "An instance of a Class at a time, place, instructor", ["BR-01", "BR-03", "BR-06", "BR-07"]],
+  ["Location", "Studio / room the session is held in", ["BR-02"]],
+  ["AttendanceRecord", "Member checked in / marked at a session", ["BR-03", "BR-06"]],
+  ["Exercise", "Item in the curated training library", []],
+  ["LessonPlan", "Ordered set of Exercises for a session", []],
+  ["LessonPlanItem", "Join, plan ↔ exercise with sets/reps", []],
+  ["TrainerProfile", "Public-site bio + certifications", ["BR-10"]],
+  ["WebsitePage", "CMS-editable public page", ["BR-10", "BR-11"]],
+  ["WebsiteBlock", "Modular content block within a page", ["BR-10"]],
+  ["BlogPost", "TipTap-authored article on the public site", ["BR-10"]],
+  ["ContactSubmission", "Inbound form submission from the site", []],
+  ["Referral", "Trackable link + referrer/referee pair", []],
+  ["Reward", "Payout / credit on a successful referral", []],
+  ["GuestPass", "Monthly pass issued with a quota", []],
+  ["Redemption", "Front-desk verification closing a GuestPass", []],
+  ["AuditLog", "Append-only record of every mutation", ["BR-09", "NFR-03"]],
 ];
 
 const RELS: [string, string, string, string][] = [
@@ -153,8 +157,10 @@ export default function FiitDataPage() {
             The BA-authored logical model, the entities and relationships the
             requirements need the platform to hold. Built before the schema,
             iterated during the build, and now the reference for tracing any
-            production issue to an owning entity. Each entity traces to the BR
-            it serves.
+            production issue to an owning entity. Fifteen of twenty-four
+            entities carry a Business Rule trace today; the other nine sit
+            in shipped scope (curated content library, referrals, guest-pass,
+            inbound form) whose behavioural rules land in a later iteration.
           </p>
           <FigFrame name="fiit_co · logical model" sub="BA-08 · 24 entities">
             <div className="fig-pad">
@@ -168,11 +174,15 @@ export default function FiitDataPage() {
                     <div className="fx-ent-body">
                       <p className="fx-ent-purpose">{purpose}</p>
                       <div className="fx-ent-tr">
-                        {trace.map((t) => (
-                          <span key={t} className={t.startsWith("N") ? "nfr" : ""}>
-                            {t}
-                          </span>
-                        ))}
+                        {trace.length > 0 ? (
+                          trace.map((t) => (
+                            <span key={t} className={t.startsWith("N") ? "nfr" : ""}>
+                              {t}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="untraced">next iteration</span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -216,8 +226,8 @@ export default function FiitDataPage() {
               icon={<Table size={22} aria-hidden />}
             />
             <MetricStat
-              value="8"
-              label="BRs traced to entities"
+              value="15 / 24"
+              label="Entities BR-traced"
               icon={<GitMerge size={22} aria-hidden />}
             />
             <MetricStat
