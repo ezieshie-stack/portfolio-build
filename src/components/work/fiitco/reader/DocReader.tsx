@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, MousePointerClick, Sparkles } from "lucide-react";
 import { DiagramRenderer } from "@/components/work/fiitco/diagrams/DiagramRenderer";
 import { DIAGRAM_REGISTRY } from "@/components/work/fiitco/diagrams/data";
+import { PrintPdfButton } from "./PrintPdfButton";
 
 function DiagramSlot({ registryKey, index }: { registryKey: string; index: number }) {
   const entries = DIAGRAM_REGISTRY[registryKey];
@@ -285,8 +286,11 @@ export function DocReader({ doc }: { doc: Doc }) {
 
       <article className="dr-art">
         <header className="dr-doc-hd">
-          <div className="dr-doc-code">
-            <span>{doc.code}</span>
+          <div className="dr-doc-topbar">
+            <div className="dr-doc-code">
+              <span>{doc.code}</span>
+            </div>
+            <PrintPdfButton />
           </div>
           <h1 className="dr-doc-title">{doc.title}</h1>
           <div className="dr-doc-meta">

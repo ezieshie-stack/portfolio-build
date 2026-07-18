@@ -3,6 +3,7 @@ import { ArrowRight, Sigma, Target } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FraudSubNav } from "@/components/work/fraud/FraudSubNav";
+import { CapacityPrecisionChart } from "@/components/work/fraud/CapacityPrecisionChart";
 
 export const metadata = {
   title: "Fraud · Rules Engine (F3) | David Ezieshi",
@@ -87,6 +88,16 @@ export default function FraudRulesPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="pj-section">
+          <Eyebrow style={{ marginBottom: 8 }}>Capacity vs precision · pick the cutoff by team headroom</Eyebrow>
+          <p className="pj-section-sub">
+            Alerts fall away as the score cutoff rises; precision rises with
+            it. Three named operating points let you choose the cutoff against
+            the analyst hours you actually have, not against gut instinct.
+          </p>
+          <CapacityPrecisionChart />
         </section>
 
         <section className="pj-section">

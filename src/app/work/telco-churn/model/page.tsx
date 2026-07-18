@@ -3,6 +3,7 @@ import { ArrowRight, Clock, Crosshair, Scale } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TelcoSubNav } from "@/components/work/telco/TelcoSubNav";
+import { TelcoThresholdSlider } from "@/components/work/telco/TelcoThresholdSlider";
 
 export const metadata = {
   title: "Telco · Model Card (T3) | David Ezieshi",
@@ -112,62 +113,36 @@ export default function TelcoModelPage() {
             </div>
           </div>
 
-          <div className="tm-grid2" style={{ marginTop: 32 }}>
-            <div>
-              <Eyebrow style={{ marginBottom: 10 }}>
-                Confusion matrix · threshold 0.50 · {TP + FP} flagged
-              </Eyebrow>
-              <div className="tm-cm">
-                <div className="tm-cm-corner"></div>
-                <div className="tm-cm-h">Pred. stay</div>
-                <div className="tm-cm-h">Pred. churn</div>
-                <div className="tm-cm-rh">Actual stay</div>
-                <div className="tm-cm-cell tn">
-                  <div className="tm-cm-v">{TN}</div>
-                  <div className="tm-cm-k">true negative</div>
-                </div>
-                <div className="tm-cm-cell fp">
-                  <div className="tm-cm-v">{FP}</div>
-                  <div className="tm-cm-k">false alarm</div>
-                </div>
-                <div className="tm-cm-rh">Actual churn</div>
-                <div className="tm-cm-cell fn">
-                  <div className="tm-cm-v">{FN}</div>
-                  <div className="tm-cm-k">missed churner</div>
-                </div>
-                <div className="tm-cm-cell tp">
-                  <div className="tm-cm-v">{TP}</div>
-                  <div className="tm-cm-k">true positive</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <Eyebrow style={{ marginBottom: 10 }}>Top 10 feature coefficients</Eyebrow>
-              <div className="tm-coefs">
-                {COEFS.map(([k, v, dir]) => (
-                  <div className="tm-coef" key={k}>
-                    <span className="tm-coef-k">{k}</span>
-                    <div className="tm-coef-track">
-                      <div className="tm-coef-mid" />
-                      <div
-                        className={`tm-coef-bar ${dir}`}
-                        style={{ width: `${(Math.abs(v) / COEF_MAX) * 50}%` }}
-                      />
-                    </div>
-                    <span className={`tm-coef-v ${dir}`}>
-                      {v > 0 ? "+" : ""}
-                      {v.toFixed(2)}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <p className="pj-caption" style={{ marginTop: 10 }}>
-                <span style={{ color: "#10b981" }}>■</span> protective &nbsp;
-                <span style={{ color: "#ef4444" }}>■</span> raises churn · log-
-                odds scale
-              </p>
-            </div>
+          <div style={{ marginTop: 26 }}>
+            <TelcoThresholdSlider />
           </div>
+        </section>
+
+        <section className="pj-section">
+          <Eyebrow style={{ marginBottom: 10 }}>Top 10 feature coefficients</Eyebrow>
+          <div className="tm-coefs">
+            {COEFS.map(([k, v, dir]) => (
+              <div className="tm-coef" key={k}>
+                <span className="tm-coef-k">{k}</span>
+                <div className="tm-coef-track">
+                  <div className="tm-coef-mid" />
+                  <div
+                    className={`tm-coef-bar ${dir}`}
+                    style={{ width: `${(Math.abs(v) / COEF_MAX) * 50}%` }}
+                  />
+                </div>
+                <span className={`tm-coef-v ${dir}`}>
+                  {v > 0 ? "+" : ""}
+                  {v.toFixed(2)}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="pj-caption" style={{ marginTop: 10 }}>
+            <span style={{ color: "#10b981" }}>■</span> protective &nbsp;
+            <span style={{ color: "#ef4444" }}>■</span> raises churn · log-odds
+            scale
+          </p>
         </section>
 
         <section className="pj-section">
@@ -210,15 +185,6 @@ export default function TelcoModelPage() {
                 </span>
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="pj-section">
-          <div className="pj-note">
-            Interactive threshold slider (drag to watch precision, recall, and
-            the confusion matrix trade off live) ships in a follow-up slice.
-            The static view above shows the default 0.50 threshold from the
-            real run.
           </div>
         </section>
 

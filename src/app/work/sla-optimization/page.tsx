@@ -18,6 +18,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { ProjectFooter } from "@/components/work/ProjectFooter";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
@@ -228,6 +229,8 @@ export default function SlaHubPage() {
             </div>
           </div>
         </details>
+
+        <ProjectFooter current="sla" />
 
         <Link href="/work" className="pj-next">
           <div>

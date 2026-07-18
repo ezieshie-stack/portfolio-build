@@ -18,10 +18,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { ProjectFooter } from "@/components/work/ProjectFooter";
 import { Chip } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { MetricStat } from "@/components/ui/MetricStat";
 import { FunnelExplorer } from "@/components/work/movie/FunnelExplorer";
+import { GenreBudgetExplorer } from "@/components/work/movie/GenreBudgetExplorer";
 
 export const metadata = {
   title: "Movie Industry Profitability | David Ezieshi",
@@ -136,6 +138,16 @@ export default function MovieHubPage() {
         </section>
 
         <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>Slice explorer · pick a genre + tier</Eyebrow>
+          <p className="pj-section-sub">
+            Compose any of the five genre bands with any of the four budget
+            tiers and read the modeled success rate, average ROI, and film
+            count for that slice.
+          </p>
+          <GenreBudgetExplorer />
+        </section>
+
+        <section className="pj-section">
           <Eyebrow prefix="" style={{ marginBottom: 8 }}>Findings, and what to do about them</Eyebrow>
           <div className="sla-frec">
             {FINDINGS.map((f, i) => (
@@ -187,6 +199,8 @@ export default function MovieHubPage() {
             <div className="pj-chips">{CHIPS.map((t) => <Chip key={t}>{t}</Chip>)}</div>
           </div>
         </details>
+
+        <ProjectFooter current="movie" />
 
         <Link href="/work/movie-profitability/genre" className="pj-next">
           <div>

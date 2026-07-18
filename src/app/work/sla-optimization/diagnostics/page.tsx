@@ -3,6 +3,7 @@ import { AlertTriangle, ArrowRight, TrendingUp, Users } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SlaSubNav } from "@/components/work/sla/SlaSubNav";
+import { SlaHourHeatmap } from "@/components/work/sla/SlaHourHeatmap";
 import type { ReactNode } from "react";
 
 export const metadata = { title: "SLA · Diagnostics (S1) | David Ezieshi" };
@@ -127,6 +128,14 @@ export default function SlaDiagPage() {
 
         <section className="pj-section">
           <Eyebrow style={{ marginBottom: 8 }}>The riskiest hour is a handover, not a rush</Eyebrow>
+          <p className="pj-section-sub" style={{ marginBottom: 18 }}>
+            Volume peaks at 21:00 (staffing intuition), but breach risk peaks an
+            hour later at the evening-to-night handover. The heatmap makes that
+            gap unmissable.
+          </p>
+          <div style={{ marginBottom: 26 }}>
+            <SlaHourHeatmap />
+          </div>
           <div className="ff-artifacts">
             <div className="ff-artifact">
               <span className="ff-artifact-ic"><TrendingUp size={20} aria-hidden /></span>
