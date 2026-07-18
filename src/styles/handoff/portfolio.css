@@ -15,7 +15,9 @@ body { font-family: var(--font-sans); }
 
 /* nav */
 .pf-nav { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--border);
-          background: var(--nav-bg); backdrop-filter: blur(var(--blur-nav)); -webkit-backdrop-filter: blur(var(--blur-nav)); }
+          background: var(--nav-bg); backdrop-filter: blur(var(--blur-nav)); -webkit-backdrop-filter: blur(var(--blur-nav));
+          transition: transform var(--duration-base) var(--ease-out); will-change: transform; }
+.pf-nav.pf-nav-hidden { transform: translateY(-100%); }
 .pf-navrow { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 15px; padding-bottom: 15px; }
 .pf-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
 .pf-tile { height: 42px; width: 42px; display: inline-flex; align-items: center; justify-content: center;

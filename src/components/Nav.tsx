@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 export function Nav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -26,8 +27,37 @@ export function Nav() {
     setMenuOpen(false);
   }, [pathname]);
 
+  // Auto-hide the nav when scrolling down, reveal on scroll up, so
+  // a long diagram or write-up gets the full viewport height for
+  // reading. Menu open keeps the nav pinned.
+  useEffect(() => {
+    if (menuOpen) return;
+    let last = typeof window !== "undefined" ? window.scrollY : 0;
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const dy = y - last;
+        // small hysteresis so tiny jitters don't toggle
+        if (Math.abs(dy) > 6) {
+          if (y > 80 && dy > 0) setHidden(true);
+          else if (dy < 0) setHidden(false);
+          last = y;
+        } else if (y <= 4) {
+          setHidden(false);
+          last = y;
+        }
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [menuOpen]);
+
   return (
-    <header className="pf-nav">
+    <header className={`pf-nav${hidden ? " pf-nav-hidden" : ""}`}>
       <div className="pf-shell pf-navrow">
         <Link href="/" className="pf-brand">
           <span className="pf-tile">{site.brand.initials}</span>
