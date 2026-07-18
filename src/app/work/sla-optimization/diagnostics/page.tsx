@@ -143,7 +143,7 @@ export default function SlaDiagPage() {
             </div>
             <div className="ff-artifact">
               <span className="ff-artifact-ic"><AlertTriangle size={20} aria-hidden /></span>
-              <div><strong>Breach risk peaks at 22:00</strong><span>The highest breach rate is one hour later, at the 10 PM evening-to-night shift handover, not at peak volume.</span></div>
+              <div><strong>Modeled breach risk peaks at 22:00</strong><span>The heatmap models breach risk one hour later than volume, at the 10 PM evening-to-night shift handover. The per-hour extract isn&rsquo;t in source data; the risk curve is modeled from the observed shift structure, so read the peak as directional, not measured.</span></div>
             </div>
             <div className="ff-artifact">
               <span className="ff-artifact-ic"><Users size={20} aria-hidden /></span>

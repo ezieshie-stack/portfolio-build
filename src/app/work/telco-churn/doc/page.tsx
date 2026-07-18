@@ -23,7 +23,7 @@ export default function TelcoDocPage() {
             className="pf-page-title"
             style={{ fontSize: "clamp(30px,3.2vw,46px)" }}
           >
-            The analysis, in prose.
+            Why month-to-month is the whole story.
           </h1>
           <p className="pf-page-intro" style={{ maxWidth: 680 }}>
             The long-form case study behind the interactive dashboard, for
