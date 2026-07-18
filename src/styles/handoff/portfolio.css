@@ -449,8 +449,11 @@ body { font-family: var(--font-sans); }
   .fc-story-head { grid-template-columns: 1fr auto; row-gap: 8px; }
   .fc-story-role { grid-column: 1 / -1; }
   .fc-story-body { grid-template-columns: 1fr; gap: 12px; }
-  .fc-node { min-width: 100%; }
-  .fc-arrow { transform: rotate(90deg); align-self: center; }
+  /* Scoped to `.fc-flow` so the process-flow cards get their vertical
+     stack without stretching absolutely-positioned diagram nodes on the
+     Diagrams page (which share the `.fc-node` class name). */
+  .fc-flow .fc-node  { min-width: 100%; }
+  .fc-flow .fc-arrow { transform: rotate(90deg); align-self: center; }
 }
 
 /* ══ FIIT CO. — ARTIFACT SUB-PAGES (fx-*) ═══════════════════════ */
