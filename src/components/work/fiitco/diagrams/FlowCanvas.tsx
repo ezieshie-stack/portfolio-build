@@ -87,6 +87,34 @@ export function FlowCanvas({ config }: { config: FlowConfig }) {
   const isAdj = (e: { from: string; to: string }) =>
     !!active && (e.from === active || e.to === active);
 
+  // Edge geometry — orthogonal, with a sideways jog around any node
+  // that sits between the endpoints. Ported verbatim from the design
+  // engine's FlowCanvas so labels never land on a node.
+  const between = (v: number, a: number, b: number) =>
+    v > Math.min(a, b) + 2 && v < Math.max(a, b) - 2;
+  const blocksV = (x: number, y0: number, y1: number) =>
+    config.nodes.some((n) => {
+      const r = R[n.id];
+      return (
+        x > r.x - 1 &&
+        x < r.x + r.w + 1 &&
+        (between(r.y, y0, y1) ||
+          between(r.y + r.h, y0, y1) ||
+          (r.y <= Math.min(y0, y1) && r.y + r.h >= Math.max(y0, y1)))
+      );
+    });
+  const blocksH = (y: number, x0: number, x1: number) =>
+    config.nodes.some((n) => {
+      const r = R[n.id];
+      return (
+        y > r.y - 1 &&
+        y < r.y + r.h + 1 &&
+        (between(r.x, x0, x1) ||
+          between(r.x + r.w, x0, x1) ||
+          (r.x <= Math.min(x0, x1) && r.x + r.w >= Math.max(x0, x1)))
+      );
+    });
+
   const edgePath = (e: { from: string; to: string }) => {
     const s = R[e.from];
     const t = R[e.to];
@@ -99,17 +127,45 @@ export function FlowCanvas({ config }: { config: FlowConfig }) {
     if (Math.abs(dx) >= Math.abs(dy)) {
       const sx = dx >= 0 ? s.x + s.w : s.x;
       const tx = dx >= 0 ? t.x : t.x + t.w;
-      const mx = (sx + tx) / 2;
+      let mx = (sx + tx) / 2;
+      // Multi-column edge: if the horizontal leg would cross a node
+      // between s and mx, jog the vertical break into the row gutter.
+      if (Math.abs(s.cy - t.cy) > 4 && blocksH(s.cy, sx, mx)) {
+        mx = dx >= 0 ? sx + U.HG / 2 : sx - U.HG / 2;
+      }
       d = `M ${sx} ${s.cy} L ${mx} ${s.cy} L ${mx} ${t.cy} L ${tx} ${t.cy}`;
       lx = mx;
       ly = (s.cy + t.cy) / 2;
     } else {
       const sy = dy >= 0 ? s.y + s.h : s.y;
       const ty = dy >= 0 ? t.y : t.y + t.h;
-      const my = (sy + ty) / 2;
+      let my = (sy + ty) / 2;
+      // Same-column edge with a node sitting between s and t: route
+      // out into the column gutter and back.
+      if (Math.abs(s.cx - t.cx) < 4 && blocksV(s.cx, sy, ty)) {
+        const mx = s.x + s.w + U.HG / 2;
+        const jog = dy >= 0 ? 16 : -16;
+        d =
+          `M ${s.cx} ${sy} ` +
+          `L ${s.cx} ${sy + jog} ` +
+          `L ${mx} ${sy + jog} ` +
+          `L ${mx} ${ty - jog} ` +
+          `L ${t.cx} ${ty - jog} ` +
+          `L ${t.cx} ${ty}`;
+        lx = mx;
+        ly = my;
+        return { d, lx, ly };
+      }
       d = `M ${s.cx} ${sy} L ${s.cx} ${my} L ${t.cx} ${my} L ${t.cx} ${ty}`;
       lx = (s.cx + t.cx) / 2;
       ly = my;
+      // Multi-column edge whose horizontal midline crosses a node:
+      // move the horizontal leg up/down into the row gutter.
+      if (Math.abs(s.cx - t.cx) > 4 && blocksH(my, s.cx, t.cx)) {
+        my = sy + (dy >= 0 ? U.VG / 2 : -U.VG / 2);
+        d = `M ${s.cx} ${sy} L ${s.cx} ${my} L ${t.cx} ${my} L ${t.cx} ${ty}`;
+        ly = my;
+      }
     }
     return { d, lx, ly };
   };
