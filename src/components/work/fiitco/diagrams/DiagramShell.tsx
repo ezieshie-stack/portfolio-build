@@ -65,17 +65,22 @@ export function DiagramShell({
     // Force layout so offsetWidth reflects the natural state.
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     inner.offsetWidth;
-    const natW = inner.offsetWidth;
-    const natH = inner.offsetHeight;
-    const isMobile =
-      typeof window !== "undefined" && window.innerWidth <= 720;
-    const avail = vp.clientWidth - (isMobile ? 12 : 40);
-    // On mobile we deliberately keep the diagram at a readable scale
-    // (0.55 floor) and let the viewport scroll horizontally instead of
-    // shrinking text into illegibility. The Expand button opens
-    // fullscreen for a wider view.
-    const minScale = isMobile ? 0.55 : 0.25;
-    const s = avail >= natW ? 1 : Math.max(minScale, avail / natW);
+    // Measure true content extent. mm-inner has min-width:100%, so its
+    // own offsetWidth can read as the viewport width before the diagram
+    // paints; the fixed-size child carries the real dimensions.
+    const child = inner.firstElementChild as HTMLElement | null;
+    const natW = Math.max(inner.scrollWidth, child?.offsetWidth ?? 0);
+    const natH = Math.max(inner.scrollHeight, child?.offsetHeight ?? 0);
+    const phone =
+      typeof window !== "undefined" && window.innerWidth <= 640;
+    const avail =
+      Math.min(vp.clientWidth, typeof window !== "undefined" ? window.innerWidth : Infinity) -
+      (phone ? 12 : 40);
+    const widthFit = natW > avail ? Math.max(0.16, +(avail / natW).toFixed(3)) : 1;
+    // On phones we render at authored size (scale 1) so nodes stay
+    // readable and the viewport pans in both directions. Desktop keeps
+    // the width-fit behaviour so wide diagrams shrink to viewport width.
+    const s = phone ? 1 : widthFit;
     // Snap the pan back to origin so the fitted diagram is actually
     // visible (otherwise a manual zoom-in + pan leaves the viewport
     // scrolled onto empty space after the fit shrinks the content).
@@ -96,6 +101,27 @@ export function DiagramShell({
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [fit]);
+
+  // Re-fit when the diagram itself paints or the viewport resizes.
+  // FlowCanvas / SequenceDiagram render with fixed inline dimensions
+  // that only settle after the first layout pass, so the initial fit
+  // measurement can be wrong on slow devices; the observer catches
+  // that and re-runs fit as soon as the real size is known.
+  useEffect(() => {
+    if (typeof ResizeObserver === "undefined") return;
+    let raf: number | null = null;
+    const ro = new ResizeObserver(() => {
+      if (raf !== null) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => fit());
+    });
+    const child = innerRef.current?.firstElementChild;
+    if (child) ro.observe(child);
+    if (vpRef.current) ro.observe(vpRef.current);
+    return () => {
+      ro.disconnect();
+      if (raf !== null) cancelAnimationFrame(raf);
+    };
+  }, [fit, resetKey]);
 
   const zoom = (f: number) =>
     setScale((s) => Math.min(3, Math.max(0.25, +(s * f).toFixed(2))));
