@@ -22,6 +22,7 @@ import { UipathChart } from "@/components/work/uipath/UipathChart";
 import { UipathSelectorStrategy } from "@/components/work/uipath/UipathSelectorStrategy";
 import { UipathRunHistory } from "@/components/work/uipath/UipathRunHistory";
 import { UipathProofStrip } from "@/components/work/uipath/UipathProofStrip";
+import { UipathDocReaderClient } from "@/components/work/uipath/UipathDocReaderClient";
 
 export const metadata = {
   title: "UiPath Supplier Price Monitor | David Ezieshi",
@@ -107,7 +108,11 @@ export default function UipathProjectPage() {
         </section>
 
         {/* the marquee replay */}
-        <section className="pj-section" style={{ marginTop: 24 }}>
+        <section
+          id="replay"
+          className="pj-section"
+          style={{ marginTop: 24, scrollMarginTop: 90 }}
+        >
           <UipathReplay />
         </section>
 
@@ -345,6 +350,17 @@ export default function UipathProjectPage() {
               <Chip key={t}>{t}</Chip>
             ))}
           </div>
+        </section>
+
+        {/* long-form case study drawn from the PDD */}
+        <section className="pj-section">
+          <Eyebrow prefix="" style={{ marginBottom: 8 }}>
+            The write-up, in prose
+          </Eyebrow>
+          <p className="pj-section-sub">
+            The case study distilled from the Process Design Document, the AS-IS survey, the objectives that shaped the TO-BE, and the exception rules the team agreed on before a line of UiPath was authored.
+          </p>
+          <UipathDocReaderClient />
         </section>
 
         {/* source */}
