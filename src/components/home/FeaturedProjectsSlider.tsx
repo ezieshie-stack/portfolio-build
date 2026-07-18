@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
     metrics: [
       { value: "27", label: "Modules", icon: <LayoutGrid size={22} /> },
       { value: "32", label: "Data Tables", icon: <Database size={22} /> },
-      { value: "9", label: "Backend Services", icon: <Server size={22} /> },
+      { value: "11", label: "BPMN Processes", icon: <Server size={22} /> },
       { value: "Live", label: "In Production", icon: <Rocket size={22} />, spark: true },
     ],
     highlights: [

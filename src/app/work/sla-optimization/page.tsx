@@ -37,7 +37,7 @@ const ARTIFACTS: Artifact[] = [
   { href: "/work/sla-optimization/diagnostics", idx: "S1", icon: Activity, title: "Diagnostics", desc: "Where the money leaks, and the test that proved it is systemic.", meta: "8,469 tickets" },
   { href: "/work/sla-optimization/data", idx: "S2", icon: Table2, title: "Data Dictionary", desc: "Every column, and the ones engineered for the model.", meta: "17 + 6 fields" },
   { href: "/work/sla-optimization/model", idx: "S3", icon: Target, title: "Model Card", desc: "The cost-sensitive Random Forest and a live threshold.", meta: "0.83 ROC-AUC" },
-  { href: "/work/sla-optimization/method", idx: "S4", icon: GitFork, title: "Methodology", desc: "The eight-phase pipeline as an interactive diagram.", meta: "Phase 0 → 8" },
+  { href: "/work/sla-optimization/method", idx: "S4", icon: GitFork, title: "Methodology", desc: "The pipeline as an interactive diagram, Phase 0 through 8.", meta: "Phase 0 → 8" },
   { href: "/work/sla-optimization/doc", idx: "S5", icon: FileText, title: "Write-up", desc: "The full case study in reading mode.", meta: "6 min read" },
 ];
 
