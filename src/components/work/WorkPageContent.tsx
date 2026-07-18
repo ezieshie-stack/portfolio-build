@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   BarChart3,
+  Bot,
   ClipboardCheck,
   Database,
   FileText,
@@ -85,6 +86,15 @@ const CARDS: WorkCard[] = [
     tags: ["BABOK v3", "BPMN", "Requirements"],
     group: "Business Analysis",
     href: "/work/fiitco",
+  },
+  {
+    icon: Bot,
+    category: "RPA · Automation",
+    title: "UiPath Supplier Price Monitor",
+    desc: "A UiPath bot that checks supplier prices on a schedule, flags anything past a ±5% threshold, and drops an Excel alert. Runs the seven-supplier list in under ten minutes vs. 60–90 manual.",
+    tags: ["UiPath", "RPA", "Excel"],
+    group: "Data Engineering",
+    href: "/work/uipath-automation",
   },
 ];
 
