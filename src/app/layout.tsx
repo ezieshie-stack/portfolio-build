@@ -5,6 +5,8 @@ import "./globals.css";
 import { BackgroundCanvas } from "@/components/BackgroundCanvas";
 import { Nav } from "@/components/Nav";
 import { PortfolioFooter } from "@/components/PortfolioFooter";
+import { PostHogProvider } from "@/components/analytics/PostHogProvider";
+import { PostHogPageView } from "@/components/analytics/PostHogPageView";
 
 // Vercel's official geist package — same release Claude Design ships,
 // avoids the Google Fonts mirror lag. Bound to --font-geist-sans /
@@ -53,10 +55,13 @@ export default function RootLayout({
         />
       </head>
       <body className="ds-canvas min-h-full flex flex-col">
-        <BackgroundCanvas />
-        <Nav />
-        <main className="flex-1 relative z-[1]">{children}</main>
-        <PortfolioFooter />
+        <PostHogProvider>
+          <PostHogPageView />
+          <BackgroundCanvas />
+          <Nav />
+          <main className="flex-1 relative z-[1]">{children}</main>
+          <PortfolioFooter />
+        </PostHogProvider>
       </body>
     </html>
   );
